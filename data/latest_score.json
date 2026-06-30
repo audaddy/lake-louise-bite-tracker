@@ -1,11 +1,39 @@
 {
-  "timestamp": null,
-  "score": null,
-  "tier": "Awaiting first update",
-  "species_note": "Lake Louise Bite Tracker",
-  "message": "Waiting for the first scheduled run to populate live data.",
-  "next_major_period": null,
-  "next_minor_period": null,
-  "pressure_trend_hpa": null,
-  "last_notified": {}
+  "timestamp": "2026-06-29T19:27:58-07:00",
+  "score": 35,
+  "tier": "Slow",
+  "species_note": "Rainbow trout \u2014 slow",
+  "message": "Slow bite. Marginal trout conditions at the moment.",
+  "next_major_period": {
+    "type": "transit",
+    "time": "2026-06-30T01:32:34-07:00"
+  },
+  "next_minor_period": {
+    "type": "moonrise",
+    "time": "2026-06-29T21:42:49-07:00"
+  },
+  "pressure_trend_hpa": 0.0,
+  "species": "trout",
+  "in_major_period": false,
+  "in_minor_period": false,
+  "in_dawn_dusk": false,
+  "moon_illumination_pct": 99.9,
+  "temp_f": 62.2,
+  "surface_pressure_hpa": 1009.5,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 5.0,
+  "precip_in": 0.0,
+  "score_breakdown": {
+    "baseline": 20,
+    "moon_phase": 10,
+    "pressure": 5
+  },
+  "notification": {
+    "fired": false,
+    "status": "skipped (dedup or below threshold)"
+  },
+  "last_notified": {
+    "period_key": null,
+    "score_ge_70": false
+  }
 }
