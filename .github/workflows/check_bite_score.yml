@@ -2,8 +2,11 @@ name: Check Bite Score
 
 on:
   schedule:
-    # Every 30 minutes (UTC). GitHub may delay scheduled runs under load.
-    - cron: "*/30 * * * *"
+    # Every 15 minutes (UTC). Note: GitHub throttles scheduled runs and may
+    # delay or skip them, especially overnight. The dashboard computes the
+    # score live in-browser, so freshness for viewing does not depend on this;
+    # this job exists for push notifications and the score-history log.
+    - cron: "*/15 * * * *"
   workflow_dispatch: {}
 
 # Allow the workflow to commit updated data files back to the repo.
