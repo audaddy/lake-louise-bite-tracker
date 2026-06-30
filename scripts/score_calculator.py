@@ -276,44 +276,121 @@ def pressure_trend(history, current_pressure, now):
 
 
 # --------------------------------------------------------------------------- #
-# 4. Scoring
+# 4. Scoring  (weather-driven model)
+#
+# Rebalanced to weight the factors with the strongest real-world support
+# (barometric pressure trend, cloud cover, wind, low light) and to carry a
+# higher baseline, so calm/stable/overcast conditions read as a decent bite
+# rather than bottoming out. Solunar timing and dawn/dusk are kept as bonuses
+# on top rather than as the dominant driver.
 # --------------------------------------------------------------------------- #
-def compute_score(in_major, in_minor, in_dawn_dusk, illumination, trend):
-    score = 20  # baseline
-    breakdown = {"baseline": 20}
+def compute_score(in_major, in_minor, in_dawn_dusk, illumination, trend,
+                  cloud_cover, wind_mph):
+    score = 35  # baseline — "average day" floor
+    breakdown = {"baseline": 35}
 
-    # Solunar: take the higher of major vs minor, never both.
+    # --- Pressure trend (strongest signal) ---
+    if trend <= -3:                       # sharp fall, pre-front feeding
+        breakdown["pressure"] = 25
+    elif trend <= -1:                     # moderate fall
+        breakdown["pressure"] = 18
+    elif trend < 1:                       # stable — comfortable for fish
+        breakdown["pressure"] = 12
+    elif trend <= 3:                      # slight rise
+        breakdown["pressure"] = 5
+    else:                                 # sharp rise, post-front shutdown
+        breakdown["pressure"] = -10
+    score += breakdown["pressure"]
+
+    # --- Cloud cover (overcast diffuses light, fish roam/feed longer) ---
+    if cloud_cover is not None:
+        if cloud_cover >= 70:
+            breakdown["cloud_cover"] = 12
+        elif cloud_cover >= 40:
+            breakdown["cloud_cover"] = 8
+        elif cloud_cover >= 20:
+            breakdown["cloud_cover"] = 4
+        else:
+            breakdown["cloud_cover"] = 0
+        score += breakdown["cloud_cover"]
+
+    # --- Wind (a light breeze/ripple is ideal; dead calm or gale is worse) ---
+    if wind_mph is not None:
+        if 3 <= wind_mph <= 10:
+            breakdown["wind"] = 12
+        elif 1 <= wind_mph < 3 or 10 < wind_mph <= 15:
+            breakdown["wind"] = 6
+        elif wind_mph < 1:
+            breakdown["wind"] = 3
+        else:                              # > 15 mph
+            breakdown["wind"] = -8
+        score += breakdown["wind"]
+
+    # --- Solunar bonus: higher of major vs minor, never both ---
     if in_major:
-        score += 35
-        breakdown["solunar_major"] = 35
+        score += 18
+        breakdown["solunar_major"] = 18
     elif in_minor:
-        score += 20
-        breakdown["solunar_minor"] = 20
+        score += 10
+        breakdown["solunar_minor"] = 10
 
+    # --- Dawn/dusk low-light bonus ---
     if in_dawn_dusk:
-        score += 20
-        breakdown["dawn_dusk"] = 20
+        score += 12
+        breakdown["dawn_dusk"] = 12
 
+    # --- Moon phase (new/full or first/last quarter) ---
     if illumination is not None and (illumination > 95 or illumination < 5
                                      or 45 <= illumination <= 55):
-        score += 10
-        breakdown["moon_phase"] = 10
-
-    if trend <= -3:
-        score += 25
-        breakdown["pressure"] = 25
-    elif trend <= -1:
-        score += 15
-        breakdown["pressure"] = 15
-    elif trend > 3:
-        score -= 10
-        breakdown["pressure"] = -10
-    else:
-        score += 5
-        breakdown["pressure"] = 5
+        score += 6
+        breakdown["moon_phase"] = 6
 
     score = max(0, min(100, score))
     return score, breakdown
+
+
+def build_factors(breakdown, trend, cloud_cover, wind_mph, in_major, in_minor,
+                  in_dawn_dusk, illumination):
+    """Human-readable positive/negative factor lists for the dashboard."""
+    pos, neg = [], []
+
+    p = breakdown.get("pressure", 0)
+    if p >= 18:
+        pos.append("Falling barometric pressure — fish often feed ahead of a front")
+    elif p == 12:
+        pos.append("Stable atmospheric pressure is comfortable for fish")
+    elif p == 5:
+        pos.append("Slightly rising pressure — neutral to mild")
+    elif p < 0:
+        neg.append("Sharply rising pressure tends to slow the bite")
+
+    if cloud_cover is not None:
+        if cloud_cover >= 70:
+            pos.append("Overcast skies have a favorable impact on biting activity")
+        elif cloud_cover >= 40:
+            pos.append("Partly cloudy skies are mildly favorable")
+        elif cloud_cover < 20:
+            neg.append("Bright, clear skies can push fish deep and slow feeding")
+
+    if wind_mph is not None:
+        if 3 <= wind_mph <= 10:
+            pos.append("A light breeze/ripple has a very favorable effect")
+        elif wind_mph < 1:
+            neg.append("Dead-calm water is less favorable than a light ripple")
+        elif wind_mph > 15:
+            neg.append("Strong winds make conditions tougher")
+
+    if in_major:
+        pos.append("Solunar major period active (moon overhead/underfoot)")
+    elif in_minor:
+        pos.append("Solunar minor period active (moonrise/moonset)")
+    if in_dawn_dusk:
+        pos.append("Low-light dawn/dusk window — prime feeding time")
+    if illumination is not None and (illumination > 95 or illumination < 5
+                                     or 45 <= illumination <= 55):
+        pos.append("Moon phase is favorable")
+
+    return pos, neg
 
 
 def tier_for(score):
@@ -461,8 +538,12 @@ def main():
     trend = pressure_trend(history, cur["pressure"], now)
 
     score, breakdown = compute_score(in_major, in_minor, in_dawn_dusk,
-                                     illumination, trend)
+                                     illumination, trend,
+                                     cur["cloud_cover"], cur["wind_mph"])
     tier = tier_for(score)
+    positive_factors, negative_factors = build_factors(
+        breakdown, trend, cur["cloud_cover"], cur["wind_mph"],
+        in_major, in_minor, in_dawn_dusk, illumination)
     species, species_note, message, hours_left = species_and_message(
         score, tier, cur["temp_f"], active_major, active_minor,
         in_dawn_dusk, now)
@@ -502,6 +583,8 @@ def main():
         "wind_mph": cur["wind_mph"],
         "precip_in": cur["precip_in"],
         "score_breakdown": breakdown,
+        "positive_factors": positive_factors,
+        "negative_factors": negative_factors,
         "notification": {"fired": fired, "status": notify_status},
         "last_notified": new_notify_state,
     }
