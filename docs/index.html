@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lake Louise Bite Tracker</title>
+<style>
+  :root {
+    --bg: #0e1b2a;
+    --card: #15293d;
+    --text: #e8eef5;
+    --muted: #8da7bf;
+    --green: #2ecc71;
+    --yellow: #f1c40f;
+    --red: #e74c3c;
+    --accent: #4aa3df;
+    --border: #234055;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(180deg, #0e1b2a 0%, #0a1420 100%);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 48px; }
+  header { text-align: center; margin-bottom: 18px; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; letter-spacing: 0.2px; }
+  .sub { color: var(--muted); font-size: 0.85rem; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  }
+  .score-card { text-align: center; padding: 28px 20px; }
+  .score-number {
+    font-size: 5.5rem;
+    font-weight: 800;
+    line-height: 1;
+    margin: 4px 0;
+  }
+  .tier { font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+  .message { font-size: 1.05rem; color: var(--text); margin: 8px auto 0; max-width: 460px; }
+  .species-note { color: var(--muted); font-size: 0.9rem; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .periods { display: flex; gap: 12px; }
+  .period {
+    flex: 1; background: var(--card); border: 1px solid var(--border);
+    border-radius: 14px; padding: 14px; text-align: center;
+  }
+  .period .label { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.6px; }
+  .period .countdown { font-size: 1.5rem; font-weight: 700; margin-top: 4px; }
+  .period .at { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 16px; }
+  .stat { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding: 6px 0; font-size: 0.92rem; }
+  .stat .k { color: var(--muted); }
+  .chart-card h2, .stats-card h2 { font-size: 0.95rem; margin: 0 0 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  #chartWrap { position: relative; height: 220px; }
+  footer { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
+  .updated { text-align: center; color: var(--muted); font-size: 0.78rem; margin-bottom: 16px; }
+  a { color: var(--accent); }
+  .pulse { animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+  @media (max-width: 480px) {
+    .score-number { font-size: 4.5rem; }
+    .stats { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🎣 Lake Louise Bite Tracker</h1>
+    <div class="sub">Lakewood, WA · Rainbow trout &amp; largemouth bass</div>
+  </header>
+
+  <div class="updated" id="updated">Loading…</div>
+
+  <div class="card score-card">
+    <div class="species-note" id="speciesNote">—</div>
+    <div class="score-number" id="score">–</div>
+    <div class="tier" id="tier">—</div>
+    <div class="message" id="message">Fetching latest conditions…</div>
+  </div>
+
+  <div class="periods" style="margin-bottom:16px;">
+    <div class="period">
+      <div class="label">Next Major</div>
+      <div class="countdown" id="majorCountdown">—</div>
+      <div class="at" id="majorAt"></div>
+    </div>
+    <div class="period">
+      <div class="label">Next Minor</div>
+      <div class="countdown" id="minorCountdown">—</div>
+      <div class="at" id="minorAt"></div>
+    </div>
+  </div>
+
+  <div class="card chart-card">
+    <h2>Score history</h2>
+    <div id="chartWrap"><canvas id="chart"></canvas></div>
+  </div>
+
+  <div class="card stats-card">
+    <h2>Current conditions</h2>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <footer>
+    Auto-refreshes every 5 minutes · scored every 30 min via GitHub Actions<br/>
+    Solunar (sun: astral, moon: ephem) + Open-Meteo pressure trend
+  </footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script>
+const REFRESH_MS = 5 * 60 * 1000;
+let chart = null;
+let nextMajorTime = null;
+let nextMinorTime = null;
+
+function colorFor(score) {
+  if (score === null || score === undefined) return 'var(--muted)';
+  if (score >= 70) return 'var(--green)';
+  if (score >= 40) return 'var(--yellow)';
+  return 'var(--red)';
+}
+
+function fmtCountdown(targetISO) {
+  if (!targetISO) return '—';
+  const target = new Date(targetISO);
+  const diffMs = target - new Date();
+  if (isNaN(diffMs)) return '—';
+  if (diffMs <= 0) return 'now';
+  const mins = Math.round(diffMs / 60000);
+  const h = Math.floor(mins / 60);
+  const m = mins % 60;
+  return h > 0 ? `${h}h ${m}m` : `${m}m`;
+}
+
+function fmtClock(iso) {
+  if (!iso) return '';
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+}
+
+// Pages serves this file from /docs as the site root, so the JSON is mirrored
+// into docs/data/ and fetched as a relative path. The ../data/ fallback covers
+// the case where the page is served from the repo root instead.
+async function fetchJSON(name) {
+  const bust = '?t=' + Date.now();
+  try {
+    return await fetch('data/' + name + bust).then(r => {
+      if (!r.ok) throw new Error(r.status);
+      return r.json();
+    });
+  } catch (e) {
+    return await fetch('../data/' + name + bust).then(r => r.json());
+  }
+}
+
+async function loadData() {
+  try {
+    const [latest, history] = await Promise.all([
+      fetchJSON('latest_score.json'),
+      fetchJSON('history.json'),
+    ]);
+    renderLatest(latest);
+    renderChart(history);
+  } catch (err) {
+    document.getElementById('message').textContent = 'Could not load data (' + err + ').';
+  }
+}
+
+function renderLatest(d) {
+  const scoreEl = document.getElementById('score');
+  const score = d.score;
+  scoreEl.textContent = (score === null || score === undefined) ? '–' : score;
+  scoreEl.style.color = colorFor(score);
+  document.getElementById('tier').textContent = d.tier || '—';
+  document.getElementById('tier').style.color = colorFor(score);
+  document.getElementById('message').textContent = d.message || '';
+  document.getElementById('speciesNote').textContent = d.species_note || '';
+
+  nextMajorTime = d.next_major_period ? d.next_major_period.time : null;
+  nextMinorTime = d.next_minor_period ? d.next_minor_period.time : null;
+  document.getElementById('majorAt').textContent = nextMajorTime ? fmtClock(nextMajorTime) : '';
+  document.getElementById('minorAt').textContent = nextMinorTime ? fmtClock(nextMinorTime) : '';
+  updateCountdowns();
+
+  if (d.timestamp) {
+    document.getElementById('updated').textContent =
+      'Updated ' + new Date(d.timestamp).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
+  } else {
+    document.getElementById('updated').textContent = 'Awaiting first scheduled run';
+  }
+
+  const stats = [
+    ['Pressure trend', d.pressure_trend_hpa != null ? d.pressure_trend_hpa + ' hPa / 3h' : '—'],
+    ['Surface pressure', d.surface_pressure_hpa != null ? d.surface_pressure_hpa + ' hPa' : '—'],
+    ['Air temp (water proxy)', d.temp_f != null ? Math.round(d.temp_f) + ' °F' : '—'],
+    ['Moon illumination', d.moon_illumination_pct != null ? d.moon_illumination_pct + '%' : '—'],
+    ['Cloud cover', d.cloud_cover_pct != null ? Math.round(d.cloud_cover_pct) + '%' : '—'],
+    ['Wind', d.wind_mph != null ? Math.round(d.wind_mph) + ' mph' : '—'],
+    ['Major period active', d.in_major_period ? 'Yes' : 'No'],
+    ['Dawn/dusk window', d.in_dawn_dusk ? 'Yes' : 'No'],
+  ];
+  document.getElementById('stats').innerHTML = stats.map(
+    ([k, v]) => `<div class="stat"><span class="k">${k}</span><span class="v">${v}</span></div>`
+  ).join('');
+}
+
+function updateCountdowns() {
+  document.getElementById('majorCountdown').textContent = fmtCountdown(nextMajorTime);
+  document.getElementById('minorCountdown').textContent = fmtCountdown(nextMinorTime);
+}
+
+function renderChart(history) {
+  if (!Array.isArray(history)) return;
+  // Last 48 hours of entries.
+  const cutoff = Date.now() - 48 * 3600 * 1000;
+  const pts = history.filter(h => h.timestamp && new Date(h.timestamp) >= cutoff && h.score != null);
+  const recent = pts.length ? pts : history.filter(h => h.score != null).slice(-96);
+  const labels = recent.map(h => new Date(h.timestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }));
+  const data = recent.map(h => h.score);
+
+  if (chart) chart.destroy();
+  const ctx = document.getElementById('chart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [{
+        label: 'Bite score',
+        data,
+        borderColor: '#4aa3df',
+        backgroundColor: 'rgba(74,163,223,0.15)',
+        fill: true,
+        tension: 0.3,
+        pointRadius: recent.length > 40 ? 0 : 2,
+        borderWidth: 2,
+      }],
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: {
+        y: { min: 0, max: 100, ticks: { color: '#8da7bf' }, grid: { color: 'rgba(255,255,255,0.06)' } },
+        x: { ticks: { color: '#8da7bf', maxTicksLimit: 8, autoSkip: true }, grid: { display: false } },
+      },
+    },
+  });
+}
+
+loadData();
+setInterval(loadData, REFRESH_MS);
+setInterval(updateCountdowns, 30 * 1000);
+</script>
+</body>
+</html>
