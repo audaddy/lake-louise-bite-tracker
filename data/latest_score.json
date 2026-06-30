@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-06-29T19:27:58-07:00",
-  "score": 35,
-  "tier": "Slow",
-  "species_note": "Rainbow trout \u2014 slow",
-  "message": "Slow bite. Marginal trout conditions at the moment.",
+  "timestamp": "2026-06-29T19:47:31-07:00",
+  "score": 69,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-06-30T01:32:34-07:00"
@@ -12,22 +12,30 @@
     "type": "moonrise",
     "time": "2026-06-29T21:42:49-07:00"
   },
-  "pressure_trend_hpa": 0.0,
+  "pressure_trend_hpa": -0.3,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 99.9,
-  "temp_f": 62.2,
-  "surface_pressure_hpa": 1009.5,
-  "cloud_cover_pct": 100.0,
-  "wind_mph": 5.0,
+  "temp_f": 62.3,
+  "surface_pressure_hpa": 1009.2,
+  "cloud_cover_pct": 30.0,
+  "wind_mph": 5.7,
   "precip_in": 0.0,
   "score_breakdown": {
-    "baseline": 20,
-    "moon_phase": 10,
-    "pressure": 5
+    "baseline": 35,
+    "pressure": 12,
+    "cloud_cover": 4,
+    "wind": 12,
+    "moon_phase": 6
   },
+  "positive_factors": [
+    "Stable atmospheric pressure is comfortable for fish",
+    "A light breeze/ripple has a very favorable effect",
+    "Moon phase is favorable"
+  ],
+  "negative_factors": [],
   "notification": {
     "fired": false,
     "status": "skipped (dedup or below threshold)"
