@@ -82,7 +82,6 @@
   .logbtn { display: block; width: 100%; background: var(--accent); color: #06121e; font-weight: 700; border: none; border-radius: 14px; padding: 15px; font-size: 1rem; cursor: pointer; margin-bottom: 16px; }
   .logbtn:active { opacity: 0.85; }
 
-  /* Catch-log card */
   .summary-line { font-size: 0.95rem; margin-bottom: 14px; }
   .summary-line b { color: var(--text); }
   .ltable { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-bottom: 14px; }
@@ -98,7 +97,6 @@
   .log-actions { display: flex; gap: 10px; margin-top: 14px; }
   .hint { color: var(--muted); font-size: 0.88rem; line-height: 1.45; }
 
-  /* Modal */
   .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.62); display: none; align-items: flex-start; justify-content: center; padding: 22px 12px; overflow: auto; z-index: 50; }
   .modal-overlay.open { display: flex; }
   .modal { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; width: 100%; max-width: 460px; }
@@ -137,7 +135,7 @@
     <div class="species-note" id="speciesNote">—</div>
     <div class="score-number" id="score">–</div>
     <div class="tier" id="tier">—</div>
-    <div class="message" id="message">Fetching latest conditions…</div>
+    <div class="message" id="message">Computing live conditions…</div>
   </div>
 
   <button class="logbtn" id="openLog">＋ Log a catch / no-catch</button>
@@ -204,8 +202,8 @@
   </div>
 
   <footer>
-    Auto-refreshes every 5 minutes · scored every 30 min via GitHub Actions<br/>
-    Solunar (sun: astral, moon: ephem) + Open-Meteo pressure trend<br/>
+    Score is computed live in your browser each time you open this page.<br/>
+    Solunar (SunCalc) + live Open-Meteo weather · GitHub job handles push alerts &amp; history.<br/>
     Your catch log is saved privately in this browser. Use Export to back it up.
   </footer>
 </div>
@@ -215,7 +213,6 @@
   <div class="modal">
     <h2>Log a session</h2>
     <div class="snapshot" id="logSnapshot">Conditions snapshot attaches automatically.</div>
-
     <div class="field">
       <label>Result</label>
       <div class="seg" id="segResult">
@@ -224,12 +221,10 @@
         <button type="button" data-v="skunk">Skunked</button>
       </div>
     </div>
-
     <div class="field" id="countField" style="display:none;">
       <label>How many landed?</label>
       <input type="number" id="logCount" min="1" value="1" />
     </div>
-
     <div class="field">
       <label>Species</label>
       <div class="seg" id="segSpecies">
@@ -238,7 +233,6 @@
         <button type="button" data-v="other">Other</button>
       </div>
     </div>
-
     <div class="field">
       <label>Method</label>
       <div class="seg" id="segMethod">
@@ -246,27 +240,10 @@
         <button type="button" data-v="spin">🎣 Spin</button>
       </div>
     </div>
-
-    <div class="field">
-      <label>Lure / fly</label>
-      <select id="logLure"></select>
-    </div>
-
-    <div class="field">
-      <label>Position on the water</label>
-      <select id="logPosition"></select>
-    </div>
-
-    <div class="field">
-      <label>Depth fished</label>
-      <select id="logDepth"></select>
-    </div>
-
-    <div class="field">
-      <label>Notes (optional)</label>
-      <textarea id="logNotes" placeholder="retrieve speed, color, time, anything worth remembering"></textarea>
-    </div>
-
+    <div class="field"><label>Lure / fly</label><select id="logLure"></select></div>
+    <div class="field"><label>Position on the water</label><select id="logPosition"></select></div>
+    <div class="field"><label>Depth fished</label><select id="logDepth"></select></div>
+    <div class="field"><label>Notes (optional)</label><textarea id="logNotes" placeholder="retrieve speed, color, time, anything worth remembering"></textarea></div>
     <div class="modal-actions">
       <button class="btn btn-ghost" id="logCancel">Cancel</button>
       <button class="btn btn-primary" id="logSave">Save entry</button>
@@ -275,65 +252,275 @@
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.9.0/suncalc.min.js"></script>
 <script>
+const LAT = 47.161861, LON = -122.567972;
 const REFRESH_MS = 5 * 60 * 1000;
 const LS_KEY = 'llbt_catch_log_v1';
 let chart = null;
-let nextMajorTime = null;
-let nextMinorTime = null;
-let currentData = null;   // latest score JSON, used to snapshot conditions
+let nextMajorTime = null, nextMinorTime = null;
+let currentData = null;
 
 const FLY_LURES = ['Dry fly', 'Popper', 'Nymph', 'Woolly Bugger', 'Streamer', 'Leech', 'Chironomid', 'Egg / glo-bug', 'Other'];
 const SPIN_LURES = ['Inline spinner', 'Spinnerbait', 'Spoon', 'Jig', 'Soft plastic', 'Topwater / buzzbait', 'Crankbait', 'Bait (worm / PowerBait)', 'Other'];
 const POSITIONS = ['Shoreline', 'Off the dock', 'Open water / middle', 'Drop-off / ledge', 'Weed edge', 'Inlet / current', 'Boat / drifting', 'Other'];
 const DEPTHS = ['Surface / top', 'Shallow (0–8 ft)', 'Mid (8–15 ft)', 'Deep (15+ ft)'];
 
-// ----- helpers -----
-function colorFor(score) {
-  if (score === null || score === undefined) return 'var(--muted)';
-  if (score >= 70) return 'var(--green)';
-  if (score >= 40) return 'var(--yellow)';
-  return 'var(--red)';
-}
-function fmtCountdown(targetISO) {
-  if (!targetISO) return '—';
-  const diffMs = new Date(targetISO) - new Date();
-  if (isNaN(diffMs)) return '—';
-  if (diffMs <= 0) return 'now';
-  const mins = Math.round(diffMs / 60000);
-  const h = Math.floor(mins / 60), m = mins % 60;
-  return h > 0 ? `${h}h ${m}m` : `${m}m`;
-}
-function fmtClock(iso) {
-  if (!iso) return '';
-  const d = new Date(iso);
-  return isNaN(d) ? '' : d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+// ---------- helpers ----------
+function colorFor(s) { if (s == null) return 'var(--muted)'; if (s >= 70) return 'var(--green)'; if (s >= 40) return 'var(--yellow)'; return 'var(--red)'; }
+function fmtCountdown(t) { if (!t) return '—'; const d = new Date(t) - new Date(); if (isNaN(d)) return '—'; if (d <= 0) return 'now'; const m = Math.round(d / 60000), h = Math.floor(m / 60); return h > 0 ? `${h}h ${m % 60}m` : `${m % 60}m`; }
+function fmtClock(iso) { if (!iso) return ''; const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
+
+// ================= LIVE COMPUTE ENGINE (ported from score_calculator.py) =================
+async function fetchWeather() {
+  const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + LAT + '&longitude=' + LON +
+    '&current=surface_pressure,cloud_cover,wind_speed_10m,precipitation,temperature_2m' +
+    '&hourly=surface_pressure&temperature_unit=fahrenheit&wind_speed_unit=mph' +
+    '&precipitation_unit=inch&timezone=auto&past_hours=6&forecast_hours=1';
+  const r = await fetch(url, { cache: 'no-store' });
+  if (!r.ok) throw new Error('weather ' + r.status);
+  return r.json();
 }
 
-// ----- data load -----
+function pressureTrend(w, now) {
+  const cur = w.current ? w.current.surface_pressure : null;
+  if (cur == null || !w.hourly || !w.hourly.time) return 0;
+  const target = now.getTime() - 3 * 3600e3;
+  let best = null, bd = Infinity;
+  for (let i = 0; i < w.hourly.time.length; i++) {
+    const p = w.hourly.surface_pressure[i];
+    if (p == null) continue;
+    const t = new Date(w.hourly.time[i]).getTime();
+    const dd = Math.abs(t - target);
+    if (dd < bd) { bd = dd; best = p; }
+  }
+  return best == null ? 0 : Math.round((cur - best) * 10) / 10;
+}
+
+function sunEventList(now) {
+  const ev = [];
+  for (const off of [-1, 0, 1]) {
+    const d = new Date(now.getTime() + off * 86400e3);
+    const t = SunCalc.getTimes(d, LAT, LON);
+    if (t.sunrise && !isNaN(t.sunrise)) ev.push({ type: 'sunrise', time: t.sunrise });
+    if (t.sunset && !isNaN(t.sunset)) ev.push({ type: 'sunset', time: t.sunset });
+  }
+  return ev;
+}
+
+function moonEvents(now) {
+  // Majors: moon meridian transit (max altitude) & underfoot (min altitude).
+  const step = 5 * 60000, span = 14 * 3600e3;
+  const times = [], alts = [];
+  for (let t = now.getTime() - span; t <= now.getTime() + span; t += step) {
+    times.push(t);
+    alts.push(SunCalc.getMoonPosition(new Date(t), LAT, LON).altitude);
+  }
+  const majors = [];
+  for (let i = 1; i < alts.length - 1; i++) {
+    if (alts[i] > alts[i - 1] && alts[i] >= alts[i + 1]) majors.push({ type: 'transit', time: new Date(times[i]) });
+    else if (alts[i] < alts[i - 1] && alts[i] <= alts[i + 1]) majors.push({ type: 'underfoot', time: new Date(times[i]) });
+  }
+  // Minors: moonrise / moonset across adjacent days.
+  const minors = [];
+  for (const off of [-1, 0, 1]) {
+    const d = new Date(now.getTime() + off * 86400e3);
+    const mt = SunCalc.getMoonTimes(d, LAT, LON);
+    if (mt.rise && !isNaN(mt.rise)) minors.push({ type: 'moonrise', time: mt.rise });
+    if (mt.set && !isNaN(mt.set)) minors.push({ type: 'moonset', time: mt.set });
+  }
+  const illum = SunCalc.getMoonIllumination(now).fraction * 100;
+  return { majors, minors, illum };
+}
+
+function activeWindow(now, events, halfMin) {
+  let best = null, bd = Infinity;
+  for (const e of events) { const dd = Math.abs(e.time - now); if (dd <= halfMin * 60000 && dd < bd) { bd = dd; best = e; } }
+  return best;
+}
+function nextEvent(now, events) {
+  const up = events.filter(e => e.time > now).sort((a, b) => a.time - b.time);
+  return up[0] || null;
+}
+
+function computeScore(inMajor, inMinor, inDawnDusk, illum, trend, cloud, wind) {
+  let score = 35; const b = { baseline: 35 };
+  if (trend <= -3) b.pressure = 25; else if (trend <= -1) b.pressure = 18; else if (trend < 1) b.pressure = 12; else if (trend <= 3) b.pressure = 5; else b.pressure = -10;
+  score += b.pressure;
+  if (cloud != null) { b.cloud_cover = cloud >= 70 ? 12 : cloud >= 40 ? 8 : cloud >= 20 ? 4 : 0; score += b.cloud_cover; }
+  if (wind != null) { b.wind = (wind >= 3 && wind <= 10) ? 12 : ((wind >= 1 && wind < 3) || (wind > 10 && wind <= 15)) ? 6 : wind < 1 ? 3 : -8; score += b.wind; }
+  if (inMajor) { score += 18; b.solunar_major = 18; } else if (inMinor) { score += 10; b.solunar_minor = 10; }
+  if (inDawnDusk) { score += 12; b.dawn_dusk = 12; }
+  if (illum != null && (illum > 95 || illum < 5 || (illum >= 45 && illum <= 55))) { score += 6; b.moon_phase = 6; }
+  return { score: Math.max(0, Math.min(100, score)), breakdown: b };
+}
+function tierFor(s) { return s >= 80 ? 'Excellent' : s >= 60 ? 'Good' : s >= 40 ? 'Fair' : 'Slow'; }
+
+function buildFactors(b, trend, cloud, wind, inMajor, inMinor, inDawnDusk, illum) {
+  const pos = [], neg = [];
+  const p = b.pressure || 0;
+  if (p >= 18) pos.push('Falling barometric pressure — fish often feed ahead of a front');
+  else if (p === 12) pos.push('Stable atmospheric pressure is comfortable for fish');
+  else if (p === 5) pos.push('Slightly rising pressure — neutral to mild');
+  else if (p < 0) neg.push('Sharply rising pressure tends to slow the bite');
+  if (cloud != null) {
+    if (cloud >= 70) pos.push('Overcast skies have a favorable impact on biting activity');
+    else if (cloud >= 40) pos.push('Partly cloudy skies are mildly favorable');
+    else if (cloud < 20) neg.push('Bright, clear skies can push fish deep and slow feeding');
+  }
+  if (wind != null) {
+    if (wind >= 3 && wind <= 10) pos.push('A light breeze/ripple has a very favorable effect');
+    else if (wind < 1) neg.push('Dead-calm water is less favorable than a light ripple');
+    else if (wind > 15) neg.push('Strong winds make conditions tougher');
+  }
+  if (inMajor) pos.push('Solunar major period active (moon overhead/underfoot)');
+  else if (inMinor) pos.push('Solunar minor period active (moonrise/moonset)');
+  if (inDawnDusk) pos.push('Low-light dawn/dusk window — prime feeding time');
+  if (illum != null && (illum > 95 || illum < 5 || (illum >= 45 && illum <= 55))) pos.push('Moon phase is favorable');
+  return { pos, neg };
+}
+
+function speciesAndMessage(tier, tempF, activeMajor, activeMinor, inDawnDusk, now) {
+  const warm = tempF != null && tempF > 65;
+  const species = warm ? 'bass' : 'trout';
+  const fish = warm ? 'Largemouth bass' : 'Rainbow trout';
+  let hoursLeft = null;
+  const active = activeMajor || activeMinor;
+  if (active) { const half = activeMajor ? 60 : 30; hoursLeft = Math.max(0, (new Date(active.time).getTime() + half * 60000 - now.getTime()) / 3600e3); }
+  const hrs = h => h >= 1 ? `~${(Math.round(h * 2) / 2)} hours` : `~${Math.round(h * 60)} min`;
+  let note, msg;
+  if (tier === 'Excellent' || tier === 'Good') {
+    if (active && hoursLeft) { note = `${fish} biting`; msg = `${tier} ${species} window right now — biting for the next ${hrs(hoursLeft)}.`; }
+    else if (inDawnDusk) { note = `${fish} — dawn/dusk window`; msg = `${tier} ${species} conditions during the low-light window. Good time to fish.`; }
+    else { note = `${fish} — ${tier.toLowerCase()} window`; msg = `${tier} conditions for ${species} right now. Worth a cast.`; }
+  } else if (tier === 'Fair') { note = `${fish} — fair conditions`; msg = `Fair ${species} conditions right now. Could go either way.`; }
+  else { note = `${fish} — slow`; msg = `Slow bite. Marginal ${species} conditions at the moment.`; }
+  return { species, species_note: note, message: msg };
+}
+
+function recommendTactics(tempF, cloud, wind, trend, lightPhase, illum, month) {
+  const t = tempF != null ? tempF : 60, cc = cloud != null ? cloud : 50, w = wind != null ? wind : 5;
+  const lowLight = lightPhase === 'dawn_dusk' || lightPhase === 'night' || cc >= 75;
+  const brightMid = lightPhase === 'day' && cc < 40;
+  const windy = w > 12, breezy = w >= 3 && w <= 12;
+  let species_pick, species_reason;
+  if (t > 66) { species_pick = 'Largemouth bass'; species_reason = `water proxy ~${Math.round(t)}°F (warm) favors bass metabolism`; }
+  else if (t < 56) { species_pick = 'Rainbow trout'; species_reason = `cool water ~${Math.round(t)}°F favors trout; bass sluggish`; }
+  else if (lowLight) { species_pick = 'Rainbow trout (bass possible)'; species_reason = `moderate ~${Math.round(t)}°F; low light leans trout`; }
+  else { species_pick = 'Either — slight bass edge'; species_reason = `moderate ~${Math.round(t)}°F; daytime warmth leans bass`; }
+  let where, where_reason;
+  if (lowLight || t < 58) { where = 'Shoreline & shallow cover'; where_reason = 'fish push shallow toward the bank in low light / cool water'; }
+  else if (brightMid && t > 68) { where = 'Open water — drop-offs & deeper structure'; where_reason = 'bright sun + warm water pulls fish off the bank'; }
+  else { where = 'Transition edges — the first drop-off off the shoreline'; where_reason = 'mixed light; work the seam between shallow flats and deeper water'; }
+  if (w >= 4) { where += ' — favor the windward shore'; where_reason += '; wind stacks plankton and baitfish on the wind-blown bank'; }
+  let depth;
+  if (lowLight || t < 58) depth = 'Shallow — top ~0–8 ft';
+  else if (brightMid && t > 70) depth = 'Deep — 15 ft+ near structure';
+  else depth = 'Mid-depth — ~8–15 ft';
+  if (trend != null && trend > 3) depth += ' (fish tight and slow it down — pressure rising)';
+  const troutLean = species_pick.indexOf('Rainbow') === 0;
+  let method_lean, method_reason;
+  if (windy) { method_lean = 'Spin fishing'; method_reason = 'wind makes fly casting tough and rewards covering water'; }
+  else if (troutLean && !windy) { method_lean = 'Fly fishing'; method_reason = 'calm-ish water and a trout bite suit fly presentations'; }
+  else if (species_pick.toLowerCase().indexOf('bass') >= 0 && !lowLight) { method_lean = 'Spin fishing'; method_reason = 'bass holding on structure are efficient to target with lures'; }
+  else { method_lean = 'Either — match the water'; method_reason = "conditions don't strongly favor one over the other"; }
+  const fly = [];
+  if (lowLight && !windy) {
+    if (t > 66) fly.push(['Poppers / foam topwater', 'low light + warm water = surface bass eats', true]);
+    fly.push(['Dry flies (caddis / mayfly)', 'trout rise to the evening hatch in low light', troutLean]);
+  }
+  fly.push(['Woolly Buggers / leeches (slow strip)', 'all-purpose in low light, wind, or stained water — both species', true]);
+  fly.push(['Streamers (sculpin / baitfish)', 'active fish chasing bait; strip on a sink-tip', (!lowLight || windy)]);
+  if (brightMid || !lowLight) fly.push(["Nymphs (pheasant tail, hare's ear) under an indicator", "subsurface when nothing's rising / bright midday", brightMid]);
+  const spin = [];
+  if (lowLight && t > 64) spin.push(['Topwater (buzzbaits, walking baits, poppers)', 'first/last light over shallow cover for bass', true]);
+  if (breezy || cc >= 40) spin.push(['Spinners / spinnerbaits', 'chop or cloud cover — cover water at mid-depth', true]);
+  spin.push(['Inline spinners / small spoons', 'steady trout producer at mid-depth', troutLean]);
+  if (brightMid || t > 70) spin.push(['Jigs & soft plastics (worked deep)', 'bright sun / warm water — fish off the bank and on structure', (brightMid || t > 70)]);
+  if (!spin.length) spin.push(['Inline spinners / small spoons', 'versatile search bait', true]);
+  let season;
+  if ([4, 5, 6].includes(month)) season = 'Late spring/early summer: trout are active; bass are shallow around cover post-spawn.';
+  else if ([7, 8, 9].includes(month)) season = 'Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.';
+  else if ([10, 11].includes(month)) season = 'Fall: both species feed up on baitfish — bigger streamers/swimbaits shine.';
+  else season = 'Winter: metabolism is low — fish deep, slow, and small.';
+  const summary = `${species_pick} · ${where.split(' — ')[0].split(' (')[0]} · ${depth.split(' (')[0]} · lean ${method_lean.toLowerCase()}`;
+  return { species_pick, species_reason, where, where_reason, depth, method_lean, method_reason,
+    fly_options: fly.map(x => ({ name: x[0], why: x[1], hot: !!x[2] })),
+    spin_options: spin.map(x => ({ name: x[0], why: x[1], hot: !!x[2] })),
+    season_note: season, summary };
+}
+
+function computeLive(weather) {
+  const now = new Date();
+  const c = weather.current || {};
+  const cur = {
+    pressure: c.surface_pressure ?? null,
+    temp_f: c.temperature_2m ?? null,
+    cloud: c.cloud_cover ?? null,
+    wind: c.wind_speed_10m ?? null,
+    precip: c.precipitation ?? null,
+  };
+  const trend = pressureTrend(weather, now);
+  const suns = sunEventList(now);
+  const { majors, minors, illum } = moonEvents(now);
+  const aMajor = activeWindow(now, majors, 60);
+  const aMinor = activeWindow(now, minors, 30);
+  const inMajor = !!aMajor, inMinor = !!aMinor;
+  const inDawnDusk = !!activeWindow(now, suns, 60);
+  // light phase
+  let lightPhase;
+  if (inDawnDusk) lightPhase = 'dawn_dusk';
+  else { const tt = SunCalc.getTimes(now, LAT, LON); lightPhase = (tt.sunrise <= now && now <= tt.sunset) ? 'day' : 'night'; }
+  const { score, breakdown } = computeScore(inMajor, inMinor, inDawnDusk, illum, trend, cur.cloud, cur.wind);
+  const tier = tierFor(score);
+  const sm = speciesAndMessage(tier, cur.temp_f, aMajor, aMinor, inDawnDusk, now);
+  const f = buildFactors(breakdown, trend, cur.cloud, cur.wind, inMajor, inMinor, inDawnDusk, illum);
+  const tactics = recommendTactics(cur.temp_f, cur.cloud, cur.wind, trend, lightPhase, illum, now.getMonth() + 1);
+  const nm = nextEvent(now, majors), nmi = nextEvent(now, minors);
+  const fmt = e => e ? { type: e.type, time: new Date(e.time).toISOString() } : null;
+  return {
+    timestamp: now.toISOString(), live: true,
+    score, tier, species: sm.species, species_note: sm.species_note, message: sm.message,
+    next_major_period: fmt(nm), next_minor_period: fmt(nmi),
+    pressure_trend_hpa: trend, in_major_period: inMajor, in_minor_period: inMinor, in_dawn_dusk: inDawnDusk,
+    light_phase: lightPhase, moon_illumination_pct: Math.round(illum * 10) / 10,
+    temp_f: cur.temp_f, surface_pressure_hpa: cur.pressure, cloud_cover_pct: cur.cloud, wind_mph: cur.wind, precip_in: cur.precip,
+    score_breakdown: breakdown, positive_factors: f.pos, negative_factors: f.neg, tactics,
+  };
+}
+
+// ---------- load ----------
 async function fetchJSON(name) {
   const bust = '?t=' + Date.now();
-  try {
-    return await fetch('data/' + name + bust).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
-  } catch (e) {
-    return await fetch('../data/' + name + bust).then(r => r.json());
-  }
+  try { return await fetch('data/' + name + bust).then(r => { if (!r.ok) throw 0; return r.json(); }); }
+  catch (e) { return await fetch('../data/' + name + bust).then(r => r.json()); }
 }
+
 async function loadData() {
+  let computed = null;
   try {
-    const [latest, history] = await Promise.all([fetchJSON('latest_score.json'), fetchJSON('history.json')]);
-    renderLatest(latest);
-    renderChart(history);
+    const weather = await fetchWeather();
+    computed = computeLive(weather);
+    renderLatest(computed);
   } catch (err) {
-    document.getElementById('message').textContent = 'Could not load data (' + err + ').';
+    // Fallback: show the last server-computed value so the page still works offline.
+    try { const latest = await fetchJSON('latest_score.json'); latest.live = false; renderLatest(latest); }
+    catch (e2) { document.getElementById('message').textContent = 'Could not load conditions (' + err + ').'; }
   }
+  // History chart from the scheduled job's log, with the live point appended.
+  try {
+    const history = await fetchJSON('history.json');
+    const series = Array.isArray(history) ? history.slice() : [];
+    if (computed) series.push({ timestamp: computed.timestamp, score: computed.score });
+    renderChart(series);
+  } catch (e) { /* chart optional */ }
 }
 
 function renderLatest(d) {
   currentData = d;
-  const scoreEl = document.getElementById('score');
   const score = d.score;
-  scoreEl.textContent = (score === null || score === undefined) ? '–' : score;
+  const scoreEl = document.getElementById('score');
+  scoreEl.textContent = (score == null) ? '–' : score;
   scoreEl.style.color = colorFor(score);
   document.getElementById('tier').textContent = d.tier || '—';
   document.getElementById('tier').style.color = colorFor(score);
@@ -346,13 +533,14 @@ function renderLatest(d) {
   document.getElementById('minorAt').textContent = nextMinorTime ? fmtClock(nextMinorTime) : '';
   updateCountdowns();
 
-  document.getElementById('updated').textContent = d.timestamp
-    ? 'Updated ' + new Date(d.timestamp).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })
-    : 'Awaiting first scheduled run';
+  const upd = document.getElementById('updated');
+  if (d.live) upd.textContent = '🟢 Live · computed ' + new Date(d.timestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  else if (d.timestamp) upd.textContent = 'Showing last saved value · ' + new Date(d.timestamp).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
+  else upd.textContent = 'Awaiting data';
 
   const stats = [
     ['Pressure trend', d.pressure_trend_hpa != null ? d.pressure_trend_hpa + ' hPa / 3h' : '—'],
-    ['Surface pressure', d.surface_pressure_hpa != null ? d.surface_pressure_hpa + ' hPa' : '—'],
+    ['Surface pressure', d.surface_pressure_hpa != null ? Math.round(d.surface_pressure_hpa * 10) / 10 + ' hPa' : '—'],
     ['Air temp (water proxy)', d.temp_f != null ? Math.round(d.temp_f) + ' °F' : '—'],
     ['Moon illumination', d.moon_illumination_pct != null ? d.moon_illumination_pct + '%' : '—'],
     ['Cloud cover', d.cloud_cover_pct != null ? Math.round(d.cloud_cover_pct) + '%' : '—'],
@@ -360,9 +548,7 @@ function renderLatest(d) {
     ['Major period active', d.in_major_period ? 'Yes' : 'No'],
     ['Dawn/dusk window', d.in_dawn_dusk ? 'Yes' : 'No'],
   ];
-  document.getElementById('stats').innerHTML = stats.map(
-    ([k, v]) => `<div class="stat"><span class="k">${k}</span><span class="v">${v}</span></div>`
-  ).join('');
+  document.getElementById('stats').innerHTML = stats.map(([k, v]) => `<div class="stat"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('');
 
   const pos = d.positive_factors || [], neg = d.negative_factors || [];
   const fc = document.getElementById('factorsCard');
@@ -419,55 +605,31 @@ function renderChart(history) {
 }
 
 // ===================== Catch log =====================
-function loadLog() {
-  try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch (e) { return []; }
-}
-function saveLog(arr) { localStorage.setItem(LS_KEY, JSON.stringify(arr)); }
-
-function tierOf(score) {
-  if (score == null) return null;
-  if (score >= 80) return 'Excellent';
-  if (score >= 60) return 'Good';
-  if (score >= 40) return 'Fair';
-  return 'Slow';
-}
+function loadLog() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch (e) { return []; } }
+function saveLog(a) { localStorage.setItem(LS_KEY, JSON.stringify(a)); }
+function tierOf(s) { if (s == null) return null; return s >= 80 ? 'Excellent' : s >= 60 ? 'Good' : s >= 40 ? 'Fair' : 'Slow'; }
 const RESULT_LABEL = { fish: 'Caught', nibble: 'Nibbles', skunk: 'Skunked' };
 const RESULT_CLASS = { fish: 'le-fish', nibble: 'le-nibble', skunk: 'le-skunk' };
-
-function fillSelect(id, opts) {
-  document.getElementById(id).innerHTML = opts.map(o => `<option>${o}</option>`).join('');
-}
-
-// ---- modal state ----
+function fillSelect(id, opts) { document.getElementById(id).innerHTML = opts.map(o => `<option>${o}</option>`).join(''); }
 const sel = { result: null, species: 'trout', method: 'fly' };
+function setSeg(g, v) { document.querySelectorAll('#' + g + ' button').forEach(b => b.classList.toggle('active', b.dataset.v === v)); }
 
-function setSeg(groupId, value) {
-  document.querySelectorAll('#' + groupId + ' button').forEach(b => b.classList.toggle('active', b.dataset.v === value));
-}
 function openModal() {
   sel.result = null; sel.species = 'trout'; sel.method = 'fly';
-  // default species/method from the current recommendation if present
   if (currentData) {
     if (currentData.species === 'bass') sel.species = 'bass';
-    const ml = (currentData.tactics && currentData.tactics.method_lean) || '';
-    if (/spin/i.test(ml)) sel.method = 'spin';
+    if (currentData.tactics && /spin/i.test(currentData.tactics.method_lean || '')) sel.method = 'spin';
   }
   setSeg('segResult', null); setSeg('segSpecies', sel.species); setSeg('segMethod', sel.method);
   fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES);
-  fillSelect('logPosition', POSITIONS);
-  fillSelect('logDepth', DEPTHS);
+  fillSelect('logPosition', POSITIONS); fillSelect('logDepth', DEPTHS);
   document.getElementById('logCount').value = 1;
   document.getElementById('countField').style.display = 'none';
   document.getElementById('logNotes').value = '';
-  // snapshot text
-  let s = 'No live conditions loaded yet — entry will still be saved.';
+  let s = 'No live conditions yet — entry will still be saved.';
   if (currentData) {
     const d = currentData;
-    s = `Auto-attaching: score ${d.score} (${d.tier}) · ${d.light_phase || '—'} · ` +
-        `${d.temp_f != null ? Math.round(d.temp_f) + '°F' : '—'} · ` +
-        `${d.pressure_trend_hpa != null ? d.pressure_trend_hpa + ' hPa/3h' : '—'} · ` +
-        `${d.cloud_cover_pct != null ? Math.round(d.cloud_cover_pct) + '% cloud' : '—'} · ` +
-        `${d.wind_mph != null ? Math.round(d.wind_mph) + ' mph' : '—'}`;
+    s = `Auto-attaching: score ${d.score} (${d.tier}) · ${d.light_phase || '—'} · ${d.temp_f != null ? Math.round(d.temp_f) + '°F' : '—'} · ${d.pressure_trend_hpa != null ? d.pressure_trend_hpa + ' hPa/3h' : '—'} · ${d.cloud_cover_pct != null ? Math.round(d.cloud_cover_pct) + '% cloud' : '—'} · ${d.wind_mph != null ? Math.round(d.wind_mph) + ' mph' : '—'}`;
   }
   document.getElementById('logSnapshot').textContent = s;
   document.getElementById('logModal').classList.add('open');
@@ -477,125 +639,69 @@ function closeModal() { document.getElementById('logModal').classList.remove('op
 function saveEntry() {
   if (!sel.result) { alert('Pick a result first (Caught / Nibbles / Skunked).'); return; }
   const d = currentData || {};
-  const entry = {
-    id: Date.now(),
-    logged_at: new Date().toISOString(),
-    result: sel.result,
+  const e = {
+    id: Date.now(), logged_at: new Date().toISOString(), result: sel.result,
     count: sel.result === 'fish' ? Math.max(1, parseInt(document.getElementById('logCount').value, 10) || 1) : 0,
-    species: sel.species,
-    method: sel.method,
-    lure: document.getElementById('logLure').value,
-    position: document.getElementById('logPosition').value,
-    depth: document.getElementById('logDepth').value,
-    notes: document.getElementById('logNotes').value.trim(),
-    // conditions snapshot
-    score: d.score ?? null,
-    tier: d.tier ?? null,
-    light_phase: d.light_phase ?? null,
-    temp_f: d.temp_f ?? null,
-    pressure_trend_hpa: d.pressure_trend_hpa ?? null,
-    cloud_cover_pct: d.cloud_cover_pct ?? null,
-    wind_mph: d.wind_mph ?? null,
-    moon_illumination_pct: d.moon_illumination_pct ?? null,
-    data_timestamp: d.timestamp ?? null,
+    species: sel.species, method: sel.method,
+    lure: document.getElementById('logLure').value, position: document.getElementById('logPosition').value,
+    depth: document.getElementById('logDepth').value, notes: document.getElementById('logNotes').value.trim(),
+    score: d.score ?? null, tier: d.tier ?? null, light_phase: d.light_phase ?? null, temp_f: d.temp_f ?? null,
+    pressure_trend_hpa: d.pressure_trend_hpa ?? null, cloud_cover_pct: d.cloud_cover_pct ?? null,
+    wind_mph: d.wind_mph ?? null, moon_illumination_pct: d.moon_illumination_pct ?? null, data_timestamp: d.timestamp ?? null,
   };
-  const log = loadLog(); log.push(entry); saveLog(log);
-  closeModal();
-  renderLog();
+  const log = loadLog(); log.push(e); saveLog(log); closeModal(); renderLog();
 }
 
 function renderLog() {
   const log = loadLog();
   const body = document.getElementById('logBody');
-  if (!log.length) {
-    body.innerHTML = `<div class="hint">No sessions logged yet. After you fish, tap <b>＋ Log a catch / no-catch</b> — each entry saves the current bite score and conditions alongside what you caught and how. Once you have a handful, this section shows whether high scores actually produce fish at your lake.</div>`;
-    return;
-  }
+  if (!log.length) { body.innerHTML = `<div class="hint">No sessions logged yet. After you fish, tap <b>＋ Log a catch / no-catch</b> — each entry saves the current bite score and conditions alongside what you caught and how. Once you have a handful, this section shows whether high scores actually produce fish at your lake.</div>`; return; }
   const sessions = log.length;
   const fish = log.filter(e => e.result === 'fish').reduce((a, e) => a + (e.count || 1), 0);
   const landedSessions = log.filter(e => e.result === 'fish').length;
-
-  // catch rate by score tier
-  const tiers = ['Excellent', 'Good', 'Fair', 'Slow'];
-  const byTier = {};
+  const tiers = ['Excellent', 'Good', 'Fair', 'Slow'], byTier = {};
   tiers.forEach(t => byTier[t] = { n: 0, hit: 0 });
   log.forEach(e => { const t = e.tier || tierOf(e.score); if (byTier[t]) { byTier[t].n++; if (e.result === 'fish') byTier[t].hit++; } });
-  let tierRows = tiers.filter(t => byTier[t].n > 0).map(t => {
-    const o = byTier[t]; const pct = Math.round(100 * o.hit / o.n);
-    return `<tr><td>${t}</td><td class="r">${o.n}</td><td class="r">${o.hit}</td><td class="r">${pct}%</td></tr>`;
-  }).join('');
+  let tierRows = tiers.filter(t => byTier[t].n > 0).map(t => { const o = byTier[t]; return `<tr><td>${t}</td><td class="r">${o.n}</td><td class="r">${o.hit}</td><td class="r">${Math.round(100 * o.hit / o.n)}%</td></tr>`; }).join('');
   if (!tierRows) tierRows = '<tr><td colspan="4" style="color:var(--muted)">—</td></tr>';
-
-  // by method
   const meth = { fly: { n: 0, hit: 0 }, spin: { n: 0, hit: 0 } };
   log.forEach(e => { if (meth[e.method]) { meth[e.method].n++; if (e.result === 'fish') meth[e.method].hit++; } });
-  const methLine = ['fly', 'spin'].filter(m => meth[m].n > 0)
-    .map(m => `${m === 'fly' ? '🪶 Fly' : '🎣 Spin'}: ${meth[m].hit}/${meth[m].n} landed`).join(' · ') || '—';
-
-  // top lures by fish landed
+  const methLine = ['fly', 'spin'].filter(m => meth[m].n > 0).map(m => `${m === 'fly' ? '🪶 Fly' : '🎣 Spin'}: ${meth[m].hit}/${meth[m].n} landed`).join(' · ') || '—';
   const lureCount = {};
   log.filter(e => e.result === 'fish').forEach(e => { lureCount[e.lure] = (lureCount[e.lure] || 0) + 1; });
-  const topLures = Object.entries(lureCount).sort((a, b) => b[1] - a[1]).slice(0, 4)
-    .map(([k, v]) => `${k} (${v})`).join(', ') || 'none yet';
-
-  // recent entries
+  const topLures = Object.entries(lureCount).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([k, v]) => `${k} (${v})`).join(', ') || 'none yet';
   const recent = log.slice(-6).reverse().map(e => {
     const when = new Date(e.logged_at).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
     const rlabel = RESULT_LABEL[e.result] + (e.result === 'fish' && e.count > 1 ? ` ×${e.count}` : '');
     const sc = e.score != null ? `score ${e.score}` : 'no score';
     const meta = [e.species, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
-    return `<div class="logentry"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}</span><span style="color:var(--muted)">${when} · ${sc}</span></div>` +
-           `<div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div></div>`;
+    return `<div class="logentry"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}</span><span style="color:var(--muted)">${when} · ${sc}</span></div><div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div></div>`;
   }).join('');
-
   body.innerHTML =
     `<div class="summary-line"><b>${sessions}</b> session${sessions !== 1 ? 's' : ''} logged · <b>${fish}</b> fish landed · ${landedSessions} productive trip${landedSessions !== 1 ? 's' : ''}</div>` +
-    `<div class="sub-h">Catch rate by bite-score tier</div>` +
-    `<table class="ltable"><thead><tr><th>Tier</th><th class="r">Logged</th><th class="r">Landed</th><th class="r">Hit %</th></tr></thead><tbody>${tierRows}</tbody></table>` +
+    `<div class="sub-h">Catch rate by bite-score tier</div><table class="ltable"><thead><tr><th>Tier</th><th class="r">Logged</th><th class="r">Landed</th><th class="r">Hit %</th></tr></thead><tbody>${tierRows}</tbody></table>` +
     `<div class="sub-h">By method</div><div style="font-size:.9rem;margin-bottom:4px;">${methLine}</div>` +
     `<div class="sub-h">Most productive lures/flies</div><div style="font-size:.9rem;">${topLures}</div>` +
     `<div class="sub-h">Recent sessions</div>${recent}`;
 }
 
 function exportLog() {
-  const log = loadLog();
-  if (!log.length) { alert('Nothing to export yet.'); return; }
+  const log = loadLog(); if (!log.length) { alert('Nothing to export yet.'); return; }
   const blob = new Blob([JSON.stringify(log, null, 2)], { type: 'application/json' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url; a.download = 'lake-louise-catch-log.json';
-  document.body.appendChild(a); a.click(); a.remove();
-  URL.revokeObjectURL(url);
+  const url = URL.createObjectURL(blob), a = document.createElement('a');
+  a.href = url; a.download = 'lake-louise-catch-log.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
 }
-function clearLog() {
-  if (!loadLog().length) return;
-  if (confirm('Delete all logged sessions from this browser? Export first if you want a backup.')) {
-    localStorage.removeItem(LS_KEY); renderLog();
-  }
-}
+function clearLog() { if (!loadLog().length) return; if (confirm('Delete all logged sessions from this browser? Export first if you want a backup.')) { localStorage.removeItem(LS_KEY); renderLog(); } }
 
-// ----- wire up -----
 document.getElementById('openLog').addEventListener('click', openModal);
 document.getElementById('logCancel').addEventListener('click', closeModal);
 document.getElementById('logSave').addEventListener('click', saveEntry);
 document.getElementById('logExport').addEventListener('click', exportLog);
 document.getElementById('logClear').addEventListener('click', clearLog);
 document.getElementById('logModal').addEventListener('click', e => { if (e.target.id === 'logModal') closeModal(); });
-
-document.getElementById('segResult').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  sel.result = b.dataset.v; setSeg('segResult', sel.result);
-  document.getElementById('countField').style.display = sel.result === 'fish' ? '' : 'none';
-});
-document.getElementById('segSpecies').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  sel.species = b.dataset.v; setSeg('segSpecies', sel.species);
-});
-document.getElementById('segMethod').addEventListener('click', e => {
-  const b = e.target.closest('button'); if (!b) return;
-  sel.method = b.dataset.v; setSeg('segMethod', sel.method);
-  fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES);
-});
+document.getElementById('segResult').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.result = b.dataset.v; setSeg('segResult', sel.result); document.getElementById('countField').style.display = sel.result === 'fish' ? '' : 'none'; });
+document.getElementById('segSpecies').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.species = b.dataset.v; setSeg('segSpecies', sel.species); });
+document.getElementById('segMethod').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.method = b.dataset.v; setSeg('segMethod', sel.method); fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES); });
 
 loadData();
 renderLog();
