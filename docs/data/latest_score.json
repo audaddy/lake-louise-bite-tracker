@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-06-29T19:47:31-07:00",
-  "score": 69,
-  "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "timestamp": "2026-06-29T20:34:12-07:00",
+  "score": 85,
+  "tier": "Excellent",
+  "species_note": "Rainbow trout \u2014 dawn/dusk window",
+  "message": "Excellent trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-06-30T01:32:34-07:00"
@@ -12,36 +12,80 @@
     "type": "moonrise",
     "time": "2026-06-29T21:42:49-07:00"
   },
-  "pressure_trend_hpa": -0.3,
+  "pressure_trend_hpa": 0.3,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
+  "in_dawn_dusk": true,
   "moon_illumination_pct": 99.9,
-  "temp_f": 62.3,
-  "surface_pressure_hpa": 1009.2,
-  "cloud_cover_pct": 30.0,
-  "wind_mph": 5.7,
+  "temp_f": 61.4,
+  "surface_pressure_hpa": 1009.8,
+  "cloud_cover_pct": 58.0,
+  "wind_mph": 6.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 4,
+    "cloud_cover": 8,
     "wind": 12,
+    "dawn_dusk": 12,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
+    "Partly cloudy skies are mildly favorable",
     "A light breeze/ripple has a very favorable effect",
+    "Low-light dawn/dusk window \u2014 prime feeding time",
     "Moon phase is favorable"
   ],
   "negative_factors": [],
+  "light_phase": "dawn_dusk",
+  "tactics": {
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~61\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "depth": "Shallow \u2014 top ~0\u20138 ft",
+    "method_lean": "Fly fishing",
+    "method_reason": "calm-ish water and a trout bite suit fly presentations",
+    "fly_options": [
+      {
+        "name": "Dry flies (caddis / mayfly)",
+        "why": "trout rise to the evening hatch in low light",
+        "hot": true
+      },
+      {
+        "name": "Woolly Buggers / leeches (slow strip)",
+        "why": "all-purpose in low light, wind, or stained water \u2014 both species",
+        "hot": true
+      },
+      {
+        "name": "Streamers (sculpin / baitfish)",
+        "why": "active fish chasing bait; strip on a sink-tip",
+        "hot": false
+      }
+    ],
+    "spin_options": [
+      {
+        "name": "Spinners / spinnerbaits",
+        "why": "chop or cloud cover \u2014 cover water at mid-depth",
+        "hot": true
+      },
+      {
+        "name": "Inline spinners / small spoons",
+        "why": "steady trout producer at mid-depth",
+        "hot": true
+      }
+    ],
+    "season_note": "Late spring/early summer: trout are active; bass are shallow around cover post-spawn.",
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+  },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
-    "score_ge_70": false
+    "period_key": "highscore@2026-06-29T20",
+    "score_ge_70": true
   }
 }
