@@ -450,6 +450,140 @@ def species_and_message(score, tier, temp_f, active_major, active_minor,
 
 
 # --------------------------------------------------------------------------- #
+# 5b. Tactics — where & how to fish (heuristic guidance)
+# --------------------------------------------------------------------------- #
+def light_phase_now(now, in_dawn_dusk):
+    """Return 'dawn_dusk', 'day', or 'night' for the current moment."""
+    if in_dawn_dusk:
+        return "dawn_dusk"
+    loc = LocationInfo("Lake Louise", "WA", TZNAME, LAT, LON)
+    try:
+        s = sun(loc.observer, date=now.date(), tzinfo=TZ)
+        if s["sunrise"] <= now <= s["sunset"]:
+            return "day"
+    except Exception:
+        pass
+    return "night"
+
+
+def recommend_tactics(temp_f, cloud_cover, wind_mph, trend, light_phase,
+                      illumination, month):
+    """Translate current conditions into where/depth/species/method guidance
+    plus condition-matched fly and spin suggestions. Heuristic, not gospel."""
+    t = temp_f if temp_f is not None else 60.0
+    cc = cloud_cover if cloud_cover is not None else 50.0
+    w = wind_mph if wind_mph is not None else 5.0
+
+    low_light = light_phase in ("dawn_dusk", "night") or cc >= 75
+    bright_mid = light_phase == "day" and cc < 40
+    windy = w > 12
+    breezy = 3 <= w <= 12
+
+    # --- Species lean ---
+    if t > 66:
+        species_pick = "Largemouth bass"
+        species_reason = f"water proxy ~{t:.0f}°F (warm) favors bass metabolism"
+    elif t < 56:
+        species_pick = "Rainbow trout"
+        species_reason = f"cool water ~{t:.0f}°F favors trout; bass sluggish"
+    elif low_light:
+        species_pick = "Rainbow trout (bass possible)"
+        species_reason = f"moderate ~{t:.0f}°F; low light leans trout"
+    else:
+        species_pick = "Either — slight bass edge"
+        species_reason = f"moderate ~{t:.0f}°F; daytime warmth leans bass"
+
+    # --- Where: shoreline vs open water ---
+    if low_light or t < 58:
+        where = "Shoreline & shallow cover"
+        where_reason = "fish push shallow toward the bank in low light / cool water"
+    elif bright_mid and t > 68:
+        where = "Open water — drop-offs & deeper structure"
+        where_reason = "bright sun + warm water pulls fish off the bank"
+    else:
+        where = "Transition edges — the first drop-off off the shoreline"
+        where_reason = "mixed light; work the seam between shallow flats and deeper water"
+    if w >= 4:
+        where += " — favor the windward shore"
+        where_reason += "; wind stacks plankton and baitfish on the wind-blown bank"
+
+    # --- Depth ---
+    if low_light or t < 58:
+        depth = "Shallow — top ~0–8 ft"
+    elif bright_mid and t > 70:
+        depth = "Deep — 15 ft+ near structure"
+    else:
+        depth = "Mid-depth — ~8–15 ft"
+    if trend is not None and trend > 3:
+        depth += " (fish tight and slow it down — pressure rising)"
+
+    # --- Method lean: fly vs spin ---
+    trout_lean = species_pick.startswith("Rainbow")
+    if windy:
+        method_lean = "Spin fishing"
+        method_reason = "wind makes fly casting tough and rewards covering water"
+    elif trout_lean and not windy:
+        method_lean = "Fly fishing"
+        method_reason = "calm-ish water and a trout bite suit fly presentations"
+    elif "bass" in species_pick.lower() and not low_light:
+        method_lean = "Spin fishing"
+        method_reason = "bass holding on structure are efficient to target with lures"
+    else:
+        method_lean = "Either — match the water"
+        method_reason = "conditions don't strongly favor one over the other"
+
+    # --- Fly options (condition-matched; 'hot' flag for the best bets now) ---
+    fly = []
+    if low_light and not windy:
+        if t > 66:
+            fly.append(["Poppers / foam topwater", "low light + warm water = surface bass eats", True])
+        fly.append(["Dry flies (caddis / mayfly)", "trout rise to the evening hatch in low light", trout_lean])
+    fly.append(["Woolly Buggers / leeches (slow strip)", "all-purpose in low light, wind, or stained water — both species", True])
+    fly.append(["Streamers (sculpin / baitfish)", "active fish chasing bait; strip on a sink-tip", not low_light or windy])
+    if bright_mid or not low_light:
+        fly.append(["Nymphs (pheasant tail, hare's ear) under an indicator", "subsurface when nothing's rising / bright midday", bright_mid])
+
+    # --- Spin options ---
+    spin = []
+    if low_light and t > 64:
+        spin.append(["Topwater (buzzbaits, walking baits, poppers)", "first/last light over shallow cover for bass", True])
+    if breezy or cc >= 40:
+        spin.append(["Spinners / spinnerbaits", "chop or cloud cover — cover water at mid-depth", True])
+    spin.append(["Inline spinners / small spoons", "steady trout producer at mid-depth", trout_lean])
+    if bright_mid or t > 70:
+        spin.append(["Jigs & soft plastics (worked deep)", "bright sun / warm water — fish off the bank and on structure", bright_mid or t > 70])
+    if not spin:
+        spin.append(["Inline spinners / small spoons", "versatile search bait", True])
+
+    # --- Seasonal note ---
+    if month in (4, 5, 6):
+        season = "Late spring/early summer: trout are active; bass are shallow around cover post-spawn."
+    elif month in (7, 8, 9):
+        season = "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday."
+    elif month in (10, 11):
+        season = "Fall: both species feed up on baitfish — bigger streamers/swimbaits shine."
+    else:
+        season = "Winter: metabolism is low — fish deep, slow, and small."
+
+    summary = (f"{species_pick} · {where.split(' — ')[0].split(' (')[0]} · "
+               f"{depth.split(' (')[0]} · lean {method_lean.lower()}")
+
+    return {
+        "species_pick": species_pick,
+        "species_reason": species_reason,
+        "where": where,
+        "where_reason": where_reason,
+        "depth": depth,
+        "method_lean": method_lean,
+        "method_reason": method_reason,
+        "fly_options": [{"name": n, "why": why, "hot": bool(h)} for n, why, h in fly],
+        "spin_options": [{"name": n, "why": why, "hot": bool(h)} for n, why, h in spin],
+        "season_note": season,
+        "summary": summary,
+    }
+
+
+# --------------------------------------------------------------------------- #
 # Notifications (ntfy.sh)
 # --------------------------------------------------------------------------- #
 def maybe_notify(score, active_major, active_minor, all_events, now,
@@ -544,6 +678,11 @@ def main():
     positive_factors, negative_factors = build_factors(
         breakdown, trend, cur["cloud_cover"], cur["wind_mph"],
         in_major, in_minor, in_dawn_dusk, illumination)
+
+    light_phase = light_phase_now(now, in_dawn_dusk)
+    tactics = recommend_tactics(
+        cur["temp_f"], cur["cloud_cover"], cur["wind_mph"], trend,
+        light_phase, illumination, now.month)
     species, species_note, message, hours_left = species_and_message(
         score, tier, cur["temp_f"], active_major, active_minor,
         in_dawn_dusk, now)
@@ -585,6 +724,8 @@ def main():
         "score_breakdown": breakdown,
         "positive_factors": positive_factors,
         "negative_factors": negative_factors,
+        "light_phase": light_phase,
+        "tactics": tactics,
         "notification": {"fired": fired, "status": notify_status},
         "last_notified": new_notify_state,
     }
