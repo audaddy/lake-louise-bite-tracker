@@ -38,27 +38,19 @@
     box-shadow: 0 6px 20px rgba(0,0,0,0.25);
   }
   .score-card { text-align: center; padding: 28px 20px; }
-  .score-number {
-    font-size: 5.5rem;
-    font-weight: 800;
-    line-height: 1;
-    margin: 4px 0;
-  }
+  .score-number { font-size: 5.5rem; font-weight: 800; line-height: 1; margin: 4px 0; }
   .tier { font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
   .message { font-size: 1.05rem; color: var(--text); margin: 8px auto 0; max-width: 460px; }
   .species-note { color: var(--muted); font-size: 0.9rem; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
   .periods { display: flex; gap: 12px; }
-  .period {
-    flex: 1; background: var(--card); border: 1px solid var(--border);
-    border-radius: 14px; padding: 14px; text-align: center;
-  }
+  .period { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; text-align: center; }
   .period .label { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.6px; }
   .period .countdown { font-size: 1.5rem; font-weight: 700; margin-top: 4px; }
   .period .at { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
   .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 16px; }
   .stat { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding: 6px 0; font-size: 0.92rem; }
   .stat .k { color: var(--muted); }
-  .chart-card h2, .stats-card h2, .factors-card h2 { font-size: 0.95rem; margin: 0 0 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .chart-card h2, .stats-card h2, .factors-card h2, .log-card h2 { font-size: 0.95rem; margin: 0 0 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
   .factor { display: flex; gap: 8px; padding: 6px 0; font-size: 0.92rem; line-height: 1.35; }
   .factor .ic { flex: 0 0 auto; font-weight: 700; }
   .factor.pos .ic { color: var(--green); }
@@ -69,6 +61,12 @@
   .tlabel { color: var(--muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.6px; }
   .tval { font-size: 1.02rem; font-weight: 700; margin-top: 3px; }
   .treason { color: var(--muted); font-size: 0.8rem; margin-top: 3px; line-height: 1.3; }
+  .tfeeding { background: rgba(74,163,223,0.07); border: 1px solid var(--border); border-radius: 12px; padding: 11px 13px; margin-bottom: 16px; }
+  .tflabel { color: var(--accent); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 7px; font-weight: 700; }
+  .tfrow { display: flex; gap: 22px; flex-wrap: wrap; }
+  .tfrow .tfk { color: var(--muted); font-size: 0.78rem; display: block; }
+  .tfrow .tfv { font-weight: 700; font-size: 0.98rem; margin-top: 2px; }
+  .tfnote { color: var(--muted); font-size: 0.74rem; margin-top: 7px; line-height: 1.3; }
   .tcols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
   .tcol h3 { font-size: 0.9rem; margin: 0 0 8px; color: var(--accent); }
   .lure { padding: 7px 0; border-bottom: 1px dashed var(--border); font-size: 0.9rem; }
@@ -76,16 +74,53 @@
   .lure .badge { display: inline-block; font-size: 0.62rem; font-weight: 700; color: #0e1b2a; background: var(--green); border-radius: 6px; padding: 1px 6px; margin-left: 6px; vertical-align: middle; text-transform: uppercase; letter-spacing: 0.4px; }
   .lure .wy { color: var(--muted); font-size: 0.8rem; margin-top: 2px; line-height: 1.3; }
   .tseason { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; font-style: italic; line-height: 1.4; }
-  @media (max-width: 480px) { .tcols { grid-template-columns: 1fr; } .tgrid { grid-template-columns: 1fr; } }
   #chartWrap { position: relative; height: 220px; }
   footer { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
   .updated { text-align: center; color: var(--muted); font-size: 0.78rem; margin-bottom: 16px; }
   a { color: var(--accent); }
-  .pulse { animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.55; } }
+
+  .logbtn { display: block; width: 100%; background: var(--accent); color: #06121e; font-weight: 700; border: none; border-radius: 14px; padding: 15px; font-size: 1rem; cursor: pointer; margin-bottom: 16px; }
+  .logbtn:active { opacity: 0.85; }
+
+  /* Catch-log card */
+  .summary-line { font-size: 0.95rem; margin-bottom: 14px; }
+  .summary-line b { color: var(--text); }
+  .ltable { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-bottom: 14px; }
+  .ltable th, .ltable td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--border); }
+  .ltable th { color: var(--muted); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4px; }
+  .ltable td.r, .ltable th.r { text-align: right; }
+  .sub-h { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; margin: 14px 0 6px; }
+  .logentry { padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 0.86rem; }
+  .le-top { display: flex; justify-content: space-between; gap: 8px; }
+  .le-result { font-weight: 700; }
+  .le-fish { color: var(--green); } .le-nibble { color: var(--yellow); } .le-skunk { color: var(--muted); }
+  .le-meta { color: var(--muted); font-size: 0.8rem; margin-top: 2px; line-height: 1.3; }
+  .log-actions { display: flex; gap: 10px; margin-top: 14px; }
+  .hint { color: var(--muted); font-size: 0.88rem; line-height: 1.45; }
+
+  /* Modal */
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.62); display: none; align-items: flex-start; justify-content: center; padding: 22px 12px; overflow: auto; z-index: 50; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; width: 100%; max-width: 460px; }
+  .modal h2 { margin: 0 0 6px; font-size: 1.15rem; }
+  .snapshot { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px; font-size: 0.8rem; color: var(--muted); margin: 12px 0 16px; line-height: 1.4; }
+  .field { margin-bottom: 14px; }
+  .field > label { display: block; color: var(--muted); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .seg { display: flex; gap: 8px; }
+  .seg button { flex: 1; background: rgba(255,255,255,0.04); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px 6px; font-size: 0.9rem; cursor: pointer; }
+  .seg button.active { background: var(--accent); color: #06121e; font-weight: 700; border-color: var(--accent); }
+  select, input[type=text], input[type=number], textarea { width: 100%; background: #0e1f31; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px; font-size: 0.95rem; font-family: inherit; }
+  textarea { resize: vertical; min-height: 54px; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 4px; }
+  .btn { flex: 1; border: none; border-radius: 10px; padding: 13px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
+  .btn-primary { background: var(--green); color: #06121e; }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+
   @media (max-width: 480px) {
     .score-number { font-size: 4.5rem; }
     .stats { grid-template-columns: 1fr; }
+    .tcols { grid-template-columns: 1fr; }
+    .tgrid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -104,6 +139,8 @@
     <div class="tier" id="tier">—</div>
     <div class="message" id="message">Fetching latest conditions…</div>
   </div>
+
+  <button class="logbtn" id="openLog">＋ Log a catch / no-catch</button>
 
   <div class="periods" style="margin-bottom:16px;">
     <div class="period">
@@ -125,6 +162,14 @@
       <div class="titem"><div class="tlabel">Where</div><div class="tval" id="tWhere">—</div><div class="treason" id="tWhereR"></div></div>
       <div class="titem"><div class="tlabel">Depth</div><div class="tval" id="tDepth">—</div></div>
       <div class="titem"><div class="tlabel">Method lean</div><div class="tval" id="tMethod">—</div><div class="treason" id="tMethodR"></div></div>
+    </div>
+    <div class="tfeeding">
+      <div class="tflabel">⏱ Peak feeding windows (solunar)</div>
+      <div class="tfrow">
+        <div><span class="tfk">Next major</span><span class="tfv" id="tfMajor">—</span></div>
+        <div><span class="tfk">Next minor</span><span class="tfv" id="tfMinor">—</span></div>
+      </div>
+      <div class="tfnote">Major = moon overhead/underfoot (strongest pull). Minor = moonrise/moonset. Fish the 30–60 min around these, especially at first/last light.</div>
     </div>
     <div class="tcols">
       <div class="tcol"><h3>🪶 Fly fishing</h3><div id="flyList"></div></div>
@@ -149,66 +194,134 @@
     <div id="negFactors"></div>
   </div>
 
+  <div class="card log-card" id="logCard">
+    <h2>Your catch log</h2>
+    <div id="logBody"></div>
+    <div class="log-actions">
+      <button class="btn btn-ghost" id="logExport">Export</button>
+      <button class="btn btn-ghost" id="logClear">Clear log</button>
+    </div>
+  </div>
+
   <footer>
     Auto-refreshes every 5 minutes · scored every 30 min via GitHub Actions<br/>
-    Solunar (sun: astral, moon: ephem) + Open-Meteo pressure trend
+    Solunar (sun: astral, moon: ephem) + Open-Meteo pressure trend<br/>
+    Your catch log is saved privately in this browser. Use Export to back it up.
   </footer>
+</div>
+
+<!-- Log modal -->
+<div class="modal-overlay" id="logModal">
+  <div class="modal">
+    <h2>Log a session</h2>
+    <div class="snapshot" id="logSnapshot">Conditions snapshot attaches automatically.</div>
+
+    <div class="field">
+      <label>Result</label>
+      <div class="seg" id="segResult">
+        <button type="button" data-v="fish">🎣 Caught</button>
+        <button type="button" data-v="nibble">Nibbles</button>
+        <button type="button" data-v="skunk">Skunked</button>
+      </div>
+    </div>
+
+    <div class="field" id="countField" style="display:none;">
+      <label>How many landed?</label>
+      <input type="number" id="logCount" min="1" value="1" />
+    </div>
+
+    <div class="field">
+      <label>Species</label>
+      <div class="seg" id="segSpecies">
+        <button type="button" data-v="trout">Trout</button>
+        <button type="button" data-v="bass">Bass</button>
+        <button type="button" data-v="other">Other</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Method</label>
+      <div class="seg" id="segMethod">
+        <button type="button" data-v="fly">🪶 Fly</button>
+        <button type="button" data-v="spin">🎣 Spin</button>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Lure / fly</label>
+      <select id="logLure"></select>
+    </div>
+
+    <div class="field">
+      <label>Position on the water</label>
+      <select id="logPosition"></select>
+    </div>
+
+    <div class="field">
+      <label>Depth fished</label>
+      <select id="logDepth"></select>
+    </div>
+
+    <div class="field">
+      <label>Notes (optional)</label>
+      <textarea id="logNotes" placeholder="retrieve speed, color, time, anything worth remembering"></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="logCancel">Cancel</button>
+      <button class="btn btn-primary" id="logSave">Save entry</button>
+    </div>
+  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script>
 const REFRESH_MS = 5 * 60 * 1000;
+const LS_KEY = 'llbt_catch_log_v1';
 let chart = null;
 let nextMajorTime = null;
 let nextMinorTime = null;
+let currentData = null;   // latest score JSON, used to snapshot conditions
 
+const FLY_LURES = ['Dry fly', 'Popper', 'Nymph', 'Woolly Bugger', 'Streamer', 'Leech', 'Chironomid', 'Egg / glo-bug', 'Other'];
+const SPIN_LURES = ['Inline spinner', 'Spinnerbait', 'Spoon', 'Jig', 'Soft plastic', 'Topwater / buzzbait', 'Crankbait', 'Bait (worm / PowerBait)', 'Other'];
+const POSITIONS = ['Shoreline', 'Off the dock', 'Open water / middle', 'Drop-off / ledge', 'Weed edge', 'Inlet / current', 'Boat / drifting', 'Other'];
+const DEPTHS = ['Surface / top', 'Shallow (0–8 ft)', 'Mid (8–15 ft)', 'Deep (15+ ft)'];
+
+// ----- helpers -----
 function colorFor(score) {
   if (score === null || score === undefined) return 'var(--muted)';
   if (score >= 70) return 'var(--green)';
   if (score >= 40) return 'var(--yellow)';
   return 'var(--red)';
 }
-
 function fmtCountdown(targetISO) {
   if (!targetISO) return '—';
-  const target = new Date(targetISO);
-  const diffMs = target - new Date();
+  const diffMs = new Date(targetISO) - new Date();
   if (isNaN(diffMs)) return '—';
   if (diffMs <= 0) return 'now';
   const mins = Math.round(diffMs / 60000);
-  const h = Math.floor(mins / 60);
-  const m = mins % 60;
+  const h = Math.floor(mins / 60), m = mins % 60;
   return h > 0 ? `${h}h ${m}m` : `${m}m`;
 }
-
 function fmtClock(iso) {
   if (!iso) return '';
   const d = new Date(iso);
-  if (isNaN(d)) return '';
-  return d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  return isNaN(d) ? '' : d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
 }
 
-// Pages serves this file from /docs as the site root, so the JSON is mirrored
-// into docs/data/ and fetched as a relative path. The ../data/ fallback covers
-// the case where the page is served from the repo root instead.
+// ----- data load -----
 async function fetchJSON(name) {
   const bust = '?t=' + Date.now();
   try {
-    return await fetch('data/' + name + bust).then(r => {
-      if (!r.ok) throw new Error(r.status);
-      return r.json();
-    });
+    return await fetch('data/' + name + bust).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
   } catch (e) {
     return await fetch('../data/' + name + bust).then(r => r.json());
   }
 }
-
 async function loadData() {
   try {
-    const [latest, history] = await Promise.all([
-      fetchJSON('latest_score.json'),
-      fetchJSON('history.json'),
-    ]);
+    const [latest, history] = await Promise.all([fetchJSON('latest_score.json'), fetchJSON('history.json')]);
     renderLatest(latest);
     renderChart(history);
   } catch (err) {
@@ -217,6 +330,7 @@ async function loadData() {
 }
 
 function renderLatest(d) {
+  currentData = d;
   const scoreEl = document.getElementById('score');
   const score = d.score;
   scoreEl.textContent = (score === null || score === undefined) ? '–' : score;
@@ -232,12 +346,9 @@ function renderLatest(d) {
   document.getElementById('minorAt').textContent = nextMinorTime ? fmtClock(nextMinorTime) : '';
   updateCountdowns();
 
-  if (d.timestamp) {
-    document.getElementById('updated').textContent =
-      'Updated ' + new Date(d.timestamp).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
-  } else {
-    document.getElementById('updated').textContent = 'Awaiting first scheduled run';
-  }
+  document.getElementById('updated').textContent = d.timestamp
+    ? 'Updated ' + new Date(d.timestamp).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })
+    : 'Awaiting first scheduled run';
 
   const stats = [
     ['Pressure trend', d.pressure_trend_hpa != null ? d.pressure_trend_hpa + ' hPa / 3h' : '—'],
@@ -253,20 +364,13 @@ function renderLatest(d) {
     ([k, v]) => `<div class="stat"><span class="k">${k}</span><span class="v">${v}</span></div>`
   ).join('');
 
-  const pos = d.positive_factors || [];
-  const neg = d.negative_factors || [];
-  const card = document.getElementById('factorsCard');
+  const pos = d.positive_factors || [], neg = d.negative_factors || [];
+  const fc = document.getElementById('factorsCard');
   if (pos.length || neg.length) {
-    card.style.display = '';
-    document.getElementById('posFactors').innerHTML = pos.map(
-      f => `<div class="factor pos"><span class="ic">+</span><span>${f}</span></div>`
-    ).join('');
-    document.getElementById('negFactors').innerHTML = neg.map(
-      f => `<div class="factor neg"><span class="ic">−</span><span>${f}</span></div>`
-    ).join('');
-  } else {
-    card.style.display = 'none';
-  }
+    fc.style.display = '';
+    document.getElementById('posFactors').innerHTML = pos.map(f => `<div class="factor pos"><span class="ic">+</span><span>${f}</span></div>`).join('');
+    document.getElementById('negFactors').innerHTML = neg.map(f => `<div class="factor neg"><span class="ic">−</span><span>${f}</span></div>`).join('');
+  } else { fc.style.display = 'none'; }
 
   renderTactics(d.tactics);
 }
@@ -283,7 +387,6 @@ function renderTactics(tc) {
   document.getElementById('tMethod').textContent = tc.method_lean || '—';
   document.getElementById('tMethodR').textContent = tc.method_reason || '';
   document.getElementById('tSeason').textContent = tc.season_note || '';
-
   const lure = o => `<div class="lure"><span class="nm">${o.name}</span>${o.hot ? '<span class="badge">best now</span>' : ''}<div class="wy">${o.why}</div></div>`;
   document.getElementById('flyList').innerHTML = (tc.fly_options || []).map(lure).join('');
   document.getElementById('spinList').innerHTML = (tc.spin_options || []).map(lure).join('');
@@ -292,47 +395,210 @@ function renderTactics(tc) {
 function updateCountdowns() {
   document.getElementById('majorCountdown').textContent = fmtCountdown(nextMajorTime);
   document.getElementById('minorCountdown').textContent = fmtCountdown(nextMinorTime);
+  const mj = document.getElementById('tfMajor'), mn = document.getElementById('tfMinor');
+  if (mj) mj.textContent = nextMajorTime ? `${fmtClock(nextMajorTime)} · in ${fmtCountdown(nextMajorTime)}` : '—';
+  if (mn) mn.textContent = nextMinorTime ? `${fmtClock(nextMinorTime)} · in ${fmtCountdown(nextMinorTime)}` : '—';
 }
 
 function renderChart(history) {
   if (!Array.isArray(history)) return;
-  // Last 48 hours of entries.
   const cutoff = Date.now() - 48 * 3600 * 1000;
   const pts = history.filter(h => h.timestamp && new Date(h.timestamp) >= cutoff && h.score != null);
   const recent = pts.length ? pts : history.filter(h => h.score != null).slice(-96);
   const labels = recent.map(h => new Date(h.timestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }));
   const data = recent.map(h => h.score);
-
   if (chart) chart.destroy();
   const ctx = document.getElementById('chart').getContext('2d');
   chart = new Chart(ctx, {
     type: 'line',
-    data: {
-      labels,
-      datasets: [{
-        label: 'Bite score',
-        data,
-        borderColor: '#4aa3df',
-        backgroundColor: 'rgba(74,163,223,0.15)',
-        fill: true,
-        tension: 0.3,
-        pointRadius: recent.length > 40 ? 0 : 2,
-        borderWidth: 2,
-      }],
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        y: { min: 0, max: 100, ticks: { color: '#8da7bf' }, grid: { color: 'rgba(255,255,255,0.06)' } },
-        x: { ticks: { color: '#8da7bf', maxTicksLimit: 8, autoSkip: true }, grid: { display: false } },
-      },
-    },
+    data: { labels, datasets: [{ label: 'Bite score', data, borderColor: '#4aa3df', backgroundColor: 'rgba(74,163,223,0.15)', fill: true, tension: 0.3, pointRadius: recent.length > 40 ? 0 : 2, borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { min: 0, max: 100, ticks: { color: '#8da7bf' }, grid: { color: 'rgba(255,255,255,0.06)' } },
+        x: { ticks: { color: '#8da7bf', maxTicksLimit: 8, autoSkip: true }, grid: { display: false } } } },
   });
 }
 
+// ===================== Catch log =====================
+function loadLog() {
+  try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch (e) { return []; }
+}
+function saveLog(arr) { localStorage.setItem(LS_KEY, JSON.stringify(arr)); }
+
+function tierOf(score) {
+  if (score == null) return null;
+  if (score >= 80) return 'Excellent';
+  if (score >= 60) return 'Good';
+  if (score >= 40) return 'Fair';
+  return 'Slow';
+}
+const RESULT_LABEL = { fish: 'Caught', nibble: 'Nibbles', skunk: 'Skunked' };
+const RESULT_CLASS = { fish: 'le-fish', nibble: 'le-nibble', skunk: 'le-skunk' };
+
+function fillSelect(id, opts) {
+  document.getElementById(id).innerHTML = opts.map(o => `<option>${o}</option>`).join('');
+}
+
+// ---- modal state ----
+const sel = { result: null, species: 'trout', method: 'fly' };
+
+function setSeg(groupId, value) {
+  document.querySelectorAll('#' + groupId + ' button').forEach(b => b.classList.toggle('active', b.dataset.v === value));
+}
+function openModal() {
+  sel.result = null; sel.species = 'trout'; sel.method = 'fly';
+  // default species/method from the current recommendation if present
+  if (currentData) {
+    if (currentData.species === 'bass') sel.species = 'bass';
+    const ml = (currentData.tactics && currentData.tactics.method_lean) || '';
+    if (/spin/i.test(ml)) sel.method = 'spin';
+  }
+  setSeg('segResult', null); setSeg('segSpecies', sel.species); setSeg('segMethod', sel.method);
+  fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES);
+  fillSelect('logPosition', POSITIONS);
+  fillSelect('logDepth', DEPTHS);
+  document.getElementById('logCount').value = 1;
+  document.getElementById('countField').style.display = 'none';
+  document.getElementById('logNotes').value = '';
+  // snapshot text
+  let s = 'No live conditions loaded yet — entry will still be saved.';
+  if (currentData) {
+    const d = currentData;
+    s = `Auto-attaching: score ${d.score} (${d.tier}) · ${d.light_phase || '—'} · ` +
+        `${d.temp_f != null ? Math.round(d.temp_f) + '°F' : '—'} · ` +
+        `${d.pressure_trend_hpa != null ? d.pressure_trend_hpa + ' hPa/3h' : '—'} · ` +
+        `${d.cloud_cover_pct != null ? Math.round(d.cloud_cover_pct) + '% cloud' : '—'} · ` +
+        `${d.wind_mph != null ? Math.round(d.wind_mph) + ' mph' : '—'}`;
+  }
+  document.getElementById('logSnapshot').textContent = s;
+  document.getElementById('logModal').classList.add('open');
+}
+function closeModal() { document.getElementById('logModal').classList.remove('open'); }
+
+function saveEntry() {
+  if (!sel.result) { alert('Pick a result first (Caught / Nibbles / Skunked).'); return; }
+  const d = currentData || {};
+  const entry = {
+    id: Date.now(),
+    logged_at: new Date().toISOString(),
+    result: sel.result,
+    count: sel.result === 'fish' ? Math.max(1, parseInt(document.getElementById('logCount').value, 10) || 1) : 0,
+    species: sel.species,
+    method: sel.method,
+    lure: document.getElementById('logLure').value,
+    position: document.getElementById('logPosition').value,
+    depth: document.getElementById('logDepth').value,
+    notes: document.getElementById('logNotes').value.trim(),
+    // conditions snapshot
+    score: d.score ?? null,
+    tier: d.tier ?? null,
+    light_phase: d.light_phase ?? null,
+    temp_f: d.temp_f ?? null,
+    pressure_trend_hpa: d.pressure_trend_hpa ?? null,
+    cloud_cover_pct: d.cloud_cover_pct ?? null,
+    wind_mph: d.wind_mph ?? null,
+    moon_illumination_pct: d.moon_illumination_pct ?? null,
+    data_timestamp: d.timestamp ?? null,
+  };
+  const log = loadLog(); log.push(entry); saveLog(log);
+  closeModal();
+  renderLog();
+}
+
+function renderLog() {
+  const log = loadLog();
+  const body = document.getElementById('logBody');
+  if (!log.length) {
+    body.innerHTML = `<div class="hint">No sessions logged yet. After you fish, tap <b>＋ Log a catch / no-catch</b> — each entry saves the current bite score and conditions alongside what you caught and how. Once you have a handful, this section shows whether high scores actually produce fish at your lake.</div>`;
+    return;
+  }
+  const sessions = log.length;
+  const fish = log.filter(e => e.result === 'fish').reduce((a, e) => a + (e.count || 1), 0);
+  const landedSessions = log.filter(e => e.result === 'fish').length;
+
+  // catch rate by score tier
+  const tiers = ['Excellent', 'Good', 'Fair', 'Slow'];
+  const byTier = {};
+  tiers.forEach(t => byTier[t] = { n: 0, hit: 0 });
+  log.forEach(e => { const t = e.tier || tierOf(e.score); if (byTier[t]) { byTier[t].n++; if (e.result === 'fish') byTier[t].hit++; } });
+  let tierRows = tiers.filter(t => byTier[t].n > 0).map(t => {
+    const o = byTier[t]; const pct = Math.round(100 * o.hit / o.n);
+    return `<tr><td>${t}</td><td class="r">${o.n}</td><td class="r">${o.hit}</td><td class="r">${pct}%</td></tr>`;
+  }).join('');
+  if (!tierRows) tierRows = '<tr><td colspan="4" style="color:var(--muted)">—</td></tr>';
+
+  // by method
+  const meth = { fly: { n: 0, hit: 0 }, spin: { n: 0, hit: 0 } };
+  log.forEach(e => { if (meth[e.method]) { meth[e.method].n++; if (e.result === 'fish') meth[e.method].hit++; } });
+  const methLine = ['fly', 'spin'].filter(m => meth[m].n > 0)
+    .map(m => `${m === 'fly' ? '🪶 Fly' : '🎣 Spin'}: ${meth[m].hit}/${meth[m].n} landed`).join(' · ') || '—';
+
+  // top lures by fish landed
+  const lureCount = {};
+  log.filter(e => e.result === 'fish').forEach(e => { lureCount[e.lure] = (lureCount[e.lure] || 0) + 1; });
+  const topLures = Object.entries(lureCount).sort((a, b) => b[1] - a[1]).slice(0, 4)
+    .map(([k, v]) => `${k} (${v})`).join(', ') || 'none yet';
+
+  // recent entries
+  const recent = log.slice(-6).reverse().map(e => {
+    const when = new Date(e.logged_at).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    const rlabel = RESULT_LABEL[e.result] + (e.result === 'fish' && e.count > 1 ? ` ×${e.count}` : '');
+    const sc = e.score != null ? `score ${e.score}` : 'no score';
+    const meta = [e.species, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
+    return `<div class="logentry"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}</span><span style="color:var(--muted)">${when} · ${sc}</span></div>` +
+           `<div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div></div>`;
+  }).join('');
+
+  body.innerHTML =
+    `<div class="summary-line"><b>${sessions}</b> session${sessions !== 1 ? 's' : ''} logged · <b>${fish}</b> fish landed · ${landedSessions} productive trip${landedSessions !== 1 ? 's' : ''}</div>` +
+    `<div class="sub-h">Catch rate by bite-score tier</div>` +
+    `<table class="ltable"><thead><tr><th>Tier</th><th class="r">Logged</th><th class="r">Landed</th><th class="r">Hit %</th></tr></thead><tbody>${tierRows}</tbody></table>` +
+    `<div class="sub-h">By method</div><div style="font-size:.9rem;margin-bottom:4px;">${methLine}</div>` +
+    `<div class="sub-h">Most productive lures/flies</div><div style="font-size:.9rem;">${topLures}</div>` +
+    `<div class="sub-h">Recent sessions</div>${recent}`;
+}
+
+function exportLog() {
+  const log = loadLog();
+  if (!log.length) { alert('Nothing to export yet.'); return; }
+  const blob = new Blob([JSON.stringify(log, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = 'lake-louise-catch-log.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  URL.revokeObjectURL(url);
+}
+function clearLog() {
+  if (!loadLog().length) return;
+  if (confirm('Delete all logged sessions from this browser? Export first if you want a backup.')) {
+    localStorage.removeItem(LS_KEY); renderLog();
+  }
+}
+
+// ----- wire up -----
+document.getElementById('openLog').addEventListener('click', openModal);
+document.getElementById('logCancel').addEventListener('click', closeModal);
+document.getElementById('logSave').addEventListener('click', saveEntry);
+document.getElementById('logExport').addEventListener('click', exportLog);
+document.getElementById('logClear').addEventListener('click', clearLog);
+document.getElementById('logModal').addEventListener('click', e => { if (e.target.id === 'logModal') closeModal(); });
+
+document.getElementById('segResult').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  sel.result = b.dataset.v; setSeg('segResult', sel.result);
+  document.getElementById('countField').style.display = sel.result === 'fish' ? '' : 'none';
+});
+document.getElementById('segSpecies').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  sel.species = b.dataset.v; setSeg('segSpecies', sel.species);
+});
+document.getElementById('segMethod').addEventListener('click', e => {
+  const b = e.target.closest('button'); if (!b) return;
+  sel.method = b.dataset.v; setSeg('segMethod', sel.method);
+  fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES);
+});
+
 loadData();
+renderLog();
 setInterval(loadData, REFRESH_MS);
 setInterval(updateCountdowns, 30 * 1000);
 </script>
