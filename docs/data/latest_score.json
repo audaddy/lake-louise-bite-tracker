@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-06-30T03:32:54-07:00",
+  "timestamp": "2026-06-30T08:25:30-07:00",
   "score": 77,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
@@ -9,19 +9,19 @@
     "time": "2026-06-30T13:57:36-07:00"
   },
   "next_minor_period": {
-    "type": "moonset",
-    "time": "2026-06-30T05:26:18-07:00"
+    "type": "moonrise",
+    "time": "2026-06-30T22:17:26-07:00"
   },
-  "pressure_trend_hpa": -0.5,
+  "pressure_trend_hpa": 0.0,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 99.7,
-  "temp_f": 54.8,
+  "moon_illumination_pct": 99.5,
+  "temp_f": 55.3,
   "surface_pressure_hpa": 1009.4,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 5.6,
+  "wind_mph": 6.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -37,7 +37,7 @@
     "Moon phase is favorable"
   ],
   "negative_factors": [],
-  "light_phase": "night",
+  "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
     "species_reason": "cool water ~55\u00b0F favors trout; bass sluggish",
@@ -83,7 +83,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-06-30T03",
+    "period_key": "highscore@2026-06-30T08",
     "score_ge_70": true
   }
 }
