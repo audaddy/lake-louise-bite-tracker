@@ -1,0 +1,4 @@
+astral>=3.2
+ephem>=4.1
+requests>=2.31
+tzdata>=2024.1
