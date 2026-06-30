@@ -1,0 +1,11 @@
+{
+  "timestamp": null,
+  "score": null,
+  "tier": "Awaiting first update",
+  "species_note": "Lake Louise Bite Tracker",
+  "message": "Waiting for the first scheduled run to populate live data.",
+  "next_major_period": null,
+  "next_minor_period": null,
+  "pressure_trend_hpa": null,
+  "last_notified": {}
+}
