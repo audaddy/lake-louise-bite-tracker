@@ -21,19 +21,30 @@ conditions. Auto-refreshes every 5 minutes and is mobile-friendly.
 
 ## How the score works
 
+A **weather-driven** model: the factors with the strongest real-world support
+(barometric pressure trend, cloud cover, wind, low light) carry the most weight,
+with solunar timing and dawn/dusk added as bonuses on top of a higher baseline.
+
 | Factor | Points |
 | --- | --- |
-| Solunar **major** period — moon transit/underfoot ±60 min | +35 |
-| Solunar **minor** period — moonrise/moonset ±30 min (higher of major/minor, not both) | +20 |
-| Dawn/dusk — sunrise/sunset ±60 min | +20 |
-| Moon phase — >95% / <5% illumination, or 45–55% | +10 |
-| Pressure falling >3 hPa/3 h | +25 |
-| Pressure falling 1–3 hPa/3 h | +15 |
-| Pressure stable | +5 |
+| Baseline ("average day" floor) | +35 |
+| Pressure falling >3 hPa/3 h (pre-front feeding) | +25 |
+| Pressure falling 1–3 hPa/3 h | +18 |
+| Pressure stable (±1 hPa) | +12 |
+| Pressure rising 1–3 hPa/3 h | +5 |
 | Pressure rising >3 hPa/3 h | −10 |
-| Baseline | +20 |
+| Cloud cover ≥70% / 40–70% / 20–40% | +12 / +8 / +4 |
+| Wind 3–10 mph (ideal ripple) | +12 |
+| Wind 1–3 or 10–15 mph | +6 |
+| Wind <1 mph (dead calm) | +3 |
+| Wind >15 mph | −8 |
+| Solunar **major** — moon transit/underfoot ±60 min | +18 |
+| Solunar **minor** — moonrise/moonset ±30 min (higher of major/minor, not both) | +10 |
+| Dawn/dusk — sunrise/sunset ±60 min | +12 |
+| Moon phase — >95% / <5% illumination, or 45–55% | +6 |
 
 Score is clamped to 0–100. **Tiers:** 80–100 Excellent · 60–79 Good · 40–59 Fair · <40 Slow.
+The dashboard lists the specific positive/negative factors behind each score.
 
 **Species logic:** air temperature is used as a rough water-temperature proxy (an
 approximation). Above 65 °F the messaging favors bass; cooler/low-light conditions favor
