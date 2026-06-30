@@ -16,8 +16,23 @@ sun position, moon phase, and barometric-pressure trend, then:
 **https://audaddy.github.io/lake-louise-bite-tracker/**
 
 Large color-coded score (green ≥70, yellow 40–69, red <40), current tier and message,
-countdowns to the next major/minor solunar periods, a score-history chart, and current
-conditions. Auto-refreshes every 5 minutes and is mobile-friendly.
+countdowns to the next major/minor solunar periods, a score-history chart, current
+conditions, and a **Where & how to fish** panel. Auto-refreshes every 5 minutes and is
+mobile-friendly.
+
+### Where & how to fish
+
+From the live conditions the tracker also recommends, as heuristic guidance:
+
+- **Target species** — bass vs. trout lean (driven mainly by water-temp proxy and light).
+- **Where** — shoreline/shallow cover vs. open-water drop-offs (plus a windward-shore tip).
+- **Depth** — shallow / mid / deep band.
+- **Method** — a fly-vs-spin lean with condition-matched patterns: fly options (poppers, dry
+  flies, nymphs, woolly buggers/streamers) and spin options (topwater/buzzbaits, spinners &
+  spinnerbaits, inline spinners/spoons, jigs & soft plastics), with the best bets for *right
+  now* flagged.
+
+This is rule-of-thumb angling logic, not a guarantee — local knowledge still wins.
 
 ## How the score works
 
