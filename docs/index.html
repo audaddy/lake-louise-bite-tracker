@@ -58,7 +58,11 @@
   .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 16px; }
   .stat { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding: 6px 0; font-size: 0.92rem; }
   .stat .k { color: var(--muted); }
-  .chart-card h2, .stats-card h2 { font-size: 0.95rem; margin: 0 0 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .chart-card h2, .stats-card h2, .factors-card h2 { font-size: 0.95rem; margin: 0 0 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .factor { display: flex; gap: 8px; padding: 6px 0; font-size: 0.92rem; line-height: 1.35; }
+  .factor .ic { flex: 0 0 auto; font-weight: 700; }
+  .factor.pos .ic { color: var(--green); }
+  .factor.neg .ic { color: var(--red); }
   #chartWrap { position: relative; height: 220px; }
   footer { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
   .updated { text-align: center; color: var(--muted); font-size: 0.78rem; margin-bottom: 16px; }
@@ -108,6 +112,12 @@
   <div class="card stats-card">
     <h2>Current conditions</h2>
     <div class="stats" id="stats"></div>
+  </div>
+
+  <div class="card factors-card" id="factorsCard" style="display:none;">
+    <h2>Why this score</h2>
+    <div id="posFactors"></div>
+    <div id="negFactors"></div>
   </div>
 
   <footer>
@@ -213,6 +223,21 @@ function renderLatest(d) {
   document.getElementById('stats').innerHTML = stats.map(
     ([k, v]) => `<div class="stat"><span class="k">${k}</span><span class="v">${v}</span></div>`
   ).join('');
+
+  const pos = d.positive_factors || [];
+  const neg = d.negative_factors || [];
+  const card = document.getElementById('factorsCard');
+  if (pos.length || neg.length) {
+    card.style.display = '';
+    document.getElementById('posFactors').innerHTML = pos.map(
+      f => `<div class="factor pos"><span class="ic">+</span><span>${f}</span></div>`
+    ).join('');
+    document.getElementById('negFactors').innerHTML = neg.map(
+      f => `<div class="factor neg"><span class="ic">−</span><span>${f}</span></div>`
+    ).join('');
+  } else {
+    card.style.display = 'none';
+  }
 }
 
 function updateCountdowns() {
