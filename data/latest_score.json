@@ -1,48 +1,46 @@
 {
-  "timestamp": "2026-06-30T20:34:33-07:00",
-  "score": 89,
-  "tier": "Excellent",
-  "species_note": "Rainbow trout \u2014 dawn/dusk window",
-  "message": "Excellent trout conditions during the low-light window. Good time to fish.",
+  "timestamp": "2026-07-01T00:58:42-07:00",
+  "score": 77,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-07-01T02:22:10-07:00"
   },
   "next_minor_period": {
-    "type": "moonrise",
-    "time": "2026-06-30T22:17:26-07:00"
+    "type": "moonset",
+    "time": "2026-07-01T06:33:22-07:00"
   },
-  "pressure_trend_hpa": 0.3,
+  "pressure_trend_hpa": 0.0,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": true,
-  "moon_illumination_pct": 98.7,
-  "temp_f": 59.4,
+  "in_dawn_dusk": false,
+  "moon_illumination_pct": 98.3,
+  "temp_f": 53.7,
   "surface_pressure_hpa": 1009.8,
-  "cloud_cover_pct": 72.0,
-  "wind_mph": 7.1,
+  "cloud_cover_pct": 99.0,
+  "wind_mph": 4.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
     "wind": 12,
-    "dawn_dusk": 12,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
-    "Low-light dawn/dusk window \u2014 prime feeding time",
     "Moon phase is favorable"
   ],
   "negative_factors": [],
-  "light_phase": "dawn_dusk",
+  "light_phase": "night",
   "tactics": {
-    "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~59\u00b0F; low light leans trout",
+    "species_pick": "Rainbow trout",
+    "species_reason": "cool water ~54\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -77,15 +75,15 @@
         "hot": true
       }
     ],
-    "season_note": "Late spring/early summer: trout are active; bass are shallow around cover post-spawn.",
-    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+    "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
+    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-06-30T20",
+    "period_key": "highscore@2026-07-01T00",
     "score_ge_70": true
   }
 }
