@@ -114,6 +114,22 @@
   .btn-primary { background: var(--green); color: #06121e; }
   .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
 
+  /* AI assistant */
+  .ai-card h2 { font-size: 0.95rem; margin: 0 0 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .ai-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .ai-b { background: rgba(74,163,223,0.12); color: var(--text); border: 1px solid var(--border); border-radius: 12px; padding: 14px 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; text-align: center; }
+  .ai-b:active { opacity: 0.85; }
+  .ai-result { margin-top: 14px; padding: 12px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; font-size: 0.92rem; line-height: 1.45; white-space: pre-wrap; }
+  .ai-result .ai-vision { color: var(--muted); font-size: 0.8rem; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); }
+  .ai-thumb { max-width: 120px; border-radius: 8px; margin-bottom: 10px; display: block; }
+  .ai-cfg { color: var(--muted); font-size: 0.8rem; margin-top: 10px; }
+  .ai-cfg a { cursor: pointer; }
+  .chat-log { max-height: 320px; overflow-y: auto; margin-bottom: 12px; }
+  .bubble { padding: 9px 12px; border-radius: 12px; margin-bottom: 8px; font-size: 0.92rem; line-height: 1.4; max-width: 90%; white-space: pre-wrap; }
+  .bubble.user { background: var(--accent); color: #06121e; margin-left: auto; border-bottom-right-radius: 4px; }
+  .bubble.bot { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+  .bubble.bot.thinking { color: var(--muted); font-style: italic; }
+
   @media (max-width: 480px) {
     .score-number { font-size: 4.5rem; }
     .stats { grid-template-columns: 1fr; }
@@ -139,6 +155,19 @@
   </div>
 
   <button class="logbtn" id="openLog">＋ Log a catch / no-catch</button>
+
+  <div class="card ai-card" id="aiCard">
+    <h2>🤖 AI fishing assistant</h2>
+    <div class="ai-btns">
+      <button class="ai-b" id="btnLure">📸 Snap a lure</button>
+      <button class="ai-b" id="btnFish">🐟 Snap a fish</button>
+      <button class="ai-b" id="btnChat">💬 Ask the guide</button>
+    </div>
+    <div class="ai-result" id="aiResult" style="display:none;"></div>
+    <div class="ai-cfg" id="aiCfg"></div>
+  </div>
+  <input type="file" id="lureInput" accept="image/*" capture="environment" style="display:none;">
+  <input type="file" id="fishInput" accept="image/*" capture="environment" style="display:none;">
 
   <div class="periods" style="margin-bottom:16px;">
     <div class="period">
@@ -206,6 +235,20 @@
     Solunar (SunCalc) + live Open-Meteo weather · GitHub job handles push alerts &amp; history.<br/>
     Your catch log is saved privately in this browser. Use Export to back it up.
   </footer>
+</div>
+
+<!-- Chat modal -->
+<div class="modal-overlay" id="chatModal">
+  <div class="modal">
+    <h2>💬 Ask the guide</h2>
+    <div class="snapshot" id="chatSnapshot">Answers use your live conditions.</div>
+    <div class="chat-log" id="chatLog"></div>
+    <div class="field"><textarea id="chatInput" placeholder="e.g. Why aren't they biting? What should I throw right now?"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="chatClose">Close</button>
+      <button class="btn btn-primary" id="chatSend">Send</button>
+    </div>
+  </div>
 </div>
 
 <!-- Log modal -->
@@ -702,6 +745,110 @@ document.getElementById('logModal').addEventListener('click', e => { if (e.targe
 document.getElementById('segResult').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.result = b.dataset.v; setSeg('segResult', sel.result); document.getElementById('countField').style.display = sel.result === 'fish' ? '' : 'none'; });
 document.getElementById('segSpecies').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.species = b.dataset.v; setSeg('segSpecies', sel.species); });
 document.getElementById('segMethod').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.method = b.dataset.v; setSeg('segMethod', sel.method); fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES); });
+
+// ===================== AI assistant (Cloudflare Worker) =====================
+const WORKER_KEY = 'llbt_worker_url';
+function getWorkerUrl() { return (localStorage.getItem(WORKER_KEY) || '').trim(); }
+function setWorkerUrl(u) { if (u) localStorage.setItem(WORKER_KEY, u.trim()); }
+function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])); }
+
+function promptWorkerUrl() {
+  const u = prompt('Paste your Cloudflare Worker URL\n(e.g. https://bite-assistant.yourname.workers.dev):', getWorkerUrl());
+  if (u && /^https?:\/\//.test(u.trim())) { setWorkerUrl(u); updateAiCfg(); return true; }
+  if (u !== null) alert('That doesn’t look like a URL — it should start with https://');
+  return false;
+}
+function updateAiCfg() {
+  const el = document.getElementById('aiCfg');
+  el.innerHTML = getWorkerUrl()
+    ? 'Connected to your AI Worker. <a id="aiChange">change URL</a>'
+    : '⚙️ Not connected yet — <a id="aiConnect">add your Worker URL</a> to turn these on.';
+  const c = document.getElementById('aiConnect'); if (c) c.onclick = promptWorkerUrl;
+  const ch = document.getElementById('aiChange'); if (ch) ch.onclick = promptWorkerUrl;
+}
+function conditionsPayload() {
+  const d = currentData || {};
+  return {
+    score: d.score, tier: d.tier, temp_f: d.temp_f, light_phase: d.light_phase,
+    cloud_cover_pct: d.cloud_cover_pct, wind_mph: d.wind_mph,
+    pressure_trend_hpa: d.pressure_trend_hpa, moon_illumination_pct: d.moon_illumination_pct,
+    tactics: d.tactics ? { species_pick: d.tactics.species_pick, where: d.tactics.where, depth: d.tactics.depth, method_lean: d.tactics.method_lean } : null,
+  };
+}
+async function callWorker(payload) {
+  const url = getWorkerUrl();
+  if (!url) throw new Error('no-url');
+  const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+  const data = await r.json().catch(() => ({ error: 'unreadable response' }));
+  if (!r.ok || data.error) throw new Error(data.error || ('HTTP ' + r.status));
+  return data;
+}
+function compressImage(file, max = 768, q = 0.8) {
+  return new Promise((res, rej) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, max / Math.max(img.width, img.height));
+      const w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h); URL.revokeObjectURL(url);
+      res(c.toDataURL('image/jpeg', q));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('could not read image')); };
+    img.src = url;
+  });
+}
+function showAiResult(html) { const el = document.getElementById('aiResult'); el.style.display = ''; el.innerHTML = html; }
+async function handlePhoto(file, mode) {
+  if (!getWorkerUrl() && !promptWorkerUrl()) return;
+  try {
+    showAiResult('Reading photo…');
+    const image = await compressImage(file);
+    showAiResult(`<img class="ai-thumb" src="${image}"/>Thinking…`);
+    const data = await callWorker({ mode, image, conditions: conditionsPayload() });
+    showAiResult(`<img class="ai-thumb" src="${image}"/>${escapeHtml(data.answer)}` +
+      (data.vision ? `<div class="ai-vision">Vision read: ${escapeHtml(data.vision)}</div>` : ''));
+  } catch (e) {
+    showAiResult(e.message === 'no-url' ? 'Add your Worker URL first (link below).'
+      : 'AI request failed: ' + escapeHtml(e.message) + '. Check the Worker URL and that Workers AI is bound as “AI”.');
+  }
+}
+
+// Chat
+let chatHistory = [];
+function renderChatLog(thinking) {
+  const intro = { role: 'assistant', content: 'Ask me anything about fishing Lake Louise right now — lures, depth, timing, or why they might not be biting.' };
+  let html = [intro, ...chatHistory].map(m => `<div class="bubble ${m.role === 'user' ? 'user' : 'bot'}">${escapeHtml(m.content)}</div>`).join('');
+  if (thinking) html += '<div class="bubble bot thinking">Thinking…</div>';
+  const log = document.getElementById('chatLog'); log.innerHTML = html; log.scrollTop = log.scrollHeight;
+}
+function openChat() {
+  if (!getWorkerUrl() && !promptWorkerUrl()) return;
+  const d = currentData || {};
+  document.getElementById('chatSnapshot').textContent = d.score != null
+    ? `Live now: score ${d.score} (${d.tier})${d.temp_f != null ? ', ' + Math.round(d.temp_f) + '°F' : ''}${d.light_phase ? ', ' + d.light_phase : ''}.`
+    : 'Answers use your live conditions.';
+  document.getElementById('chatModal').classList.add('open'); renderChatLog(false);
+}
+function closeChat() { document.getElementById('chatModal').classList.remove('open'); }
+async function sendChat() {
+  const inp = document.getElementById('chatInput'); const q = inp.value.trim(); if (!q) return; inp.value = '';
+  chatHistory.push({ role: 'user', content: q }); renderChatLog(true);
+  try {
+    const data = await callWorker({ mode: 'chat', question: q, conditions: conditionsPayload(), history: chatHistory.slice(0, -1) });
+    chatHistory.push({ role: 'assistant', content: data.answer }); renderChatLog(false);
+  } catch (e) { chatHistory.push({ role: 'assistant', content: '⚠️ ' + e.message }); renderChatLog(false); }
+}
+
+document.getElementById('btnLure').addEventListener('click', () => { if (!getWorkerUrl() && !promptWorkerUrl()) return; document.getElementById('lureInput').click(); });
+document.getElementById('btnFish').addEventListener('click', () => { if (!getWorkerUrl() && !promptWorkerUrl()) return; document.getElementById('fishInput').click(); });
+document.getElementById('lureInput').addEventListener('change', e => { if (e.target.files[0]) handlePhoto(e.target.files[0], 'lure'); e.target.value = ''; });
+document.getElementById('fishInput').addEventListener('change', e => { if (e.target.files[0]) handlePhoto(e.target.files[0], 'fish'); e.target.value = ''; });
+document.getElementById('btnChat').addEventListener('click', openChat);
+document.getElementById('chatClose').addEventListener('click', closeChat);
+document.getElementById('chatSend').addEventListener('click', sendChat);
+document.getElementById('chatInput').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); } });
+document.getElementById('chatModal').addEventListener('click', e => { if (e.target.id === 'chatModal') closeChat(); });
+updateAiCfg();
 
 loadData();
 renderLog();
