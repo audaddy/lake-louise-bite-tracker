@@ -14,8 +14,10 @@
  * (Worker → Settings → Bindings → Add → Workers AI → variable name: AI).
  */
 
-const VISION_MODEL = '@cf/llava-hf/llava-1.5-7b-hf';
-const CHAT_MODEL = '@cf/meta/llama-3.1-8b-instruct';
+// Current Workers AI models (older ones like llava-1.5 / llama-3.1-8b were
+// deprecated). Both are free-tier eligible.
+const VISION_MODEL = '@cf/meta/llama-3.2-11b-vision-instruct';
+const CHAT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 
 // Lock browser access to your dashboard's origin (basic abuse protection).
 // If you use a custom domain later, add it to this list.
@@ -87,6 +89,21 @@ async function runChat(env, system, user, history) {
   return r.response || '';
 }
 
+async function runVision(env, bytes, prompt) {
+  const args = { image: Array.from(bytes), prompt, max_tokens: 300 };
+  const read = (v) => ((v && (v.response || v.description)) || '').trim();
+  try {
+    return read(await env.AI.run(VISION_MODEL, args));
+  } catch (e) {
+    // Some Meta vision models require a one-time license acceptance.
+    if (/agree|license|accept|terms/i.test(e && e.message ? e.message : '')) {
+      try { await env.AI.run(VISION_MODEL, { prompt: 'agree' }); } catch (_) {}
+      return read(await env.AI.run(VISION_MODEL, args));
+    }
+    throw e;
+  }
+}
+
 export default {
   async fetch(request, env) {
     const origin = request.headers.get('Origin') || '';
@@ -118,12 +135,7 @@ export default {
           ? 'Look at this fish. Describe its species (best guess), body shape, coloration, spots or stripes, and fin shape. Be specific and concise.'
           : 'Look at this fishing lure or fly. Identify what type it is (for example: woolly bugger, streamer, dry fly, nymph, popper, inline spinner, spinnerbait, spoon, jig, soft plastic, crankbait, topwater). Note its color and rough size. Be concise.';
 
-        const v = await env.AI.run(VISION_MODEL, {
-          image: Array.from(bytes),
-          prompt: visionPrompt,
-          max_tokens: 256,
-        });
-        const desc = (v && v.description) ? v.description.trim() : '';
+        const desc = await runVision(env, bytes, visionPrompt);
 
         let system, user;
         if (mode === 'fish') {
