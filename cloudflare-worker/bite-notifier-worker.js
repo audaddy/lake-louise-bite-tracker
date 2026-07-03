@@ -317,25 +317,28 @@ return SunCalc;
 /* ===================================================================== *
  * Lake Louise Bite Tracker — look-ahead notifier (Cloudflare Cron)
  *
- * Runs on a Cron Trigger. Fetches the Open-Meteo forecast, scores every
- * upcoming hour with the same model as the app (solunar via the inlined
- * SunCalc above + weather), finds upcoming "Excellent" windows, and sends
- * an advance ntfy push so you get a heads-up before great fishing.
+ * Runs on a Cron Trigger every 30 min. Fetches the Open-Meteo forecast,
+ * scores every upcoming hour with the same model as the app (solunar via
+ * the inlined SunCalc above + weather), finds upcoming "Excellent" windows,
+ * and sends an advance ntfy push so you get a heads-up before great fishing.
  *
  * ntfy -> your phone -> mirrored to your Garmin Fenix 7 via Garmin Connect.
  *
- * BINDINGS / VARS expected on this Worker:
- *   - NTFY_TOPIC   (plain text variable) : your ntfy.sh topic
- *   - BITE_KV      (KV namespace binding): used to avoid duplicate alerts
+ * Stateless by design (no database): a ~90-min heads-up and a ~30-min
+ * reminder are fired using timing bands sized to the 30-min cron cadence,
+ * so each window alerts about once. Windows are on the hour.
+ *
+ * VARS expected on this Worker:
+ *   - NTFY_TOPIC  (plain text variable): your ntfy.sh topic
  * ===================================================================== */
 
 const LAT = 47.161861;
 const LON = -122.567972;
 const TZ = 'America/Los_Angeles';
 
-const THRESHOLD = 80;        // "Excellent" tier. Lower to 70 for "Good or better".
-const LOOKAHEAD_HOURS = 24;  // how far ahead to announce a coming window
-const SOON_MINUTES = 45;     // "starting soon" reminder lead time
+const THRESHOLD = 80;          // "Excellent". Lower to 70 for "Good or better".
+const HEADS_BAND = [61, 110];  // minutes-to-start window for the advance alert (~90 min)
+const SOON_BAND = [16, 45];    // minutes-to-start window for the reminder (~30 min)
 
 // ---- scoring (identical weights to the dashboard) ----
 function computeScore(inMajor, inMinor, inDawnDusk, illum, trend, cloud, wind) {
@@ -349,7 +352,7 @@ function computeScore(inMajor, inMinor, inDawnDusk, illum, trend, cloud, wind) {
   return Math.max(0, Math.min(100, s));
 }
 
-// ---- solunar helpers (SunCalc is defined above this block) ----
+// ---- solunar helpers (SunCalc is defined in the block above) ----
 function moonMajorCenters(startMs, endMs) {
   const step = 10 * 60000, centers = [], alts = [], times = [];
   for (let t = startMs - 2 * 3600e3; t <= endMs + 2 * 3600e3; t += step) {
@@ -398,7 +401,6 @@ async function fetchForecast() {
   return r.json();
 }
 
-// Score every hour, return array of { ms, score, flags }
 function scoreHours(w) {
   const H = w.hourly;
   const n = H.time.length;
@@ -409,7 +411,6 @@ function scoreHours(w) {
   for (let i = 0; i < n; i++) {
     const t = ms[i];
     const pressure = H.surface_pressure[i];
-    // pressure trend over ~3h
     let trend = 0;
     for (let j = i; j >= 0; j--) {
       if (ms[i] - ms[j] >= 3 * 3600e3 || j === 0) {
@@ -455,9 +456,6 @@ function findWindows(hours, now) {
   return wins.filter((w) => w.endMs > now).sort((a, b) => a.startMs - b.startMs);
 }
 
-async function kvGet(env, k) { try { return env.BITE_KV ? await env.BITE_KV.get(k) : null; } catch (e) { return null; } }
-async function kvPut(env, k, v) { try { if (env.BITE_KV) await env.BITE_KV.put(k, v, { expirationTtl: 3 * 86400 }); } catch (e) {} }
-
 async function ntfy(env, title, body, tags) {
   const topic = env.NTFY_TOPIC;
   if (!topic) return 'no-topic';
@@ -480,11 +478,12 @@ async function runCheck(env, opts) {
   const summary = {
     now: fmtLocal(now, { weekday: 'short', hour: 'numeric', minute: '2-digit' }),
     threshold: THRESHOLD,
-    upcomingWindows: windows.slice(0, 5).map((wd) => ({
+    upcomingWindows: windows.slice(0, 6).map((wd) => ({
       start: fmtLocal(wd.startMs, { weekday: 'short', hour: 'numeric', minute: '2-digit' }),
       end: fmtLocal(wd.endMs, { hour: 'numeric', minute: '2-digit' }),
       peakScore: wd.peak,
       peakAt: fmtLocal(wd.peakHour.ms, { weekday: 'short', hour: 'numeric', minute: '2-digit' }),
+      minsToStart: Math.round((wd.startMs - now) / 60000),
       reasons: reasonsFor(wd.peakHour),
     })),
     actions: [],
@@ -495,39 +494,25 @@ async function runCheck(env, opts) {
     return summary;
   }
 
-  if (next && (next.startMs - now) <= LOOKAHEAD_HOURS * 3600e3) {
-    const wid = new Date(next.peakHour.ms).toISOString().slice(0, 13);
+  if (next) {
+    const mins = (next.startMs - now) / 60000;
+    const inBand = (b) => mins >= b[0] && mins < b[1];
     const peakLabel = fmtLocal(next.peakHour.ms, { weekday: 'short', hour: 'numeric', minute: '2-digit' });
     const startLabel = fmtLocal(next.startMs, { hour: 'numeric', minute: '2-digit' });
     const endLabel = fmtLocal(next.endMs, { hour: 'numeric', minute: '2-digit' });
     const reasons = reasonsFor(next.peakHour);
 
-    // Advance heads-up (once per window)
-    const lastHeads = await kvGet(env, 'heads');
-    if (lastHeads !== wid) {
-      const body = `Peak ~${peakLabel} (in ${relTime(next.peakHour.ms, now)}) · score ${next.peak}. ` +
-        `Window ${startLabel}–${endLabel}. ${reasons}.`;
-      const res = opts.dryRun ? 'dry-run' : await ntfy(env, '🎣 Excellent bite window ahead', body, 'fish,calendar');
-      summary.actions.push('headsup:' + res);
-      if (!opts.dryRun && res === 'sent') await kvPut(env, 'heads', wid);
+    if (inBand(HEADS_BAND)) {
+      const body = `Peak ~${peakLabel} (in ${relTime(next.peakHour.ms, now)}) · score ${next.peak}. Window ${startLabel}–${endLabel}. ${reasons}.`;
+      summary.actions.push('headsup:' + (opts.dryRun ? 'would-send' : await ntfy(env, '🎣 Excellent bite window ahead', body, 'fish,calendar')));
+    } else if (inBand(SOON_BAND)) {
+      const body = `${startLabel}–${endLabel} · score ${next.peak}. ${reasons}. Get to the water.`;
+      summary.actions.push('soon:' + (opts.dryRun ? 'would-send' : await ntfy(env, '🎣 Excellent bite starting soon', body, 'fish,rotating_light')));
     } else {
-      summary.actions.push('headsup:already-sent');
-    }
-
-    // "Starting soon" reminder (once per window)
-    if ((next.startMs - now) <= SOON_MINUTES * 60000 && (next.startMs - now) > -3600e3) {
-      const lastSoon = await kvGet(env, 'soon');
-      if (lastSoon !== wid) {
-        const body = `${startLabel}–${endLabel} · score ${next.peak}. ${reasons}. Get to the water.`;
-        const res = opts.dryRun ? 'dry-run' : await ntfy(env, '🎣 Excellent bite starting soon', body, 'fish,rotating_light');
-        summary.actions.push('soon:' + res);
-        if (!opts.dryRun && res === 'sent') await kvPut(env, 'soon', wid);
-      } else {
-        summary.actions.push('soon:already-sent');
-      }
+      summary.actions.push(`next excellent window in ${Math.round(mins)} min — outside alert bands`);
     }
   } else {
-    summary.actions.push(next ? 'next window beyond look-ahead' : 'no upcoming excellent window');
+    summary.actions.push('no upcoming excellent window in the next 3 days');
   }
   return summary;
 }
