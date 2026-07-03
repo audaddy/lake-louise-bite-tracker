@@ -330,6 +330,9 @@ return SunCalc;
  *
  * VARS expected on this Worker:
  *   - NTFY_TOPIC  (plain text variable): your ntfy.sh topic
+ *   - NTFY_TOKEN  (secret): an ntfy.sh access token. REQUIRED because ntfy
+ *                 rate-limits anonymous publishing from Cloudflare's shared
+ *                 IPs; authenticating with a token uses your account's limits.
  * ===================================================================== */
 
 const LAT = 47.161861;
@@ -459,11 +462,9 @@ function findWindows(hours, now) {
 async function ntfy(env, title, body, tags) {
   const topic = env.NTFY_TOPIC;
   if (!topic) return 'no-topic';
-  const r = await fetch('https://ntfy.sh/' + topic, {
-    method: 'POST',
-    body,
-    headers: { 'Title': title, 'Priority': 'high', 'Tags': tags || 'fish', 'Click': 'https://audaddy.github.io/lake-louise-bite-tracker/' },
-  });
+  const headers = { 'Title': title, 'Priority': 'high', 'Tags': tags || 'fish', 'Click': 'https://audaddy.github.io/lake-louise-bite-tracker/' };
+  if (env.NTFY_TOKEN) headers['Authorization'] = 'Bearer ' + env.NTFY_TOKEN;
+  const r = await fetch('https://ntfy.sh/' + topic, { method: 'POST', body, headers });
   return r.ok ? 'sent' : ('ntfy ' + r.status);
 }
 
