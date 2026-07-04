@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-04T14:57:00-07:00",
-  "score": 59,
-  "tier": "Fair",
-  "species_note": "Largemouth bass \u2014 fair conditions",
-  "message": "Fair bass conditions right now. Could go either way.",
+  "timestamp": "2026-07-04T15:59:29-07:00",
+  "score": 65,
+  "tier": "Good",
+  "species_note": "Largemouth bass \u2014 good window",
+  "message": "Good conditions for bass right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-07-04T16:59:54-07:00"
@@ -12,25 +12,25 @@
     "type": "moonrise",
     "time": "2026-07-04T23:40:47-07:00"
   },
-  "pressure_trend_hpa": -0.7,
+  "pressure_trend_hpa": -1.2,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 78.7,
-  "temp_f": 69.5,
-  "surface_pressure_hpa": 1012.3,
-  "cloud_cover_pct": 4.0,
-  "wind_mph": 7.3,
+  "moon_illumination_pct": 78.3,
+  "temp_f": 71.1,
+  "surface_pressure_hpa": 1011.9,
+  "cloud_cover_pct": 2.0,
+  "wind_mph": 6.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 18,
     "cloud_cover": 0,
     "wind": 12
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
@@ -39,10 +39,10 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~70\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~71\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Mid-depth \u2014 ~8\u201315 ft",
+    "depth": "Deep \u2014 15 ft+ near structure",
     "method_lean": "Spin fishing",
     "method_reason": "bass holding on structure are efficient to target with lures",
     "fly_options": [
@@ -80,7 +80,7 @@
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Open water \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Largemouth bass \u00b7 Open water \u00b7 Deep \u2014 15 ft+ near structure \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
