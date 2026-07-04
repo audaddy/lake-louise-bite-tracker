@@ -719,6 +719,13 @@ function renderLog() {
   log.forEach(e => { const t = e.tier || tierOf(e.score); if (byTier[t]) { byTier[t].n++; if (e.result === 'fish') byTier[t].hit++; } });
   let tierRows = tiers.filter(t => byTier[t].n > 0).map(t => { const o = byTier[t]; return `<tr><td>${t}</td><td class="r">${o.n}</td><td class="r">${o.hit}</td><td class="r">${Math.round(100 * o.hit / o.n)}%</td></tr>`; }).join('');
   if (!tierRows) tierRows = '<tr><td colspan="4" style="color:var(--muted)">—</td></tr>';
+  const SPECIES_LABEL = { trout: 'Trout', bass: 'Bass', perch: 'Perch', bluegill: 'Bluegill', other: 'Other' };
+  const bySpecies = {};
+  log.forEach(e => { const s = e.species || 'other'; if (!bySpecies[s]) bySpecies[s] = { n: 0, hit: 0, fish: 0 }; bySpecies[s].n++; if (e.result === 'fish') { bySpecies[s].hit++; bySpecies[s].fish += (e.count || 1); } });
+  const speciesOrder = Object.keys(bySpecies).sort((a, b) => bySpecies[b].fish - bySpecies[a].fish || bySpecies[b].n - bySpecies[a].n);
+  let speciesRows = speciesOrder.map(s => { const o = bySpecies[s]; return `<tr><td>${SPECIES_LABEL[s] || s}</td><td class="r">${o.n}</td><td class="r">${o.fish}</td><td class="r">${Math.round(100 * o.hit / o.n)}%</td></tr>`; }).join('');
+  if (!speciesRows) speciesRows = '<tr><td colspan="4" style="color:var(--muted)">—</td></tr>';
+
   const meth = { fly: { n: 0, hit: 0 }, spin: { n: 0, hit: 0 } };
   log.forEach(e => { if (meth[e.method]) { meth[e.method].n++; if (e.result === 'fish') meth[e.method].hit++; } });
   const methLine = ['fly', 'spin'].filter(m => meth[m].n > 0).map(m => `${m === 'fly' ? '🪶 Fly' : '🎣 Spin'}: ${meth[m].hit}/${meth[m].n} landed`).join(' · ') || '—';
@@ -735,6 +742,7 @@ function renderLog() {
   body.innerHTML =
     `<div class="summary-line"><b>${sessions}</b> session${sessions !== 1 ? 's' : ''} logged · <b>${fish}</b> fish landed · ${landedSessions} productive trip${landedSessions !== 1 ? 's' : ''}</div>` +
     `<div class="sub-h">Catch rate by bite-score tier</div><table class="ltable"><thead><tr><th>Tier</th><th class="r">Logged</th><th class="r">Landed</th><th class="r">Hit %</th></tr></thead><tbody>${tierRows}</tbody></table>` +
+    `<div class="sub-h">Catch by species</div><table class="ltable"><thead><tr><th>Species</th><th class="r">Logged</th><th class="r">Fish</th><th class="r">Hit %</th></tr></thead><tbody>${speciesRows}</tbody></table>` +
     `<div class="sub-h">By method</div><div style="font-size:.9rem;margin-bottom:4px;">${methLine}</div>` +
     `<div class="sub-h">Most productive lures/flies</div><div style="font-size:.9rem;">${topLures}</div>` +
     `<div class="sub-h">Recent sessions</div>${recent}`;
