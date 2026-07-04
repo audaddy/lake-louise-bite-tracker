@@ -115,6 +115,8 @@
   .seg { display: flex; gap: 8px; }
   .seg button { flex: 1; background: rgba(255,255,255,0.04); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px 6px; font-size: 0.9rem; cursor: pointer; }
   .seg button.active { background: var(--accent); color: #06121e; font-weight: 700; border-color: var(--accent); }
+  .seg.wrap { flex-wrap: wrap; }
+  .seg.wrap button { flex: 1 1 30%; }
   select, input[type=text], input[type=number], textarea { width: 100%; background: #0e1f31; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px; font-size: 0.95rem; font-family: inherit; }
   textarea { resize: vertical; min-height: 54px; }
   .modal-actions { display: flex; gap: 10px; margin-top: 4px; }
@@ -278,9 +280,11 @@
     </div>
     <div class="field">
       <label>Species</label>
-      <div class="seg" id="segSpecies">
+      <div class="seg wrap" id="segSpecies">
         <button type="button" data-v="trout">Trout</button>
         <button type="button" data-v="bass">Bass</button>
+        <button type="button" data-v="perch">Perch</button>
+        <button type="button" data-v="bluegill">Bluegill</button>
         <button type="button" data-v="other">Other</button>
       </div>
     </div>
