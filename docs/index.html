@@ -82,6 +82,15 @@
   .lure .badge { display: inline-block; font-size: 0.62rem; font-weight: 700; color: #0e1b2a; background: var(--green); border-radius: 6px; padding: 1px 6px; margin-left: 6px; vertical-align: middle; text-transform: uppercase; letter-spacing: 0.4px; }
   .lure .wy { color: var(--muted); font-size: 0.8rem; margin-top: 2px; line-height: 1.3; }
   .tseason { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; font-style: italic; line-height: 1.4; }
+  .planner-card h2 { font-size: 0.95rem; margin: 0 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .planner-sub { color: var(--muted); font-size: 0.8rem; margin-bottom: 8px; }
+  .pday { display: grid; grid-template-columns: 78px 1fr auto; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--border); }
+  .pday:last-child { border-bottom: none; }
+  .pd-name { font-weight: 700; font-size: 0.92rem; }
+  .pd-time { font-weight: 600; font-size: 0.92rem; }
+  .pd-reason { color: var(--muted); font-size: 0.78rem; margin-top: 2px; line-height: 1.25; }
+  .pd-score { font-size: 1.35rem; font-weight: 800; text-align: right; min-width: 42px; }
+  .pday.slow .pd-time { color: var(--muted); font-weight: 500; }
   #chartWrap { position: relative; height: 220px; }
   footer { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
   .updated { text-align: center; color: var(--muted); font-size: 0.78rem; margin-bottom: 16px; }
@@ -213,6 +222,12 @@
       <div class="tcol"><h3>🎣 Spin fishing</h3><div id="spinList"></div></div>
     </div>
     <div class="tseason" id="tSeason"></div>
+  </div>
+
+  <div class="card planner-card" id="plannerCard" style="display:none;">
+    <h2>📅 7-day outlook</h2>
+    <div class="planner-sub">Best fishing window each day (forecast + solunar)</div>
+    <div id="plannerBody"></div>
   </div>
 
   <div class="card chart-card">
@@ -569,6 +584,8 @@ async function loadData() {
     if (computed) series.push({ timestamp: computed.timestamp, score: computed.score });
     renderChart(series);
   } catch (e) { /* chart optional */ }
+  // 7-day outlook (separate forecast fetch; non-blocking)
+  try { renderPlanner(scoreForecast(await planFetch())); } catch (e) { /* planner optional */ }
 }
 
 function renderLatest(d) {
@@ -657,6 +674,103 @@ function renderChart(history) {
       scales: { y: { min: 0, max: 100, ticks: { color: '#8da7bf' }, grid: { color: 'rgba(255,255,255,0.06)' } },
         x: { ticks: { color: '#8da7bf', maxTicksLimit: 8, autoSkip: true }, grid: { display: false } } } },
   });
+}
+
+// ===================== 7-day outlook planner =====================
+async function planFetch() {
+  const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + LAT + '&longitude=' + LON +
+    '&hourly=surface_pressure,cloud_cover,wind_speed_10m,precipitation,temperature_2m' +
+    '&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto&forecast_days=7&past_hours=6';
+  return fetch(url, { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+}
+function nearAny(t, arr, winMin) { const w = winMin * 60000; return arr.some(x => Math.abs(t - x) <= w); }
+function planMoonMajors(a, b) {
+  const step = 10 * 60000, centers = [], alts = [], times = [];
+  for (let t = a - 2 * 3600e3; t <= b + 2 * 3600e3; t += step) { times.push(t); alts.push(SunCalc.getMoonPosition(new Date(t), LAT, LON).altitude); }
+  for (let i = 1; i < alts.length - 1; i++) if ((alts[i] > alts[i - 1] && alts[i] >= alts[i + 1]) || (alts[i] < alts[i - 1] && alts[i] <= alts[i + 1])) centers.push(times[i]);
+  return centers;
+}
+function planEvents(a, b) {
+  const minors = [], suns = [];
+  for (let d = a - 24 * 3600e3; d <= b + 24 * 3600e3; d += 24 * 3600e3) {
+    const date = new Date(d);
+    const mt = SunCalc.getMoonTimes(date, LAT, LON);
+    if (mt.rise) minors.push(mt.rise.getTime());
+    if (mt.set) minors.push(mt.set.getTime());
+    const st = SunCalc.getTimes(date, LAT, LON);
+    if (st.sunrise && !isNaN(st.sunrise)) suns.push(st.sunrise.getTime());
+    if (st.sunset && !isNaN(st.sunset)) suns.push(st.sunset.getTime());
+  }
+  return { minors, suns };
+}
+function scoreForecast(w) {
+  const H = w.hourly, n = H.time.length;
+  const ms = H.time.map(t => new Date(t).getTime());
+  const majors = planMoonMajors(ms[0], ms[n - 1]);
+  const { minors, suns } = planEvents(ms[0], ms[n - 1]);
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const t = ms[i], pressure = H.surface_pressure[i];
+    let trend = 0;
+    for (let j = i; j >= 0; j--) { if (ms[i] - ms[j] >= 3 * 3600e3 || j === 0) { const p0 = H.surface_pressure[j]; if (pressure != null && p0 != null) trend = Math.round((pressure - p0) * 10) / 10; break; } }
+    const cloud = H.cloud_cover[i], wind = H.wind_speed_10m[i];
+    const inMajor = nearAny(t, majors, 60), inMinor = nearAny(t, minors, 30), inDawnDusk = nearAny(t, suns, 60);
+    const illum = SunCalc.getMoonIllumination(new Date(t)).fraction * 100;
+    const score = computeScore(inMajor, inMinor, inDawnDusk, illum, trend, cloud, wind).score;
+    out.push({ ms: t, score, trend, cloud, wind, inMajor, inMinor, inDawnDusk });
+  }
+  return out;
+}
+function planReasons(h) {
+  const r = [];
+  if (h.trend <= -1) r.push('falling pressure'); else if (h.trend < 1) r.push('stable pressure');
+  if (h.inDawnDusk) r.push('dawn/dusk');
+  if (h.inMajor) r.push('solunar major'); else if (h.inMinor) r.push('solunar minor');
+  if (h.cloud != null && h.cloud >= 70) r.push('overcast');
+  if (h.wind != null && h.wind >= 3 && h.wind <= 10) r.push('light wind');
+  return r.slice(0, 2).join(' + ');
+}
+function dailyBest(hrs) {
+  // Prime window centered on the day's peak hour (not the whole good stretch).
+  let idx = 0;
+  for (let i = 1; i < hrs.length; i++) if (hrs[i].score > hrs[idx].score) idx = i;
+  const peak = hrs[idx].score;
+  const slow = peak < 60;
+  const floor = Math.max(60, peak - 12);
+  let a = idx, b = idx;
+  while (a - 1 >= 0 && hrs[a - 1].score >= floor && idx - (a - 1) <= 3) a--;
+  while (b + 1 < hrs.length && hrs[b + 1].score >= floor && (b + 1) - idx <= 3) b++;
+  return { win: { s: hrs[a].ms, e: hrs[b].ms + 3600e3, peak, ph: hrs[idx] }, slow };
+}
+function dayLabel(ms) {
+  const d = new Date(ms), t = new Date();
+  const diff = Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(t.getFullYear(), t.getMonth(), t.getDate())) / 86400e3);
+  if (diff <= 0) return 'Today';
+  if (diff === 1) return 'Tomorrow';
+  return d.toLocaleDateString([], { weekday: 'long' });
+}
+function renderPlanner(hours) {
+  const card = document.getElementById('plannerCard');
+  if (!Array.isArray(hours) || !hours.length) { card.style.display = 'none'; return; }
+  const now = Date.now(), groups = new Map();
+  for (const h of hours) {
+    if (h.ms < now - 3600e3) continue;
+    const d = new Date(h.ms), key = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(h);
+  }
+  const days = [...groups.values()].slice(0, 7);
+  if (!days.length) { card.style.display = 'none'; return; }
+  const rows = days.map(hrs => {
+    const { win, slow } = dailyBest(hrs);
+    const range = fmtClock(new Date(win.s).toISOString()) + '–' + fmtClock(new Date(win.e).toISOString());
+    const reasons = planReasons(win.ph);
+    return `<div class="pday${slow ? ' slow' : ''}"><div class="pd-name">${dayLabel(win.ph.ms)}</div>` +
+      `<div><div class="pd-time">${range}</div><div class="pd-reason">${slow ? 'slow day · best around here' : reasons}</div></div>` +
+      `<div class="pd-score" style="color:${colorFor(win.peak)}">${win.peak}</div></div>`;
+  }).join('');
+  card.style.display = '';
+  document.getElementById('plannerBody').innerHTML = rows;
 }
 
 // ===================== Catch log =====================
