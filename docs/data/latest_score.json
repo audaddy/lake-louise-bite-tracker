@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-07-05T08:51:39-07:00",
-  "score": 67,
+  "timestamp": "2026-07-05T10:06:30-07:00",
+  "score": 63,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,33 +12,32 @@
     "type": "moonset",
     "time": "2026-07-05T11:14:30-07:00"
   },
-  "pressure_trend_hpa": -0.1,
+  "pressure_trend_hpa": 0.3,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 72.1,
-  "temp_f": 60.0,
-  "surface_pressure_hpa": 1012.4,
-  "cloud_cover_pct": 40.0,
-  "wind_mph": 8.3,
+  "moon_illumination_pct": 71.7,
+  "temp_f": 62.5,
+  "surface_pressure_hpa": 1013.0,
+  "cloud_cover_pct": 37.0,
+  "wind_mph": 9.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 8,
+    "cloud_cover": 4,
     "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Partly cloudy skies are mildly favorable",
     "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~60\u00b0F; daytime warmth leans bass",
+    "species_reason": "moderate ~62\u00b0F; daytime warmth leans bass",
     "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
     "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Mid-depth \u2014 ~8\u201315 ft",
@@ -58,7 +57,7 @@
       {
         "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
         "why": "subsurface when nothing's rising / bright midday",
-        "hot": false
+        "hot": true
       }
     ],
     "spin_options": [
@@ -71,6 +70,11 @@
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
+      },
+      {
+        "name": "Jigs & soft plastics (worked deep)",
+        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
+        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
