@@ -1,43 +1,47 @@
 {
-  "timestamp": "2026-07-05T10:06:30-07:00",
-  "score": 63,
+  "timestamp": "2026-07-05T11:15:53-07:00",
+  "score": 69,
   "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "species_note": "Largemouth bass biting",
+  "message": "Good bass window right now \u2014 biting for the next ~29 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-07-05T17:42:35-07:00"
   },
   "next_minor_period": {
-    "type": "moonset",
-    "time": "2026-07-05T11:14:30-07:00"
+    "type": "moonrise",
+    "time": "2026-07-05T23:56:28-07:00"
   },
-  "pressure_trend_hpa": 0.3,
-  "species": "trout",
+  "pressure_trend_hpa": -0.1,
+  "species": "bass",
   "in_major_period": false,
-  "in_minor_period": false,
+  "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 71.7,
-  "temp_f": 62.5,
-  "surface_pressure_hpa": 1013.0,
-  "cloud_cover_pct": 37.0,
-  "wind_mph": 9.4,
+  "moon_illumination_pct": 71.2,
+  "temp_f": 65.4,
+  "surface_pressure_hpa": 1012.6,
+  "cloud_cover_pct": 11.0,
+  "wind_mph": 8.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 4,
-    "wind": 12
+    "cloud_cover": 0,
+    "wind": 12,
+    "solunar_minor": 10
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect"
+    "A light breeze/ripple has a very favorable effect",
+    "Solunar minor period active (moonrise/moonset)"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Bright, clear skies can push fish deep and slow feeding"
+  ],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~62\u00b0F; daytime warmth leans bass",
+    "species_reason": "moderate ~65\u00b0F; daytime warmth leans bass",
     "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
     "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Mid-depth \u2014 ~8\u201315 ft",
@@ -85,7 +89,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": null,
+    "period_key": "moonset@2026-07-05T11:14:30-07:00",
     "score_ge_70": false
   }
 }
