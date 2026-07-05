@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-05T11:15:53-07:00",
-  "score": 69,
+  "timestamp": "2026-07-05T12:49:46-07:00",
+  "score": 65,
   "tier": "Good",
-  "species_note": "Largemouth bass biting",
-  "message": "Good bass window right now \u2014 biting for the next ~29 min.",
+  "species_note": "Largemouth bass \u2014 good window",
+  "message": "Good conditions for bass right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-07-05T17:42:35-07:00"
@@ -12,38 +12,36 @@
     "type": "moonrise",
     "time": "2026-07-05T23:56:28-07:00"
   },
-  "pressure_trend_hpa": -0.1,
+  "pressure_trend_hpa": -1.2,
   "species": "bass",
   "in_major_period": false,
-  "in_minor_period": true,
+  "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 71.2,
-  "temp_f": 65.4,
-  "surface_pressure_hpa": 1012.6,
-  "cloud_cover_pct": 11.0,
-  "wind_mph": 8.9,
+  "moon_illumination_pct": 70.6,
+  "temp_f": 70.0,
+  "surface_pressure_hpa": 1011.8,
+  "cloud_cover_pct": 0.0,
+  "wind_mph": 9.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 18,
     "cloud_cover": 0,
-    "wind": 12,
-    "solunar_minor": 10
+    "wind": 12
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect",
-    "Solunar minor period active (moonrise/moonset)"
+    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
   ],
   "light_phase": "day",
   "tactics": {
-    "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~65\u00b0F; daytime warmth leans bass",
-    "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
-    "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_pick": "Largemouth bass",
+    "species_reason": "water proxy ~70\u00b0F (warm) favors bass metabolism",
+    "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
+    "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Mid-depth \u2014 ~8\u201315 ft",
     "method_lean": "Spin fishing",
     "method_reason": "bass holding on structure are efficient to target with lures",
@@ -82,14 +80,14 @@
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Either \u2014 slight bass edge \u00b7 Transition edges \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Largemouth bass \u00b7 Open water \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "moonset@2026-07-05T11:14:30-07:00",
+    "period_key": null,
     "score_ge_70": false
   }
 }
