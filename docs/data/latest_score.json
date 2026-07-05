@@ -1,39 +1,40 @@
 {
-  "timestamp": "2026-07-05T04:37:47-07:00",
-  "score": 95,
+  "timestamp": "2026-07-05T05:53:15-07:00",
+  "score": 100,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~1.5 hours.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~28 min.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-07-05T05:21:13-07:00"
+    "type": "underfoot",
+    "time": "2026-07-05T17:42:35-07:00"
   },
   "next_minor_period": {
     "type": "moonset",
     "time": "2026-07-05T11:14:30-07:00"
   },
-  "pressure_trend_hpa": 0.3,
+  "pressure_trend_hpa": 0.6,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 73.8,
-  "temp_f": 55.5,
-  "surface_pressure_hpa": 1012.3,
+  "moon_illumination_pct": 73.3,
+  "temp_f": 55.2,
+  "surface_pressure_hpa": 1012.5,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 2.2,
+  "wind_mph": 5.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 6,
+    "wind": 12,
     "solunar_major": 18,
     "dawn_dusk": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
+    "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)",
     "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
@@ -41,9 +42,9 @@
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~56\u00b0F favors trout; bass sluggish",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
+    "species_reason": "cool water ~55\u00b0F favors trout; bass sluggish",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -81,7 +82,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "transit@2026-07-05T05:21:13-07:00",
