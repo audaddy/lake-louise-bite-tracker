@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-05T13:56:58-07:00",
+  "timestamp": "2026-07-05T15:03:40-07:00",
   "score": 59,
   "tier": "Fair",
   "species_note": "Largemouth bass \u2014 fair conditions",
@@ -12,25 +12,26 @@
     "type": "moonrise",
     "time": "2026-07-05T23:56:28-07:00"
   },
-  "pressure_trend_hpa": -1.3,
+  "pressure_trend_hpa": -0.4,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 70.2,
-  "temp_f": 72.1,
-  "surface_pressure_hpa": 1011.3,
+  "moon_illumination_pct": 69.7,
+  "temp_f": 74.2,
+  "surface_pressure_hpa": 1011.4,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 10.4,
+  "wind_mph": 9.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 12,
     "cloud_cover": 0,
-    "wind": 6
+    "wind": 12
   },
   "positive_factors": [
-    "Falling barometric pressure \u2014 fish often feed ahead of a front"
+    "Stable atmospheric pressure is comfortable for fish",
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -38,7 +39,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~72\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~74\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Deep \u2014 15 ft+ near structure",
