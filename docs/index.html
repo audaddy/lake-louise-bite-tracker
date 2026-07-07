@@ -126,7 +126,8 @@
   .seg button.active { background: var(--accent); color: #06121e; font-weight: 700; border-color: var(--accent); }
   .seg.wrap { flex-wrap: wrap; }
   .seg.wrap button { flex: 1 1 30%; }
-  select, input[type=text], input[type=number], textarea { width: 100%; background: #0e1f31; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px; font-size: 0.95rem; font-family: inherit; }
+  select, input[type=text], input[type=number], input[type=datetime-local], textarea { width: 100%; background: #0e1f31; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px; font-size: 0.95rem; font-family: inherit; }
+  input[type=datetime-local] { color-scheme: dark; }
   textarea { resize: vertical; min-height: 54px; }
   .modal-actions { display: flex; gap: 10px; margin-top: 4px; }
   .btn { flex: 1; border: none; border-radius: 10px; padding: 13px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
@@ -293,6 +294,11 @@
       <label>How many landed?</label>
       <input type="number" id="logCount" min="1" value="1" />
     </div>
+    <div class="field">
+      <label>When did you catch it?</label>
+      <input type="datetime-local" id="logTime" />
+    </div>
+
     <div class="field">
       <label>Species</label>
       <div class="seg wrap" id="segSpecies">
@@ -717,7 +723,7 @@ function scoreForecast(w) {
     const inMajor = nearAny(t, majors, 60), inMinor = nearAny(t, minors, 30), inDawnDusk = nearAny(t, suns, 60);
     const illum = SunCalc.getMoonIllumination(new Date(t)).fraction * 100;
     const score = computeScore(inMajor, inMinor, inDawnDusk, illum, trend, cloud, wind).score;
-    out.push({ ms: t, score, trend, cloud, wind, inMajor, inMinor, inDawnDusk });
+    out.push({ ms: t, score, trend, cloud, wind, temp: H.temperature_2m[i], inMajor, inMinor, inDawnDusk });
   }
   return out;
 }
@@ -773,6 +779,47 @@ function renderPlanner(hours) {
   document.getElementById('plannerBody').innerHTML = rows;
 }
 
+// ---- time-based conditions snapshot (for logging a past catch) ----
+function nowLocalInput() {
+  const d = new Date();
+  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+  return d.toISOString().slice(0, 16);
+}
+function lightPhaseAt(ms) {
+  const suns = [];
+  for (const off of [-1, 0, 1]) {
+    const t = SunCalc.getTimes(new Date(ms + off * 86400e3), LAT, LON);
+    if (t.sunrise && !isNaN(t.sunrise)) suns.push(t.sunrise.getTime());
+    if (t.sunset && !isNaN(t.sunset)) suns.push(t.sunset.getTime());
+  }
+  if (suns.some(x => Math.abs(ms - x) <= 60 * 60000)) return 'dawn_dusk';
+  const d = new Date(ms), tt = SunCalc.getTimes(d, LAT, LON);
+  return (tt.sunrise <= d && d <= tt.sunset) ? 'day' : 'night';
+}
+// Build a conditions snapshot for a specific moment. Uses the live value if the
+// time is ~now, otherwise recomputes from the forecast (which includes past hours).
+async function snapshotForTime(ms) {
+  const now = Date.now();
+  if (currentData && Math.abs(ms - now) < 25 * 60000) {
+    const d = currentData;
+    return { timestamp: new Date(ms).toISOString(), score: d.score, tier: d.tier, light_phase: d.light_phase,
+      temp_f: d.temp_f, pressure_trend_hpa: d.pressure_trend_hpa, cloud_cover_pct: d.cloud_cover_pct,
+      wind_mph: d.wind_mph, moon_illumination_pct: d.moon_illumination_pct };
+  }
+  const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + LAT + '&longitude=' + LON +
+    '&hourly=surface_pressure,cloud_cover,wind_speed_10m,precipitation,temperature_2m' +
+    '&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto&past_days=2&forecast_days=1';
+  const w = await fetch(url, { cache: 'no-store' }).then(r => r.json());
+  const hours = scoreForecast(w);
+  let best = hours[0];
+  for (const h of hours) if (Math.abs(h.ms - ms) < Math.abs(best.ms - ms)) best = h;
+  return {
+    timestamp: new Date(ms).toISOString(), score: best.score, tier: tierFor(best.score), light_phase: lightPhaseAt(ms),
+    temp_f: best.temp, pressure_trend_hpa: best.trend, cloud_cover_pct: best.cloud, wind_mph: best.wind,
+    moon_illumination_pct: Math.round(SunCalc.getMoonIllumination(new Date(ms)).fraction * 1000) / 10,
+  };
+}
+
 // ===================== Catch log =====================
 function loadLog() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch (e) { return []; } }
 function saveLog(a) { localStorage.setItem(LS_KEY, JSON.stringify(a)); }
@@ -795,6 +842,7 @@ function openModal() {
   document.getElementById('logCount').value = 1;
   document.getElementById('countField').style.display = 'none';
   document.getElementById('logNotes').value = '';
+  document.getElementById('logTime').value = nowLocalInput();
   let s = 'No live conditions yet — entry will still be saved.';
   if (currentData) {
     const d = currentData;
@@ -805,18 +853,30 @@ function openModal() {
 }
 function closeModal() { document.getElementById('logModal').classList.remove('open'); }
 
-function saveEntry() {
+async function saveEntry() {
   if (!sel.result) { alert('Pick a result first (Caught / Nibbles / Skunked).'); return; }
-  const d = currentData || {};
+  const btn = document.getElementById('logSave');
+  const tv = document.getElementById('logTime').value;
+  const caughtMs = tv ? new Date(tv).getTime() : Date.now();
+  const prev = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Saving…';
+  let snap;
+  try {
+    snap = await snapshotForTime(caughtMs);
+  } catch (err) {
+    const d = currentData || {};
+    snap = { timestamp: new Date(caughtMs).toISOString(), score: d.score ?? null, tier: d.tier ?? null, light_phase: d.light_phase ?? null, temp_f: d.temp_f ?? null, pressure_trend_hpa: d.pressure_trend_hpa ?? null, cloud_cover_pct: d.cloud_cover_pct ?? null, wind_mph: d.wind_mph ?? null, moon_illumination_pct: d.moon_illumination_pct ?? null };
+  }
+  btn.disabled = false; btn.textContent = prev;
   const e = {
-    id: Date.now(), logged_at: new Date().toISOString(), result: sel.result,
+    id: Date.now(), logged_at: new Date().toISOString(), caught_at: new Date(caughtMs).toISOString(), result: sel.result,
     count: sel.result === 'fish' ? Math.max(1, parseInt(document.getElementById('logCount').value, 10) || 1) : 0,
     species: sel.species, method: sel.method,
     lure: document.getElementById('logLure').value, position: document.getElementById('logPosition').value,
     depth: document.getElementById('logDepth').value, notes: document.getElementById('logNotes').value.trim(),
-    score: d.score ?? null, tier: d.tier ?? null, light_phase: d.light_phase ?? null, temp_f: d.temp_f ?? null,
-    pressure_trend_hpa: d.pressure_trend_hpa ?? null, cloud_cover_pct: d.cloud_cover_pct ?? null,
-    wind_mph: d.wind_mph ?? null, moon_illumination_pct: d.moon_illumination_pct ?? null, data_timestamp: d.timestamp ?? null,
+    score: snap.score ?? null, tier: snap.tier ?? null, light_phase: snap.light_phase ?? null, temp_f: snap.temp_f ?? null,
+    pressure_trend_hpa: snap.pressure_trend_hpa ?? null, cloud_cover_pct: snap.cloud_cover_pct ?? null,
+    wind_mph: snap.wind_mph ?? null, moon_illumination_pct: snap.moon_illumination_pct ?? null, data_timestamp: snap.timestamp ?? null,
   };
   const log = loadLog(); log.push(e); saveLog(log); closeModal(); renderLog();
 }
@@ -847,7 +907,7 @@ function renderLog() {
   log.filter(e => e.result === 'fish').forEach(e => { lureCount[e.lure] = (lureCount[e.lure] || 0) + 1; });
   const topLures = Object.entries(lureCount).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([k, v]) => `${k} (${v})`).join(', ') || 'none yet';
   const recent = log.slice(-6).reverse().map(e => {
-    const when = new Date(e.logged_at).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    const when = new Date(e.caught_at || e.logged_at).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
     const rlabel = RESULT_LABEL[e.result] + (e.result === 'fish' && e.count > 1 ? ` ×${e.count}` : '');
     const sc = e.score != null ? `score ${e.score}` : 'no score';
     const meta = [e.species, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
