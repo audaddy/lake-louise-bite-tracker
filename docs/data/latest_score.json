@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-07-07T15:13:39-07:00",
-  "score": 77,
+  "timestamp": "2026-07-07T16:15:36-07:00",
+  "score": 65,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
   "message": "Good conditions for bass right now. Worth a cast.",
@@ -12,51 +12,42 @@
     "type": "moonrise",
     "time": "2026-07-08T00:31:14-07:00"
   },
-  "pressure_trend_hpa": 0.5,
+  "pressure_trend_hpa": -0.8,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 48.9,
-  "temp_f": 73.2,
-  "surface_pressure_hpa": 1009.9,
-  "cloud_cover_pct": 100.0,
-  "wind_mph": 5.9,
+  "moon_illumination_pct": 48.4,
+  "temp_f": 75.3,
+  "surface_pressure_hpa": 1008.9,
+  "cloud_cover_pct": 0.0,
+  "wind_mph": 5.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 12,
+    "cloud_cover": 0,
     "wind": 12,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
     "Moon phase is favorable"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Bright, clear skies can push fish deep and slow feeding"
+  ],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~73\u00b0F (warm) favors bass metabolism",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Either \u2014 match the water",
-    "method_reason": "conditions don't strongly favor one over the other",
+    "species_reason": "water proxy ~75\u00b0F (warm) favors bass metabolism",
+    "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
+    "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
+    "depth": "Deep \u2014 15 ft+ near structure",
+    "method_lean": "Spin fishing",
+    "method_reason": "bass holding on structure are efficient to target with lures",
     "fly_options": [
-      {
-        "name": "Poppers / foam topwater",
-        "why": "low light + warm water = surface bass eats",
-        "hot": true
-      },
-      {
-        "name": "Dry flies (caddis / mayfly)",
-        "why": "trout rise to the evening hatch in low light",
-        "hot": false
-      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -65,15 +56,15 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
-        "hot": false
+        "hot": true
+      },
+      {
+        "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
+        "why": "subsurface when nothing's rising / bright midday",
+        "hot": true
       }
     ],
     "spin_options": [
-      {
-        "name": "Topwater (buzzbaits, walking baits, poppers)",
-        "why": "first/last light over shallow cover for bass",
-        "hot": true
-      },
       {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
@@ -91,14 +82,14 @@
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean either \u2014 match the water"
+    "summary": "Largemouth bass \u00b7 Open water \u00b7 Deep \u2014 15 ft+ near structure \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-07T15",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
