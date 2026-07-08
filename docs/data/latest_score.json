@@ -1,64 +1,57 @@
 {
-  "timestamp": "2026-07-07T21:19:33-07:00",
-  "score": 77,
+  "timestamp": "2026-07-08T00:03:22-07:00",
+  "score": 62,
   "tier": "Good",
-  "species_note": "Largemouth bass \u2014 dawn/dusk window",
-  "message": "Good bass conditions during the low-light window. Good time to fish.",
+  "species_note": "Rainbow trout biting",
+  "message": "Good trout window right now \u2014 biting for the next ~58 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-07-08T07:36:17-07:00"
   },
   "next_minor_period": {
     "type": "moonrise",
-    "time": "2026-07-08T00:31:13-07:00"
+    "time": "2026-07-08T00:31:14-07:00"
   },
-  "pressure_trend_hpa": 0.4,
-  "species": "bass",
+  "pressure_trend_hpa": 1.7,
+  "species": "trout",
   "in_major_period": false,
-  "in_minor_period": false,
-  "in_dawn_dusk": true,
-  "moon_illumination_pct": 46.1,
-  "temp_f": 67.1,
-  "surface_pressure_hpa": 1009.3,
-  "cloud_cover_pct": 0.0,
-  "wind_mph": 6.1,
+  "in_minor_period": true,
+  "in_dawn_dusk": false,
+  "moon_illumination_pct": 44.8,
+  "temp_f": 59.6,
+  "surface_pressure_hpa": 1011.0,
+  "cloud_cover_pct": 5.0,
+  "wind_mph": 3.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 0,
     "wind": 12,
-    "dawn_dusk": 12,
-    "moon_phase": 6
+    "solunar_minor": 10
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Slightly rising pressure \u2014 neutral to mild",
     "A light breeze/ripple has a very favorable effect",
-    "Low-light dawn/dusk window \u2014 prime feeding time",
-    "Moon phase is favorable"
+    "Solunar minor period active (moonrise/moonset)"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
   ],
-  "light_phase": "dawn_dusk",
+  "light_phase": "night",
   "tactics": {
-    "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~67\u00b0F (warm) favors bass metabolism",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~60\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Either \u2014 match the water",
-    "method_reason": "conditions don't strongly favor one over the other",
+    "method_lean": "Fly fishing",
+    "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
-      {
-        "name": "Poppers / foam topwater",
-        "why": "low light + warm water = surface bass eats",
-        "hot": true
-      },
       {
         "name": "Dry flies (caddis / mayfly)",
         "why": "trout rise to the evening hatch in low light",
-        "hot": false
+        "hot": true
       },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
@@ -73,11 +66,6 @@
     ],
     "spin_options": [
       {
-        "name": "Topwater (buzzbaits, walking baits, poppers)",
-        "why": "first/last light over shallow cover for bass",
-        "hot": true
-      },
-      {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
         "hot": true
@@ -85,18 +73,18 @@
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
-        "hot": false
+        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean either \u2014 match the water"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-07T21",
-    "score_ge_70": true
+    "period_key": "moonrise@2026-07-08T00:31:14-07:00",
+    "score_ge_70": false
   }
 }
