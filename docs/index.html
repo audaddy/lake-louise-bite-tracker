@@ -341,6 +341,8 @@ const FLY_LURES = ['Dry fly', 'Popper', 'Nymph', 'Woolly Bugger', 'Streamer', 'L
 const SPIN_LURES = ['Inline spinner', 'Spinnerbait', 'Spoon', 'Jig', 'Soft plastic', 'Topwater / buzzbait', 'Crankbait', 'Bait (worm / PowerBait)', 'Other'];
 const POSITIONS = ['Shoreline', 'Off the dock', 'Open water / middle', 'Drop-off / ledge', 'Weed edge', 'Inlet / current', 'Boat / drifting', 'Other'];
 const DEPTHS = ['Surface / top', 'Shallow (0–8 ft)', 'Mid (8–15 ft)', 'Deep (15+ ft)'];
+const SPECIES_LABELS = { trout: 'Trout', bass: 'Bass', perch: 'Perch', bluegill: 'Bluegill', other: 'Other' };
+let pendingPhoto = null, lastFishPhoto = null, lastFishSpecies = null;
 
 // ---------- helpers ----------
 function colorFor(s) { if (s == null) return 'var(--muted)'; if (s >= 70) return 'var(--green)'; if (s >= 40) return 'var(--yellow)'; return 'var(--red)'; }
@@ -822,7 +824,16 @@ async function snapshotForTime(ms) {
 
 // ===================== Catch log =====================
 function loadLog() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch (e) { return []; } }
-function saveLog(a) { localStorage.setItem(LS_KEY, JSON.stringify(a)); }
+function saveLog(a) {
+  // Keep photos only on the 30 most recent entries so we don't blow localStorage.
+  const withPhoto = a.filter(x => x.photo);
+  if (withPhoto.length > 30) {
+    const drop = new Set(withPhoto.slice(0, withPhoto.length - 30).map(x => x.id));
+    a = a.map(x => drop.has(x.id) ? Object.assign({}, x, { photo: null }) : x);
+  }
+  try { localStorage.setItem(LS_KEY, JSON.stringify(a)); }
+  catch (e) { localStorage.setItem(LS_KEY, JSON.stringify(a.map(x => Object.assign({}, x, { photo: null })))); }
+}
 function tierOf(s) { if (s == null) return null; return s >= 80 ? 'Excellent' : s >= 60 ? 'Good' : s >= 40 ? 'Fair' : 'Slow'; }
 const RESULT_LABEL = { fish: 'Caught', nibble: 'Nibbles', skunk: 'Skunked' };
 const RESULT_CLASS = { fish: 'le-fish', nibble: 'le-nibble', skunk: 'le-skunk' };
@@ -843,6 +854,7 @@ function openModal() {
   document.getElementById('countField').style.display = 'none';
   document.getElementById('logNotes').value = '';
   document.getElementById('logTime').value = nowLocalInput();
+  pendingPhoto = null;
   let s = 'No live conditions yet — entry will still be saved.';
   if (currentData) {
     const d = currentData;
@@ -877,8 +889,9 @@ async function saveEntry() {
     score: snap.score ?? null, tier: snap.tier ?? null, light_phase: snap.light_phase ?? null, temp_f: snap.temp_f ?? null,
     pressure_trend_hpa: snap.pressure_trend_hpa ?? null, cloud_cover_pct: snap.cloud_cover_pct ?? null,
     wind_mph: snap.wind_mph ?? null, moon_illumination_pct: snap.moon_illumination_pct ?? null, data_timestamp: snap.timestamp ?? null,
+    photo: pendingPhoto || null,
   };
-  const log = loadLog(); log.push(e); saveLog(log); closeModal(); renderLog();
+  const log = loadLog(); log.push(e); saveLog(log); pendingPhoto = null; closeModal(); renderLog();
 }
 
 function renderLog() {
@@ -911,7 +924,8 @@ function renderLog() {
     const rlabel = RESULT_LABEL[e.result] + (e.result === 'fish' && e.count > 1 ? ` ×${e.count}` : '');
     const sc = e.score != null ? `score ${e.score}` : 'no score';
     const meta = [e.species, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
-    return `<div class="logentry"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}</span><span style="color:var(--muted)">${when} · ${sc}</span></div><div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div></div>`;
+    const photoImg = e.photo ? `<img src="${e.photo}" alt="catch" style="width:54px;height:54px;object-fit:cover;border-radius:8px;margin-top:6px;">` : '';
+    return `<div class="logentry"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}</span><span style="color:var(--muted)">${when} · ${sc}</span></div><div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div>${photoImg}</div>`;
   }).join('');
   body.innerHTML =
     `<div class="summary-line"><b>${sessions}</b> session${sessions !== 1 ? 's' : ''} logged · <b>${fish}</b> fish landed · ${landedSessions} productive trip${landedSessions !== 1 ? 's' : ''}</div>` +
@@ -992,6 +1006,21 @@ function compressImage(file, max = 768, q = 0.8) {
   });
 }
 function showAiResult(html) { const el = document.getElementById('aiResult'); el.style.display = ''; el.innerHTML = html; }
+function detectSpecies(text) {
+  const t = (text || '').toLowerCase();
+  if (/bluegill|sunfish|bream/.test(t)) return 'bluegill';
+  if (/perch/.test(t)) return 'perch';
+  if (/bass/.test(t)) return 'bass';
+  if (/trout/.test(t)) return 'trout';
+  return 'other';
+}
+function openModalPrefill(species, photo) {
+  openModal();
+  sel.result = 'fish'; setSeg('segResult', 'fish');
+  document.getElementById('countField').style.display = '';
+  if (species) { sel.species = species; setSeg('segSpecies', species); }
+  pendingPhoto = photo || null;
+}
 async function handlePhoto(file, mode) {
   if (!getWorkerUrl() && !promptWorkerUrl()) return;
   try {
@@ -999,8 +1028,15 @@ async function handlePhoto(file, mode) {
     const image = await compressImage(file);
     showAiResult(`<img class="ai-thumb" src="${image}"/>Thinking…`);
     const data = await callWorker({ mode, image, conditions: conditionsPayload() });
-    showAiResult(`<img class="ai-thumb" src="${image}"/>${escapeHtml(data.answer)}` +
-      (data.vision ? `<div class="ai-vision">Vision read: ${escapeHtml(data.vision)}</div>` : ''));
+    let html = `<img class="ai-thumb" src="${image}"/>${escapeHtml(data.answer)}` +
+      (data.vision ? `<div class="ai-vision">Vision read: ${escapeHtml(data.vision)}</div>` : '');
+    if (mode === 'fish') {
+      lastFishSpecies = detectSpecies(data.answer + ' ' + (data.vision || ''));
+      lastFishPhoto = await compressImage(file, 240, 0.6);
+      html += `<button class="btn btn-primary" id="aiLogBtn" style="margin-top:12px;width:100%;">＋ Log this catch (${SPECIES_LABELS[lastFishSpecies] || lastFishSpecies})</button>`;
+    }
+    showAiResult(html);
+    if (mode === 'fish') { const lb = document.getElementById('aiLogBtn'); if (lb) lb.onclick = () => openModalPrefill(lastFishSpecies, lastFishPhoto); }
   } catch (e) {
     showAiResult(e.message === 'no-url' ? 'Add your Worker URL first (link below).'
       : 'AI request failed: ' + escapeHtml(e.message) + '. Check the Worker URL and that Workers AI is bound as “AI”.');
