@@ -1,39 +1,36 @@
 {
-  "timestamp": "2026-07-08T00:03:22-07:00",
-  "score": 62,
-  "tier": "Good",
-  "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~58 min.",
+  "timestamp": "2026-07-08T02:36:16-07:00",
+  "score": 46,
+  "tier": "Fair",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-07-08T07:36:17-07:00"
   },
   "next_minor_period": {
-    "type": "moonrise",
-    "time": "2026-07-08T00:31:14-07:00"
+    "type": "moonset",
+    "time": "2026-07-08T14:58:30-07:00"
   },
-  "pressure_trend_hpa": 1.7,
+  "pressure_trend_hpa": 1.3,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": true,
+  "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 44.8,
-  "temp_f": 59.6,
-  "surface_pressure_hpa": 1011.0,
-  "cloud_cover_pct": 5.0,
-  "wind_mph": 3.9,
+  "moon_illumination_pct": 43.7,
+  "temp_f": 58.0,
+  "surface_pressure_hpa": 1012.3,
+  "cloud_cover_pct": 12.0,
+  "wind_mph": 2.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
     "cloud_cover": 0,
-    "wind": 12,
-    "solunar_minor": 10
+    "wind": 6
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
-    "A light breeze/ripple has a very favorable effect",
-    "Solunar minor period active (moonrise/moonset)"
+    "Slightly rising pressure \u2014 neutral to mild"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -41,7 +38,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~60\u00b0F; low light leans trout",
+    "species_reason": "moderate ~58\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -66,11 +63,6 @@
     ],
     "spin_options": [
       {
-        "name": "Spinners / spinnerbaits",
-        "why": "chop or cloud cover \u2014 cover water at mid-depth",
-        "hot": true
-      },
-      {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": true
@@ -81,10 +73,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "moonrise@2026-07-08T00:31:14-07:00",
+    "period_key": null,
     "score_ge_70": false
   }
 }
