@@ -1,5 +1,5 @@
 /* Lake Louise Bite Tracker — service worker (offline app shell + last data) */
-const CACHE = 'llbt-v1';
+const CACHE = 'llbt-v2';
 
 // Same-origin shell files (must all succeed).
 const SHELL = [
@@ -15,6 +15,8 @@ const SHELL = [
 const CDN = [
   'https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js',
   'https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.9.0/suncalc.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js',
+  'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css',
 ];
 
 self.addEventListener('install', (event) => {
@@ -41,8 +43,8 @@ self.addEventListener('fetch', (event) => {
   if (req.method !== 'GET') return;
   const url = new URL(req.url);
 
-  // Live weather + AI Worker: always go to the network, never cache.
-  if (url.hostname.includes('open-meteo.com') || url.hostname.includes('workers.dev')) return;
+  // Live weather + AI Worker + map tiles: always go to the network, never cache.
+  if (url.hostname.includes('open-meteo.com') || url.hostname.includes('workers.dev') || url.hostname.includes('arcgisonline.com')) return;
 
   // Data JSON: network-first so the score is fresh, fall back to cache offline.
   if (url.origin === location.origin && url.pathname.includes('/data/')) {

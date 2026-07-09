@@ -12,6 +12,7 @@
 <meta name="apple-mobile-web-app-title" content="Bite Tracker" />
 <link rel="apple-touch-icon" href="icons/icon-180.png" />
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="" />
 <style>
   :root {
     --bg: #0e1b2a;
@@ -133,6 +134,10 @@
   .btn-sm { flex: 0 0 auto; padding: 9px 12px; font-weight: 600; }
   .logentry { cursor: pointer; }
   .le-edit { color: var(--muted); font-size: 0.85rem; margin-left: 6px; }
+  .log-map { height: 180px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .map-card h2 { font-size: 0.95rem; margin: 0 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .spot-map { height: 300px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .leaflet-container { background: #0a1420; }
   textarea { resize: vertical; min-height: 54px; }
   .modal-actions { display: flex; gap: 10px; margin-top: 4px; }
   .btn { flex: 1; border: none; border-radius: 10px; padding: 13px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
@@ -252,6 +257,12 @@
     <div id="negFactors"></div>
   </div>
 
+  <div class="card map-card" id="spotMapCard" style="display:none;">
+    <h2>🗺️ Spot map</h2>
+    <div class="planner-sub">Where you've landed fish — tap a pin for details</div>
+    <div id="spotMap" class="spot-map"></div>
+  </div>
+
   <div class="card log-card" id="logCard">
     <h2>Your catch log</h2>
     <div id="logBody"></div>
@@ -334,6 +345,11 @@
       </div>
       <input type="file" id="photoInput" accept="image/*" style="display:none;" />
     </div>
+    <div class="field">
+      <label>Where on the lake <span id="mapCoord" style="color:var(--muted);font-weight:400;"></span></label>
+      <div id="logMap" class="log-map"></div>
+      <button type="button" class="btn btn-ghost btn-sm" id="useGpsBtn" style="margin-top:8px;">📍 Use my location</button>
+    </div>
     <div class="modal-actions">
       <button class="btn btn-ghost btn-sm" id="logDelete" style="display:none;color:var(--red);border-color:var(--red);">Delete</button>
       <button class="btn btn-ghost" id="logCancel">Cancel</button>
@@ -344,6 +360,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.9.0/suncalc.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin=""></script>
 <script>
 const LAT = 47.161861, LON = -122.567972;
 const REFRESH_MS = 5 * 60 * 1000;
@@ -358,6 +375,8 @@ const POSITIONS = ['Shoreline', 'Off the dock', 'Open water / middle', 'Drop-off
 const DEPTHS = ['Surface / top', 'Shallow (0–8 ft)', 'Mid (8–15 ft)', 'Deep (15+ ft)'];
 const SPECIES_LABELS = { trout: 'Trout', bass: 'Bass', perch: 'Perch', bluegill: 'Bluegill', other: 'Other' };
 let pendingPhoto = null, lastFishPhoto = null, lastFishSpecies = null, editingId = null;
+let pendingLatLng = null, logMap = null, logMarker = null, spotMap = null, spotMarkers = null;
+const SPECIES_COLOR = { trout: '#2ecc71', bass: '#4aa3df', perch: '#f1c40f', bluegill: '#9b59b6', other: '#e74c3c' };
 
 // ---------- helpers ----------
 function colorFor(s) { if (s == null) return 'var(--muted)'; if (s >= 70) return 'var(--green)'; if (s >= 40) return 'var(--yellow)'; return 'var(--red)'; }
@@ -886,6 +905,7 @@ function openModal() {
   }
   document.getElementById('logSnapshot').textContent = s;
   document.getElementById('logModal').classList.add('open');
+  clearLogMarker(); initLogMap(); if (logMap) logMap.setView([LAT, LON], 16);
 }
 function closeModal() { document.getElementById('logModal').classList.remove('open'); }
 function updatePhotoPreview() {
@@ -914,6 +934,10 @@ function openEditModal(entry) {
   document.getElementById('logSnapshot').textContent = entry.score != null
     ? `Logged at score ${entry.score} (${entry.tier}). Change the time to recompute conditions.`
     : 'Edit the details below.';
+  if (entry.catch_lat != null && entry.catch_lng != null) {
+    setLogMarker(entry.catch_lat, entry.catch_lng);
+    if (logMap) logMap.setView([entry.catch_lat, entry.catch_lng], 16);
+  }
 }
 function liveFallback(caughtMs) {
   const d = currentData || {};
@@ -928,6 +952,74 @@ async function resolveSnapshot(caughtMs, editing) {
   }
   if (withinFetch) { try { return await snapshotForTime(caughtMs); } catch (e) { return editing ? keepExisting() : liveFallback(caughtMs); } }
   return editing ? Object.assign(keepExisting(), { timestamp: new Date(caughtMs).toISOString() }) : liveFallback(caughtMs);
+}
+
+// ---- spot map (Leaflet + Esri satellite) ----
+const MAP_SPECIES_LABEL = { trout: 'Trout', bass: 'Bass', perch: 'Perch', bluegill: 'Bluegill', other: 'Other' };
+function esriLayer() {
+  return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: 'Tiles © Esri' });
+}
+function updateCoordLabel() {
+  const el = document.getElementById('mapCoord'); if (!el) return;
+  el.textContent = pendingLatLng ? `· pinned (${pendingLatLng.lat.toFixed(5)}, ${pendingLatLng.lng.toFixed(5)})` : '· tap the map or use GPS';
+}
+function setLogMarker(lat, lng) {
+  pendingLatLng = { lat, lng };
+  if (logMap) {
+    if (!logMarker) {
+      logMarker = L.marker([lat, lng], { draggable: true }).addTo(logMap);
+      logMarker.on('dragend', () => { const p = logMarker.getLatLng(); pendingLatLng = { lat: p.lat, lng: p.lng }; updateCoordLabel(); });
+    } else logMarker.setLatLng([lat, lng]);
+  }
+  updateCoordLabel();
+}
+function clearLogMarker() {
+  pendingLatLng = null;
+  if (logMap && logMarker) { logMap.removeLayer(logMarker); logMarker = null; }
+  updateCoordLabel();
+}
+function initLogMap() {
+  if (typeof L === 'undefined') return;
+  if (!logMap) {
+    logMap = L.map('logMap', { attributionControl: false }).setView([LAT, LON], 16);
+    esriLayer().addTo(logMap);
+    logMap.on('click', (e) => setLogMarker(e.latlng.lat, e.latlng.lng));
+  }
+  setTimeout(() => { if (logMap) logMap.invalidateSize(); }, 150);
+}
+function useGps() {
+  if (!navigator.geolocation) { alert('Location is not available on this device.'); return; }
+  const btn = document.getElementById('useGpsBtn'); const prev = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'Locating…'; }
+  navigator.geolocation.getCurrentPosition(
+    (p) => { setLogMarker(p.coords.latitude, p.coords.longitude); if (logMap) logMap.setView([p.coords.latitude, p.coords.longitude], 17); if (btn) { btn.disabled = false; btn.textContent = prev; } },
+    (err) => { alert('Could not get your location: ' + err.message); if (btn) { btn.disabled = false; btn.textContent = prev; } },
+    { enableHighAccuracy: true, timeout: 10000 });
+}
+function renderSpotMap() {
+  if (typeof L === 'undefined') return;
+  const card = document.getElementById('spotMapCard'); if (!card) return;
+  const pins = loadLog().filter(e => e.catch_lat != null && e.catch_lng != null);
+  if (!pins.length) { card.style.display = 'none'; return; }
+  card.style.display = '';
+  if (!spotMap) {
+    spotMap = L.map('spotMap', { attributionControl: false }).setView([LAT, LON], 15);
+    esriLayer().addTo(spotMap);
+    spotMarkers = L.layerGroup().addTo(spotMap);
+  }
+  spotMarkers.clearLayers();
+  const latlngs = [];
+  pins.forEach(e => {
+    const color = SPECIES_COLOR[e.species] || SPECIES_COLOR.other;
+    const m = L.circleMarker([e.catch_lat, e.catch_lng], { radius: 7, color: '#0e1b2a', weight: 2, fillColor: color, fillOpacity: 0.9 }).addTo(spotMarkers);
+    const when = new Date(e.caught_at || e.logged_at).toLocaleDateString([], { month: 'short', day: 'numeric' });
+    const rlab = (RESULT_LABEL[e.result] || '') + (e.result === 'fish' && e.count > 1 ? ' ×' + e.count : '');
+    m.bindPopup(`<b>${MAP_SPECIES_LABEL[e.species] || e.species}</b><br>${rlab} · ${when}${e.score != null ? ' · score ' + e.score : ''}`);
+    latlngs.push([e.catch_lat, e.catch_lng]);
+  });
+  if (latlngs.length > 1) spotMap.fitBounds(latlngs, { padding: [30, 30], maxZoom: 17 });
+  else spotMap.setView(latlngs[0], 16);
+  setTimeout(() => { if (spotMap) spotMap.invalidateSize(); }, 150);
 }
 
 async function saveEntry() {
@@ -948,19 +1040,21 @@ async function saveEntry() {
     lure: document.getElementById('logLure').value, position: document.getElementById('logPosition').value,
     depth: document.getElementById('logDepth').value, notes: document.getElementById('logNotes').value.trim(),
     caught_at: new Date(caughtMs).toISOString(), photo: pendingPhoto || null,
+    catch_lat: pendingLatLng ? pendingLatLng.lat : (editing ? (editing.catch_lat ?? null) : null),
+    catch_lng: pendingLatLng ? pendingLatLng.lng : (editing ? (editing.catch_lng ?? null) : null),
     score: snap.score ?? null, tier: snap.tier ?? null, light_phase: snap.light_phase ?? null, temp_f: snap.temp_f ?? null,
     pressure_trend_hpa: snap.pressure_trend_hpa ?? null, cloud_cover_pct: snap.cloud_cover_pct ?? null,
     wind_mph: snap.wind_mph ?? null, moon_illumination_pct: snap.moon_illumination_pct ?? null, data_timestamp: snap.timestamp ?? null,
   };
   if (editing) Object.assign(editing, fields);
   else log.push(Object.assign({ id: Date.now(), logged_at: new Date().toISOString() }, fields));
-  saveLog(log); pendingPhoto = null; editingId = null; closeModal(); renderLog();
+  saveLog(log); pendingPhoto = null; editingId = null; pendingLatLng = null; closeModal(); renderLog();
 }
 
 function renderLog() {
   const log = loadLog();
   const body = document.getElementById('logBody');
-  if (!log.length) { body.innerHTML = `<div class="hint">No sessions logged yet. After you fish, tap <b>＋ Log a catch / no-catch</b> — each entry saves the current bite score and conditions alongside what you caught and how. Once you have a handful, this section shows whether high scores actually produce fish at your lake.</div>`; return; }
+  if (!log.length) { body.innerHTML = `<div class="hint">No sessions logged yet. After you fish, tap <b>＋ Log a catch / no-catch</b> — each entry saves the current bite score and conditions alongside what you caught and how. Once you have a handful, this section shows whether high scores actually produce fish at your lake.</div>`; renderSpotMap(); return; }
   const sessions = log.length;
   const fish = log.filter(e => e.result === 'fish').reduce((a, e) => a + (e.count || 1), 0);
   const landedSessions = log.filter(e => e.result === 'fish').length;
@@ -997,6 +1091,7 @@ function renderLog() {
     `<div class="sub-h">By method</div><div style="font-size:.9rem;margin-bottom:4px;">${methLine}</div>` +
     `<div class="sub-h">Most productive lures/flies</div><div style="font-size:.9rem;">${topLures}</div>` +
     `<div class="sub-h">Recent sessions</div>${recent}`;
+  renderSpotMap();
 }
 
 function exportLog() {
@@ -1015,6 +1110,7 @@ document.getElementById('logClear').addEventListener('click', clearLog);
 document.getElementById('photoAddBtn').addEventListener('click', () => document.getElementById('photoInput').click());
 document.getElementById('photoInput').addEventListener('change', async (e) => { const f = e.target.files[0]; if (f) { try { pendingPhoto = await compressImage(f, 240, 0.6); updatePhotoPreview(); } catch (_) {} } e.target.value = ''; });
 document.getElementById('photoRemoveBtn').addEventListener('click', () => { pendingPhoto = null; updatePhotoPreview(); });
+document.getElementById('useGpsBtn').addEventListener('click', useGps);
 document.getElementById('logDelete').addEventListener('click', () => { if (editingId && confirm('Delete this catch from your log?')) { saveLog(loadLog().filter(x => x.id !== editingId)); editingId = null; pendingPhoto = null; closeModal(); renderLog(); } });
 document.getElementById('logBody').addEventListener('click', (e) => { const row = e.target.closest('.logentry'); if (!row) return; const entry = loadLog().find(x => x.id === Number(row.dataset.id)); if (entry) openEditModal(entry); });
 document.getElementById('logModal').addEventListener('click', e => { if (e.target.id === 'logModal') closeModal(); });
