@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Lake Louise Bite Tracker</title>
+<link rel="manifest" href="manifest.webmanifest" />
+<meta name="theme-color" content="#0e1b2a" />
+<meta name="mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+<meta name="apple-mobile-web-app-title" content="Bite Tracker" />
+<link rel="apple-touch-icon" href="icons/icon-180.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="" />
+<style>
+  :root {
+    --bg: #0e1b2a;
+    --card: #15293d;
+    --text: #e8eef5;
+    --muted: #8da7bf;
+    --green: #2ecc71;
+    --yellow: #f1c40f;
+    --red: #e74c3c;
+    --accent: #4aa3df;
+    --border: #234055;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    background: linear-gradient(180deg, #0e1b2a 0%, #0a1420 100%);
+    color: var(--text);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 760px; margin: 0 auto; padding: 20px 16px 48px; }
+  header { text-align: center; margin-bottom: 18px; }
+  h1 { font-size: 1.5rem; margin: 0 0 4px; letter-spacing: 0.2px; }
+  .sub { color: var(--muted); font-size: 0.85rem; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+  }
+  .score-card { text-align: center; padding: 28px 20px; }
+  .score-number { font-size: 5.5rem; font-weight: 800; line-height: 1; margin: 4px 0; }
+  .tier { font-size: 1.4rem; font-weight: 700; margin-bottom: 6px; }
+  .message { font-size: 1.05rem; color: var(--text); margin: 8px auto 0; max-width: 460px; }
+  .species-note { color: var(--muted); font-size: 0.9rem; margin-top: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .periods { display: flex; gap: 12px; }
+  .period { flex: 1; background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 14px; text-align: center; }
+  .period .label { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.6px; }
+  .period .countdown { font-size: 1.5rem; font-weight: 700; margin-top: 4px; }
+  .period .at { color: var(--muted); font-size: 0.78rem; margin-top: 2px; }
+  .stats { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 16px; }
+  .stat { display: flex; justify-content: space-between; border-bottom: 1px dashed var(--border); padding: 6px 0; font-size: 0.92rem; }
+  .stat .k { color: var(--muted); }
+  .chart-card h2, .stats-card h2, .factors-card h2, .log-card h2 { font-size: 0.95rem; margin: 0 0 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .factor { display: flex; gap: 8px; padding: 6px 0; font-size: 0.92rem; line-height: 1.35; }
+  .factor .ic { flex: 0 0 auto; font-weight: 700; }
+  .factor.pos .ic { color: var(--green); }
+  .factor.neg .ic { color: var(--red); }
+  .tactics-card h2 { font-size: 0.95rem; margin: 0 0 14px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .tgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 16px; margin-bottom: 16px; }
+  .titem { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 10px 12px; }
+  .tlabel { color: var(--muted); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.6px; }
+  .tval { font-size: 1.02rem; font-weight: 700; margin-top: 3px; }
+  .treason { color: var(--muted); font-size: 0.8rem; margin-top: 3px; line-height: 1.3; }
+  .tfeeding { background: rgba(74,163,223,0.07); border: 1px solid var(--border); border-radius: 12px; padding: 11px 13px; margin-bottom: 16px; }
+  .tflabel { color: var(--accent); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 7px; font-weight: 700; }
+  .tfrow { display: flex; gap: 22px; flex-wrap: wrap; }
+  .tfrow .tfk { color: var(--muted); font-size: 0.78rem; display: block; }
+  .tfrow .tfv { font-weight: 700; font-size: 0.98rem; margin-top: 2px; }
+  .tfnote { color: var(--muted); font-size: 0.74rem; margin-top: 7px; line-height: 1.3; }
+  .tcols { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 4px; }
+  .tcol h3 { font-size: 0.9rem; margin: 0 0 8px; color: var(--accent); }
+  .lure { padding: 7px 0; border-bottom: 1px dashed var(--border); font-size: 0.9rem; }
+  .lure .nm { font-weight: 600; }
+  .lure .badge { display: inline-block; font-size: 0.62rem; font-weight: 700; color: #0e1b2a; background: var(--green); border-radius: 6px; padding: 1px 6px; margin-left: 6px; vertical-align: middle; text-transform: uppercase; letter-spacing: 0.4px; }
+  .lure .wy { color: var(--muted); font-size: 0.8rem; margin-top: 2px; line-height: 1.3; }
+  .tseason { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--border); color: var(--muted); font-size: 0.85rem; font-style: italic; line-height: 1.4; }
+  .planner-card h2 { font-size: 0.95rem; margin: 0 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .planner-sub { color: var(--muted); font-size: 0.8rem; margin-bottom: 8px; }
+  .pday { display: grid; grid-template-columns: 78px 1fr auto; gap: 10px; align-items: center; padding: 10px 0; border-bottom: 1px dashed var(--border); }
+  .pday:last-child { border-bottom: none; }
+  .pd-name { font-weight: 700; font-size: 0.92rem; }
+  .pd-time { font-weight: 600; font-size: 0.92rem; }
+  .pd-reason { color: var(--muted); font-size: 0.78rem; margin-top: 2px; line-height: 1.25; }
+  .pd-score { font-size: 1.35rem; font-weight: 800; text-align: right; min-width: 42px; }
+  .pday.slow .pd-time { color: var(--muted); font-weight: 500; }
+  #chartWrap { position: relative; height: 220px; }
+  footer { text-align: center; color: var(--muted); font-size: 0.78rem; margin-top: 10px; }
+  .updated { text-align: center; color: var(--muted); font-size: 0.78rem; margin-bottom: 16px; }
+  a { color: var(--accent); }
+
+  .logbtn { display: block; width: 100%; background: var(--accent); color: #06121e; font-weight: 700; border: none; border-radius: 14px; padding: 15px; font-size: 1rem; cursor: pointer; margin-bottom: 16px; }
+  .logbtn:active { opacity: 0.85; }
+
+  .summary-line { font-size: 0.95rem; margin-bottom: 14px; }
+  .summary-line b { color: var(--text); }
+  .ltable { width: 100%; border-collapse: collapse; font-size: 0.86rem; margin-bottom: 14px; }
+  .ltable th, .ltable td { text-align: left; padding: 6px 4px; border-bottom: 1px solid var(--border); }
+  .ltable th { color: var(--muted); font-weight: 600; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.4px; }
+  .ltable td.r, .ltable th.r { text-align: right; }
+  .sub-h { color: var(--muted); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.5px; margin: 14px 0 6px; }
+  .logentry { padding: 8px 0; border-bottom: 1px dashed var(--border); font-size: 0.86rem; }
+  .le-top { display: flex; justify-content: space-between; gap: 8px; }
+  .le-result { font-weight: 700; }
+  .le-fish { color: var(--green); } .le-nibble { color: var(--yellow); } .le-skunk { color: var(--muted); }
+  .le-meta { color: var(--muted); font-size: 0.8rem; margin-top: 2px; line-height: 1.3; }
+  .log-actions { display: flex; gap: 10px; margin-top: 14px; }
+  .hint { color: var(--muted); font-size: 0.88rem; line-height: 1.45; }
+
+  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.62); display: none; align-items: flex-start; justify-content: center; padding: 22px 12px; overflow: auto; z-index: 50; }
+  .modal-overlay.open { display: flex; }
+  .modal { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 20px; width: 100%; max-width: 460px; }
+  .modal h2 { margin: 0 0 6px; font-size: 1.15rem; }
+  .snapshot { background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 9px 11px; font-size: 0.8rem; color: var(--muted); margin: 12px 0 16px; line-height: 1.4; }
+  .field { margin-bottom: 14px; }
+  .field > label { display: block; color: var(--muted); font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 6px; }
+  .seg { display: flex; gap: 8px; }
+  .seg button { flex: 1; background: rgba(255,255,255,0.04); color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px 6px; font-size: 0.9rem; cursor: pointer; }
+  .seg button.active { background: var(--accent); color: #06121e; font-weight: 700; border-color: var(--accent); }
+  .seg.wrap { flex-wrap: wrap; }
+  .seg.wrap button { flex: 1 1 30%; }
+  select, input[type=text], input[type=number], input[type=datetime-local], textarea { width: 100%; background: #0e1f31; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px; font-size: 0.95rem; font-family: inherit; }
+  input[type=datetime-local] { color-scheme: dark; }
+  .photo-row { display: flex; gap: 10px; align-items: center; }
+  .photo-preview { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); }
+  .btn-sm { flex: 0 0 auto; padding: 9px 12px; font-weight: 600; }
+  .logentry { cursor: pointer; }
+  .le-edit { color: var(--muted); font-size: 0.85rem; margin-left: 6px; }
+  .log-map { height: 180px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .map-card h2 { font-size: 0.95rem; margin: 0 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .spot-map { height: 300px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
+  .leaflet-container { background: #0a1420; }
+  .tally-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  .tally-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 8px; padding: 6px 10px; font-size: 0.92rem; }
+  .tally-row input { width: 58px; text-align: center; }
+  .time-row { display: flex; gap: 8px; }
+  .time-row input { flex: 1; min-width: 0; }
+  textarea { resize: vertical; min-height: 54px; }
+  .modal-actions { display: flex; gap: 10px; margin-top: 4px; }
+  .btn { flex: 1; border: none; border-radius: 10px; padding: 13px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
+  .btn-primary { background: var(--green); color: #06121e; }
+  .btn-ghost { background: transparent; color: var(--muted); border: 1px solid var(--border); }
+
+  /* AI assistant */
+  .ai-card h2 { font-size: 0.95rem; margin: 0 0 12px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
+  .ai-btns { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .ai-b { background: rgba(74,163,223,0.12); color: var(--text); border: 1px solid var(--border); border-radius: 12px; padding: 14px 8px; font-size: 0.9rem; font-weight: 600; cursor: pointer; text-align: center; }
+  .ai-b:active { opacity: 0.85; }
+  .ai-result { margin-top: 14px; padding: 12px 14px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; font-size: 0.92rem; line-height: 1.45; white-space: pre-wrap; }
+  .ai-result .ai-vision { color: var(--muted); font-size: 0.8rem; margin-top: 8px; padding-top: 8px; border-top: 1px dashed var(--border); }
+  .ai-thumb { max-width: 120px; border-radius: 8px; margin-bottom: 10px; display: block; }
+  .ai-cfg { color: var(--muted); font-size: 0.8rem; margin-top: 10px; }
+  .ai-cfg a { cursor: pointer; }
+  .chat-log { max-height: 320px; overflow-y: auto; margin-bottom: 12px; }
+  .bubble { padding: 9px 12px; border-radius: 12px; margin-bottom: 8px; font-size: 0.92rem; line-height: 1.4; max-width: 90%; white-space: pre-wrap; }
+  .bubble.user { background: var(--accent); color: #06121e; margin-left: auto; border-bottom-right-radius: 4px; }
+  .bubble.bot { background: rgba(255,255,255,0.05); border: 1px solid var(--border); border-bottom-left-radius: 4px; }
+  .bubble.bot.thinking { color: var(--muted); font-style: italic; }
+
+  @media (max-width: 480px) {
+    .score-number { font-size: 4.5rem; }
+    .stats { grid-template-columns: 1fr; }
+    .tcols { grid-template-columns: 1fr; }
+    .tgrid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🎣 Lake Louise Bite Tracker</h1>
+    <div class="sub">Lakewood, WA · Rainbow trout &amp; largemouth bass</div>
+  </header>
+
+  <div class="updated" id="updated">Loading…</div>
+
+  <div class="card score-card">
+    <div class="species-note" id="speciesNote">—</div>
+    <div class="score-number" id="score">–</div>
+    <div class="tier" id="tier">—</div>
+    <div class="message" id="message">Computing live conditions…</div>
+  </div>
+
+  <button class="logbtn" id="openLog">＋ Log a catch / no-catch</button>
+
+  <div class="card ai-card" id="aiCard">
+    <h2>🤖 AI fishing assistant</h2>
+    <div class="ai-btns">
+      <button class="ai-b" id="btnLure">📸 Snap a lure</button>
+      <button class="ai-b" id="btnFish">🐟 Snap a fish</button>
+      <button class="ai-b" id="btnChat">💬 Ask the guide</button>
+    </div>
+    <div class="ai-result" id="aiResult" style="display:none;"></div>
+    <div class="ai-cfg" id="aiCfg"></div>
+  </div>
+  <input type="file" id="lureInput" accept="image/*" capture="environment" style="display:none;">
+  <input type="file" id="fishInput" accept="image/*" capture="environment" style="display:none;">
+
+  <div class="periods" style="margin-bottom:16px;">
+    <div class="period">
+      <div class="label">Next Major</div>
+      <div class="countdown" id="majorCountdown">—</div>
+      <div class="at" id="majorAt"></div>
+    </div>
+    <div class="period">
+      <div class="label">Next Minor</div>
+      <div class="countdown" id="minorCountdown">—</div>
+      <div class="at" id="minorAt"></div>
+    </div>
+  </div>
+
+  <div class="card tactics-card" id="tacticsCard" style="display:none;">
+    <h2>Where &amp; how to fish</h2>
+    <div class="tgrid">
+      <div class="titem"><div class="tlabel">Target</div><div class="tval" id="tSpecies">—</div><div class="treason" id="tSpeciesR"></div></div>
+      <div class="titem"><div class="tlabel">Where</div><div class="tval" id="tWhere">—</div><div class="treason" id="tWhereR"></div></div>
+      <div class="titem"><div class="tlabel">Depth</div><div class="tval" id="tDepth">—</div></div>
+      <div class="titem"><div class="tlabel">Method lean</div><div class="tval" id="tMethod">—</div><div class="treason" id="tMethodR"></div></div>
+    </div>
+    <div class="tfeeding">
+      <div class="tflabel">⏱ Peak feeding windows (solunar)</div>
+      <div class="tfrow">
+        <div><span class="tfk">Next major</span><span class="tfv" id="tfMajor">—</span></div>
+        <div><span class="tfk">Next minor</span><span class="tfv" id="tfMinor">—</span></div>
+      </div>
+      <div class="tfnote">Major = moon overhead/underfoot (strongest pull). Minor = moonrise/moonset. Fish the 30–60 min around these, especially at first/last light.</div>
+    </div>
+    <div class="tcols">
+      <div class="tcol"><h3>🪶 Fly fishing</h3><div id="flyList"></div></div>
+      <div class="tcol"><h3>🎣 Spin fishing</h3><div id="spinList"></div></div>
+    </div>
+    <div class="tseason" id="tSeason"></div>
+  </div>
+
+  <div class="card planner-card" id="plannerCard" style="display:none;">
+    <h2>📅 7-day outlook</h2>
+    <div class="planner-sub">Best fishing window each day (forecast + solunar)</div>
+    <div id="plannerBody"></div>
+  </div>
+
+  <div class="card chart-card">
+    <h2>Score history</h2>
+    <div id="chartWrap"><canvas id="chart"></canvas></div>
+  </div>
+
+  <div class="card stats-card">
+    <h2>Current conditions</h2>
+    <div class="stats" id="stats"></div>
+  </div>
+
+  <div class="card factors-card" id="factorsCard" style="display:none;">
+    <h2>Why this score</h2>
+    <div id="posFactors"></div>
+    <div id="negFactors"></div>
+  </div>
+
+  <div class="card map-card" id="spotMapCard" style="display:none;">
+    <h2>🗺️ Spot map</h2>
+    <div class="planner-sub">Where you've landed fish — tap a pin for details</div>
+    <div id="spotMap" class="spot-map"></div>
+  </div>
+
+  <div class="card log-card" id="logCard">
+    <h2>Your catch log</h2>
+    <div id="logBody"></div>
+    <div class="log-actions">
+      <button class="btn btn-ghost" id="logExport">Export</button>
+      <button class="btn btn-ghost" id="logClear">Clear log</button>
+    </div>
+  </div>
+
+  <footer>
+    Score is computed live in your browser each time you open this page.<br/>
+    Solunar (SunCalc) + live Open-Meteo weather · GitHub job handles push alerts &amp; history.<br/>
+    Your catch log is saved privately in this browser. Use Export to back it up.
+  </footer>
+</div>
+
+<!-- Chat modal -->
+<div class="modal-overlay" id="chatModal">
+  <div class="modal">
+    <h2>💬 Ask the guide</h2>
+    <div class="snapshot" id="chatSnapshot">Answers use your live conditions.</div>
+    <div class="chat-log" id="chatLog"></div>
+    <div class="field"><textarea id="chatInput" placeholder="e.g. Why aren't they biting? What should I throw right now?"></textarea></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="chatClose">Close</button>
+      <button class="btn btn-primary" id="chatSend">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- Log modal -->
+<div class="modal-overlay" id="logModal">
+  <div class="modal">
+    <h2 id="logModalTitle">Log a session</h2>
+    <div class="snapshot" id="logSnapshot">Conditions snapshot attaches automatically.</div>
+    <div class="field">
+      <label>Log type</label>
+      <div class="seg" id="segMode">
+        <button type="button" data-v="single">🎣 Single catch</button>
+        <button type="button" data-v="session">📋 Whole session</button>
+      </div>
+    </div>
+    <div class="field" id="fieldResult">
+      <label>Result</label>
+      <div class="seg" id="segResult">
+        <button type="button" data-v="fish">🎣 Caught</button>
+        <button type="button" data-v="nibble">Nibbles</button>
+        <button type="button" data-v="skunk">Skunked</button>
+      </div>
+    </div>
+    <div class="field" id="countField" style="display:none;">
+      <label>How many landed?</label>
+      <input type="number" id="logCount" min="1" value="1" />
+    </div>
+    <div class="field" id="fieldWhen">
+      <label>When did you catch it?</label>
+      <input type="datetime-local" id="logTime" />
+    </div>
+
+    <div class="field" id="fieldSpeciesSingle">
+      <label>Species</label>
+      <div class="seg wrap" id="segSpecies">
+        <button type="button" data-v="trout">Trout</button>
+        <button type="button" data-v="bass">Bass</button>
+        <button type="button" data-v="perch">Perch</button>
+        <button type="button" data-v="bluegill">Bluegill</button>
+        <button type="button" data-v="other">Other</button>
+      </div>
+    </div>
+
+    <div class="field" id="fieldSessionTime" style="display:none;">
+      <label>Session — start &amp; end</label>
+      <div class="time-row">
+        <input type="datetime-local" id="logStart" />
+        <input type="datetime-local" id="logEnd" />
+      </div>
+    </div>
+    <div class="field" id="fieldTally" style="display:none;">
+      <label>How many of each did you land?</label>
+      <div class="tally-grid">
+        <div class="tally-row"><span>🐟 Trout</span><input type="number" id="tally_trout" min="0" value="0" inputmode="numeric" /></div>
+        <div class="tally-row"><span>🐟 Bass</span><input type="number" id="tally_bass" min="0" value="0" inputmode="numeric" /></div>
+        <div class="tally-row"><span>🐟 Perch</span><input type="number" id="tally_perch" min="0" value="0" inputmode="numeric" /></div>
+        <div class="tally-row"><span>🐟 Bluegill</span><input type="number" id="tally_bluegill" min="0" value="0" inputmode="numeric" /></div>
+        <div class="tally-row"><span>🐟 Other</span><input type="number" id="tally_other" min="0" value="0" inputmode="numeric" /></div>
+      </div>
+    </div>
+    <div class="field">
+      <label>Method</label>
+      <div class="seg" id="segMethod">
+        <button type="button" data-v="fly">🪶 Fly</button>
+        <button type="button" data-v="spin">🎣 Spin</button>
+      </div>
+    </div>
+    <div class="field"><label>Lure / fly</label><select id="logLure"></select></div>
+    <div class="field"><label>Position on the water</label><select id="logPosition"></select></div>
+    <div class="field"><label>Depth fished</label><select id="logDepth"></select></div>
+    <div class="field"><label>Notes (optional)</label><textarea id="logNotes" placeholder="retrieve speed, color, time, anything worth remembering"></textarea></div>
+    <div class="field">
+      <label>Photo</label>
+      <div class="photo-row">
+        <img id="photoPreview" class="photo-preview" style="display:none;" alt="catch photo" />
+        <button type="button" class="btn btn-ghost btn-sm" id="photoAddBtn">Add photo</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="photoRemoveBtn" style="display:none;">Remove</button>
+      </div>
+      <input type="file" id="photoInput" accept="image/*" style="display:none;" />
+    </div>
+    <div class="field">
+      <label>Where on the lake <span id="mapCoord" style="color:var(--muted);font-weight:400;"></span></label>
+      <div id="logMap" class="log-map"></div>
+      <button type="button" class="btn btn-ghost btn-sm" id="useGpsBtn" style="margin-top:8px;">📍 Use my location</button>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost btn-sm" id="logDelete" style="display:none;color:var(--red);border-color:var(--red);">Delete</button>
+      <button class="btn btn-ghost" id="logCancel">Cancel</button>
+      <button class="btn btn-primary" id="logSave">Save entry</button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.9.0/suncalc.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin=""></script>
+<script>
+const LAT = 47.161861, LON = -122.567972;
+const REFRESH_MS = 5 * 60 * 1000;
+const LS_KEY = 'llbt_catch_log_v1';
+let chart = null;
+let nextMajorTime = null, nextMinorTime = null;
+let currentData = null;
+
+const FLY_LURES = ['Dry fly', 'Popper', 'Nymph', 'Woolly Bugger', 'Streamer', 'Leech', 'Chironomid', 'Egg / glo-bug', 'Other'];
+const SPIN_LURES = ['Inline spinner', 'Spinnerbait', 'Spoon', 'Jig', 'Soft plastic', 'Topwater / buzzbait', 'Crankbait', 'Bait (worm / PowerBait)', 'Other'];
+const POSITIONS = ['Shoreline', 'Off the dock', 'Open water / middle', 'Drop-off / ledge', 'Weed edge', 'Inlet / current', 'Boat / drifting', 'Other'];
+const DEPTHS = ['Surface / top', 'Shallow (0–8 ft)', 'Mid (8–15 ft)', 'Deep (15+ ft)'];
+const SPECIES_LABELS = { trout: 'Trout', bass: 'Bass', perch: 'Perch', bluegill: 'Bluegill', other: 'Other' };
+let pendingPhoto = null, lastFishPhoto = null, lastFishSpecies = null, editingId = null;
+let pendingLatLng = null, logMap = null, logMarker = null, spotMap = null, spotMarkers = null;
+const SPECIES_COLOR = { trout: '#2ecc71', bass: '#4aa3df', perch: '#f1c40f', bluegill: '#9b59b6', other: '#e74c3c' };
+
+// ---------- helpers ----------
+function colorFor(s) { if (s == null) return 'var(--muted)'; if (s >= 70) return 'var(--green)'; if (s >= 40) return 'var(--yellow)'; return 'var(--red)'; }
+function fmtCountdown(t) { if (!t) return '—'; const d = new Date(t) - new Date(); if (isNaN(d)) return '—'; if (d <= 0) return 'now'; const m = Math.round(d / 60000), h = Math.floor(m / 60); return h > 0 ? `${h}h ${m % 60}m` : `${m % 60}m`; }
+function fmtClock(iso) { if (!iso) return ''; const d = new Date(iso); return isNaN(d) ? '' : d.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }); }
+
+// ================= LIVE COMPUTE ENGINE (ported from score_calculator.py) =================
+async function fetchWeather() {
+  const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + LAT + '&longitude=' + LON +
+    '&current=surface_pressure,cloud_cover,wind_speed_10m,precipitation,temperature_2m' +
+    '&hourly=surface_pressure&temperature_unit=fahrenheit&wind_speed_unit=mph' +
+    '&precipitation_unit=inch&timezone=auto&past_hours=6&forecast_hours=1';
+  const r = await fetch(url, { cache: 'no-store' });
+  if (!r.ok) throw new Error('weather ' + r.status);
+  return r.json();
+}
+
+function pressureTrend(w, now) {
+  const cur = w.current ? w.current.surface_pressure : null;
+  if (cur == null || !w.hourly || !w.hourly.time) return 0;
+  const target = now.getTime() - 3 * 3600e3;
+  let best = null, bd = Infinity;
+  for (let i = 0; i < w.hourly.time.length; i++) {
+    const p = w.hourly.surface_pressure[i];
+    if (p == null) continue;
+    const t = new Date(w.hourly.time[i]).getTime();
+    const dd = Math.abs(t - target);
+    if (dd < bd) { bd = dd; best = p; }
+  }
+  return best == null ? 0 : Math.round((cur - best) * 10) / 10;
+}
+
+function sunEventList(now) {
+  const ev = [];
+  for (const off of [-1, 0, 1]) {
+    const d = new Date(now.getTime() + off * 86400e3);
+    const t = SunCalc.getTimes(d, LAT, LON);
+    if (t.sunrise && !isNaN(t.sunrise)) ev.push({ type: 'sunrise', time: t.sunrise });
+    if (t.sunset && !isNaN(t.sunset)) ev.push({ type: 'sunset', time: t.sunset });
+  }
+  return ev;
+}
+
+function moonEvents(now) {
+  // Majors: moon meridian transit (max altitude) & underfoot (min altitude).
+  const step = 5 * 60000, span = 14 * 3600e3;
+  const times = [], alts = [];
+  for (let t = now.getTime() - span; t <= now.getTime() + span; t += step) {
+    times.push(t);
+    alts.push(SunCalc.getMoonPosition(new Date(t), LAT, LON).altitude);
+  }
+  const majors = [];
+  for (let i = 1; i < alts.length - 1; i++) {
+    if (alts[i] > alts[i - 1] && alts[i] >= alts[i + 1]) majors.push({ type: 'transit', time: new Date(times[i]) });
+    else if (alts[i] < alts[i - 1] && alts[i] <= alts[i + 1]) majors.push({ type: 'underfoot', time: new Date(times[i]) });
+  }
+  // Minors: moonrise / moonset across adjacent days.
+  const minors = [];
+  for (const off of [-1, 0, 1]) {
+    const d = new Date(now.getTime() + off * 86400e3);
+    const mt = SunCalc.getMoonTimes(d, LAT, LON);
+    if (mt.rise && !isNaN(mt.rise)) minors.push({ type: 'moonrise', time: mt.rise });
+    if (mt.set && !isNaN(mt.set)) minors.push({ type: 'moonset', time: mt.set });
+  }
+  const illum = SunCalc.getMoonIllumination(now).fraction * 100;
+  return { majors, minors, illum };
+}
+
+function activeWindow(now, events, halfMin) {
+  let best = null, bd = Infinity;
+  for (const e of events) { const dd = Math.abs(e.time - now); if (dd <= halfMin * 60000 && dd < bd) { bd = dd; best = e; } }
+  return best;
+}
+function nextEvent(now, events) {
+  const up = events.filter(e => e.time > now).sort((a, b) => a.time - b.time);
+  return up[0] || null;
+}
+
+function computeScore(inMajor, inMinor, inDawnDusk, illum, trend, cloud, wind) {
+  let score = 35; const b = { baseline: 35 };
+  if (trend <= -3) b.pressure = 25; else if (trend <= -1) b.pressure = 18; else if (trend < 1) b.pressure = 12; else if (trend <= 3) b.pressure = 5; else b.pressure = -10;
+  score += b.pressure;
+  if (cloud != null) { b.cloud_cover = cloud >= 70 ? 12 : cloud >= 40 ? 8 : cloud >= 20 ? 4 : 0; score += b.cloud_cover; }
+  if (wind != null) { b.wind = (wind >= 3 && wind <= 10) ? 12 : ((wind >= 1 && wind < 3) || (wind > 10 && wind <= 15)) ? 6 : wind < 1 ? 3 : -8; score += b.wind; }
+  if (inMajor) { score += 18; b.solunar_major = 18; } else if (inMinor) { score += 10; b.solunar_minor = 10; }
+  if (inDawnDusk) { score += 12; b.dawn_dusk = 12; }
+  if (illum != null && (illum > 95 || illum < 5 || (illum >= 45 && illum <= 55))) { score += 6; b.moon_phase = 6; }
+  return { score: Math.max(0, Math.min(100, score)), breakdown: b };
+}
+function tierFor(s) { return s >= 80 ? 'Excellent' : s >= 60 ? 'Good' : s >= 40 ? 'Fair' : 'Slow'; }
+
+function buildFactors(b, trend, cloud, wind, inMajor, inMinor, inDawnDusk, illum) {
+  const pos = [], neg = [];
+  const p = b.pressure || 0;
+  if (p >= 18) pos.push('Falling barometric pressure — fish often feed ahead of a front');
+  else if (p === 12) pos.push('Stable atmospheric pressure is comfortable for fish');
+  else if (p === 5) pos.push('Slightly rising pressure — neutral to mild');
+  else if (p < 0) neg.push('Sharply rising pressure tends to slow the bite');
+  if (cloud != null) {
+    if (cloud >= 70) pos.push('Overcast skies have a favorable impact on biting activity');
+    else if (cloud >= 40) pos.push('Partly cloudy skies are mildly favorable');
+    else if (cloud < 20) neg.push('Bright, clear skies can push fish deep and slow feeding');
+  }
+  if (wind != null) {
+    if (wind >= 3 && wind <= 10) pos.push('A light breeze/ripple has a very favorable effect');
+    else if (wind < 1) neg.push('Dead-calm water is less favorable than a light ripple');
+    else if (wind > 15) neg.push('Strong winds make conditions tougher');
+  }
+  if (inMajor) pos.push('Solunar major period active (moon overhead/underfoot)');
+  else if (inMinor) pos.push('Solunar minor period active (moonrise/moonset)');
+  if (inDawnDusk) pos.push('Low-light dawn/dusk window — prime feeding time');
+  if (illum != null && (illum > 95 || illum < 5 || (illum >= 45 && illum <= 55))) pos.push('Moon phase is favorable');
+  return { pos, neg };
+}
+
+function speciesAndMessage(tier, tempF, activeMajor, activeMinor, inDawnDusk, now) {
+  const warm = tempF != null && tempF > 65;
+  const species = warm ? 'bass' : 'trout';
+  const fish = warm ? 'Largemouth bass' : 'Rainbow trout';
+  let hoursLeft = null;
+  const active = activeMajor || activeMinor;
+  if (active) { const half = activeMajor ? 60 : 30; hoursLeft = Math.max(0, (new Date(active.time).getTime() + half * 60000 - now.getTime()) / 3600e3); }
+  const hrs = h => h >= 1 ? `~${(Math.round(h * 2) / 2)} hours` : `~${Math.round(h * 60)} min`;
+  let note, msg;
+  if (tier === 'Excellent' || tier === 'Good') {
+    if (active && hoursLeft) { note = `${fish} biting`; msg = `${tier} ${species} window right now — biting for the next ${hrs(hoursLeft)}.`; }
+    else if (inDawnDusk) { note = `${fish} — dawn/dusk window`; msg = `${tier} ${species} conditions during the low-light window. Good time to fish.`; }
+    else { note = `${fish} — ${tier.toLowerCase()} window`; msg = `${tier} conditions for ${species} right now. Worth a cast.`; }
+  } else if (tier === 'Fair') { note = `${fish} — fair conditions`; msg = `Fair ${species} conditions right now. Could go either way.`; }
+  else { note = `${fish} — slow`; msg = `Slow bite. Marginal ${species} conditions at the moment.`; }
+  return { species, species_note: note, message: msg };
+}
+
+function recommendTactics(tempF, cloud, wind, trend, lightPhase, illum, month) {
+  const t = tempF != null ? tempF : 60, cc = cloud != null ? cloud : 50, w = wind != null ? wind : 5;
+  const lowLight = lightPhase === 'dawn_dusk' || lightPhase === 'night' || cc >= 75;
+  const brightMid = lightPhase === 'day' && cc < 40;
+  const windy = w > 12, breezy = w >= 3 && w <= 12;
+  let species_pick, species_reason;
+  if (t > 66) { species_pick = 'Largemouth bass'; species_reason = `water proxy ~${Math.round(t)}°F (warm) favors bass metabolism`; }
+  else if (t < 56) { species_pick = 'Rainbow trout'; species_reason = `cool water ~${Math.round(t)}°F favors trout; bass sluggish`; }
+  else if (lowLight) { species_pick = 'Rainbow trout (bass possible)'; species_reason = `moderate ~${Math.round(t)}°F; low light leans trout`; }
+  else { species_pick = 'Either — slight bass edge'; species_reason = `moderate ~${Math.round(t)}°F; daytime warmth leans bass`; }
+  let where, where_reason;
+  if (lowLight || t < 58) { where = 'Shoreline & shallow cover'; where_reason = 'fish push shallow toward the bank in low light / cool water'; }
+  else if (brightMid && t > 68) { where = 'Open water — drop-offs & deeper structure'; where_reason = 'bright sun + warm water pulls fish off the bank'; }
+  else { where = 'Transition edges — the first drop-off off the shoreline'; where_reason = 'mixed light; work the seam between shallow flats and deeper water'; }
+  if (w >= 4) { where += ' — favor the windward shore'; where_reason += '; wind stacks plankton and baitfish on the wind-blown bank'; }
+  let depth;
+  if (lowLight || t < 58) depth = 'Shallow — top ~0–8 ft';
+  else if (brightMid && t > 70) depth = 'Deep — 15 ft+ near structure';
+  else depth = 'Mid-depth — ~8–15 ft';
+  if (trend != null && trend > 3) depth += ' (fish tight and slow it down — pressure rising)';
+  const troutLean = species_pick.indexOf('Rainbow') === 0;
+  let method_lean, method_reason;
+  if (windy) { method_lean = 'Spin fishing'; method_reason = 'wind makes fly casting tough and rewards covering water'; }
+  else if (troutLean && !windy) { method_lean = 'Fly fishing'; method_reason = 'calm-ish water and a trout bite suit fly presentations'; }
+  else if (species_pick.toLowerCase().indexOf('bass') >= 0 && !lowLight) { method_lean = 'Spin fishing'; method_reason = 'bass holding on structure are efficient to target with lures'; }
+  else { method_lean = 'Either — match the water'; method_reason = "conditions don't strongly favor one over the other"; }
+  const fly = [];
+  if (lowLight && !windy) {
+    if (t > 66) fly.push(['Poppers / foam topwater', 'low light + warm water = surface bass eats', true]);
+    fly.push(['Dry flies (caddis / mayfly)', 'trout rise to the evening hatch in low light', troutLean]);
+  }
+  fly.push(['Woolly Buggers / leeches (slow strip)', 'all-purpose in low light, wind, or stained water — both species', true]);
+  fly.push(['Streamers (sculpin / baitfish)', 'active fish chasing bait; strip on a sink-tip', (!lowLight || windy)]);
+  if (brightMid || !lowLight) fly.push(["Nymphs (pheasant tail, hare's ear) under an indicator", "subsurface when nothing's rising / bright midday", brightMid]);
+  const spin = [];
+  if (lowLight && t > 64) spin.push(['Topwater (buzzbaits, walking baits, poppers)', 'first/last light over shallow cover for bass', true]);
+  if (breezy || cc >= 40) spin.push(['Spinners / spinnerbaits', 'chop or cloud cover — cover water at mid-depth', true]);
+  spin.push(['Inline spinners / small spoons', 'steady trout producer at mid-depth', troutLean]);
+  if (brightMid || t > 70) spin.push(['Jigs & soft plastics (worked deep)', 'bright sun / warm water — fish off the bank and on structure', (brightMid || t > 70)]);
+  if (!spin.length) spin.push(['Inline spinners / small spoons', 'versatile search bait', true]);
+  let season;
+  if ([4, 5, 6].includes(month)) season = 'Late spring/early summer: trout are active; bass are shallow around cover post-spawn.';
+  else if ([7, 8, 9].includes(month)) season = 'Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.';
+  else if ([10, 11].includes(month)) season = 'Fall: both species feed up on baitfish — bigger streamers/swimbaits shine.';
+  else season = 'Winter: metabolism is low — fish deep, slow, and small.';
+  const summary = `${species_pick} · ${where.split(' — ')[0].split(' (')[0]} · ${depth.split(' (')[0]} · lean ${method_lean.toLowerCase()}`;
+  return { species_pick, species_reason, where, where_reason, depth, method_lean, method_reason,
+    fly_options: fly.map(x => ({ name: x[0], why: x[1], hot: !!x[2] })),
+    spin_options: spin.map(x => ({ name: x[0], why: x[1], hot: !!x[2] })),
+    season_note: season, summary };
+}
+
+function computeLive(weather) {
+  const now = new Date();
+  const c = weather.current || {};
+  const cur = {
+    pressure: c.surface_pressure ?? null,
+    temp_f: c.temperature_2m ?? null,
+    cloud: c.cloud_cover ?? null,
+    wind: c.wind_speed_10m ?? null,
+    precip: c.precipitation ?? null,
+  };
+  const trend = pressureTrend(weather, now);
+  const suns = sunEventList(now);
+  const { majors, minors, illum } = moonEvents(now);
+  const aMajor = activeWindow(now, majors, 60);
+  const aMinor = activeWindow(now, minors, 30);
+  const inMajor = !!aMajor, inMinor = !!aMinor;
+  const inDawnDusk = !!activeWindow(now, suns, 60);
+  // light phase
+  let lightPhase;
+  if (inDawnDusk) lightPhase = 'dawn_dusk';
+  else { const tt = SunCalc.getTimes(now, LAT, LON); lightPhase = (tt.sunrise <= now && now <= tt.sunset) ? 'day' : 'night'; }
+  const { score, breakdown } = computeScore(inMajor, inMinor, inDawnDusk, illum, trend, cur.cloud, cur.wind);
+  const tier = tierFor(score);
+  const sm = speciesAndMessage(tier, cur.temp_f, aMajor, aMinor, inDawnDusk, now);
+  const f = buildFactors(breakdown, trend, cur.cloud, cur.wind, inMajor, inMinor, inDawnDusk, illum);
+  const tactics = recommendTactics(cur.temp_f, cur.cloud, cur.wind, trend, lightPhase, illum, now.getMonth() + 1);
+  const nm = nextEvent(now, majors), nmi = nextEvent(now, minors);
+  const fmt = e => e ? { type: e.type, time: new Date(e.time).toISOString() } : null;
+  return {
+    timestamp: now.toISOString(), live: true,
+    score, tier, species: sm.species, species_note: sm.species_note, message: sm.message,
+    next_major_period: fmt(nm), next_minor_period: fmt(nmi),
+    pressure_trend_hpa: trend, in_major_period: inMajor, in_minor_period: inMinor, in_dawn_dusk: inDawnDusk,
+    light_phase: lightPhase, moon_illumination_pct: Math.round(illum * 10) / 10,
+    temp_f: cur.temp_f, surface_pressure_hpa: cur.pressure, cloud_cover_pct: cur.cloud, wind_mph: cur.wind, precip_in: cur.precip,
+    score_breakdown: breakdown, positive_factors: f.pos, negative_factors: f.neg, tactics,
+  };
+}
+
+// ---------- load ----------
+async function fetchJSON(name) {
+  const bust = '?t=' + Date.now();
+  try { return await fetch('data/' + name + bust).then(r => { if (!r.ok) throw 0; return r.json(); }); }
+  catch (e) { return await fetch('../data/' + name + bust).then(r => r.json()); }
+}
+
+async function loadData() {
+  let computed = null;
+  try {
+    const weather = await fetchWeather();
+    computed = computeLive(weather);
+    renderLatest(computed);
+  } catch (err) {
+    // Fallback: show the last server-computed value so the page still works offline.
+    try { const latest = await fetchJSON('latest_score.json'); latest.live = false; renderLatest(latest); }
+    catch (e2) { document.getElementById('message').textContent = 'Could not load conditions (' + err + ').'; }
+  }
+  // History chart from the scheduled job's log, with the live point appended.
+  try {
+    const history = await fetchJSON('history.json');
+    const series = Array.isArray(history) ? history.slice() : [];
+    if (computed) series.push({ timestamp: computed.timestamp, score: computed.score });
+    renderChart(series);
+  } catch (e) { /* chart optional */ }
+  // 7-day outlook (separate forecast fetch; non-blocking)
+  try { renderPlanner(scoreForecast(await planFetch())); } catch (e) { /* planner optional */ }
+}
+
+function renderLatest(d) {
+  currentData = d;
+  const score = d.score;
+  const scoreEl = document.getElementById('score');
+  scoreEl.textContent = (score == null) ? '–' : score;
+  scoreEl.style.color = colorFor(score);
+  document.getElementById('tier').textContent = d.tier || '—';
+  document.getElementById('tier').style.color = colorFor(score);
+  document.getElementById('message').textContent = d.message || '';
+  document.getElementById('speciesNote').textContent = d.species_note || '';
+
+  nextMajorTime = d.next_major_period ? d.next_major_period.time : null;
+  nextMinorTime = d.next_minor_period ? d.next_minor_period.time : null;
+  document.getElementById('majorAt').textContent = nextMajorTime ? fmtClock(nextMajorTime) : '';
+  document.getElementById('minorAt').textContent = nextMinorTime ? fmtClock(nextMinorTime) : '';
+  updateCountdowns();
+
+  const upd = document.getElementById('updated');
+  if (d.live) upd.textContent = '🟢 Live · computed ' + new Date(d.timestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+  else if (d.timestamp) upd.textContent = 'Showing last saved value · ' + new Date(d.timestamp).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' });
+  else upd.textContent = 'Awaiting data';
+
+  const stats = [
+    ['Pressure trend', d.pressure_trend_hpa != null ? d.pressure_trend_hpa + ' hPa / 3h' : '—'],
+    ['Surface pressure', d.surface_pressure_hpa != null ? Math.round(d.surface_pressure_hpa * 10) / 10 + ' hPa' : '—'],
+    ['Air temp (water proxy)', d.temp_f != null ? Math.round(d.temp_f) + ' °F' : '—'],
+    ['Moon illumination', d.moon_illumination_pct != null ? d.moon_illumination_pct + '%' : '—'],
+    ['Cloud cover', d.cloud_cover_pct != null ? Math.round(d.cloud_cover_pct) + '%' : '—'],
+    ['Wind', d.wind_mph != null ? Math.round(d.wind_mph) + ' mph' : '—'],
+    ['Major period active', d.in_major_period ? 'Yes' : 'No'],
+    ['Dawn/dusk window', d.in_dawn_dusk ? 'Yes' : 'No'],
+  ];
+  document.getElementById('stats').innerHTML = stats.map(([k, v]) => `<div class="stat"><span class="k">${k}</span><span class="v">${v}</span></div>`).join('');
+
+  const pos = d.positive_factors || [], neg = d.negative_factors || [];
+  const fc = document.getElementById('factorsCard');
+  if (pos.length || neg.length) {
+    fc.style.display = '';
+    document.getElementById('posFactors').innerHTML = pos.map(f => `<div class="factor pos"><span class="ic">+</span><span>${f}</span></div>`).join('');
+    document.getElementById('negFactors').innerHTML = neg.map(f => `<div class="factor neg"><span class="ic">−</span><span>${f}</span></div>`).join('');
+  } else { fc.style.display = 'none'; }
+
+  renderTactics(d.tactics);
+}
+
+function renderTactics(tc) {
+  const card = document.getElementById('tacticsCard');
+  if (!tc) { card.style.display = 'none'; return; }
+  card.style.display = '';
+  document.getElementById('tSpecies').textContent = tc.species_pick || '—';
+  document.getElementById('tSpeciesR').textContent = tc.species_reason || '';
+  document.getElementById('tWhere').textContent = tc.where || '—';
+  document.getElementById('tWhereR').textContent = tc.where_reason || '';
+  document.getElementById('tDepth').textContent = tc.depth || '—';
+  document.getElementById('tMethod').textContent = tc.method_lean || '—';
+  document.getElementById('tMethodR').textContent = tc.method_reason || '';
+  document.getElementById('tSeason').textContent = tc.season_note || '';
+  const lure = o => `<div class="lure"><span class="nm">${o.name}</span>${o.hot ? '<span class="badge">best now</span>' : ''}<div class="wy">${o.why}</div></div>`;
+  document.getElementById('flyList').innerHTML = (tc.fly_options || []).map(lure).join('');
+  document.getElementById('spinList').innerHTML = (tc.spin_options || []).map(lure).join('');
+}
+
+function updateCountdowns() {
+  document.getElementById('majorCountdown').textContent = fmtCountdown(nextMajorTime);
+  document.getElementById('minorCountdown').textContent = fmtCountdown(nextMinorTime);
+  const mj = document.getElementById('tfMajor'), mn = document.getElementById('tfMinor');
+  if (mj) mj.textContent = nextMajorTime ? `${fmtClock(nextMajorTime)} · in ${fmtCountdown(nextMajorTime)}` : '—';
+  if (mn) mn.textContent = nextMinorTime ? `${fmtClock(nextMinorTime)} · in ${fmtCountdown(nextMinorTime)}` : '—';
+}
+
+function renderChart(history) {
+  if (!Array.isArray(history)) return;
+  const cutoff = Date.now() - 48 * 3600 * 1000;
+  const pts = history.filter(h => h.timestamp && new Date(h.timestamp) >= cutoff && h.score != null);
+  const recent = pts.length ? pts : history.filter(h => h.score != null).slice(-96);
+  const labels = recent.map(h => new Date(h.timestamp).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }));
+  const data = recent.map(h => h.score);
+  if (chart) chart.destroy();
+  const ctx = document.getElementById('chart').getContext('2d');
+  chart = new Chart(ctx, {
+    type: 'line',
+    data: { labels, datasets: [{ label: 'Bite score', data, borderColor: '#4aa3df', backgroundColor: 'rgba(74,163,223,0.15)', fill: true, tension: 0.3, pointRadius: recent.length > 40 ? 0 : 2, borderWidth: 2 }] },
+    options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } },
+      scales: { y: { min: 0, max: 100, ticks: { color: '#8da7bf' }, grid: { color: 'rgba(255,255,255,0.06)' } },
+        x: { ticks: { color: '#8da7bf', maxTicksLimit: 8, autoSkip: true }, grid: { display: false } } } },
+  });
+}
+
+// ===================== 7-day outlook planner =====================
+async function planFetch() {
+  const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + LAT + '&longitude=' + LON +
+    '&hourly=surface_pressure,cloud_cover,wind_speed_10m,precipitation,temperature_2m' +
+    '&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto&forecast_days=7&past_hours=6';
+  return fetch(url, { cache: 'no-store' }).then(r => { if (!r.ok) throw new Error(r.status); return r.json(); });
+}
+function nearAny(t, arr, winMin) { const w = winMin * 60000; return arr.some(x => Math.abs(t - x) <= w); }
+function planMoonMajors(a, b) {
+  const step = 10 * 60000, centers = [], alts = [], times = [];
+  for (let t = a - 2 * 3600e3; t <= b + 2 * 3600e3; t += step) { times.push(t); alts.push(SunCalc.getMoonPosition(new Date(t), LAT, LON).altitude); }
+  for (let i = 1; i < alts.length - 1; i++) if ((alts[i] > alts[i - 1] && alts[i] >= alts[i + 1]) || (alts[i] < alts[i - 1] && alts[i] <= alts[i + 1])) centers.push(times[i]);
+  return centers;
+}
+function planEvents(a, b) {
+  const minors = [], suns = [];
+  for (let d = a - 24 * 3600e3; d <= b + 24 * 3600e3; d += 24 * 3600e3) {
+    const date = new Date(d);
+    const mt = SunCalc.getMoonTimes(date, LAT, LON);
+    if (mt.rise) minors.push(mt.rise.getTime());
+    if (mt.set) minors.push(mt.set.getTime());
+    const st = SunCalc.getTimes(date, LAT, LON);
+    if (st.sunrise && !isNaN(st.sunrise)) suns.push(st.sunrise.getTime());
+    if (st.sunset && !isNaN(st.sunset)) suns.push(st.sunset.getTime());
+  }
+  return { minors, suns };
+}
+function scoreForecast(w) {
+  const H = w.hourly, n = H.time.length;
+  const ms = H.time.map(t => new Date(t).getTime());
+  const majors = planMoonMajors(ms[0], ms[n - 1]);
+  const { minors, suns } = planEvents(ms[0], ms[n - 1]);
+  const out = [];
+  for (let i = 0; i < n; i++) {
+    const t = ms[i], pressure = H.surface_pressure[i];
+    let trend = 0;
+    for (let j = i; j >= 0; j--) { if (ms[i] - ms[j] >= 3 * 3600e3 || j === 0) { const p0 = H.surface_pressure[j]; if (pressure != null && p0 != null) trend = Math.round((pressure - p0) * 10) / 10; break; } }
+    const cloud = H.cloud_cover[i], wind = H.wind_speed_10m[i];
+    const inMajor = nearAny(t, majors, 60), inMinor = nearAny(t, minors, 30), inDawnDusk = nearAny(t, suns, 60);
+    const illum = SunCalc.getMoonIllumination(new Date(t)).fraction * 100;
+    const score = computeScore(inMajor, inMinor, inDawnDusk, illum, trend, cloud, wind).score;
+    out.push({ ms: t, score, trend, cloud, wind, temp: H.temperature_2m[i], inMajor, inMinor, inDawnDusk });
+  }
+  return out;
+}
+function planReasons(h) {
+  const r = [];
+  if (h.trend <= -1) r.push('falling pressure'); else if (h.trend < 1) r.push('stable pressure');
+  if (h.inDawnDusk) r.push('dawn/dusk');
+  if (h.inMajor) r.push('solunar major'); else if (h.inMinor) r.push('solunar minor');
+  if (h.cloud != null && h.cloud >= 70) r.push('overcast');
+  if (h.wind != null && h.wind >= 3 && h.wind <= 10) r.push('light wind');
+  return r.slice(0, 2).join(' + ');
+}
+function dailyBest(hrs) {
+  // Prime window centered on the day's peak hour (not the whole good stretch).
+  let idx = 0;
+  for (let i = 1; i < hrs.length; i++) if (hrs[i].score > hrs[idx].score) idx = i;
+  const peak = hrs[idx].score;
+  const slow = peak < 60;
+  const floor = Math.max(60, peak - 12);
+  let a = idx, b = idx;
+  while (a - 1 >= 0 && hrs[a - 1].score >= floor && idx - (a - 1) <= 3) a--;
+  while (b + 1 < hrs.length && hrs[b + 1].score >= floor && (b + 1) - idx <= 3) b++;
+  return { win: { s: hrs[a].ms, e: hrs[b].ms + 3600e3, peak, ph: hrs[idx] }, slow };
+}
+function dayLabel(ms) {
+  const d = new Date(ms), t = new Date();
+  const diff = Math.round((new Date(d.getFullYear(), d.getMonth(), d.getDate()) - new Date(t.getFullYear(), t.getMonth(), t.getDate())) / 86400e3);
+  if (diff <= 0) return 'Today';
+  if (diff === 1) return 'Tomorrow';
+  return d.toLocaleDateString([], { weekday: 'long' });
+}
+function renderPlanner(hours) {
+  const card = document.getElementById('plannerCard');
+  if (!Array.isArray(hours) || !hours.length) { card.style.display = 'none'; return; }
+  const now = Date.now(), groups = new Map();
+  for (const h of hours) {
+    if (h.ms < now - 3600e3) continue;
+    const d = new Date(h.ms), key = d.getFullYear() + '-' + d.getMonth() + '-' + d.getDate();
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(h);
+  }
+  const days = [...groups.values()].slice(0, 7);
+  if (!days.length) { card.style.display = 'none'; return; }
+  const rows = days.map(hrs => {
+    const { win, slow } = dailyBest(hrs);
+    const range = fmtClock(new Date(win.s).toISOString()) + '–' + fmtClock(new Date(win.e).toISOString());
+    const reasons = planReasons(win.ph);
+    return `<div class="pday${slow ? ' slow' : ''}"><div class="pd-name">${dayLabel(win.ph.ms)}</div>` +
+      `<div><div class="pd-time">${range}</div><div class="pd-reason">${slow ? 'slow day · best around here' : reasons}</div></div>` +
+      `<div class="pd-score" style="color:${colorFor(win.peak)}">${win.peak}</div></div>`;
+  }).join('');
+  card.style.display = '';
+  document.getElementById('plannerBody').innerHTML = rows;
+}
+
+// ---- time-based conditions snapshot (for logging a past catch) ----
+function nowLocalInput() {
+  const d = new Date();
+  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+  return d.toISOString().slice(0, 16);
+}
+function isoToLocalInput(iso) {
+  const d = new Date(iso);
+  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+  return d.toISOString().slice(0, 16);
+}
+function lightPhaseAt(ms) {
+  const suns = [];
+  for (const off of [-1, 0, 1]) {
+    const t = SunCalc.getTimes(new Date(ms + off * 86400e3), LAT, LON);
+    if (t.sunrise && !isNaN(t.sunrise)) suns.push(t.sunrise.getTime());
+    if (t.sunset && !isNaN(t.sunset)) suns.push(t.sunset.getTime());
+  }
+  if (suns.some(x => Math.abs(ms - x) <= 60 * 60000)) return 'dawn_dusk';
+  const d = new Date(ms), tt = SunCalc.getTimes(d, LAT, LON);
+  return (tt.sunrise <= d && d <= tt.sunset) ? 'day' : 'night';
+}
+// Build a conditions snapshot for a specific moment. Uses the live value if the
+// time is ~now, otherwise recomputes from the forecast (which includes past hours).
+async function snapshotForTime(ms) {
+  const now = Date.now();
+  if (currentData && Math.abs(ms - now) < 25 * 60000) {
+    const d = currentData;
+    return { timestamp: new Date(ms).toISOString(), score: d.score, tier: d.tier, light_phase: d.light_phase,
+      temp_f: d.temp_f, pressure_trend_hpa: d.pressure_trend_hpa, cloud_cover_pct: d.cloud_cover_pct,
+      wind_mph: d.wind_mph, moon_illumination_pct: d.moon_illumination_pct };
+  }
+  const url = 'https://api.open-meteo.com/v1/forecast?latitude=' + LAT + '&longitude=' + LON +
+    '&hourly=surface_pressure,cloud_cover,wind_speed_10m,precipitation,temperature_2m' +
+    '&temperature_unit=fahrenheit&wind_speed_unit=mph&precipitation_unit=inch&timezone=auto&past_days=2&forecast_days=1';
+  const w = await fetch(url, { cache: 'no-store' }).then(r => r.json());
+  const hours = scoreForecast(w);
+  let best = hours[0];
+  for (const h of hours) if (Math.abs(h.ms - ms) < Math.abs(best.ms - ms)) best = h;
+  return {
+    timestamp: new Date(ms).toISOString(), score: best.score, tier: tierFor(best.score), light_phase: lightPhaseAt(ms),
+    temp_f: best.temp, pressure_trend_hpa: best.trend, cloud_cover_pct: best.cloud, wind_mph: best.wind,
+    moon_illumination_pct: Math.round(SunCalc.getMoonIllumination(new Date(ms)).fraction * 1000) / 10,
+  };
+}
+
+// ===================== Catch log =====================
+function loadLog() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch (e) { return []; } }
+function saveLog(a) {
+  // Keep photos only on the 30 most recent entries so we don't blow localStorage.
+  const withPhoto = a.filter(x => x.photo);
+  if (withPhoto.length > 30) {
+    const drop = new Set(withPhoto.slice(0, withPhoto.length - 30).map(x => x.id));
+    a = a.map(x => drop.has(x.id) ? Object.assign({}, x, { photo: null }) : x);
+  }
+  try { localStorage.setItem(LS_KEY, JSON.stringify(a)); }
+  catch (e) { localStorage.setItem(LS_KEY, JSON.stringify(a.map(x => Object.assign({}, x, { photo: null })))); }
+}
+function tierOf(s) { if (s == null) return null; return s >= 80 ? 'Excellent' : s >= 60 ? 'Good' : s >= 40 ? 'Fair' : 'Slow'; }
+const RESULT_LABEL = { fish: 'Caught', nibble: 'Nibbles', skunk: 'Skunked' };
+const RESULT_CLASS = { fish: 'le-fish', nibble: 'le-nibble', skunk: 'le-skunk' };
+function fillSelect(id, opts) { document.getElementById(id).innerHTML = opts.map(o => `<option>${o}</option>`).join(''); }
+const sel = { result: null, species: 'trout', method: 'fly', mode: 'single' };
+const TALLY_SPECIES = ['trout', 'bass', 'perch', 'bluegill', 'other'];
+function setSeg(g, v) { document.querySelectorAll('#' + g + ' button').forEach(b => b.classList.toggle('active', b.dataset.v === v)); }
+function setModeUI() {
+  const session = sel.mode === 'session';
+  document.getElementById('fieldResult').style.display = session ? 'none' : '';
+  document.getElementById('fieldWhen').style.display = session ? 'none' : '';
+  document.getElementById('fieldSpeciesSingle').style.display = session ? 'none' : '';
+  document.getElementById('countField').style.display = (!session && sel.result === 'fish') ? '' : 'none';
+  document.getElementById('fieldSessionTime').style.display = session ? '' : 'none';
+  document.getElementById('fieldTally').style.display = session ? '' : 'none';
+  setSeg('segMode', sel.mode);
+}
+
+function openModal() {
+  sel.result = null; sel.species = 'trout'; sel.method = 'fly'; sel.mode = 'single';
+  if (currentData) {
+    if (currentData.species === 'bass') sel.species = 'bass';
+    if (currentData.tactics && /spin/i.test(currentData.tactics.method_lean || '')) sel.method = 'spin';
+  }
+  setSeg('segResult', null); setSeg('segSpecies', sel.species); setSeg('segMethod', sel.method);
+  fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES);
+  fillSelect('logPosition', POSITIONS); fillSelect('logDepth', DEPTHS);
+  document.getElementById('logCount').value = 1;
+  document.getElementById('countField').style.display = 'none';
+  document.getElementById('logNotes').value = '';
+  document.getElementById('logTime').value = nowLocalInput();
+  document.getElementById('logEnd').value = nowLocalInput();
+  document.getElementById('logStart').value = isoToLocalInput(new Date(Date.now() - 2 * 3600e3).toISOString());
+  TALLY_SPECIES.forEach(s => { const el = document.getElementById('tally_' + s); if (el) el.value = 0; });
+  setModeUI();
+  pendingPhoto = null; editingId = null;
+  document.getElementById('logModalTitle').textContent = 'Log a catch';
+  document.getElementById('logDelete').style.display = 'none';
+  document.getElementById('logSave').textContent = 'Save entry';
+  updatePhotoPreview();
+  let s = 'No live conditions yet — entry will still be saved.';
+  if (currentData) {
+    const d = currentData;
+    s = `Auto-attaching: score ${d.score} (${d.tier}) · ${d.light_phase || '—'} · ${d.temp_f != null ? Math.round(d.temp_f) + '°F' : '—'} · ${d.pressure_trend_hpa != null ? d.pressure_trend_hpa + ' hPa/3h' : '—'} · ${d.cloud_cover_pct != null ? Math.round(d.cloud_cover_pct) + '% cloud' : '—'} · ${d.wind_mph != null ? Math.round(d.wind_mph) + ' mph' : '—'}`;
+  }
+  document.getElementById('logSnapshot').textContent = s;
+  document.getElementById('logModal').classList.add('open');
+  clearLogMarker(); initLogMap(); if (logMap) logMap.setView([LAT, LON], 16);
+}
+function closeModal() { document.getElementById('logModal').classList.remove('open'); }
+function updatePhotoPreview() {
+  const img = document.getElementById('photoPreview'), rm = document.getElementById('photoRemoveBtn'), add = document.getElementById('photoAddBtn');
+  if (pendingPhoto) { img.src = pendingPhoto; img.style.display = ''; rm.style.display = ''; add.textContent = 'Change'; }
+  else { img.removeAttribute('src'); img.style.display = 'none'; rm.style.display = 'none'; add.textContent = 'Add photo'; }
+}
+function openEditModal(entry) {
+  openModal();
+  editingId = entry.id;
+  document.getElementById('logDelete').style.display = '';
+  document.getElementById('logSave').textContent = 'Save changes';
+  if (entry.type === 'session') {
+    sel.mode = 'session';
+    document.getElementById('logModalTitle').textContent = 'Edit session';
+    document.getElementById('logStart').value = isoToLocalInput(entry.start_at || entry.caught_at || new Date().toISOString());
+    document.getElementById('logEnd').value = isoToLocalInput(entry.end_at || entry.caught_at || new Date().toISOString());
+    const sc = entry.species_counts || {};
+    TALLY_SPECIES.forEach(s => { document.getElementById('tally_' + s).value = sc[s] || 0; });
+  } else {
+    sel.mode = 'single';
+    document.getElementById('logModalTitle').textContent = 'Edit catch';
+    sel.result = entry.result || 'fish'; setSeg('segResult', sel.result);
+    document.getElementById('logCount').value = entry.count || 1;
+    sel.species = entry.species || 'trout'; setSeg('segSpecies', sel.species);
+    document.getElementById('logTime').value = isoToLocalInput(entry.caught_at || entry.logged_at || new Date().toISOString());
+  }
+  setModeUI();
+  sel.method = entry.method || 'fly'; setSeg('segMethod', sel.method);
+  fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES);
+  if (entry.lure) document.getElementById('logLure').value = entry.lure;
+  if (entry.position) document.getElementById('logPosition').value = entry.position;
+  if (entry.depth) document.getElementById('logDepth').value = entry.depth;
+  document.getElementById('logNotes').value = entry.notes || '';
+  pendingPhoto = entry.photo || null; updatePhotoPreview();
+  document.getElementById('logSnapshot').textContent = entry.score != null
+    ? `Logged at score ${entry.score} (${entry.tier}). Change the time to recompute conditions.`
+    : 'Edit the details below.';
+  if (entry.catch_lat != null && entry.catch_lng != null) {
+    setLogMarker(entry.catch_lat, entry.catch_lng);
+    if (logMap) logMap.setView([entry.catch_lat, entry.catch_lng], 16);
+  }
+}
+function liveFallback(caughtMs) {
+  const d = currentData || {};
+  return { timestamp: new Date(caughtMs).toISOString(), score: d.score ?? null, tier: d.tier ?? null, light_phase: d.light_phase ?? null, temp_f: d.temp_f ?? null, pressure_trend_hpa: d.pressure_trend_hpa ?? null, cloud_cover_pct: d.cloud_cover_pct ?? null, wind_mph: d.wind_mph ?? null, moon_illumination_pct: d.moon_illumination_pct ?? null };
+}
+async function resolveSnapshot(caughtMs, editing) {
+  const withinFetch = caughtMs > Date.now() - (2 * 86400e3 - 3600e3);
+  const keepExisting = () => ({ timestamp: editing.data_timestamp ?? new Date(caughtMs).toISOString(), score: editing.score, tier: editing.tier, light_phase: editing.light_phase, temp_f: editing.temp_f, pressure_trend_hpa: editing.pressure_trend_hpa, cloud_cover_pct: editing.cloud_cover_pct, wind_mph: editing.wind_mph, moon_illumination_pct: editing.moon_illumination_pct });
+  if (editing) {
+    const existingMs = new Date(editing.caught_at || editing.logged_at).getTime();
+    if (Math.abs(caughtMs - existingMs) <= 60000) return keepExisting();
+  }
+  if (withinFetch) { try { return await snapshotForTime(caughtMs); } catch (e) { return editing ? keepExisting() : liveFallback(caughtMs); } }
+  return editing ? Object.assign(keepExisting(), { timestamp: new Date(caughtMs).toISOString() }) : liveFallback(caughtMs);
+}
+
+// ---- spot map (Leaflet + Esri satellite) ----
+const MAP_SPECIES_LABEL = { trout: 'Trout', bass: 'Bass', perch: 'Perch', bluegill: 'Bluegill', other: 'Other' };
+function esriLayer() {
+  return L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}', { maxZoom: 19, attribution: 'Tiles © Esri' });
+}
+function updateCoordLabel() {
+  const el = document.getElementById('mapCoord'); if (!el) return;
+  el.textContent = pendingLatLng ? `· pinned (${pendingLatLng.lat.toFixed(5)}, ${pendingLatLng.lng.toFixed(5)})` : '· tap the map or use GPS';
+}
+function setLogMarker(lat, lng) {
+  pendingLatLng = { lat, lng };
+  if (logMap) {
+    if (!logMarker) {
+      logMarker = L.marker([lat, lng], { draggable: true }).addTo(logMap);
+      logMarker.on('dragend', () => { const p = logMarker.getLatLng(); pendingLatLng = { lat: p.lat, lng: p.lng }; updateCoordLabel(); });
+    } else logMarker.setLatLng([lat, lng]);
+  }
+  updateCoordLabel();
+}
+function clearLogMarker() {
+  pendingLatLng = null;
+  if (logMap && logMarker) { logMap.removeLayer(logMarker); logMarker = null; }
+  updateCoordLabel();
+}
+function initLogMap() {
+  if (typeof L === 'undefined') return;
+  if (!logMap) {
+    logMap = L.map('logMap', { attributionControl: false }).setView([LAT, LON], 16);
+    esriLayer().addTo(logMap);
+    logMap.on('click', (e) => setLogMarker(e.latlng.lat, e.latlng.lng));
+  }
+  setTimeout(() => { if (logMap) logMap.invalidateSize(); }, 150);
+}
+function useGps() {
+  if (!navigator.geolocation) { alert('Location is not available on this device.'); return; }
+  const btn = document.getElementById('useGpsBtn'); const prev = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'Locating…'; }
+  navigator.geolocation.getCurrentPosition(
+    (p) => { setLogMarker(p.coords.latitude, p.coords.longitude); if (logMap) logMap.setView([p.coords.latitude, p.coords.longitude], 17); if (btn) { btn.disabled = false; btn.textContent = prev; } },
+    (err) => { alert('Could not get your location: ' + err.message); if (btn) { btn.disabled = false; btn.textContent = prev; } },
+    { enableHighAccuracy: true, timeout: 10000 });
+}
+function renderSpotMap() {
+  if (typeof L === 'undefined') return;
+  const card = document.getElementById('spotMapCard'); if (!card) return;
+  const pins = loadLog().filter(e => e.catch_lat != null && e.catch_lng != null);
+  if (!pins.length) { card.style.display = 'none'; return; }
+  card.style.display = '';
+  if (!spotMap) {
+    spotMap = L.map('spotMap', { attributionControl: false }).setView([LAT, LON], 15);
+    esriLayer().addTo(spotMap);
+    spotMarkers = L.layerGroup().addTo(spotMap);
+  }
+  spotMarkers.clearLayers();
+  const latlngs = [];
+  pins.forEach(e => {
+    const color = SPECIES_COLOR[e.species] || SPECIES_COLOR.other;
+    const m = L.circleMarker([e.catch_lat, e.catch_lng], { radius: 7, color: '#0e1b2a', weight: 2, fillColor: color, fillOpacity: 0.9 }).addTo(spotMarkers);
+    const when = new Date(e.caught_at || e.logged_at).toLocaleDateString([], { month: 'short', day: 'numeric' });
+    let rlab, title;
+    if (e.type === 'session') {
+      title = '📋 Session';
+      rlab = Object.entries(e.species_counts || {}).map(([s, n]) => `${n} ${MAP_SPECIES_LABEL[s] || s}`).join(', ') || 'no fish';
+    } else {
+      title = MAP_SPECIES_LABEL[e.species] || e.species;
+      rlab = (RESULT_LABEL[e.result] || '') + (e.result === 'fish' && e.count > 1 ? ' ×' + e.count : '');
+    }
+    m.bindPopup(`<b>${title}</b><br>${rlab} · ${when}${e.score != null ? ' · score ' + e.score : ''}`);
+    latlngs.push([e.catch_lat, e.catch_lng]);
+  });
+  if (latlngs.length > 1) spotMap.fitBounds(latlngs, { padding: [30, 30], maxZoom: 17 });
+  else spotMap.setView(latlngs[0], 16);
+  setTimeout(() => { if (spotMap) spotMap.invalidateSize(); }, 150);
+}
+
+async function saveEntry() {
+  const session = sel.mode === 'session';
+  if (!session && !sel.result) { alert('Pick a result first (Caught / Nibbles / Skunked).'); return; }
+  const btn = document.getElementById('logSave');
+  const log = loadLog();
+  const editing = editingId ? log.find(x => x.id === editingId) : null;
+
+  let caughtMs, typeFields;
+  if (session) {
+    const sv = document.getElementById('logStart').value, ev = document.getElementById('logEnd').value;
+    let startMs = sv ? new Date(sv).getTime() : Date.now();
+    let endMs = ev ? new Date(ev).getTime() : startMs;
+    if (endMs < startMs) { const t = startMs; startMs = endMs; endMs = t; }
+    const counts = {}; let total = 0;
+    TALLY_SPECIES.forEach(s => { const n = Math.max(0, parseInt(document.getElementById('tally_' + s).value, 10) || 0); if (n > 0) { counts[s] = n; total += n; } });
+    let dom = 'other', max = -1; for (const s in counts) if (counts[s] > max) { max = counts[s]; dom = s; }
+    caughtMs = Math.round((startMs + endMs) / 2);
+    typeFields = { type: 'session', result: total > 0 ? 'fish' : 'skunk', count: total, species: dom,
+      species_counts: counts, start_at: new Date(startMs).toISOString(), end_at: new Date(endMs).toISOString() };
+  } else {
+    const tv = document.getElementById('logTime').value;
+    caughtMs = tv ? new Date(tv).getTime() : Date.now();
+    typeFields = { type: 'single', result: sel.result,
+      count: sel.result === 'fish' ? Math.max(1, parseInt(document.getElementById('logCount').value, 10) || 1) : 0,
+      species: sel.species, species_counts: null, start_at: null, end_at: null };
+  }
+
+  const prev = btn.textContent;
+  btn.disabled = true; btn.textContent = 'Saving…';
+  const snap = await resolveSnapshot(caughtMs, editing);
+  btn.disabled = false; btn.textContent = prev;
+  const fields = Object.assign({
+    method: sel.method,
+    lure: document.getElementById('logLure').value, position: document.getElementById('logPosition').value,
+    depth: document.getElementById('logDepth').value, notes: document.getElementById('logNotes').value.trim(),
+    caught_at: new Date(caughtMs).toISOString(), photo: pendingPhoto || null,
+    catch_lat: pendingLatLng ? pendingLatLng.lat : (editing ? (editing.catch_lat ?? null) : null),
+    catch_lng: pendingLatLng ? pendingLatLng.lng : (editing ? (editing.catch_lng ?? null) : null),
+    score: snap.score ?? null, tier: snap.tier ?? null, light_phase: snap.light_phase ?? null, temp_f: snap.temp_f ?? null,
+    pressure_trend_hpa: snap.pressure_trend_hpa ?? null, cloud_cover_pct: snap.cloud_cover_pct ?? null,
+    wind_mph: snap.wind_mph ?? null, moon_illumination_pct: snap.moon_illumination_pct ?? null, data_timestamp: snap.timestamp ?? null,
+  }, typeFields);
+  if (editing) Object.assign(editing, fields);
+  else log.push(Object.assign({ id: Date.now(), logged_at: new Date().toISOString() }, fields));
+  saveLog(log); pendingPhoto = null; editingId = null; pendingLatLng = null; closeModal(); renderLog();
+}
+
+function renderLog() {
+  const log = loadLog();
+  const body = document.getElementById('logBody');
+  if (!log.length) { body.innerHTML = `<div class="hint">No sessions logged yet. After you fish, tap <b>＋ Log a catch / no-catch</b> — each entry saves the current bite score and conditions alongside what you caught and how. Once you have a handful, this section shows whether high scores actually produce fish at your lake.</div>`; renderSpotMap(); return; }
+  const sessions = log.length;
+  const fish = log.filter(e => e.result === 'fish').reduce((a, e) => a + (e.count || 1), 0);
+  const landedSessions = log.filter(e => e.result === 'fish').length;
+  const tiers = ['Excellent', 'Good', 'Fair', 'Slow'], byTier = {};
+  tiers.forEach(t => byTier[t] = { n: 0, hit: 0 });
+  log.forEach(e => { const t = e.tier || tierOf(e.score); if (byTier[t]) { byTier[t].n++; if (e.result === 'fish') byTier[t].hit++; } });
+  let tierRows = tiers.filter(t => byTier[t].n > 0).map(t => { const o = byTier[t]; return `<tr><td>${t}</td><td class="r">${o.n}</td><td class="r">${o.hit}</td><td class="r">${Math.round(100 * o.hit / o.n)}%</td></tr>`; }).join('');
+  if (!tierRows) tierRows = '<tr><td colspan="4" style="color:var(--muted)">—</td></tr>';
+  const SPECIES_LABEL = { trout: 'Trout', bass: 'Bass', perch: 'Perch', bluegill: 'Bluegill', other: 'Other' };
+  const bySpecies = {};
+  log.forEach(e => {
+    if (e.type === 'session' && e.species_counts && Object.keys(e.species_counts).length) {
+      for (const s in e.species_counts) {
+        if (!bySpecies[s]) bySpecies[s] = { n: 0, hit: 0, fish: 0 };
+        bySpecies[s].n++; bySpecies[s].hit++; bySpecies[s].fish += e.species_counts[s];
+      }
+    } else {
+      const s = e.species || 'other';
+      if (!bySpecies[s]) bySpecies[s] = { n: 0, hit: 0, fish: 0 };
+      bySpecies[s].n++; if (e.result === 'fish') { bySpecies[s].hit++; bySpecies[s].fish += (e.count || 1); }
+    }
+  });
+  const speciesOrder = Object.keys(bySpecies).sort((a, b) => bySpecies[b].fish - bySpecies[a].fish || bySpecies[b].n - bySpecies[a].n);
+  let speciesRows = speciesOrder.map(s => { const o = bySpecies[s]; return `<tr><td>${SPECIES_LABEL[s] || s}</td><td class="r">${o.n}</td><td class="r">${o.fish}</td><td class="r">${Math.round(100 * o.hit / o.n)}%</td></tr>`; }).join('');
+  if (!speciesRows) speciesRows = '<tr><td colspan="4" style="color:var(--muted)">—</td></tr>';
+
+  const meth = { fly: { n: 0, hit: 0 }, spin: { n: 0, hit: 0 } };
+  log.forEach(e => { if (meth[e.method]) { meth[e.method].n++; if (e.result === 'fish') meth[e.method].hit++; } });
+  const methLine = ['fly', 'spin'].filter(m => meth[m].n > 0).map(m => `${m === 'fly' ? '🪶 Fly' : '🎣 Spin'}: ${meth[m].hit}/${meth[m].n} landed`).join(' · ') || '—';
+  const lureCount = {};
+  log.filter(e => e.result === 'fish').forEach(e => { lureCount[e.lure] = (lureCount[e.lure] || 0) + 1; });
+  const topLures = Object.entries(lureCount).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([k, v]) => `${k} (${v})`).join(', ') || 'none yet';
+  const recent = log.slice(-6).reverse().map(e => {
+    const sc = e.score != null ? `score ${e.score}` : 'no score';
+    const photoImg = e.photo ? `<img src="${e.photo}" alt="catch" style="width:54px;height:54px;object-fit:cover;border-radius:8px;margin-top:6px;">` : '';
+    let rlabel, when, meta;
+    if (e.type === 'session') {
+      const tally = Object.entries(e.species_counts || {}).map(([s, n]) => `${n} ${SPECIES_LABEL[s] || s}`).join(', ') || 'no fish';
+      rlabel = '📋 Session';
+      const st = e.start_at ? new Date(e.start_at) : null, en = e.end_at ? new Date(e.end_at) : null;
+      if (st && en) {
+        const durH = Math.round((en - st) / 3600e3 * 10) / 10;
+        when = `${st.toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}–${en.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })} · ${durH}h`;
+      } else when = new Date(e.caught_at || e.logged_at).toLocaleDateString([], { month: 'short', day: 'numeric' });
+      meta = [tally, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
+    } else {
+      when = new Date(e.caught_at || e.logged_at).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+      rlabel = RESULT_LABEL[e.result] + (e.result === 'fish' && e.count > 1 ? ` ×${e.count}` : '');
+      meta = [e.species, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
+    }
+    return `<div class="logentry" data-id="${e.id}"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}<span class="le-edit">✎ edit</span></span><span style="color:var(--muted)">${when} · ${sc}</span></div><div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div>${photoImg}</div>`;
+  }).join('');
+  body.innerHTML =
+    `<div class="summary-line"><b>${sessions}</b> session${sessions !== 1 ? 's' : ''} logged · <b>${fish}</b> fish landed · ${landedSessions} productive trip${landedSessions !== 1 ? 's' : ''}</div>` +
+    `<div class="sub-h">Catch rate by bite-score tier</div><table class="ltable"><thead><tr><th>Tier</th><th class="r">Logged</th><th class="r">Landed</th><th class="r">Hit %</th></tr></thead><tbody>${tierRows}</tbody></table>` +
+    `<div class="sub-h">Catch by species</div><table class="ltable"><thead><tr><th>Species</th><th class="r">Logged</th><th class="r">Fish</th><th class="r">Hit %</th></tr></thead><tbody>${speciesRows}</tbody></table>` +
+    `<div class="sub-h">By method</div><div style="font-size:.9rem;margin-bottom:4px;">${methLine}</div>` +
+    `<div class="sub-h">Most productive lures/flies</div><div style="font-size:.9rem;">${topLures}</div>` +
+    `<div class="sub-h">Recent sessions</div>${recent}`;
+  renderSpotMap();
+}
+
+function exportLog() {
+  const log = loadLog(); if (!log.length) { alert('Nothing to export yet.'); return; }
+  const blob = new Blob([JSON.stringify(log, null, 2)], { type: 'application/json' });
+  const url = URL.createObjectURL(blob), a = document.createElement('a');
+  a.href = url; a.download = 'lake-louise-catch-log.json'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
+}
+function clearLog() { if (!loadLog().length) return; if (confirm('Delete all logged sessions from this browser? Export first if you want a backup.')) { localStorage.removeItem(LS_KEY); renderLog(); } }
+
+document.getElementById('openLog').addEventListener('click', openModal);
+document.getElementById('logCancel').addEventListener('click', closeModal);
+document.getElementById('logSave').addEventListener('click', saveEntry);
+document.getElementById('logExport').addEventListener('click', exportLog);
+document.getElementById('logClear').addEventListener('click', clearLog);
+document.getElementById('photoAddBtn').addEventListener('click', () => document.getElementById('photoInput').click());
+document.getElementById('photoInput').addEventListener('change', async (e) => { const f = e.target.files[0]; if (f) { try { pendingPhoto = await compressImage(f, 240, 0.6); updatePhotoPreview(); } catch (_) {} } e.target.value = ''; });
+document.getElementById('photoRemoveBtn').addEventListener('click', () => { pendingPhoto = null; updatePhotoPreview(); });
+document.getElementById('useGpsBtn').addEventListener('click', useGps);
+document.getElementById('logDelete').addEventListener('click', () => { if (editingId && confirm('Delete this catch from your log?')) { saveLog(loadLog().filter(x => x.id !== editingId)); editingId = null; pendingPhoto = null; closeModal(); renderLog(); } });
+document.getElementById('logBody').addEventListener('click', (e) => { const row = e.target.closest('.logentry'); if (!row) return; const entry = loadLog().find(x => x.id === Number(row.dataset.id)); if (entry) openEditModal(entry); });
+document.getElementById('logModal').addEventListener('click', e => { if (e.target.id === 'logModal') closeModal(); });
+document.getElementById('segMode').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.mode = b.dataset.v; setModeUI(); });
+document.getElementById('segResult').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.result = b.dataset.v; setSeg('segResult', sel.result); document.getElementById('countField').style.display = sel.result === 'fish' ? '' : 'none'; });
+document.getElementById('segSpecies').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.species = b.dataset.v; setSeg('segSpecies', sel.species); });
+document.getElementById('segMethod').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.method = b.dataset.v; setSeg('segMethod', sel.method); fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES); });
+
+// ===================== AI assistant (Cloudflare Worker) =====================
+const WORKER_KEY = 'llbt_worker_url';
+function getWorkerUrl() { return (localStorage.getItem(WORKER_KEY) || '').trim(); }
+function setWorkerUrl(u) { if (u) localStorage.setItem(WORKER_KEY, u.trim()); }
+function escapeHtml(s) { return String(s == null ? '' : s).replace(/[&<>]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c])); }
+
+function promptWorkerUrl() {
+  const u = prompt('Paste your Cloudflare Worker URL\n(e.g. https://bite-assistant.yourname.workers.dev):', getWorkerUrl());
+  if (u && /^https?:\/\//.test(u.trim())) { setWorkerUrl(u); updateAiCfg(); return true; }
+  if (u !== null) alert('That doesn’t look like a URL — it should start with https://');
+  return false;
+}
+function updateAiCfg() {
+  const el = document.getElementById('aiCfg');
+  el.innerHTML = getWorkerUrl()
+    ? 'Connected to your AI Worker. <a id="aiChange">change URL</a>'
+    : '⚙️ Not connected yet — <a id="aiConnect">add your Worker URL</a> to turn these on.';
+  const c = document.getElementById('aiConnect'); if (c) c.onclick = promptWorkerUrl;
+  const ch = document.getElementById('aiChange'); if (ch) ch.onclick = promptWorkerUrl;
+}
+function conditionsPayload() {
+  const d = currentData || {};
+  return {
+    score: d.score, tier: d.tier, temp_f: d.temp_f, light_phase: d.light_phase,
+    cloud_cover_pct: d.cloud_cover_pct, wind_mph: d.wind_mph,
+    pressure_trend_hpa: d.pressure_trend_hpa, moon_illumination_pct: d.moon_illumination_pct,
+    tactics: d.tactics ? { species_pick: d.tactics.species_pick, where: d.tactics.where, depth: d.tactics.depth, method_lean: d.tactics.method_lean } : null,
+  };
+}
+async function callWorker(payload) {
+  const url = getWorkerUrl();
+  if (!url) throw new Error('no-url');
+  const r = await fetch(url, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(payload) });
+  const data = await r.json().catch(() => ({ error: 'unreadable response' }));
+  if (!r.ok || data.error) throw new Error(data.error || ('HTTP ' + r.status));
+  return data;
+}
+function compressImage(file, max = 768, q = 0.8) {
+  return new Promise((res, rej) => {
+    const img = new Image(), url = URL.createObjectURL(file);
+    img.onload = () => {
+      const scale = Math.min(1, max / Math.max(img.width, img.height));
+      const w = Math.round(img.width * scale), h = Math.round(img.height * scale);
+      const c = document.createElement('canvas'); c.width = w; c.height = h;
+      c.getContext('2d').drawImage(img, 0, 0, w, h); URL.revokeObjectURL(url);
+      res(c.toDataURL('image/jpeg', q));
+    };
+    img.onerror = () => { URL.revokeObjectURL(url); rej(new Error('could not read image')); };
+    img.src = url;
+  });
+}
+function showAiResult(html) { const el = document.getElementById('aiResult'); el.style.display = ''; el.innerHTML = html; }
+function detectSpecies(text) {
+  const t = (text || '').toLowerCase();
+  if (/bluegill|sunfish|bream/.test(t)) return 'bluegill';
+  if (/perch/.test(t)) return 'perch';
+  if (/bass/.test(t)) return 'bass';
+  if (/trout/.test(t)) return 'trout';
+  return 'other';
+}
+function openModalPrefill(species, photo) {
+  openModal();
+  sel.result = 'fish'; setSeg('segResult', 'fish');
+  document.getElementById('countField').style.display = '';
+  if (species) { sel.species = species; setSeg('segSpecies', species); }
+  pendingPhoto = photo || null; updatePhotoPreview();
+}
+async function handlePhoto(file, mode) {
+  if (!getWorkerUrl() && !promptWorkerUrl()) return;
+  try {
+    showAiResult('Reading photo…');
+    const image = await compressImage(file);
+    showAiResult(`<img class="ai-thumb" src="${image}"/>Thinking…`);
+    const data = await callWorker({ mode, image, conditions: conditionsPayload() });
+    let html = `<img class="ai-thumb" src="${image}"/>${escapeHtml(data.answer)}` +
+      (data.vision ? `<div class="ai-vision">Vision read: ${escapeHtml(data.vision)}</div>` : '');
+    if (mode === 'fish') {
+      lastFishSpecies = detectSpecies(data.answer + ' ' + (data.vision || ''));
+      lastFishPhoto = await compressImage(file, 240, 0.6);
+      html += `<button class="btn btn-primary" id="aiLogBtn" style="margin-top:12px;width:100%;">＋ Log this catch (${SPECIES_LABELS[lastFishSpecies] || lastFishSpecies})</button>`;
+    }
+    showAiResult(html);
+    if (mode === 'fish') { const lb = document.getElementById('aiLogBtn'); if (lb) lb.onclick = () => openModalPrefill(lastFishSpecies, lastFishPhoto); }
+  } catch (e) {
+    showAiResult(e.message === 'no-url' ? 'Add your Worker URL first (link below).'
+      : 'AI request failed: ' + escapeHtml(e.message) + '. Check the Worker URL and that Workers AI is bound as “AI”.');
+  }
+}
+
+// Chat
+let chatHistory = [];
+function renderChatLog(thinking) {
+  const intro = { role: 'assistant', content: 'Ask me anything about fishing Lake Louise right now — lures, depth, timing, or why they might not be biting.' };
+  let html = [intro, ...chatHistory].map(m => `<div class="bubble ${m.role === 'user' ? 'user' : 'bot'}">${escapeHtml(m.content)}</div>`).join('');
+  if (thinking) html += '<div class="bubble bot thinking">Thinking…</div>';
+  const log = document.getElementById('chatLog'); log.innerHTML = html; log.scrollTop = log.scrollHeight;
+}
+function openChat() {
+  if (!getWorkerUrl() && !promptWorkerUrl()) return;
+  const d = currentData || {};
+  document.getElementById('chatSnapshot').textContent = d.score != null
+    ? `Live now: score ${d.score} (${d.tier})${d.temp_f != null ? ', ' + Math.round(d.temp_f) + '°F' : ''}${d.light_phase ? ', ' + d.light_phase : ''}.`
+    : 'Answers use your live conditions.';
+  document.getElementById('chatModal').classList.add('open'); renderChatLog(false);
+}
+function closeChat() { document.getElementById('chatModal').classList.remove('open'); }
+async function sendChat() {
+  const inp = document.getElementById('chatInput'); const q = inp.value.trim(); if (!q) return; inp.value = '';
+  chatHistory.push({ role: 'user', content: q }); renderChatLog(true);
+  try {
+    const data = await callWorker({ mode: 'chat', question: q, conditions: conditionsPayload(), history: chatHistory.slice(0, -1) });
+    chatHistory.push({ role: 'assistant', content: data.answer }); renderChatLog(false);
+  } catch (e) { chatHistory.push({ role: 'assistant', content: '⚠️ ' + e.message }); renderChatLog(false); }
+}
+
+document.getElementById('btnLure').addEventListener('click', () => { if (!getWorkerUrl() && !promptWorkerUrl()) return; document.getElementById('lureInput').click(); });
+document.getElementById('btnFish').addEventListener('click', () => { if (!getWorkerUrl() && !promptWorkerUrl()) return; document.getElementById('fishInput').click(); });
+document.getElementById('lureInput').addEventListener('change', e => { if (e.target.files[0]) handlePhoto(e.target.files[0], 'lure'); e.target.value = ''; });
+document.getElementById('fishInput').addEventListener('change', e => { if (e.target.files[0]) handlePhoto(e.target.files[0], 'fish'); e.target.value = ''; });
+document.getElementById('btnChat').addEventListener('click', openChat);
+document.getElementById('chatClose').addEventListener('click', closeChat);
+document.getElementById('chatSend').addEventListener('click', sendChat);
+document.getElementById('chatInput').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); } });
+document.getElementById('chatModal').addEventListener('click', e => { if (e.target.id === 'chatModal') closeChat(); });
+updateAiCfg();
+
+// Register the service worker so the app installs to the home screen and
+// opens offline with the last-known data.
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
+
+loadData();
+renderLog();
+setInterval(loadData, REFRESH_MS);
+setInterval(updateCountdowns, 30 * 1000);
+</script>
+</body>
+</html>
