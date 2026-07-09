@@ -128,6 +128,11 @@
   .seg.wrap button { flex: 1 1 30%; }
   select, input[type=text], input[type=number], input[type=datetime-local], textarea { width: 100%; background: #0e1f31; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px; font-size: 0.95rem; font-family: inherit; }
   input[type=datetime-local] { color-scheme: dark; }
+  .photo-row { display: flex; gap: 10px; align-items: center; }
+  .photo-preview { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); }
+  .btn-sm { flex: 0 0 auto; padding: 9px 12px; font-weight: 600; }
+  .logentry { cursor: pointer; }
+  .le-edit { color: var(--muted); font-size: 0.85rem; margin-left: 6px; }
   textarea { resize: vertical; min-height: 54px; }
   .modal-actions { display: flex; gap: 10px; margin-top: 4px; }
   .btn { flex: 1; border: none; border-radius: 10px; padding: 13px; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
@@ -280,7 +285,7 @@
 <!-- Log modal -->
 <div class="modal-overlay" id="logModal">
   <div class="modal">
-    <h2>Log a session</h2>
+    <h2 id="logModalTitle">Log a session</h2>
     <div class="snapshot" id="logSnapshot">Conditions snapshot attaches automatically.</div>
     <div class="field">
       <label>Result</label>
@@ -320,7 +325,17 @@
     <div class="field"><label>Position on the water</label><select id="logPosition"></select></div>
     <div class="field"><label>Depth fished</label><select id="logDepth"></select></div>
     <div class="field"><label>Notes (optional)</label><textarea id="logNotes" placeholder="retrieve speed, color, time, anything worth remembering"></textarea></div>
+    <div class="field">
+      <label>Photo</label>
+      <div class="photo-row">
+        <img id="photoPreview" class="photo-preview" style="display:none;" alt="catch photo" />
+        <button type="button" class="btn btn-ghost btn-sm" id="photoAddBtn">Add photo</button>
+        <button type="button" class="btn btn-ghost btn-sm" id="photoRemoveBtn" style="display:none;">Remove</button>
+      </div>
+      <input type="file" id="photoInput" accept="image/*" style="display:none;" />
+    </div>
     <div class="modal-actions">
+      <button class="btn btn-ghost btn-sm" id="logDelete" style="display:none;color:var(--red);border-color:var(--red);">Delete</button>
       <button class="btn btn-ghost" id="logCancel">Cancel</button>
       <button class="btn btn-primary" id="logSave">Save entry</button>
     </div>
@@ -342,7 +357,7 @@ const SPIN_LURES = ['Inline spinner', 'Spinnerbait', 'Spoon', 'Jig', 'Soft plast
 const POSITIONS = ['Shoreline', 'Off the dock', 'Open water / middle', 'Drop-off / ledge', 'Weed edge', 'Inlet / current', 'Boat / drifting', 'Other'];
 const DEPTHS = ['Surface / top', 'Shallow (0–8 ft)', 'Mid (8–15 ft)', 'Deep (15+ ft)'];
 const SPECIES_LABELS = { trout: 'Trout', bass: 'Bass', perch: 'Perch', bluegill: 'Bluegill', other: 'Other' };
-let pendingPhoto = null, lastFishPhoto = null, lastFishSpecies = null;
+let pendingPhoto = null, lastFishPhoto = null, lastFishSpecies = null, editingId = null;
 
 // ---------- helpers ----------
 function colorFor(s) { if (s == null) return 'var(--muted)'; if (s >= 70) return 'var(--green)'; if (s >= 40) return 'var(--yellow)'; return 'var(--red)'; }
@@ -787,6 +802,11 @@ function nowLocalInput() {
   d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
   return d.toISOString().slice(0, 16);
 }
+function isoToLocalInput(iso) {
+  const d = new Date(iso);
+  d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+  return d.toISOString().slice(0, 16);
+}
 function lightPhaseAt(ms) {
   const suns = [];
   for (const off of [-1, 0, 1]) {
@@ -854,7 +874,11 @@ function openModal() {
   document.getElementById('countField').style.display = 'none';
   document.getElementById('logNotes').value = '';
   document.getElementById('logTime').value = nowLocalInput();
-  pendingPhoto = null;
+  pendingPhoto = null; editingId = null;
+  document.getElementById('logModalTitle').textContent = 'Log a session';
+  document.getElementById('logDelete').style.display = 'none';
+  document.getElementById('logSave').textContent = 'Save entry';
+  updatePhotoPreview();
   let s = 'No live conditions yet — entry will still be saved.';
   if (currentData) {
     const d = currentData;
@@ -864,34 +888,73 @@ function openModal() {
   document.getElementById('logModal').classList.add('open');
 }
 function closeModal() { document.getElementById('logModal').classList.remove('open'); }
+function updatePhotoPreview() {
+  const img = document.getElementById('photoPreview'), rm = document.getElementById('photoRemoveBtn'), add = document.getElementById('photoAddBtn');
+  if (pendingPhoto) { img.src = pendingPhoto; img.style.display = ''; rm.style.display = ''; add.textContent = 'Change'; }
+  else { img.removeAttribute('src'); img.style.display = 'none'; rm.style.display = 'none'; add.textContent = 'Add photo'; }
+}
+function openEditModal(entry) {
+  openModal();
+  editingId = entry.id;
+  document.getElementById('logModalTitle').textContent = 'Edit catch';
+  document.getElementById('logDelete').style.display = '';
+  document.getElementById('logSave').textContent = 'Save changes';
+  sel.result = entry.result || 'fish'; setSeg('segResult', sel.result);
+  document.getElementById('countField').style.display = sel.result === 'fish' ? '' : 'none';
+  document.getElementById('logCount').value = entry.count || 1;
+  sel.species = entry.species || 'trout'; setSeg('segSpecies', sel.species);
+  sel.method = entry.method || 'fly'; setSeg('segMethod', sel.method);
+  fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES);
+  if (entry.lure) document.getElementById('logLure').value = entry.lure;
+  if (entry.position) document.getElementById('logPosition').value = entry.position;
+  if (entry.depth) document.getElementById('logDepth').value = entry.depth;
+  document.getElementById('logNotes').value = entry.notes || '';
+  document.getElementById('logTime').value = isoToLocalInput(entry.caught_at || entry.logged_at || new Date().toISOString());
+  pendingPhoto = entry.photo || null; updatePhotoPreview();
+  document.getElementById('logSnapshot').textContent = entry.score != null
+    ? `Logged at score ${entry.score} (${entry.tier}). Change the time to recompute conditions.`
+    : 'Edit the details below.';
+}
+function liveFallback(caughtMs) {
+  const d = currentData || {};
+  return { timestamp: new Date(caughtMs).toISOString(), score: d.score ?? null, tier: d.tier ?? null, light_phase: d.light_phase ?? null, temp_f: d.temp_f ?? null, pressure_trend_hpa: d.pressure_trend_hpa ?? null, cloud_cover_pct: d.cloud_cover_pct ?? null, wind_mph: d.wind_mph ?? null, moon_illumination_pct: d.moon_illumination_pct ?? null };
+}
+async function resolveSnapshot(caughtMs, editing) {
+  const withinFetch = caughtMs > Date.now() - (2 * 86400e3 - 3600e3);
+  const keepExisting = () => ({ timestamp: editing.data_timestamp ?? new Date(caughtMs).toISOString(), score: editing.score, tier: editing.tier, light_phase: editing.light_phase, temp_f: editing.temp_f, pressure_trend_hpa: editing.pressure_trend_hpa, cloud_cover_pct: editing.cloud_cover_pct, wind_mph: editing.wind_mph, moon_illumination_pct: editing.moon_illumination_pct });
+  if (editing) {
+    const existingMs = new Date(editing.caught_at || editing.logged_at).getTime();
+    if (Math.abs(caughtMs - existingMs) <= 60000) return keepExisting();
+  }
+  if (withinFetch) { try { return await snapshotForTime(caughtMs); } catch (e) { return editing ? keepExisting() : liveFallback(caughtMs); } }
+  return editing ? Object.assign(keepExisting(), { timestamp: new Date(caughtMs).toISOString() }) : liveFallback(caughtMs);
+}
 
 async function saveEntry() {
   if (!sel.result) { alert('Pick a result first (Caught / Nibbles / Skunked).'); return; }
   const btn = document.getElementById('logSave');
   const tv = document.getElementById('logTime').value;
   const caughtMs = tv ? new Date(tv).getTime() : Date.now();
+  const log = loadLog();
+  const editing = editingId ? log.find(x => x.id === editingId) : null;
   const prev = btn.textContent;
   btn.disabled = true; btn.textContent = 'Saving…';
-  let snap;
-  try {
-    snap = await snapshotForTime(caughtMs);
-  } catch (err) {
-    const d = currentData || {};
-    snap = { timestamp: new Date(caughtMs).toISOString(), score: d.score ?? null, tier: d.tier ?? null, light_phase: d.light_phase ?? null, temp_f: d.temp_f ?? null, pressure_trend_hpa: d.pressure_trend_hpa ?? null, cloud_cover_pct: d.cloud_cover_pct ?? null, wind_mph: d.wind_mph ?? null, moon_illumination_pct: d.moon_illumination_pct ?? null };
-  }
+  const snap = await resolveSnapshot(caughtMs, editing);
   btn.disabled = false; btn.textContent = prev;
-  const e = {
-    id: Date.now(), logged_at: new Date().toISOString(), caught_at: new Date(caughtMs).toISOString(), result: sel.result,
+  const fields = {
+    result: sel.result,
     count: sel.result === 'fish' ? Math.max(1, parseInt(document.getElementById('logCount').value, 10) || 1) : 0,
     species: sel.species, method: sel.method,
     lure: document.getElementById('logLure').value, position: document.getElementById('logPosition').value,
     depth: document.getElementById('logDepth').value, notes: document.getElementById('logNotes').value.trim(),
+    caught_at: new Date(caughtMs).toISOString(), photo: pendingPhoto || null,
     score: snap.score ?? null, tier: snap.tier ?? null, light_phase: snap.light_phase ?? null, temp_f: snap.temp_f ?? null,
     pressure_trend_hpa: snap.pressure_trend_hpa ?? null, cloud_cover_pct: snap.cloud_cover_pct ?? null,
     wind_mph: snap.wind_mph ?? null, moon_illumination_pct: snap.moon_illumination_pct ?? null, data_timestamp: snap.timestamp ?? null,
-    photo: pendingPhoto || null,
   };
-  const log = loadLog(); log.push(e); saveLog(log); pendingPhoto = null; closeModal(); renderLog();
+  if (editing) Object.assign(editing, fields);
+  else log.push(Object.assign({ id: Date.now(), logged_at: new Date().toISOString() }, fields));
+  saveLog(log); pendingPhoto = null; editingId = null; closeModal(); renderLog();
 }
 
 function renderLog() {
@@ -925,7 +988,7 @@ function renderLog() {
     const sc = e.score != null ? `score ${e.score}` : 'no score';
     const meta = [e.species, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
     const photoImg = e.photo ? `<img src="${e.photo}" alt="catch" style="width:54px;height:54px;object-fit:cover;border-radius:8px;margin-top:6px;">` : '';
-    return `<div class="logentry"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}</span><span style="color:var(--muted)">${when} · ${sc}</span></div><div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div>${photoImg}</div>`;
+    return `<div class="logentry" data-id="${e.id}"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}<span class="le-edit">✎ edit</span></span><span style="color:var(--muted)">${when} · ${sc}</span></div><div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div>${photoImg}</div>`;
   }).join('');
   body.innerHTML =
     `<div class="summary-line"><b>${sessions}</b> session${sessions !== 1 ? 's' : ''} logged · <b>${fish}</b> fish landed · ${landedSessions} productive trip${landedSessions !== 1 ? 's' : ''}</div>` +
@@ -949,6 +1012,11 @@ document.getElementById('logCancel').addEventListener('click', closeModal);
 document.getElementById('logSave').addEventListener('click', saveEntry);
 document.getElementById('logExport').addEventListener('click', exportLog);
 document.getElementById('logClear').addEventListener('click', clearLog);
+document.getElementById('photoAddBtn').addEventListener('click', () => document.getElementById('photoInput').click());
+document.getElementById('photoInput').addEventListener('change', async (e) => { const f = e.target.files[0]; if (f) { try { pendingPhoto = await compressImage(f, 240, 0.6); updatePhotoPreview(); } catch (_) {} } e.target.value = ''; });
+document.getElementById('photoRemoveBtn').addEventListener('click', () => { pendingPhoto = null; updatePhotoPreview(); });
+document.getElementById('logDelete').addEventListener('click', () => { if (editingId && confirm('Delete this catch from your log?')) { saveLog(loadLog().filter(x => x.id !== editingId)); editingId = null; pendingPhoto = null; closeModal(); renderLog(); } });
+document.getElementById('logBody').addEventListener('click', (e) => { const row = e.target.closest('.logentry'); if (!row) return; const entry = loadLog().find(x => x.id === Number(row.dataset.id)); if (entry) openEditModal(entry); });
 document.getElementById('logModal').addEventListener('click', e => { if (e.target.id === 'logModal') closeModal(); });
 document.getElementById('segResult').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.result = b.dataset.v; setSeg('segResult', sel.result); document.getElementById('countField').style.display = sel.result === 'fish' ? '' : 'none'; });
 document.getElementById('segSpecies').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.species = b.dataset.v; setSeg('segSpecies', sel.species); });
@@ -1019,7 +1087,7 @@ function openModalPrefill(species, photo) {
   sel.result = 'fish'; setSeg('segResult', 'fish');
   document.getElementById('countField').style.display = '';
   if (species) { sel.species = species; setSeg('segSpecies', species); }
-  pendingPhoto = photo || null;
+  pendingPhoto = photo || null; updatePhotoPreview();
 }
 async function handlePhoto(file, mode) {
   if (!getWorkerUrl() && !promptWorkerUrl()) return;
