@@ -303,13 +303,6 @@
   <div class="modal">
     <h2 id="logModalTitle">Log a session</h2>
     <div class="snapshot" id="logSnapshot">Conditions snapshot attaches automatically.</div>
-    <div class="field">
-      <label>Log type</label>
-      <div class="seg" id="segMode">
-        <button type="button" data-v="single">🎣 Single catch</button>
-        <button type="button" data-v="session">📋 Whole session</button>
-      </div>
-    </div>
     <div class="field" id="fieldResult">
       <label>Result</label>
       <div class="seg" id="segResult">
@@ -320,11 +313,18 @@
     </div>
     <div class="field" id="countField" style="display:none;">
       <label>How many landed?</label>
-      <input type="number" id="logCount" min="1" value="1" />
+      <input type="number" id="logCount" min="1" value="1" inputmode="numeric" />
     </div>
     <div class="field" id="fieldWhen">
       <label>When did you catch it?</label>
       <input type="datetime-local" id="logTime" />
+    </div>
+    <div class="field" id="fieldSessionTime" style="display:none;">
+      <label>Session — start &amp; end time</label>
+      <div class="time-row">
+        <input type="datetime-local" id="logStart" />
+        <input type="datetime-local" id="logEnd" />
+      </div>
     </div>
 
     <div class="field" id="fieldSpeciesSingle">
@@ -335,24 +335,6 @@
         <button type="button" data-v="perch">Perch</button>
         <button type="button" data-v="bluegill">Bluegill</button>
         <button type="button" data-v="other">Other</button>
-      </div>
-    </div>
-
-    <div class="field" id="fieldSessionTime" style="display:none;">
-      <label>Session — start &amp; end</label>
-      <div class="time-row">
-        <input type="datetime-local" id="logStart" />
-        <input type="datetime-local" id="logEnd" />
-      </div>
-    </div>
-    <div class="field" id="fieldTally" style="display:none;">
-      <label>How many of each did you land?</label>
-      <div class="tally-grid">
-        <div class="tally-row"><span>🐟 Trout</span><input type="number" id="tally_trout" min="0" value="0" inputmode="numeric" /></div>
-        <div class="tally-row"><span>🐟 Bass</span><input type="number" id="tally_bass" min="0" value="0" inputmode="numeric" /></div>
-        <div class="tally-row"><span>🐟 Perch</span><input type="number" id="tally_perch" min="0" value="0" inputmode="numeric" /></div>
-        <div class="tally-row"><span>🐟 Bluegill</span><input type="number" id="tally_bluegill" min="0" value="0" inputmode="numeric" /></div>
-        <div class="tally-row"><span>🐟 Other</span><input type="number" id="tally_other" min="0" value="0" inputmode="numeric" /></div>
       </div>
     </div>
     <div class="field">
@@ -907,22 +889,20 @@ function tierOf(s) { if (s == null) return null; return s >= 80 ? 'Excellent' : 
 const RESULT_LABEL = { fish: 'Caught', nibble: 'Nibbles', skunk: 'Skunked' };
 const RESULT_CLASS = { fish: 'le-fish', nibble: 'le-nibble', skunk: 'le-skunk' };
 function fillSelect(id, opts) { document.getElementById(id).innerHTML = opts.map(o => `<option>${o}</option>`).join(''); }
-const sel = { result: null, species: 'trout', method: 'fly', mode: 'single' };
-const TALLY_SPECIES = ['trout', 'bass', 'perch', 'bluegill', 'other'];
+const sel = { result: null, species: 'trout', method: 'fly' };
 function setSeg(g, v) { document.querySelectorAll('#' + g + ' button').forEach(b => b.classList.toggle('active', b.dataset.v === v)); }
-function setModeUI() {
-  const session = sel.mode === 'session';
-  document.getElementById('fieldResult').style.display = session ? 'none' : '';
-  document.getElementById('fieldWhen').style.display = session ? 'none' : '';
-  document.getElementById('fieldSpeciesSingle').style.display = session ? 'none' : '';
-  document.getElementById('countField').style.display = (!session && sel.result === 'fish') ? '' : 'none';
-  document.getElementById('fieldSessionTime').style.display = session ? '' : 'none';
-  document.getElementById('fieldTally').style.display = session ? '' : 'none';
-  setSeg('segMode', sel.mode);
+function currentCount() { return Math.max(1, parseInt(document.getElementById('logCount').value, 10) || 1); }
+// Show a start→end time range only when more than one fish was landed; otherwise a single time.
+function updateTimeFields() {
+  const isFish = sel.result === 'fish';
+  const many = isFish && currentCount() > 1;
+  document.getElementById('countField').style.display = isFish ? '' : 'none';
+  document.getElementById('fieldSessionTime').style.display = many ? '' : 'none';
+  document.getElementById('fieldWhen').style.display = many ? 'none' : '';
 }
 
 function openModal() {
-  sel.result = null; sel.species = 'trout'; sel.method = 'fly'; sel.mode = 'single';
+  sel.result = null; sel.species = 'trout'; sel.method = 'fly';
   if (currentData) {
     if (currentData.species === 'bass') sel.species = 'bass';
     if (currentData.tactics && /spin/i.test(currentData.tactics.method_lean || '')) sel.method = 'spin';
@@ -936,8 +916,7 @@ function openModal() {
   document.getElementById('logTime').value = nowLocalInput();
   document.getElementById('logEnd').value = nowLocalInput();
   document.getElementById('logStart').value = isoToLocalInput(new Date(Date.now() - 2 * 3600e3).toISOString());
-  TALLY_SPECIES.forEach(s => { const el = document.getElementById('tally_' + s); if (el) el.value = 0; });
-  setModeUI();
+  updateTimeFields();
   pendingPhoto = null; editingId = null;
   document.getElementById('logModalTitle').textContent = 'Log a catch';
   document.getElementById('logDelete').style.display = 'none';
@@ -961,24 +940,18 @@ function updatePhotoPreview() {
 function openEditModal(entry) {
   openModal();
   editingId = entry.id;
+  document.getElementById('logModalTitle').textContent = 'Edit catch';
   document.getElementById('logDelete').style.display = '';
   document.getElementById('logSave').textContent = 'Save changes';
-  if (entry.type === 'session') {
-    sel.mode = 'session';
-    document.getElementById('logModalTitle').textContent = 'Edit session';
-    document.getElementById('logStart').value = isoToLocalInput(entry.start_at || entry.caught_at || new Date().toISOString());
-    document.getElementById('logEnd').value = isoToLocalInput(entry.end_at || entry.caught_at || new Date().toISOString());
-    const sc = entry.species_counts || {};
-    TALLY_SPECIES.forEach(s => { document.getElementById('tally_' + s).value = sc[s] || 0; });
-  } else {
-    sel.mode = 'single';
-    document.getElementById('logModalTitle').textContent = 'Edit catch';
-    sel.result = entry.result || 'fish'; setSeg('segResult', sel.result);
-    document.getElementById('logCount').value = entry.count || 1;
-    sel.species = entry.species || 'trout'; setSeg('segSpecies', sel.species);
-    document.getElementById('logTime').value = isoToLocalInput(entry.caught_at || entry.logged_at || new Date().toISOString());
+  sel.result = entry.result || 'fish'; setSeg('segResult', sel.result);
+  document.getElementById('logCount').value = entry.count || 1;
+  sel.species = entry.species || 'trout'; setSeg('segSpecies', sel.species);
+  document.getElementById('logTime').value = isoToLocalInput(entry.caught_at || entry.logged_at || new Date().toISOString());
+  if (entry.start_at && entry.end_at) {
+    document.getElementById('logStart').value = isoToLocalInput(entry.start_at);
+    document.getElementById('logEnd').value = isoToLocalInput(entry.end_at);
   }
-  setModeUI();
+  updateTimeFields();
   sel.method = entry.method || 'fly'; setSeg('segMethod', sel.method);
   fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES);
   if (entry.lure) document.getElementById('logLure').value = entry.lure;
@@ -1068,14 +1041,8 @@ function renderSpotMap() {
     const color = SPECIES_COLOR[e.species] || SPECIES_COLOR.other;
     const m = L.circleMarker([e.catch_lat, e.catch_lng], { radius: 7, color: '#0e1b2a', weight: 2, fillColor: color, fillOpacity: 0.9 }).addTo(spotMarkers);
     const when = new Date(e.caught_at || e.logged_at).toLocaleDateString([], { month: 'short', day: 'numeric' });
-    let rlab, title;
-    if (e.type === 'session') {
-      title = '📋 Session';
-      rlab = Object.entries(e.species_counts || {}).map(([s, n]) => `${n} ${MAP_SPECIES_LABEL[s] || s}`).join(', ') || 'no fish';
-    } else {
-      title = MAP_SPECIES_LABEL[e.species] || e.species;
-      rlab = (RESULT_LABEL[e.result] || '') + (e.result === 'fish' && e.count > 1 ? ' ×' + e.count : '');
-    }
+    const title = MAP_SPECIES_LABEL[e.species] || e.species;
+    const rlab = (RESULT_LABEL[e.result] || '') + (e.result === 'fish' && e.count > 1 ? ' ×' + e.count : '');
     m.bindPopup(`<b>${title}</b><br>${rlab} · ${when}${e.score != null ? ' · score ' + e.score : ''}`);
     latlngs.push([e.catch_lat, e.catch_lng]);
   });
@@ -1085,38 +1052,36 @@ function renderSpotMap() {
 }
 
 async function saveEntry() {
-  const session = sel.mode === 'session';
-  if (!session && !sel.result) { alert('Pick a result first (Caught / Nibbles / Skunked).'); return; }
+  if (!sel.result) { alert('Pick a result first (Caught / Nibbles / Skunked).'); return; }
   const btn = document.getElementById('logSave');
   const log = loadLog();
   const editing = editingId ? log.find(x => x.id === editingId) : null;
 
-  let caughtMs, typeFields;
-  if (session) {
+  const isFish = sel.result === 'fish';
+  const count = isFish ? currentCount() : 0;
+  const many = isFish && count > 1;
+
+  let caughtMs, startISO = null, endISO = null;
+  if (many) {
     const sv = document.getElementById('logStart').value, ev = document.getElementById('logEnd').value;
     let startMs = sv ? new Date(sv).getTime() : Date.now();
     let endMs = ev ? new Date(ev).getTime() : startMs;
     if (endMs < startMs) { const t = startMs; startMs = endMs; endMs = t; }
-    const counts = {}; let total = 0;
-    TALLY_SPECIES.forEach(s => { const n = Math.max(0, parseInt(document.getElementById('tally_' + s).value, 10) || 0); if (n > 0) { counts[s] = n; total += n; } });
-    let dom = 'other', max = -1; for (const s in counts) if (counts[s] > max) { max = counts[s]; dom = s; }
+    startISO = new Date(startMs).toISOString();
+    endISO = new Date(endMs).toISOString();
     caughtMs = Math.round((startMs + endMs) / 2);
-    typeFields = { type: 'session', result: total > 0 ? 'fish' : 'skunk', count: total, species: dom,
-      species_counts: counts, start_at: new Date(startMs).toISOString(), end_at: new Date(endMs).toISOString() };
   } else {
     const tv = document.getElementById('logTime').value;
     caughtMs = tv ? new Date(tv).getTime() : Date.now();
-    typeFields = { type: 'single', result: sel.result,
-      count: sel.result === 'fish' ? Math.max(1, parseInt(document.getElementById('logCount').value, 10) || 1) : 0,
-      species: sel.species, species_counts: null, start_at: null, end_at: null };
   }
 
   const prev = btn.textContent;
   btn.disabled = true; btn.textContent = 'Saving…';
   const snap = await resolveSnapshot(caughtMs, editing);
   btn.disabled = false; btn.textContent = prev;
-  const fields = Object.assign({
-    method: sel.method,
+  const fields = {
+    result: sel.result, count, species: sel.species, method: sel.method,
+    start_at: startISO, end_at: endISO,
     lure: document.getElementById('logLure').value, position: document.getElementById('logPosition').value,
     depth: document.getElementById('logDepth').value, notes: document.getElementById('logNotes').value.trim(),
     caught_at: new Date(caughtMs).toISOString(), photo: pendingPhoto || null,
@@ -1125,8 +1090,8 @@ async function saveEntry() {
     score: snap.score ?? null, tier: snap.tier ?? null, light_phase: snap.light_phase ?? null, temp_f: snap.temp_f ?? null,
     pressure_trend_hpa: snap.pressure_trend_hpa ?? null, cloud_cover_pct: snap.cloud_cover_pct ?? null,
     wind_mph: snap.wind_mph ?? null, moon_illumination_pct: snap.moon_illumination_pct ?? null, data_timestamp: snap.timestamp ?? null,
-  }, typeFields);
-  if (editing) Object.assign(editing, fields);
+  };
+  if (editing) { delete editing.type; delete editing.species_counts; Object.assign(editing, fields); }
   else log.push(Object.assign({ id: Date.now(), logged_at: new Date().toISOString() }, fields));
   saveLog(log); pendingPhoto = null; editingId = null; pendingLatLng = null; closeModal(); renderLog();
 }
@@ -1170,21 +1135,16 @@ function renderLog() {
   const recent = log.slice(-6).reverse().map(e => {
     const sc = e.score != null ? `score ${e.score}` : 'no score';
     const photoImg = e.photo ? `<img src="${e.photo}" alt="catch" style="width:54px;height:54px;object-fit:cover;border-radius:8px;margin-top:6px;">` : '';
-    let rlabel, when, meta;
-    if (e.type === 'session') {
-      const tally = Object.entries(e.species_counts || {}).map(([s, n]) => `${n} ${SPECIES_LABEL[s] || s}`).join(', ') || 'no fish';
-      rlabel = '📋 Session';
-      const st = e.start_at ? new Date(e.start_at) : null, en = e.end_at ? new Date(e.end_at) : null;
-      if (st && en) {
-        const durH = Math.round((en - st) / 3600e3 * 10) / 10;
-        when = `${st.toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}–${en.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })} · ${durH}h`;
-      } else when = new Date(e.caught_at || e.logged_at).toLocaleDateString([], { month: 'short', day: 'numeric' });
-      meta = [tally, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
+    let when;
+    if (e.start_at && e.end_at) {
+      const st = new Date(e.start_at), en = new Date(e.end_at);
+      const durH = Math.round((en - st) / 3600e3 * 10) / 10;
+      when = `${st.toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}–${en.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })} · ${durH}h`;
     } else {
       when = new Date(e.caught_at || e.logged_at).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
-      rlabel = RESULT_LABEL[e.result] + (e.result === 'fish' && e.count > 1 ? ` ×${e.count}` : '');
-      meta = [e.species, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
     }
+    const rlabel = RESULT_LABEL[e.result] + (e.result === 'fish' && e.count > 1 ? ` ×${e.count}` : '');
+    const meta = [e.species, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
     return `<div class="logentry" data-id="${e.id}"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}<span class="le-edit">✎ edit</span></span><span style="color:var(--muted)">${when} · ${sc}</span></div><div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div>${photoImg}</div>`;
   }).join('');
   body.innerHTML =
@@ -1217,8 +1177,8 @@ document.getElementById('useGpsBtn').addEventListener('click', useGps);
 document.getElementById('logDelete').addEventListener('click', () => { if (editingId && confirm('Delete this catch from your log?')) { saveLog(loadLog().filter(x => x.id !== editingId)); editingId = null; pendingPhoto = null; closeModal(); renderLog(); } });
 document.getElementById('logBody').addEventListener('click', (e) => { const row = e.target.closest('.logentry'); if (!row) return; const entry = loadLog().find(x => x.id === Number(row.dataset.id)); if (entry) openEditModal(entry); });
 document.getElementById('logModal').addEventListener('click', e => { if (e.target.id === 'logModal') closeModal(); });
-document.getElementById('segMode').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.mode = b.dataset.v; setModeUI(); });
-document.getElementById('segResult').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.result = b.dataset.v; setSeg('segResult', sel.result); document.getElementById('countField').style.display = sel.result === 'fish' ? '' : 'none'; });
+document.getElementById('segResult').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.result = b.dataset.v; setSeg('segResult', sel.result); updateTimeFields(); });
+document.getElementById('logCount').addEventListener('input', updateTimeFields);
 document.getElementById('segSpecies').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.species = b.dataset.v; setSeg('segSpecies', sel.species); });
 document.getElementById('segMethod').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.method = b.dataset.v; setSeg('segMethod', sel.method); fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES); });
 
