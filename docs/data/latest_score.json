@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-07-10T11:58:26-07:00",
-  "score": 65,
+  "timestamp": "2026-07-10T13:37:05-07:00",
+  "score": 69,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
   "message": "Good conditions for bass right now. Worth a cast.",
@@ -12,37 +12,35 @@
     "type": "moonset",
     "time": "2026-07-10T17:44:22-07:00"
   },
-  "pressure_trend_hpa": -1.5,
+  "pressure_trend_hpa": -1.8,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 18.6,
-  "temp_f": 69.0,
-  "surface_pressure_hpa": 1005.3,
-  "cloud_cover_pct": 5.0,
-  "wind_mph": 4.9,
+  "moon_illumination_pct": 18.0,
+  "temp_f": 74.4,
+  "surface_pressure_hpa": 1004.8,
+  "cloud_cover_pct": 36.0,
+  "wind_mph": 5.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
-    "cloud_cover": 0,
+    "cloud_cover": 4,
     "wind": 12
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "A light breeze/ripple has a very favorable effect"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~69\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~74\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Mid-depth \u2014 ~8\u201315 ft",
+    "depth": "Deep \u2014 15 ft+ near structure",
     "method_lean": "Spin fishing",
     "method_reason": "bass holding on structure are efficient to target with lures",
     "fly_options": [
@@ -80,7 +78,7 @@
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Open water \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Largemouth bass \u00b7 Open water \u00b7 Deep \u2014 15 ft+ near structure \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
