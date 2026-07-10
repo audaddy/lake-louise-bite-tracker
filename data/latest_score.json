@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-09T16:52:03-07:00",
+  "timestamp": "2026-07-09T19:45:46-07:00",
   "score": 65,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-07-10T01:23:04-07:00"
   },
-  "pressure_trend_hpa": -2.4,
+  "pressure_trend_hpa": -1.9,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 26.4,
-  "temp_f": 77.3,
-  "surface_pressure_hpa": 1008.6,
+  "moon_illumination_pct": 25.2,
+  "temp_f": 77.1,
+  "surface_pressure_hpa": 1006.7,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 5.4,
+  "wind_mph": 4.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
