@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-11T05:06:38-07:00",
-  "score": 64,
-  "tier": "Good",
-  "species_note": "Rainbow trout \u2014 dawn/dusk window",
-  "message": "Good trout conditions during the low-light window. Good time to fish.",
+  "timestamp": "2026-07-11T06:53:33-07:00",
+  "score": 52,
+  "tier": "Fair",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-07-11T10:29:01-07:00"
@@ -12,47 +12,40 @@
     "type": "moonset",
     "time": "2026-07-11T19:03:46-07:00"
   },
-  "pressure_trend_hpa": 1.4,
+  "pressure_trend_hpa": 2.3,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": true,
-  "moon_illumination_pct": 12.4,
-  "temp_f": 55.1,
-  "surface_pressure_hpa": 1005.3,
-  "cloud_cover_pct": 2.0,
-  "wind_mph": 3.8,
+  "in_dawn_dusk": false,
+  "moon_illumination_pct": 11.8,
+  "temp_f": 58.3,
+  "surface_pressure_hpa": 1006.5,
+  "cloud_cover_pct": 5.0,
+  "wind_mph": 5.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
     "cloud_cover": 0,
-    "wind": 12,
-    "dawn_dusk": 12
+    "wind": 12
   },
   "positive_factors": [
     "Slightly rising pressure \u2014 neutral to mild",
-    "A light breeze/ripple has a very favorable effect",
-    "Low-light dawn/dusk window \u2014 prime feeding time"
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
   ],
-  "light_phase": "dawn_dusk",
+  "light_phase": "day",
   "tactics": {
-    "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~55\u00b0F favors trout; bass sluggish",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
-    "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Fly fishing",
-    "method_reason": "calm-ish water and a trout bite suit fly presentations",
+    "species_pick": "Either \u2014 slight bass edge",
+    "species_reason": "moderate ~58\u00b0F; daytime warmth leans bass",
+    "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
+    "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
+    "depth": "Mid-depth \u2014 ~8\u201315 ft",
+    "method_lean": "Spin fishing",
+    "method_reason": "bass holding on structure are efficient to target with lures",
     "fly_options": [
-      {
-        "name": "Dry flies (caddis / mayfly)",
-        "why": "trout rise to the evening hatch in low light",
-        "hot": true
-      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -61,7 +54,12 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
-        "hot": false
+        "hot": true
+      },
+      {
+        "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
+        "why": "subsurface when nothing's rising / bright midday",
+        "hot": true
       }
     ],
     "spin_options": [
@@ -73,11 +71,16 @@
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
+        "hot": false
+      },
+      {
+        "name": "Jigs & soft plastics (worked deep)",
+        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
         "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+    "summary": "Either \u2014 slight bass edge \u00b7 Transition edges \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
