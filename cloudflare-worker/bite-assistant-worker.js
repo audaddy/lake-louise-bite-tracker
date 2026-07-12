@@ -1,23 +1,39 @@
 /**
- * Lake Louise Bite Tracker — AI assistant Worker (Cloudflare Workers AI)
+ * BiteCast — AI assistant Worker (Cloudflare Workers AI)
  *
- * Powers three features on the dashboard, all free via Workers AI:
+ * Powers three features on the dashboard:
  *   - mode "lure": photograph a lure/fly -> is it a good choice right now?
  *   - mode "fish": photograph a fish   -> what species is it (likely)?
  *   - mode "chat": ask the guide a fishing question, aware of live conditions
  *
- * Vision runs on LLaVA, then a Llama text model reasons over the description
- * plus the live conditions the app sends. No API key required — the AI binding
- * (env.AI) is provided by Cloudflare. Cost stays inside the free daily allowance.
+ * Vision runs on a Llama vision model, then a Llama text model reasons over the
+ * description plus the live conditions the app sends. No API key required — the
+ * AI binding (env.AI) is provided by Cloudflare. Usage above the free daily
+ * Workers AI allowance is billed, so this Worker enforces a soft per-IP daily
+ * cap (see DAILY_FREE_LIMIT / RATE_LIMIT KV binding below) to keep cost bounded
+ * as BiteCast is used at more locations.
  *
  * SETUP: bind Workers AI to this Worker with the variable name `AI`
  * (Worker → Settings → Bindings → Add → Workers AI → variable name: AI).
+ *
+ * OPTIONAL (cost control): create a KV namespace and bind it as `RATE_LIMIT`
+ * (Worker → Settings → Bindings → Add → KV Namespace → variable name: RATE_LIMIT)
+ * to cap free AI requests per IP per day. Without this binding, rate limiting
+ * is skipped entirely (fails open) so the Worker still works if you don't set
+ * it up. Optionally set a `DAILY_LIMIT` plain-text var to override the default.
  */
 
 // Current Workers AI models (older ones like llava-1.5 / llama-3.1-8b were
 // deprecated). Both are free-tier eligible.
 const VISION_MODEL = '@cf/meta/llama-3.2-11b-vision-instruct';
 const CHAT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
+
+// Free requests allowed per IP per UTC day before nudging toward Ko-fi.
+// Overridable per-deployment via a `DAILY_LIMIT` plain-text Worker variable.
+const DAILY_FREE_LIMIT = 15;
+const SUPPORT_MESSAGE =
+  "You've hit today's free AI limit for BiteCast. It resets tomorrow (UTC) — " +
+  'or chip in on Ko-fi to help raise it: https://ko-fi.com/audaddy';
 
 // Lock browser access to your dashboard's origin (basic abuse protection).
 // If you use a custom domain later, add it to this list.
@@ -61,7 +77,8 @@ function conditionsText(c) {
   if (c.wind_mph != null) parts.push(`wind ${Math.round(c.wind_mph)} mph`);
   if (c.pressure_trend_hpa != null) parts.push(`pressure ${c.pressure_trend_hpa} hPa/3h`);
   if (c.moon_illumination_pct != null) parts.push(`moon ${c.moon_illumination_pct}% lit`);
-  let s = 'Live conditions at Lake Louise (Lakewood, WA): ' + parts.join(', ') + '.';
+  const place = c.at_home === false && c.location_name ? c.location_name : 'Lake Louise (Lakewood, WA)';
+  let s = `Live conditions at ${place}: ` + parts.join(', ') + '.';
   const t = c.tactics;
   if (t) {
     s += ` The app currently suggests: target ${t.species_pick}; ${t.where}; ${t.depth}; method lean ${t.method_lean}.`;
@@ -69,11 +86,30 @@ function conditionsText(c) {
   return s;
 }
 
-const GUIDE_INTRO =
-  'You are a friendly, practical fishing guide built into the "Lake Louise Bite Tracker" app. ' +
-  'Lake Louise is a small lowland lake in Lakewood, Washington holding rainbow trout and largemouth bass. ' +
-  'Give concise, specific, real-world advice. Prefer 2–4 short sentences unless asked for more. ' +
-  'Use the live conditions provided. Do not invent facts you cannot infer.';
+function guideIntro(c) {
+  const atHome = !c || c.at_home !== false;
+  const place = atHome
+    ? 'Lake Louise, a small lowland lake in Lakewood, Washington holding rainbow trout and largemouth bass'
+    : (c && c.location_name ? c.location_name : "the angler's current location");
+  return 'You are a friendly, practical fishing guide built into the "BiteCast" app. ' +
+    `The angler is fishing at ${place}. ` +
+    (atHome ? '' : 'This is not the Lake Louise home water, so do not assume rainbow trout/largemouth bass are ' +
+      'present — reason from the live conditions and general species behavior for the region instead. ') +
+    'Give concise, specific, real-world advice. Prefer 2–4 short sentences unless asked for more. ' +
+    'Use the live conditions provided. Do not invent facts you cannot infer.';
+}
+
+async function checkRateLimit(env, request) {
+  if (!env.RATE_LIMIT) return { limited: false }; // KV not bound — limiting disabled (fails open)
+  const ip = request.headers.get('CF-Connecting-IP') || 'unknown';
+  const day = new Date().toISOString().slice(0, 10);
+  const key = `rl:${ip}:${day}`;
+  const limit = Number(env.DAILY_LIMIT) || DAILY_FREE_LIMIT;
+  const current = Number((await env.RATE_LIMIT.get(key)) || '0');
+  if (current >= limit) return { limited: true };
+  await env.RATE_LIMIT.put(key, String(current + 1), { expirationTtl: 172800 });
+  return { limited: false };
+}
 
 async function runChat(env, system, user, history) {
   const messages = [{ role: 'system', content: system }];
@@ -111,7 +147,7 @@ export default {
 
     if (request.method === 'OPTIONS') return new Response(null, { headers: cors });
     if (request.method === 'GET') {
-      return json({ ok: true, service: 'lake-louise-bite-assistant', modes: ['lure', 'fish', 'chat'] }, 200, cors);
+      return json({ ok: true, service: 'bitecast-assistant', modes: ['lure', 'fish', 'chat'] }, 200, cors);
     }
     if (request.method !== 'POST') return json({ error: 'POST only' }, 405, cors);
 
@@ -121,8 +157,11 @@ export default {
     const cond = conditionsText(conditions);
 
     try {
+      const rl = await checkRateLimit(env, request);
+      if (rl.limited) return json({ error: SUPPORT_MESSAGE }, 429, cors);
+
       if (mode === 'chat') {
-        const system = `${GUIDE_INTRO}\n\n${cond}`;
+        const system = `${guideIntro(conditions)}\n\n${cond}`;
         const answer = await runChat(env, system, question || 'What should I throw right now?', history);
         return json({ answer }, 200, cors);
       }
@@ -139,14 +178,14 @@ export default {
 
         let system, user;
         if (mode === 'fish') {
-          system = `${GUIDE_INTRO}\n\n${cond}\n\n` +
+          system = `${guideIntro(conditions)}\n\n${cond}\n\n` +
             'The user photographed a fish. Based on the image description, tell them the most likely species ' +
             '(rainbow trout and largemouth bass are most common here; it could be something else like a perch, ' +
             'crappie, or cutthroat). Give the 1–2 key features that support your guess, note your uncertainty, ' +
             'and add one quick handling or ID tip.';
           user = `Image description of the fish: "${desc}". The user asks: ${question || 'What kind of fish is this?'}`;
         } else {
-          system = `${GUIDE_INTRO}\n\n${cond}\n\n` +
+          system = `${guideIntro(conditions)}\n\n${cond}\n\n` +
             'The user photographed a lure or fly they are considering. Based on the image description and the ' +
             'live conditions, tell them plainly whether it is a GOOD choice right now and why, and how to fish it ' +
             '(depth, retrieve speed, any color tweak). If it is a poor match for current conditions, say so and ' +

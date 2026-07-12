@@ -315,7 +315,12 @@ return SunCalc;
 }());
 
 /* ===================================================================== *
- * Lake Louise Bite Tracker — look-ahead notifier (Cloudflare Cron)
+ * BiteCast — look-ahead notifier for the Lake Louise home water (Cloudflare Cron)
+ *
+ * This notifier is tied to the fixed Lake Louise coordinates below by design
+ * — advance push alerts need a single "home" location to run a cron against.
+ * Live, on-demand scoring for other locations happens client-side in the
+ * dashboard (docs/index.html) via geolocation and does not use this Worker.
  *
  * Runs on a Cron Trigger every 30 min. Fetches the Open-Meteo forecast,
  * scores every upcoming hour with the same model as the app (solunar via

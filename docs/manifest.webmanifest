@@ -1,7 +1,7 @@
 {
-  "name": "Lake Louise Bite Tracker",
-  "short_name": "Bite Tracker",
-  "description": "Live fishing bite score, solunar windows, tactics, and AI assistant for Lake Louise, WA.",
+  "name": "BiteCast",
+  "short_name": "BiteCast",
+  "description": "Live fishing bite score, solunar windows, tactics, and AI assistant for Lake Louise, WA — or anywhere you drop a line.",
   "start_url": ".",
   "scope": "./",
   "display": "standalone",

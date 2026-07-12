@@ -1,0 +1,5 @@
+# Displays a "Sponsor" button on the repo. Ko-fi takes 0% platform fee on
+# one-time tips; GitHub Sponsors is also 0% fee but must be enabled for this
+# account first (github.com/sponsors) before uncommenting it below.
+ko_fi: audaddy
+# github: [audaddy]
