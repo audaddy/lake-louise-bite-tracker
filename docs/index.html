@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>Lake Louise Bite Tracker</title>
+<title>BiteCast — Lake Louise</title>
 <link rel="manifest" href="manifest.webmanifest" />
 <meta name="theme-color" content="#0e1b2a" />
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-<meta name="apple-mobile-web-app-title" content="Bite Tracker" />
+<meta name="apple-mobile-web-app-title" content="BiteCast" />
 <link rel="apple-touch-icon" href="icons/icon-180.png" />
 <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" crossorigin="" />
@@ -166,13 +166,25 @@
     .tcols { grid-template-columns: 1fr; }
     .tgrid { grid-template-columns: 1fr; }
   }
+  .locbar { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; font-size: 0.85rem; }
+  .locbtn { background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--text); border-radius: 999px; padding: 5px 12px; font-size: 0.82rem; cursor: pointer; }
+  .locbtn:disabled { opacity: 0.6; }
+  .locname { color: var(--muted); }
+  .locreset { color: var(--accent); text-decoration: none; }
+  .support-card { text-align: center; font-size: 0.85rem; color: var(--muted); margin-top: 10px; }
+  .support-card a { color: var(--accent); }
 </style>
 </head>
 <body>
 <div class="wrap">
   <header>
-    <h1>🎣 Lake Louise Bite Tracker</h1>
-    <div class="sub">Lakewood, WA · Rainbow trout &amp; largemouth bass</div>
+    <h1>🎣 BiteCast</h1>
+    <div class="sub" id="subLine">Lakewood, WA · Rainbow trout &amp; largemouth bass</div>
+    <div class="locbar">
+      <button class="locbtn" id="btnUseLocation">📍 Use my location</button>
+      <span class="locname" id="locName"></span>
+      <a href="#" id="btnResetLocation" class="locreset" style="display:none;">Reset to Lake Louise</a>
+    </div>
   </header>
 
   <div class="updated" id="updated">Loading…</div>
@@ -195,6 +207,8 @@
     </div>
     <div class="ai-result" id="aiResult" style="display:none;"></div>
     <div class="ai-cfg" id="aiCfg"></div>
+    <div class="support-card">AI photo ID and chat run on paid Cloudflare AI credits — free to use, but not free to run.
+      <a href="https://ko-fi.com/audaddy" target="_blank" rel="noopener">☕ chip in on Ko-fi</a> if BiteCast helps you put fish in the boat.</div>
   </div>
   <input type="file" id="lureInput" accept="image/*" capture="environment" style="display:none;">
   <input type="file" id="fishInput" accept="image/*" capture="environment" style="display:none;">
@@ -362,7 +376,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.9.0/suncalc.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" crossorigin=""></script>
 <script>
-const LAT = 47.161861, LON = -122.567972;
+const HOME_LOCATION = { lat: 47.161861, lon: -122.567972, name: 'Lake Louise, WA' };
+const LOC_KEY = 'bitecast_location_v1';
+function loadSavedLocation() { try { const v = JSON.parse(localStorage.getItem(LOC_KEY)); return (v && typeof v.lat === 'number' && typeof v.lon === 'number') ? v : null; } catch (e) { return null; } }
+const _savedLoc = loadSavedLocation();
+let LAT = _savedLoc ? _savedLoc.lat : HOME_LOCATION.lat;
+let LON = _savedLoc ? _savedLoc.lon : HOME_LOCATION.lon;
+let LOCATION_NAME = _savedLoc ? _savedLoc.name : HOME_LOCATION.name;
+let AT_HOME = !_savedLoc;
 const REFRESH_MS = 5 * 60 * 1000;
 const LS_KEY = 'llbt_catch_log_v1';
 let chart = null;
@@ -600,6 +621,50 @@ function computeLive(weather) {
     score_breakdown: breakdown, positive_factors: f.pos, negative_factors: f.neg, tactics,
   };
 }
+
+// ---------- location ----------
+function saveLocation(loc) { try { localStorage.setItem(LOC_KEY, JSON.stringify(loc)); } catch (e) {} }
+function updateLocationUI() {
+  const nameEl = document.getElementById('locName');
+  const resetEl = document.getElementById('btnResetLocation');
+  const subEl = document.getElementById('subLine');
+  if (nameEl) nameEl.textContent = AT_HOME ? '' : LOCATION_NAME;
+  if (resetEl) resetEl.style.display = AT_HOME ? 'none' : '';
+  if (subEl) {
+    subEl.textContent = AT_HOME
+      ? 'Lakewood, WA · Rainbow trout & largemouth bass'
+      : LOCATION_NAME + ' · species guidance tuned for Lake Louise — adjust for local fish';
+  }
+}
+function applyLocation(loc, atHome) {
+  LAT = loc.lat; LON = loc.lon; LOCATION_NAME = loc.name; AT_HOME = !!atHome;
+  if (atHome) { try { localStorage.removeItem(LOC_KEY); } catch (e) {} } else { saveLocation(loc); }
+  updateLocationUI();
+  loadData();
+}
+async function reverseGeocodeName(lat, lon) {
+  try {
+    const r = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`, { cache: 'no-store' });
+    const d = await r.json();
+    const place = d.city || d.locality || d.principalSubdivision;
+    return place ? `${place}, ${d.principalSubdivisionCode || d.countryCode || ''}`.replace(/,\s*$/, '') : `Your location (${lat.toFixed(3)}, ${lon.toFixed(3)})`;
+  } catch (e) { return `Your location (${lat.toFixed(3)}, ${lon.toFixed(3)})`; }
+}
+function useMyLocation() {
+  if (!navigator.geolocation) { alert('Location is not available on this device/browser.'); return; }
+  const btn = document.getElementById('btnUseLocation'); const prev = btn ? btn.textContent : '';
+  if (btn) { btn.disabled = true; btn.textContent = 'Locating…'; }
+  navigator.geolocation.getCurrentPosition(
+    async (p) => {
+      const lat = p.coords.latitude, lon = p.coords.longitude;
+      const name = await reverseGeocodeName(lat, lon);
+      applyLocation({ lat, lon, name }, false);
+      if (btn) { btn.disabled = false; btn.textContent = prev; }
+    },
+    (err) => { alert('Could not get your location: ' + err.message); if (btn) { btn.disabled = false; btn.textContent = prev; } },
+    { enableHighAccuracy: true, timeout: 10000 });
+}
+function resetToHomeLocation(e) { if (e) e.preventDefault(); applyLocation(HOME_LOCATION, true); }
 
 // ---------- load ----------
 async function fetchJSON(name) {
@@ -1145,6 +1210,7 @@ function conditionsPayload() {
     cloud_cover_pct: d.cloud_cover_pct, wind_mph: d.wind_mph,
     pressure_trend_hpa: d.pressure_trend_hpa, moon_illumination_pct: d.moon_illumination_pct,
     tactics: d.tactics ? { species_pick: d.tactics.species_pick, where: d.tactics.where, depth: d.tactics.depth, method_lean: d.tactics.method_lean } : null,
+    location_name: LOCATION_NAME, at_home: AT_HOME,
   };
 }
 async function callWorker(payload) {
@@ -1210,7 +1276,7 @@ async function handlePhoto(file, mode) {
 // Chat
 let chatHistory = [];
 function renderChatLog(thinking) {
-  const intro = { role: 'assistant', content: 'Ask me anything about fishing Lake Louise right now — lures, depth, timing, or why they might not be biting.' };
+  const intro = { role: 'assistant', content: `Ask me anything about fishing ${AT_HOME ? 'Lake Louise' : LOCATION_NAME} right now — lures, depth, timing, or why they might not be biting.` };
   let html = [intro, ...chatHistory].map(m => `<div class="bubble ${m.role === 'user' ? 'user' : 'bot'}">${escapeHtml(m.content)}</div>`).join('');
   if (thinking) html += '<div class="bubble bot thinking">Thinking…</div>';
   const log = document.getElementById('chatLog'); log.innerHTML = html; log.scrollTop = log.scrollHeight;
@@ -1243,6 +1309,9 @@ document.getElementById('chatSend').addEventListener('click', sendChat);
 document.getElementById('chatInput').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); } });
 document.getElementById('chatModal').addEventListener('click', e => { if (e.target.id === 'chatModal') closeChat(); });
 updateAiCfg();
+document.getElementById('btnUseLocation').addEventListener('click', useMyLocation);
+document.getElementById('btnResetLocation').addEventListener('click', resetToHomeLocation);
+updateLocationUI();
 
 // Register the service worker so the app installs to the home screen and
 // opens offline with the last-known data.
@@ -1256,6 +1325,17 @@ loadData();
 renderLog();
 setInterval(loadData, REFRESH_MS);
 setInterval(updateCountdowns, 30 * 1000);
+</script>
+<script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
+<script>
+  if (window.kofiWidgetOverlay) {
+    kofiWidgetOverlay.draw('audaddy', {
+      'type': 'floating-chat',
+      'floating-chat.donateButton.text': 'Support',
+      'floating-chat.donateButton.background-color': '#4aa3df',
+      'floating-chat.donateButton.text-color': '#fff'
+    });
+  }
 </script>
 </body>
 </html>
