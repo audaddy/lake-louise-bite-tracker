@@ -6,12 +6,12 @@
  *   - mode "fish": photograph a fish   -> what species is it (likely)?
  *   - mode "chat": ask the guide a fishing question, aware of live conditions
  *
- * Vision runs on a Llama vision model, then a Llama text model reasons over the
- * description plus the live conditions the app sends. No API key required — the
- * AI binding (env.AI) is provided by Cloudflare. Usage above the free daily
- * Workers AI allowance is billed, so this Worker enforces a soft per-IP daily
- * cap (see DAILY_FREE_LIMIT / RATE_LIMIT KV binding below) to keep cost bounded
- * as BiteCast is used at more locations.
+ * Vision runs on a vision-capable chat model, then a text model reasons over
+ * the description plus the live conditions the app sends. No API key required
+ * — the AI binding (env.AI) is provided by Cloudflare. Usage above the free
+ * daily Workers AI allowance is billed, so this Worker enforces a soft per-IP
+ * daily cap (see DAILY_FREE_LIMIT / RATE_LIMIT KV binding below) to keep cost
+ * bounded as BiteCast is used at more locations.
  *
  * SETUP: bind Workers AI to this Worker with the variable name `AI`
  * (Worker → Settings → Bindings → Add → Workers AI → variable name: AI).
@@ -23,9 +23,12 @@
  * it up. Optionally set a `DAILY_LIMIT` plain-text var to override the default.
  */
 
-// Current Workers AI models (older ones like llava-1.5 / llama-3.1-8b were
-// deprecated). Both are free-tier eligible.
-const VISION_MODEL = '@cf/meta/llama-3.2-11b-vision-instruct';
+// Cloudflare deprecated the older Llama 3.2 vision model on 2026-05-30 (error
+// 5028: "This model was deprecated"). gemma-4-26b-a4b-it is Cloudflare's
+// current recommended vision + tool-calling replacement, and is also cheaper
+// per token than the old model. llama-3.3-70b-instruct-fp8-fast is a "-fast"
+// variant explicitly confirmed to remain active, so it's kept for chat.
+const VISION_MODEL = '@cf/google/gemma-4-26b-a4b-it';
 const CHAT_MODEL = '@cf/meta/llama-3.3-70b-instruct-fp8-fast';
 
 // Free requests allowed per IP per UTC day before nudging toward Ko-fi.
@@ -65,6 +68,15 @@ function base64ToBytes(b64) {
   const bytes = new Uint8Array(bin.length);
   for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
   return bytes;
+}
+
+function bytesToBase64(bytes) {
+  let binary = '';
+  const chunkSize = 0x8000;
+  for (let i = 0; i < bytes.length; i += chunkSize) {
+    binary += String.fromCharCode.apply(null, bytes.subarray(i, i + chunkSize));
+  }
+  return btoa(binary);
 }
 
 function conditionsText(c) {
@@ -122,22 +134,35 @@ async function runChat(env, system, user, history) {
   }
   messages.push({ role: 'user', content: String(user || '') });
   const r = await env.AI.run(CHAT_MODEL, { messages, max_tokens: 500 });
-  return r.response || '';
+  return extractText(r);
+}
+
+// Different Workers AI model families shape their response slightly
+// differently (native `.response`, or OpenAI-style `.choices[0].message`).
+// Read defensively across both so a future model swap doesn't silently break.
+function extractText(r) {
+  if (!r) return '';
+  if (typeof r.response === 'string') return r.response;
+  if (r.choices && r.choices[0] && r.choices[0].message && typeof r.choices[0].message.content === 'string') {
+    return r.choices[0].message.content;
+  }
+  if (typeof r.description === 'string') return r.description;
+  return '';
 }
 
 async function runVision(env, bytes, prompt) {
-  const args = { image: Array.from(bytes), prompt, max_tokens: 300 };
-  const read = (v) => ((v && (v.response || v.description)) || '').trim();
-  try {
-    return read(await env.AI.run(VISION_MODEL, args));
-  } catch (e) {
-    // Some Meta vision models require a one-time license acceptance.
-    if (/agree|license|accept|terms/i.test(e && e.message ? e.message : '')) {
-      try { await env.AI.run(VISION_MODEL, { prompt: 'agree' }); } catch (_) {}
-      return read(await env.AI.run(VISION_MODEL, args));
-    }
-    throw e;
-  }
+  const b64 = bytesToBase64(bytes);
+  const messages = [
+    {
+      role: 'user',
+      content: [
+        { type: 'text', text: prompt },
+        { type: 'image_url', image_url: { url: `data:image/jpeg;base64,${b64}` } },
+      ],
+    },
+  ];
+  const r = await env.AI.run(VISION_MODEL, { messages, max_tokens: 300 });
+  return extractText(r).trim();
 }
 
 export default {
