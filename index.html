@@ -174,10 +174,20 @@
   .locbar { display: flex; align-items: center; gap: 8px; margin-top: 8px; flex-wrap: wrap; font-size: 0.85rem; }
   .locbtn { background: rgba(255,255,255,0.06); border: 1px solid var(--border); color: var(--text); border-radius: 999px; padding: 5px 12px; font-size: 0.82rem; cursor: pointer; }
   .locbtn:disabled { opacity: 0.6; }
-  .locname { color: var(--muted); }
-  .locreset { color: var(--accent); text-decoration: none; }
   .support-card { text-align: center; font-size: 0.85rem; color: var(--muted); margin-top: 10px; }
   .support-card a { color: var(--accent); }
+  .spot-modal { max-width: 480px; max-height: 82vh; overflow-y: auto; }
+  .spot-section { margin-top: 16px; }
+  .spot-section-label { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.5px; color: var(--muted); margin-bottom: 6px; }
+  .spot-list { display: flex; flex-direction: column; gap: 6px; }
+  .spot-row { display: flex; align-items: center; justify-content: space-between; gap: 8px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; padding: 9px 12px; cursor: pointer; }
+  .spot-row:hover { border-color: var(--accent); }
+  .spot-row .spot-name { font-size: 0.92rem; }
+  .spot-row .spot-meta { font-size: 0.76rem; color: var(--muted); margin-top: 1px; }
+  .spot-row .spot-remove { background: none; border: none; color: var(--muted); font-size: 1rem; cursor: pointer; padding: 2px 6px; line-height: 1; }
+  .spot-row.active { border-color: var(--accent); background: rgba(74,163,223,0.12); }
+  .spot-empty { font-size: 0.85rem; color: var(--muted); padding: 6px 2px; }
+  .spot-find-btn { width: 100%; }
 </style>
 </head>
 <body>
@@ -186,9 +196,7 @@
     <h1>🎣 BiteCast</h1>
     <div class="sub" id="subLine">Lakewood, WA · Rainbow trout &amp; largemouth bass</div>
     <div class="locbar">
-      <button class="locbtn" id="btnUseLocation">📍 Use my location</button>
-      <span class="locname" id="locName"></span>
-      <a href="#" id="btnResetLocation" class="locreset" style="display:none;">Reset to Lake Louise</a>
+      <button class="locbtn" id="btnSpotPicker" type="button">📍 <span id="spotLabel">Lake Louise, WA</span> ▾</button>
     </div>
   </header>
 
@@ -308,6 +316,38 @@
     <div class="modal-actions">
       <button class="btn btn-ghost" id="chatClose">Close</button>
       <button class="btn btn-primary" id="chatSend">Send</button>
+    </div>
+  </div>
+</div>
+
+<!-- Spot picker modal -->
+<div class="modal-overlay" id="spotModal">
+  <div class="modal spot-modal">
+    <h2>📍 Choose a fishing spot</h2>
+    <button class="btn btn-ghost spot-find-btn" id="spotUseGpsBtn" type="button">📍 Use my exact current location</button>
+    <div class="field" style="margin-top:12px; margin-bottom:0;">
+      <input type="text" id="spotSearch" placeholder="Search any lake, town, or place…" autocomplete="off" />
+    </div>
+    <div class="spot-section" id="spotSearchResults" style="display:none;">
+      <div class="spot-section-label">Search results</div>
+      <div class="spot-list" id="spotSearchList"></div>
+    </div>
+    <div class="spot-section">
+      <div class="spot-section-label">Home</div>
+      <div class="spot-list" id="spotHomeList"></div>
+    </div>
+    <div class="spot-section">
+      <div class="spot-section-label">Popular spots near you</div>
+      <div class="spot-list" id="spotNearbyList">
+        <button class="btn btn-ghost spot-find-btn" id="spotNearbyBtn" type="button">📍 Find spots near me</button>
+      </div>
+    </div>
+    <div class="spot-section" id="spotSavedSection" style="display:none;">
+      <div class="spot-section-label">Your saved spots</div>
+      <div class="spot-list" id="spotSavedList"></div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="spotModalClose">Close</button>
     </div>
   </div>
 </div>
@@ -634,24 +674,58 @@ function computeLive(weather) {
   };
 }
 
-// ---------- location ----------
-function saveLocation(loc) { try { localStorage.setItem(LOC_KEY, JSON.stringify(loc)); } catch (e) {} }
+// ---------- location: search, nearby discovery, saved spots ----------
+const SPOTS_KEY = 'bitecast_saved_spots_v1';
+const NEARBY_RADIUS_M = 40000; // ~25 miles
+
+
+function loadSpots() {
+  try { const v = JSON.parse(localStorage.getItem(SPOTS_KEY)); return Array.isArray(v) ? v : []; }
+  catch (e) { return []; }
+}
+function persistSpots(list) { try { localStorage.setItem(SPOTS_KEY, JSON.stringify(list)); } catch (e) {} }
+function spotIdOf(lat, lon) { return lat.toFixed(3) + ',' + lon.toFixed(3); }
+function upsertSpot(spot) {
+  const list = loadSpots();
+  const id = spotIdOf(spot.lat, spot.lon);
+  const existing = list.findIndex((s) => s.id === id);
+  if (existing >= 0) list.splice(existing, 1);
+  list.unshift({ id, lat: spot.lat, lon: spot.lon, name: spot.name, savedAt: Date.now() });
+  const capped = list.slice(0, 25);
+  persistSpots(capped);
+  return capped;
+}
+function removeSpot(id) { persistSpots(loadSpots().filter((s) => s.id !== id)); renderSavedSpots(); }
+function haversineMiles(lat1, lon1, lat2, lon2) {
+  const R = 3958.8, rad = Math.PI / 180;
+  const dLat = (lat2 - lat1) * rad, dLon = (lon2 - lon1) * rad;
+  const a = Math.sin(dLat / 2) ** 2 + Math.cos(lat1 * rad) * Math.cos(lat2 * rad) * Math.sin(dLon / 2) ** 2;
+  return R * 2 * Math.asin(Math.sqrt(a));
+}
+
+// One-time migration: fold a single saved location from the previous
+// release into the new saved-spots list so nothing is lost.
+if (_savedLoc) upsertSpot({ lat: _savedLoc.lat, lon: _savedLoc.lon, name: _savedLoc.name });
+
 function updateLocationUI() {
-  const nameEl = document.getElementById('locName');
-  const resetEl = document.getElementById('btnResetLocation');
+  const labelEl = document.getElementById('spotLabel');
   const subEl = document.getElementById('subLine');
-  if (nameEl) nameEl.textContent = AT_HOME ? '' : LOCATION_NAME;
-  if (resetEl) resetEl.style.display = AT_HOME ? 'none' : '';
+  if (labelEl) labelEl.textContent = LOCATION_NAME;
   if (subEl) {
     subEl.textContent = AT_HOME
       ? 'Lakewood, WA · Rainbow trout & largemouth bass'
       : LOCATION_NAME + ' · species guidance tuned for Lake Louise — adjust for local fish';
   }
 }
-function applyLocation(loc, atHome) {
+function activateSpot(loc, atHome) {
   LAT = loc.lat; LON = loc.lon; LOCATION_NAME = loc.name; AT_HOME = !!atHome;
-  if (atHome) { try { localStorage.removeItem(LOC_KEY); } catch (e) {} } else { saveLocation(loc); }
+  if (atHome) { try { localStorage.removeItem(LOC_KEY); } catch (e) {} }
+  else {
+    try { localStorage.setItem(LOC_KEY, JSON.stringify({ lat: loc.lat, lon: loc.lon, name: loc.name })); } catch (e) {}
+    upsertSpot(loc);
+  }
   updateLocationUI();
+  closeSpotModal();
   loadData();
 }
 async function reverseGeocodeName(lat, lon) {
@@ -662,21 +736,155 @@ async function reverseGeocodeName(lat, lon) {
     return place ? `${place}, ${d.principalSubdivisionCode || d.countryCode || ''}`.replace(/,\s*$/, '') : `Your location (${lat.toFixed(3)}, ${lon.toFixed(3)})`;
   } catch (e) { return `Your location (${lat.toFixed(3)}, ${lon.toFixed(3)})`; }
 }
-function useMyLocation() {
+
+let lastKnownGPS = null; // cached for the session once geolocation is granted
+
+function useCurrentLocation(btn) {
   if (!navigator.geolocation) { alert('Location is not available on this device/browser.'); return; }
-  const btn = document.getElementById('btnUseLocation'); const prev = btn ? btn.textContent : '';
+  const prev = btn ? btn.textContent : '';
   if (btn) { btn.disabled = true; btn.textContent = 'Locating…'; }
   navigator.geolocation.getCurrentPosition(
     async (p) => {
       const lat = p.coords.latitude, lon = p.coords.longitude;
+      lastKnownGPS = { lat, lon };
       const name = await reverseGeocodeName(lat, lon);
-      applyLocation({ lat, lon, name }, false);
       if (btn) { btn.disabled = false; btn.textContent = prev; }
+      activateSpot({ lat, lon, name }, false);
     },
     (err) => { alert('Could not get your location: ' + err.message); if (btn) { btn.disabled = false; btn.textContent = prev; } },
     { enableHighAccuracy: true, timeout: 10000 });
 }
-function resetToHomeLocation(e) { if (e) e.preventDefault(); applyLocation(HOME_LOCATION, true); }
+
+// ---- search: any spot, anywhere (Open-Meteo geocoding, free, no key) ----
+let spotSearchDebounce = null;
+function onSpotSearchInput(e) {
+  const q = e.target.value.trim();
+  clearTimeout(spotSearchDebounce);
+  const wrap = document.getElementById('spotSearchResults');
+  if (q.length < 2) { wrap.style.display = 'none'; return; }
+  spotSearchDebounce = setTimeout(() => runSpotSearch(q), 350);
+}
+async function runSpotSearch(q) {
+  const wrap = document.getElementById('spotSearchResults');
+  const list = document.getElementById('spotSearchList');
+  wrap.style.display = '';
+  list.innerHTML = '<div class="spot-empty">Searching…</div>';
+  try {
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(q)}&count=8&language=en&format=json`;
+    const r = await fetch(url, { cache: 'no-store' });
+    const d = await r.json();
+    const results = Array.isArray(d.results) ? d.results : [];
+    if (!results.length) { list.innerHTML = '<div class="spot-empty">No matches. Try a different spelling.</div>'; return; }
+    list.innerHTML = '';
+    for (const res of results) {
+      const label = [res.name, res.admin1, res.country].filter(Boolean).join(', ');
+      list.appendChild(spotRow({ lat: res.latitude, lon: res.longitude, name: label }));
+    }
+  } catch (e) {
+    list.innerHTML = '<div class="spot-empty">Search failed — check your connection.</div>';
+  }
+}
+
+// ---- nearby: named water bodies near current GPS (OpenStreetMap Overpass, free, no key) ----
+async function findNearbySpots() {
+  const list = document.getElementById('spotNearbyList');
+  list.innerHTML = '<div class="spot-empty">Finding your location…</div>';
+  const getPos = () => new Promise((resolve, reject) => {
+    if (lastKnownGPS) return resolve(lastKnownGPS);
+    if (!navigator.geolocation) return reject(new Error('Location is not available on this device/browser.'));
+    navigator.geolocation.getCurrentPosition(
+      (p) => { lastKnownGPS = { lat: p.coords.latitude, lon: p.coords.longitude }; resolve(lastKnownGPS); },
+      (err) => reject(err),
+      { enableHighAccuracy: true, timeout: 10000 });
+  });
+  let pos;
+  try { pos = await getPos(); }
+  catch (e) { list.innerHTML = `<div class="spot-empty">Couldn't get your location (${escapeHtml(e.message || 'permission denied')}).</div>`; return; }
+
+  list.innerHTML = '<div class="spot-empty">Searching nearby water…</div>';
+  const q = `[out:json][timeout:20];(` +
+    `way["natural"="water"]["water"~"lake|pond|reservoir|oxbow"](around:${NEARBY_RADIUS_M},${pos.lat},${pos.lon});` +
+    `relation["natural"="water"]["water"~"lake|pond|reservoir|oxbow"](around:${NEARBY_RADIUS_M},${pos.lat},${pos.lon});` +
+    `node["leisure"="fishing"](around:${NEARBY_RADIUS_M},${pos.lat},${pos.lon});` +
+    `);out center tags 20;`;
+  try {
+    const r = await fetch('https://overpass-api.de/api/interpreter', { method: 'POST', body: 'data=' + encodeURIComponent(q), cache: 'no-store' });
+    if (!r.ok) throw new Error('overpass ' + r.status);
+    const d = await r.json();
+    const seen = new Set();
+    const spots = [];
+    for (const el of (d.elements || [])) {
+      const name = el.tags && el.tags.name;
+      if (!name) continue;
+      const lat = el.lat != null ? el.lat : (el.center && el.center.lat);
+      const lon = el.lon != null ? el.lon : (el.center && el.center.lon);
+      if (lat == null || lon == null) continue;
+      const key = name + '@' + lat.toFixed(2) + ',' + lon.toFixed(2);
+      if (seen.has(key)) continue;
+      seen.add(key);
+      spots.push({ lat, lon, name, distance: haversineMiles(pos.lat, pos.lon, lat, lon) });
+    }
+    spots.sort((a, b) => a.distance - b.distance);
+    const top = spots.slice(0, 8);
+    list.innerHTML = '';
+    if (!top.length) {
+      list.innerHTML = '<div class="spot-empty">No named water bodies found nearby. Try the search box above.</div>';
+    } else {
+      for (const s of top) list.appendChild(spotRow({ lat: s.lat, lon: s.lon, name: s.name }, `${s.distance.toFixed(1)} mi away`));
+    }
+    const refresh = document.createElement('button');
+    refresh.className = 'btn btn-ghost spot-find-btn spot-refresh-btn';
+    refresh.type = 'button';
+    refresh.textContent = '↻ Search again';
+    list.appendChild(refresh);
+  } catch (e) {
+    list.innerHTML = '<div class="spot-empty">Nearby lookup failed — OpenStreetMap may be unreachable right now. Try the search box above.</div>';
+  }
+}
+
+// ---- shared row builder + saved-list rendering ----
+function spotRow(loc, meta) {
+  const row = document.createElement('div');
+  row.className = 'spot-row';
+  const isActive = !AT_HOME && Math.abs(LAT - loc.lat) < 0.001 && Math.abs(LON - loc.lon) < 0.001;
+  if (isActive) row.classList.add('active');
+  row.innerHTML = `<div><div class="spot-name">${escapeHtml(loc.name)}</div>${meta ? `<div class="spot-meta">${escapeHtml(meta)}</div>` : ''}</div>`;
+  row.addEventListener('click', () => activateSpot(loc, false));
+  return row;
+}
+function renderHomeRow() {
+  const wrap = document.getElementById('spotHomeList');
+  wrap.innerHTML = '';
+  const row = document.createElement('div');
+  row.className = 'spot-row' + (AT_HOME ? ' active' : '');
+  row.innerHTML = `<div><div class="spot-name">🏠 ${escapeHtml(HOME_LOCATION.name)}</div><div class="spot-meta">Default · tuned for trout &amp; bass</div></div>`;
+  row.addEventListener('click', () => activateSpot(HOME_LOCATION, true));
+  wrap.appendChild(row);
+}
+function renderSavedSpots() {
+  const section = document.getElementById('spotSavedSection');
+  const wrap = document.getElementById('spotSavedList');
+  const spots = loadSpots();
+  if (!spots.length) { section.style.display = 'none'; return; }
+  section.style.display = '';
+  wrap.innerHTML = '';
+  for (const s of spots) {
+    const row = spotRow(s);
+    const rm = document.createElement('button');
+    rm.className = 'spot-remove'; rm.type = 'button'; rm.textContent = '✕'; rm.title = 'Remove';
+    rm.addEventListener('click', (e) => { e.stopPropagation(); removeSpot(s.id); });
+    row.appendChild(rm);
+    wrap.appendChild(row);
+  }
+}
+function openSpotModal() {
+  document.getElementById('spotSearch').value = '';
+  document.getElementById('spotSearchResults').style.display = 'none';
+  renderHomeRow();
+  renderSavedSpots();
+  document.getElementById('spotModal').classList.add('open');
+}
+function closeSpotModal() { document.getElementById('spotModal').classList.remove('open'); }
 
 // ---------- load ----------
 async function fetchJSON(name) {
@@ -1373,8 +1581,14 @@ document.getElementById('chatSend').addEventListener('click', sendChat);
 document.getElementById('chatInput').addEventListener('keydown', e => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendChat(); } });
 document.getElementById('chatModal').addEventListener('click', e => { if (e.target.id === 'chatModal') closeChat(); });
 updateAiCfg();
-document.getElementById('btnUseLocation').addEventListener('click', useMyLocation);
-document.getElementById('btnResetLocation').addEventListener('click', resetToHomeLocation);
+document.getElementById('btnSpotPicker').addEventListener('click', openSpotModal);
+document.getElementById('spotModalClose').addEventListener('click', closeSpotModal);
+document.getElementById('spotModal').addEventListener('click', (e) => { if (e.target.id === 'spotModal') closeSpotModal(); });
+document.getElementById('spotSearch').addEventListener('input', onSpotSearchInput);
+document.getElementById('spotUseGpsBtn').addEventListener('click', (e) => useCurrentLocation(e.currentTarget));
+document.getElementById('spotNearbyList').addEventListener('click', (e) => {
+  if (e.target.id === 'spotNearbyBtn' || e.target.classList.contains('spot-refresh-btn')) findNearbySpots();
+});
 updateLocationUI();
 
 // Register the service worker so the app installs to the home screen and
