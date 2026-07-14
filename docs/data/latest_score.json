@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-13T16:12:20-07:00",
+  "timestamp": "2026-07-13T17:07:43-07:00",
   "score": 71,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
@@ -12,16 +12,16 @@
     "type": "moonset",
     "time": "2026-07-13T21:02:50-07:00"
   },
-  "pressure_trend_hpa": -1.3,
+  "pressure_trend_hpa": -2.0,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 0.4,
-  "temp_f": 79.7,
-  "surface_pressure_hpa": 1009.5,
+  "moon_illumination_pct": 0.3,
+  "temp_f": 78.9,
+  "surface_pressure_hpa": 1008.6,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 6.7,
+  "wind_mph": 8.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -41,7 +41,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~80\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~79\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Deep \u2014 15 ft+ near structure",
@@ -89,7 +89,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-13T16",
+    "period_key": "highscore@2026-07-13T17",
     "score_ge_70": true
   }
 }
