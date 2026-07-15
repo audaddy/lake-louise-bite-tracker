@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-14T22:58:40-07:00",
-  "score": 65,
+  "timestamp": "2026-07-15T01:25:54-07:00",
+  "score": 76,
   "tier": "Good",
-  "species_note": "Largemouth bass \u2014 good window",
-  "message": "Good conditions for bass right now. Worth a cast.",
+  "species_note": "Rainbow trout biting",
+  "message": "Good trout window right now \u2014 biting for the next ~2 hours.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-07-15T02:15:26-07:00"
@@ -12,27 +12,29 @@
     "type": "moonrise",
     "time": "2026-07-15T07:00:44-07:00"
   },
-  "pressure_trend_hpa": 0.2,
-  "species": "bass",
-  "in_major_period": false,
+  "pressure_trend_hpa": 1.1,
+  "species": "trout",
+  "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 1.1,
-  "temp_f": 68.9,
-  "surface_pressure_hpa": 1009.8,
-  "cloud_cover_pct": 8.0,
-  "wind_mph": 5.5,
+  "moon_illumination_pct": 1.4,
+  "temp_f": 62.3,
+  "surface_pressure_hpa": 1010.9,
+  "cloud_cover_pct": 18.0,
+  "wind_mph": 3.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 0,
     "wind": 12,
+    "solunar_major": 18,
     "moon_phase": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Slightly rising pressure \u2014 neutral to mild",
     "A light breeze/ripple has a very favorable effect",
+    "Solunar major period active (moon overhead/underfoot)",
     "Moon phase is favorable"
   ],
   "negative_factors": [
@@ -40,23 +42,18 @@
   ],
   "light_phase": "night",
   "tactics": {
-    "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~69\u00b0F (warm) favors bass metabolism",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~62\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Either \u2014 match the water",
-    "method_reason": "conditions don't strongly favor one over the other",
+    "method_lean": "Fly fishing",
+    "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
-      {
-        "name": "Poppers / foam topwater",
-        "why": "low light + warm water = surface bass eats",
-        "hot": true
-      },
       {
         "name": "Dry flies (caddis / mayfly)",
         "why": "trout rise to the evening hatch in low light",
-        "hot": false
+        "hot": true
       },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
@@ -71,11 +68,6 @@
     ],
     "spin_options": [
       {
-        "name": "Topwater (buzzbaits, walking baits, poppers)",
-        "why": "first/last light over shallow cover for bass",
-        "hot": true
-      },
-      {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
         "hot": true
@@ -83,18 +75,18 @@
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
-        "hot": false
+        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean either \u2014 match the water"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
-    "score_ge_70": false
+    "period_key": "underfoot@2026-07-15T02:15:26-07:00",
+    "score_ge_70": true
   }
 }
