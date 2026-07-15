@@ -1,40 +1,37 @@
 {
-  "timestamp": "2026-07-15T06:48:47-07:00",
-  "score": 68,
-  "tier": "Good",
-  "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~42 min.",
+  "timestamp": "2026-07-15T08:24:39-07:00",
+  "score": 52,
+  "tier": "Fair",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-07-15T14:43:42-07:00"
   },
   "next_minor_period": {
-    "type": "moonrise",
-    "time": "2026-07-15T07:00:44-07:00"
+    "type": "moonset",
+    "time": "2026-07-15T22:08:17-07:00"
   },
-  "pressure_trend_hpa": 1.5,
+  "pressure_trend_hpa": 1.1,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": true,
+  "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 2.0,
-  "temp_f": 57.7,
-  "surface_pressure_hpa": 1012.2,
-  "cloud_cover_pct": 2.0,
-  "wind_mph": 3.1,
+  "moon_illumination_pct": 2.3,
+  "temp_f": 61.7,
+  "surface_pressure_hpa": 1011.8,
+  "cloud_cover_pct": 1.0,
+  "wind_mph": 2.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
     "cloud_cover": 0,
-    "wind": 12,
-    "solunar_minor": 10,
+    "wind": 6,
     "moon_phase": 6
   },
   "positive_factors": [
     "Slightly rising pressure \u2014 neutral to mild",
-    "A light breeze/ripple has a very favorable effect",
-    "Solunar minor period active (moonrise/moonset)",
     "Moon phase is favorable"
   ],
   "negative_factors": [
@@ -43,10 +40,10 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~58\u00b0F; daytime warmth leans bass",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
-    "depth": "Shallow \u2014 top ~0\u20138 ft",
+    "species_reason": "moderate ~62\u00b0F; daytime warmth leans bass",
+    "where": "Transition edges \u2014 the first drop-off off the shoreline",
+    "where_reason": "mixed light; work the seam between shallow flats and deeper water",
+    "depth": "Mid-depth \u2014 ~8\u201315 ft",
     "method_lean": "Spin fishing",
     "method_reason": "bass holding on structure are efficient to target with lures",
     "fly_options": [
@@ -68,11 +65,6 @@
     ],
     "spin_options": [
       {
-        "name": "Spinners / spinnerbaits",
-        "why": "chop or cloud cover \u2014 cover water at mid-depth",
-        "hot": true
-      },
-      {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
@@ -84,14 +76,14 @@
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Either \u2014 slight bass edge \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean spin fishing"
+    "summary": "Either \u2014 slight bass edge \u00b7 Transition edges \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "moonrise@2026-07-15T07:00:44-07:00",
+    "period_key": null,
     "score_ge_70": false
   }
 }
