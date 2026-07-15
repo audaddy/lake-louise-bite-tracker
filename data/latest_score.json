@@ -1,49 +1,47 @@
 {
-  "timestamp": "2026-07-14T20:36:40-07:00",
-  "score": 77,
+  "timestamp": "2026-07-14T22:58:40-07:00",
+  "score": 65,
   "tier": "Good",
-  "species_note": "Largemouth bass \u2014 dawn/dusk window",
-  "message": "Good bass conditions during the low-light window. Good time to fish.",
+  "species_note": "Largemouth bass \u2014 good window",
+  "message": "Good conditions for bass right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-07-15T02:15:26-07:00"
   },
   "next_minor_period": {
-    "type": "moonset",
-    "time": "2026-07-14T21:40:28-07:00"
+    "type": "moonrise",
+    "time": "2026-07-15T07:00:44-07:00"
   },
-  "pressure_trend_hpa": 0.8,
+  "pressure_trend_hpa": 0.2,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": true,
-  "moon_illumination_pct": 0.9,
-  "temp_f": 76.3,
-  "surface_pressure_hpa": 1009.6,
-  "cloud_cover_pct": 0.0,
-  "wind_mph": 8.9,
+  "in_dawn_dusk": false,
+  "moon_illumination_pct": 1.1,
+  "temp_f": 68.9,
+  "surface_pressure_hpa": 1009.8,
+  "cloud_cover_pct": 8.0,
+  "wind_mph": 5.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
     "wind": 12,
-    "dawn_dusk": 12,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect",
-    "Low-light dawn/dusk window \u2014 prime feeding time",
     "Moon phase is favorable"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
   ],
-  "light_phase": "dawn_dusk",
+  "light_phase": "night",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~76\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~69\u00b0F (warm) favors bass metabolism",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -86,11 +84,6 @@
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
-      },
-      {
-        "name": "Jigs & soft plastics (worked deep)",
-        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
-        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
@@ -98,10 +91,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-14T20",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
