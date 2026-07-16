@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-16T10:45:39-07:00",
+  "timestamp": "2026-07-16T12:05:23-07:00",
   "score": 71,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
@@ -12,17 +12,17 @@
     "type": "moonset",
     "time": "2026-07-16T22:29:57-07:00"
   },
-  "pressure_trend_hpa": 0.4,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 7.6,
-  "temp_f": 60.7,
-  "surface_pressure_hpa": 1007.7,
+  "moon_illumination_pct": 8.0,
+  "temp_f": 60.3,
+  "surface_pressure_hpa": 1007.8,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 3.2,
-  "precip_in": 0.004,
+  "wind_mph": 5.0,
+  "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
@@ -38,9 +38,9 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~61\u00b0F; low light leans trout",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
+    "species_reason": "moderate ~60\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -81,7 +81,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-16T10",
+    "period_key": "highscore@2026-07-16T12",
     "score_ge_70": true
   }
 }
