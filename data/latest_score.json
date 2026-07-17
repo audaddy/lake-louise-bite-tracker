@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-16T18:02:19-07:00",
+  "timestamp": "2026-07-16T21:24:05-07:00",
   "score": 77,
   "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "species_note": "Rainbow trout \u2014 dawn/dusk window",
+  "message": "Good trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-07-17T04:00:46-07:00"
@@ -12,35 +12,36 @@
     "type": "moonset",
     "time": "2026-07-16T22:29:57-07:00"
   },
-  "pressure_trend_hpa": -1.0,
+  "pressure_trend_hpa": 0.7,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 9.6,
-  "temp_f": 61.9,
-  "surface_pressure_hpa": 1007.4,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 10.6,
+  "temp_f": 60.4,
+  "surface_pressure_hpa": 1008.1,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 5.3,
+  "wind_mph": 2.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 12,
     "cloud_cover": 12,
-    "wind": 12
+    "wind": 6,
+    "dawn_dusk": 12
   },
   "positive_factors": [
-    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect"
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
-  "light_phase": "day",
+  "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~62\u00b0F; low light leans trout",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_reason": "moderate ~60\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -81,7 +82,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-16T18",
+    "period_key": "highscore@2026-07-16T21",
     "score_ge_70": true
   }
 }
