@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-07-17T03:49:01-07:00",
-  "score": 89,
-  "tier": "Excellent",
-  "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~1 hours.",
+  "timestamp": "2026-07-17T05:07:02-07:00",
+  "score": 77,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 dawn/dusk window",
+  "message": "Good trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
-    "type": "underfoot",
-    "time": "2026-07-17T04:00:46-07:00"
+    "type": "transit",
+    "time": "2026-07-17T16:24:23-07:00"
   },
   "next_minor_period": {
     "type": "moonrise",
@@ -14,30 +14,29 @@
   },
   "pressure_trend_hpa": -0.7,
   "species": "trout",
-  "in_major_period": true,
+  "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 12.5,
-  "temp_f": 58.2,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 12.9,
+  "temp_f": 57.6,
   "surface_pressure_hpa": 1007.5,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 3.5,
+  "wind_mph": 2.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 12,
-    "solunar_major": 18
+    "wind": 6,
+    "dawn_dusk": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect",
-    "Solunar major period active (moon overhead/underfoot)"
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
-  "light_phase": "night",
+  "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
     "species_reason": "moderate ~58\u00b0F; low light leans trout",
@@ -83,7 +82,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "underfoot@2026-07-17T04:00:46-07:00",
+    "period_key": "highscore@2026-07-17T05",
     "score_ge_70": true
   }
 }
