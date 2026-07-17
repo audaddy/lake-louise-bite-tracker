@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-07-16T23:36:43-07:00",
-  "score": 63,
+  "timestamp": "2026-07-17T01:57:08-07:00",
+  "score": 65,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,26 +12,26 @@
     "type": "moonrise",
     "time": "2026-07-17T09:44:58-07:00"
   },
-  "pressure_trend_hpa": 0.0,
+  "pressure_trend_hpa": 0.1,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 11.2,
-  "temp_f": 58.5,
-  "surface_pressure_hpa": 1008.1,
-  "cloud_cover_pct": 28.0,
-  "wind_mph": 3.2,
+  "moon_illumination_pct": 11.9,
+  "temp_f": 58.4,
+  "surface_pressure_hpa": 1008.2,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 2.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 4,
-    "wind": 12
+    "cloud_cover": 12,
+    "wind": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect"
+    "Overcast skies have a favorable impact on biting activity"
   ],
   "negative_factors": [],
   "light_phase": "night",
