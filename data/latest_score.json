@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-07-17T13:31:54-07:00",
-  "score": 67,
+  "timestamp": "2026-07-17T14:32:31-07:00",
+  "score": 63,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
   "message": "Good conditions for bass right now. Worth a cast.",
@@ -12,35 +12,34 @@
     "type": "moonset",
     "time": "2026-07-17T22:48:05-07:00"
   },
-  "pressure_trend_hpa": 0.2,
+  "pressure_trend_hpa": -0.2,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 15.7,
-  "temp_f": 68.3,
-  "surface_pressure_hpa": 1009.3,
-  "cloud_cover_pct": 44.0,
-  "wind_mph": 6.1,
+  "moon_illumination_pct": 16.0,
+  "temp_f": 69.9,
+  "surface_pressure_hpa": 1008.9,
+  "cloud_cover_pct": 21.0,
+  "wind_mph": 6.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 8,
+    "cloud_cover": 4,
     "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Partly cloudy skies are mildly favorable",
     "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~68\u00b0F (warm) favors bass metabolism",
-    "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
-    "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_reason": "water proxy ~70\u00b0F (warm) favors bass metabolism",
+    "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
+    "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Mid-depth \u2014 ~8\u201315 ft",
     "method_lean": "Spin fishing",
     "method_reason": "bass holding on structure are efficient to target with lures",
@@ -58,7 +57,7 @@
       {
         "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
         "why": "subsurface when nothing's rising / bright midday",
-        "hot": false
+        "hot": true
       }
     ],
     "spin_options": [
@@ -71,10 +70,15 @@
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
+      },
+      {
+        "name": "Jigs & soft plastics (worked deep)",
+        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
+        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Transition edges \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Largemouth bass \u00b7 Open water \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
