@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-19T12:52:50-07:00",
-  "score": 65,
-  "tier": "Good",
-  "species_note": "Largemouth bass \u2014 good window",
-  "message": "Good conditions for bass right now. Worth a cast.",
+  "timestamp": "2026-07-19T13:42:45-07:00",
+  "score": 59,
+  "tier": "Fair",
+  "species_note": "Largemouth bass \u2014 fair conditions",
+  "message": "Fair bass conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-07-19T17:53:16-07:00"
@@ -12,25 +12,25 @@
     "type": "moonset",
     "time": "2026-07-19T23:20:42-07:00"
   },
-  "pressure_trend_hpa": -1.2,
+  "pressure_trend_hpa": -0.6,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 33.8,
-  "temp_f": 73.1,
-  "surface_pressure_hpa": 1011.0,
-  "cloud_cover_pct": 14.0,
-  "wind_mph": 6.7,
+  "moon_illumination_pct": 34.1,
+  "temp_f": 75.0,
+  "surface_pressure_hpa": 1011.3,
+  "cloud_cover_pct": 10.0,
+  "wind_mph": 6.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 12,
     "cloud_cover": 0,
     "wind": 12
   },
   "positive_factors": [
-    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
@@ -39,7 +39,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~73\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~75\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Deep \u2014 15 ft+ near structure",
