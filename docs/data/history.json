@@ -1867,5 +1867,12 @@
     "tier": "Excellent",
     "pressure": 1006.2,
     "temp_f": 78.9
+  },
+  {
+    "timestamp": "2026-07-20T14:41:38-07:00",
+    "score": 71,
+    "tier": "Good",
+    "pressure": 1005.9,
+    "temp_f": 82.6
   }
 ]
