@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-07-20T00:56:06-07:00",
-  "score": 71,
+  "timestamp": "2026-07-20T03:51:30-07:00",
+  "score": 65,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,35 +12,34 @@
     "type": "moonrise",
     "time": "2026-07-20T13:24:38-07:00"
   },
-  "pressure_trend_hpa": -0.3,
+  "pressure_trend_hpa": -0.1,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 38.8,
-  "temp_f": 61.9,
-  "surface_pressure_hpa": 1007.3,
+  "moon_illumination_pct": 40.0,
+  "temp_f": 58.9,
+  "surface_pressure_hpa": 1007.2,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 4.9,
+  "wind_mph": 2.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 12
+    "wind": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect"
+    "Overcast skies have a favorable impact on biting activity"
   ],
   "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~62\u00b0F; low light leans trout",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_reason": "moderate ~59\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -78,10 +77,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-20T00",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
