@@ -1,57 +1,59 @@
 {
-  "timestamp": "2026-07-20T06:03:23-07:00",
-  "score": 95,
-  "tier": "Excellent",
-  "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~1 hours.",
+  "timestamp": "2026-07-20T08:20:41-07:00",
+  "score": 71,
+  "tier": "Good",
+  "species_note": "Largemouth bass \u2014 good window",
+  "message": "Good conditions for bass right now. Worth a cast.",
   "next_major_period": {
-    "type": "underfoot",
-    "time": "2026-07-20T06:14:57-07:00"
+    "type": "transit",
+    "time": "2026-07-20T18:36:43-07:00"
   },
   "next_minor_period": {
     "type": "moonrise",
     "time": "2026-07-20T13:24:38-07:00"
   },
-  "pressure_trend_hpa": -0.8,
-  "species": "trout",
-  "in_major_period": true,
+  "pressure_trend_hpa": 0.2,
+  "species": "bass",
+  "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": true,
-  "moon_illumination_pct": 40.9,
-  "temp_f": 56.3,
-  "surface_pressure_hpa": 1006.4,
-  "cloud_cover_pct": 85.0,
-  "wind_mph": 1.0,
+  "in_dawn_dusk": false,
+  "moon_illumination_pct": 41.9,
+  "temp_f": 66.3,
+  "surface_pressure_hpa": 1006.6,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 9.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 6,
-    "solunar_major": 18,
-    "dawn_dusk": 12
+    "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
-    "Solunar major period active (moon overhead/underfoot)",
-    "Low-light dawn/dusk window \u2014 prime feeding time"
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [],
-  "light_phase": "dawn_dusk",
+  "light_phase": "day",
   "tactics": {
-    "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~56\u00b0F; low light leans trout",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
+    "species_pick": "Largemouth bass",
+    "species_reason": "water proxy ~66\u00b0F (warm) favors bass metabolism",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Fly fishing",
-    "method_reason": "calm-ish water and a trout bite suit fly presentations",
+    "method_lean": "Either \u2014 match the water",
+    "method_reason": "conditions don't strongly favor one over the other",
     "fly_options": [
+      {
+        "name": "Poppers / foam topwater",
+        "why": "low light + warm water = surface bass eats",
+        "hot": true
+      },
       {
         "name": "Dry flies (caddis / mayfly)",
         "why": "trout rise to the evening hatch in low light",
-        "hot": true
+        "hot": false
       },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
@@ -66,6 +68,11 @@
     ],
     "spin_options": [
       {
+        "name": "Topwater (buzzbaits, walking baits, poppers)",
+        "why": "first/last light over shallow cover for bass",
+        "hot": true
+      },
+      {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
         "hot": true
@@ -73,18 +80,18 @@
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
-        "hot": true
+        "hot": false
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+    "summary": "Largemouth bass \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean either \u2014 match the water"
   },
   "notification": {
     "fired": false,
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "underfoot@2026-07-20T06:14:57-07:00",
+    "period_key": "highscore@2026-07-20T08",
     "score_ge_70": true
   }
 }
