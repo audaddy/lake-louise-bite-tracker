@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-21T15:12:09-07:00",
-  "score": 65,
-  "tier": "Good",
-  "species_note": "Largemouth bass \u2014 good window",
-  "message": "Good conditions for bass right now. Worth a cast.",
+  "timestamp": "2026-07-21T16:12:25-07:00",
+  "score": 59,
+  "tier": "Fair",
+  "species_note": "Largemouth bass \u2014 fair conditions",
+  "message": "Fair bass conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-07-21T19:21:03-07:00"
@@ -12,28 +12,26 @@
     "type": "moonset",
     "time": "2026-07-21T23:57:33-07:00"
   },
-  "pressure_trend_hpa": -0.9,
+  "pressure_trend_hpa": -0.8,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 54.7,
-  "temp_f": 90.4,
-  "surface_pressure_hpa": 1005.4,
+  "moon_illumination_pct": 55.1,
+  "temp_f": 91.9,
+  "surface_pressure_hpa": 1005.5,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 4.9,
+  "wind_mph": 4.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 12,
-    "moon_phase": 6
+    "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect",
-    "Moon phase is favorable"
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -41,7 +39,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~90\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~92\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Deep \u2014 15 ft+ near structure",
