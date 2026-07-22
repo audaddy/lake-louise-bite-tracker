@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-07-21T23:16:28-07:00",
-  "score": 59,
+  "timestamp": "2026-07-22T02:08:26-07:00",
+  "score": 53,
   "tier": "Fair",
   "species_note": "Largemouth bass \u2014 fair conditions",
   "message": "Fair bass conditions right now. Could go either way.",
@@ -9,29 +9,28 @@
     "time": "2026-07-22T07:43:47-07:00"
   },
   "next_minor_period": {
-    "type": "moonset",
-    "time": "2026-07-21T23:57:33-07:00"
+    "type": "moonrise",
+    "time": "2026-07-22T15:45:13-07:00"
   },
-  "pressure_trend_hpa": 0.1,
+  "pressure_trend_hpa": 0.0,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 57.9,
-  "temp_f": 76.5,
+  "moon_illumination_pct": 59.1,
+  "temp_f": 70.0,
   "surface_pressure_hpa": 1005.0,
-  "cloud_cover_pct": 16.0,
-  "wind_mph": 3.7,
+  "cloud_cover_pct": 0.0,
+  "wind_mph": 2.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 12
+    "wind": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect"
+    "Stable atmospheric pressure is comfortable for fish"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -39,7 +38,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~76\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~70\u00b0F (warm) favors bass metabolism",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -74,19 +73,9 @@
         "hot": true
       },
       {
-        "name": "Spinners / spinnerbaits",
-        "why": "chop or cloud cover \u2014 cover water at mid-depth",
-        "hot": true
-      },
-      {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
-      },
-      {
-        "name": "Jigs & soft plastics (worked deep)",
-        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
-        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
