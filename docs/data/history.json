@@ -2014,5 +2014,12 @@
     "tier": "Fair",
     "pressure": 1005.3,
     "temp_f": 67.0
+  },
+  {
+    "timestamp": "2026-07-22T05:56:45-07:00",
+    "score": 65,
+    "tier": "Good",
+    "pressure": 1004.5,
+    "temp_f": 64.0
   }
 ]

@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-22T04:19:13-07:00",
-  "score": 53,
-  "tier": "Fair",
-  "species_note": "Largemouth bass \u2014 fair conditions",
-  "message": "Fair bass conditions right now. Could go either way.",
+  "timestamp": "2026-07-22T05:56:45-07:00",
+  "score": 65,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 dawn/dusk window",
+  "message": "Good trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-07-22T07:43:47-07:00"
@@ -12,48 +12,45 @@
     "type": "moonrise",
     "time": "2026-07-22T15:45:13-07:00"
   },
-  "pressure_trend_hpa": 0.3,
-  "species": "bass",
+  "pressure_trend_hpa": -0.5,
+  "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 60.0,
-  "temp_f": 67.0,
-  "surface_pressure_hpa": 1005.3,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 60.6,
+  "temp_f": 64.0,
+  "surface_pressure_hpa": 1004.5,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 2.1,
+  "wind_mph": 1.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 6
+    "wind": 6,
+    "dawn_dusk": 12
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish"
+    "Stable atmospheric pressure is comfortable for fish",
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
   ],
-  "light_phase": "night",
+  "light_phase": "dawn_dusk",
   "tactics": {
-    "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~67\u00b0F (warm) favors bass metabolism",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~64\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Either \u2014 match the water",
-    "method_reason": "conditions don't strongly favor one over the other",
+    "method_lean": "Fly fishing",
+    "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
-      {
-        "name": "Poppers / foam topwater",
-        "why": "low light + warm water = surface bass eats",
-        "hot": true
-      },
       {
         "name": "Dry flies (caddis / mayfly)",
         "why": "trout rise to the evening hatch in low light",
-        "hot": false
+        "hot": true
       },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
@@ -68,18 +65,13 @@
     ],
     "spin_options": [
       {
-        "name": "Topwater (buzzbaits, walking baits, poppers)",
-        "why": "first/last light over shallow cover for bass",
-        "hot": true
-      },
-      {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
-        "hot": false
+        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean either \u2014 match the water"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
