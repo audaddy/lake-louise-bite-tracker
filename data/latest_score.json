@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-21T20:44:56-07:00",
-  "score": 71,
-  "tier": "Good",
-  "species_note": "Largemouth bass \u2014 dawn/dusk window",
-  "message": "Good bass conditions during the low-light window. Good time to fish.",
+  "timestamp": "2026-07-21T23:16:28-07:00",
+  "score": 59,
+  "tier": "Fair",
+  "species_note": "Largemouth bass \u2014 fair conditions",
+  "message": "Fair bass conditions right now. Could go either way.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-07-22T07:43:47-07:00"
@@ -12,38 +12,36 @@
     "type": "moonset",
     "time": "2026-07-21T23:57:33-07:00"
   },
-  "pressure_trend_hpa": 0.0,
+  "pressure_trend_hpa": 0.1,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": true,
-  "moon_illumination_pct": 56.9,
-  "temp_f": 85.0,
-  "surface_pressure_hpa": 1004.9,
-  "cloud_cover_pct": 0.0,
-  "wind_mph": 7.5,
+  "in_dawn_dusk": false,
+  "moon_illumination_pct": 57.9,
+  "temp_f": 76.5,
+  "surface_pressure_hpa": 1005.0,
+  "cloud_cover_pct": 16.0,
+  "wind_mph": 3.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 12,
-    "dawn_dusk": 12
+    "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect",
-    "Low-light dawn/dusk window \u2014 prime feeding time"
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
   ],
-  "light_phase": "dawn_dusk",
+  "light_phase": "night",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~85\u00b0F (warm) favors bass metabolism",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_reason": "water proxy ~76\u00b0F (warm) favors bass metabolism",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Either \u2014 match the water",
     "method_reason": "conditions don't strongly favor one over the other",
@@ -96,10 +94,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-21T20",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
