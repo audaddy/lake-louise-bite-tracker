@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-22T02:08:26-07:00",
+  "timestamp": "2026-07-22T04:19:13-07:00",
   "score": 53,
   "tier": "Fair",
   "species_note": "Largemouth bass \u2014 fair conditions",
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-07-22T15:45:13-07:00"
   },
-  "pressure_trend_hpa": 0.0,
+  "pressure_trend_hpa": 0.3,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 59.1,
-  "temp_f": 70.0,
-  "surface_pressure_hpa": 1005.0,
+  "moon_illumination_pct": 60.0,
+  "temp_f": 67.0,
+  "surface_pressure_hpa": 1005.3,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 2.9,
+  "wind_mph": 2.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -38,7 +38,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~70\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~67\u00b0F (warm) favors bass metabolism",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
