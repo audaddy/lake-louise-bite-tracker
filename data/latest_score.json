@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-22T08:04:31-07:00",
-  "score": 71,
-  "tier": "Good",
-  "species_note": "Largemouth bass biting",
-  "message": "Good bass window right now \u2014 biting for the next ~39 min.",
+  "timestamp": "2026-07-22T09:44:59-07:00",
+  "score": 52,
+  "tier": "Fair",
+  "species_note": "Largemouth bass \u2014 fair conditions",
+  "message": "Fair bass conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-07-22T20:07:02-07:00"
@@ -12,27 +12,26 @@
     "type": "moonrise",
     "time": "2026-07-22T15:45:13-07:00"
   },
-  "pressure_trend_hpa": 0.1,
+  "pressure_trend_hpa": 1.1,
   "species": "bass",
-  "in_major_period": true,
+  "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 61.4,
-  "temp_f": 70.5,
-  "surface_pressure_hpa": 1005.4,
-  "cloud_cover_pct": 0.0,
-  "wind_mph": 1.6,
+  "moon_illumination_pct": 62.1,
+  "temp_f": 77.7,
+  "surface_pressure_hpa": 1005.6,
+  "cloud_cover_pct": 3.0,
+  "wind_mph": 4.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 0,
-    "wind": 6,
-    "solunar_major": 18
+    "wind": 12
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "Solunar major period active (moon overhead/underfoot)"
+    "Slightly rising pressure \u2014 neutral to mild",
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -40,9 +39,9 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~70\u00b0F (warm) favors bass metabolism",
-    "where": "Open water \u2014 drop-offs & deeper structure",
-    "where_reason": "bright sun + warm water pulls fish off the bank",
+    "species_reason": "water proxy ~78\u00b0F (warm) favors bass metabolism",
+    "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
+    "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Deep \u2014 15 ft+ near structure",
     "method_lean": "Spin fishing",
     "method_reason": "bass holding on structure are efficient to target with lures",
@@ -65,6 +64,11 @@
     ],
     "spin_options": [
       {
+        "name": "Spinners / spinnerbaits",
+        "why": "chop or cloud cover \u2014 cover water at mid-depth",
+        "hot": true
+      },
+      {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
@@ -80,10 +84,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "underfoot@2026-07-22T07:43:47-07:00",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
