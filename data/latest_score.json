@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-07-22T09:44:59-07:00",
-  "score": 52,
+  "timestamp": "2026-07-22T10:55:57-07:00",
+  "score": 59,
   "tier": "Fair",
   "species_note": "Largemouth bass \u2014 fair conditions",
   "message": "Fair bass conditions right now. Could go either way.",
@@ -10,27 +10,27 @@
   },
   "next_minor_period": {
     "type": "moonrise",
-    "time": "2026-07-22T15:45:13-07:00"
+    "time": "2026-07-22T15:45:12-07:00"
   },
-  "pressure_trend_hpa": 1.1,
+  "pressure_trend_hpa": -0.4,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 62.1,
-  "temp_f": 77.7,
-  "surface_pressure_hpa": 1005.6,
-  "cloud_cover_pct": 3.0,
-  "wind_mph": 4.2,
+  "moon_illumination_pct": 62.6,
+  "temp_f": 84.3,
+  "surface_pressure_hpa": 1005.0,
+  "cloud_cover_pct": 0.0,
+  "wind_mph": 5.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
+    "pressure": 12,
     "cloud_cover": 0,
     "wind": 12
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
+    "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
@@ -39,7 +39,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~78\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~84\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Deep \u2014 15 ft+ near structure",
