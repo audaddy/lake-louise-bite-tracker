@@ -127,6 +127,8 @@
   .seg button.active { background: var(--accent); color: #06121e; font-weight: 700; border-color: var(--accent); }
   .seg.wrap { flex-wrap: wrap; }
   .seg.wrap button { flex: 1 1 30%; }
+  .time-row { display: flex; gap: 8px; }
+  .time-row input { flex: 1; min-width: 0; }
   select, input[type=text], input[type=number], input[type=datetime-local], textarea { width: 100%; background: #0e1f31; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px; font-size: 0.95rem; font-family: inherit; }
   input[type=datetime-local] { color-scheme: dark; }
   .photo-row { display: flex; gap: 10px; align-items: center; }
@@ -354,7 +356,7 @@
   <div class="modal">
     <h2 id="logModalTitle">Log a session</h2>
     <div class="snapshot" id="logSnapshot">Conditions snapshot attaches automatically.</div>
-    <div class="field">
+    <div class="field" id="fieldResult">
       <label>Result</label>
       <div class="seg" id="segResult">
         <button type="button" data-v="fish">🎣 Caught</button>
@@ -364,14 +366,21 @@
     </div>
     <div class="field" id="countField" style="display:none;">
       <label>How many landed?</label>
-      <input type="number" id="logCount" min="1" value="1" />
+      <input type="number" id="logCount" min="1" value="1" inputmode="numeric" />
     </div>
-    <div class="field">
+    <div class="field" id="fieldWhen">
       <label>When did you catch it?</label>
       <input type="datetime-local" id="logTime" />
     </div>
+    <div class="field" id="fieldSessionTime" style="display:none;">
+      <label>Session — start &amp; end time</label>
+      <div class="time-row">
+        <input type="datetime-local" id="logStart" />
+        <input type="datetime-local" id="logEnd" />
+      </div>
+    </div>
 
-    <div class="field">
+    <div class="field" id="fieldSpeciesSingle">
       <label>Species</label>
       <div class="seg wrap" id="segSpecies">
         <button type="button" data-v="trout">Trout</button>
@@ -1155,6 +1164,15 @@ const RESULT_CLASS = { fish: 'le-fish', nibble: 'le-nibble', skunk: 'le-skunk' }
 function fillSelect(id, opts) { document.getElementById(id).innerHTML = opts.map(o => `<option>${o}</option>`).join(''); }
 const sel = { result: null, species: 'trout', method: 'fly' };
 function setSeg(g, v) { document.querySelectorAll('#' + g + ' button').forEach(b => b.classList.toggle('active', b.dataset.v === v)); }
+function currentCount() { return Math.max(1, parseInt(document.getElementById('logCount').value, 10) || 1); }
+// Show a start→end time range only when more than one fish was landed; otherwise a single time.
+function updateTimeFields() {
+  const isFish = sel.result === 'fish';
+  const many = isFish && currentCount() > 1;
+  document.getElementById('countField').style.display = isFish ? '' : 'none';
+  document.getElementById('fieldSessionTime').style.display = many ? '' : 'none';
+  document.getElementById('fieldWhen').style.display = many ? 'none' : '';
+}
 
 function openModal() {
   sel.result = null; sel.species = 'trout'; sel.method = 'fly';
@@ -1169,6 +1187,9 @@ function openModal() {
   document.getElementById('countField').style.display = 'none';
   document.getElementById('logNotes').value = '';
   document.getElementById('logTime').value = nowLocalInput();
+  document.getElementById('logEnd').value = nowLocalInput();
+  document.getElementById('logStart').value = isoToLocalInput(new Date(Date.now() - 2 * 3600e3).toISOString());
+  updateTimeFields();
   pendingPhoto = null; editingId = null;
   document.getElementById('logModalTitle').textContent = 'Log a session';
   document.getElementById('logDelete').style.display = 'none';
@@ -1196,16 +1217,20 @@ function openEditModal(entry) {
   document.getElementById('logDelete').style.display = '';
   document.getElementById('logSave').textContent = 'Save changes';
   sel.result = entry.result || 'fish'; setSeg('segResult', sel.result);
-  document.getElementById('countField').style.display = sel.result === 'fish' ? '' : 'none';
   document.getElementById('logCount').value = entry.count || 1;
   sel.species = entry.species || 'trout'; setSeg('segSpecies', sel.species);
+  document.getElementById('logTime').value = isoToLocalInput(entry.caught_at || entry.logged_at || new Date().toISOString());
+  if (entry.start_at && entry.end_at) {
+    document.getElementById('logStart').value = isoToLocalInput(entry.start_at);
+    document.getElementById('logEnd').value = isoToLocalInput(entry.end_at);
+  }
+  updateTimeFields();
   sel.method = entry.method || 'fly'; setSeg('segMethod', sel.method);
   fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES);
   if (entry.lure) document.getElementById('logLure').value = entry.lure;
   if (entry.position) document.getElementById('logPosition').value = entry.position;
   if (entry.depth) document.getElementById('logDepth').value = entry.depth;
   document.getElementById('logNotes').value = entry.notes || '';
-  document.getElementById('logTime').value = isoToLocalInput(entry.caught_at || entry.logged_at || new Date().toISOString());
   pendingPhoto = entry.photo || null; updatePhotoPreview();
   document.getElementById('logSnapshot').textContent = entry.score != null
     ? `Logged at score ${entry.score} (${entry.tier}). Change the time to recompute conditions.`
@@ -1301,18 +1326,34 @@ function renderSpotMap() {
 async function saveEntry() {
   if (!sel.result) { alert('Pick a result first (Caught / Nibbles / Skunked).'); return; }
   const btn = document.getElementById('logSave');
-  const tv = document.getElementById('logTime').value;
-  const caughtMs = tv ? new Date(tv).getTime() : Date.now();
   const log = loadLog();
   const editing = editingId ? log.find(x => x.id === editingId) : null;
+
+  const isFish = sel.result === 'fish';
+  const count = isFish ? currentCount() : 0;
+  const many = isFish && count > 1;
+
+  let caughtMs, startISO = null, endISO = null;
+  if (many) {
+    const sv = document.getElementById('logStart').value, ev = document.getElementById('logEnd').value;
+    let startMs = sv ? new Date(sv).getTime() : Date.now();
+    let endMs = ev ? new Date(ev).getTime() : startMs;
+    if (endMs < startMs) { const t = startMs; startMs = endMs; endMs = t; }
+    startISO = new Date(startMs).toISOString();
+    endISO = new Date(endMs).toISOString();
+    caughtMs = Math.round((startMs + endMs) / 2);
+  } else {
+    const tv = document.getElementById('logTime').value;
+    caughtMs = tv ? new Date(tv).getTime() : Date.now();
+  }
+
   const prev = btn.textContent;
   btn.disabled = true; btn.textContent = 'Saving…';
   const snap = await resolveSnapshot(caughtMs, editing);
   btn.disabled = false; btn.textContent = prev;
   const fields = {
-    result: sel.result,
-    count: sel.result === 'fish' ? Math.max(1, parseInt(document.getElementById('logCount').value, 10) || 1) : 0,
-    species: sel.species, method: sel.method,
+    result: sel.result, count, species: sel.species, method: sel.method,
+    start_at: startISO, end_at: endISO,
     lure: document.getElementById('logLure').value, position: document.getElementById('logPosition').value,
     depth: document.getElementById('logDepth').value, notes: document.getElementById('logNotes').value.trim(),
     caught_at: new Date(caughtMs).toISOString(), photo: pendingPhoto || null,
@@ -1479,7 +1520,14 @@ function renderLog() {
   log.filter(e => e.result === 'fish').forEach(e => { lureCount[e.lure] = (lureCount[e.lure] || 0) + 1; });
   const topLures = Object.entries(lureCount).sort((a, b) => b[1] - a[1]).slice(0, 4).map(([k, v]) => `${k} (${v})`).join(', ') || 'none yet';
   const recent = log.slice(-6).reverse().map(e => {
-    const when = new Date(e.caught_at || e.logged_at).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    let when;
+    if (e.start_at && e.end_at) {
+      const st = new Date(e.start_at), en = new Date(e.end_at);
+      const durH = Math.round((en - st) / 3600e3 * 10) / 10;
+      when = `${st.toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}–${en.toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })} · ${durH}h`;
+    } else {
+      when = new Date(e.caught_at || e.logged_at).toLocaleString([], { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+    }
     const rlabel = RESULT_LABEL[e.result] + (e.result === 'fish' && e.count > 1 ? ` ×${e.count}` : '');
     const sc = e.score != null ? `score ${e.score}` : 'no score';
     const meta = [e.species, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
@@ -1527,7 +1575,8 @@ document.getElementById('logBody').addEventListener('click', (e) => {
   const row = e.target.closest('.logentry'); if (!row) return; const entry = loadLog().find(x => x.id === Number(row.dataset.id)); if (entry) openEditModal(entry);
 });
 document.getElementById('logModal').addEventListener('click', e => { if (e.target.id === 'logModal') closeModal(); });
-document.getElementById('segResult').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.result = b.dataset.v; setSeg('segResult', sel.result); document.getElementById('countField').style.display = sel.result === 'fish' ? '' : 'none'; });
+document.getElementById('segResult').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.result = b.dataset.v; setSeg('segResult', sel.result); updateTimeFields(); });
+document.getElementById('logCount').addEventListener('input', updateTimeFields);
 document.getElementById('segSpecies').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.species = b.dataset.v; setSeg('segSpecies', sel.species); });
 document.getElementById('segMethod').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.method = b.dataset.v; setSeg('segMethod', sel.method); fillSelect('logLure', sel.method === 'fly' ? FLY_LURES : SPIN_LURES); });
 
@@ -1594,8 +1643,7 @@ function detectSpecies(text) {
 }
 function openModalPrefill(species, photo) {
   openModal();
-  sel.result = 'fish'; setSeg('segResult', 'fish');
-  document.getElementById('countField').style.display = '';
+  sel.result = 'fish'; setSeg('segResult', 'fish'); updateTimeFields();
   if (species) { sel.species = species; setSeg('segSpecies', species); }
   pendingPhoto = photo || null; updatePhotoPreview();
 }
