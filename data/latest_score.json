@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-23T02:56:19-07:00",
-  "score": 64,
+  "timestamp": "2026-07-23T04:50:13-07:00",
+  "score": 79,
   "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "species_note": "Rainbow trout \u2014 dawn/dusk window",
+  "message": "Good trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-07-23T08:30:47-07:00"
@@ -12,30 +12,32 @@
     "type": "moonrise",
     "time": "2026-07-23T16:53:29-07:00"
   },
-  "pressure_trend_hpa": 1.1,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 68.6,
-  "temp_f": 62.9,
-  "surface_pressure_hpa": 1007.8,
-  "cloud_cover_pct": 89.0,
-  "wind_mph": 6.0,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 69.3,
+  "temp_f": 63.4,
+  "surface_pressure_hpa": 1008.3,
+  "cloud_cover_pct": 52.0,
+  "wind_mph": 5.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
-    "cloud_cover": 12,
-    "wind": 12
+    "pressure": 12,
+    "cloud_cover": 8,
+    "wind": 12,
+    "dawn_dusk": 12
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
-    "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect"
+    "Stable atmospheric pressure is comfortable for fish",
+    "Partly cloudy skies are mildly favorable",
+    "A light breeze/ripple has a very favorable effect",
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
-  "light_phase": "night",
+  "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
     "species_reason": "moderate ~63\u00b0F; low light leans trout",
@@ -78,10 +80,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
-    "score_ge_70": false
+    "period_key": "highscore@2026-07-23T04",
+    "score_ge_70": true
   }
 }
