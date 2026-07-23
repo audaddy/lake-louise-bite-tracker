@@ -134,6 +134,8 @@
   .btn-sm { flex: 0 0 auto; padding: 9px 12px; font-weight: 600; }
   .logentry { cursor: pointer; }
   .le-edit { color: var(--muted); font-size: 0.85rem; margin-left: 6px; }
+  .le-share { background: none; border: 1px solid var(--border); border-radius: 8px; color: var(--accent); font-size: 0.82rem; padding: 3px 8px; margin-left: 8px; cursor: pointer; }
+  .le-share:hover { border-color: var(--accent); }
   .log-map { height: 180px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
   .map-card h2 { font-size: 0.95rem; margin: 0 0 6px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.6px; }
   .spot-map { height: 300px; border-radius: 10px; overflow: hidden; border: 1px solid var(--border); }
@@ -406,6 +408,7 @@
     </div>
     <div class="modal-actions">
       <button class="btn btn-ghost btn-sm" id="logDelete" style="display:none;color:var(--red);border-color:var(--red);">Delete</button>
+      <button class="btn btn-ghost" id="logShare" type="button">📤 Share</button>
       <button class="btn btn-ghost" id="logCancel">Cancel</button>
       <button class="btn btn-primary" id="logSave">Save entry</button>
     </div>
@@ -1315,13 +1318,139 @@ async function saveEntry() {
     caught_at: new Date(caughtMs).toISOString(), photo: pendingPhoto || null,
     catch_lat: pendingLatLng ? pendingLatLng.lat : (editing ? (editing.catch_lat ?? null) : null),
     catch_lng: pendingLatLng ? pendingLatLng.lng : (editing ? (editing.catch_lng ?? null) : null),
+    location_name: (typeof LOCATION_NAME !== 'undefined' && LOCATION_NAME) ? LOCATION_NAME : (editing ? (editing.location_name ?? null) : null),
     score: snap.score ?? null, tier: snap.tier ?? null, light_phase: snap.light_phase ?? null, temp_f: snap.temp_f ?? null,
     pressure_trend_hpa: snap.pressure_trend_hpa ?? null, cloud_cover_pct: snap.cloud_cover_pct ?? null,
     wind_mph: snap.wind_mph ?? null, moon_illumination_pct: snap.moon_illumination_pct ?? null, data_timestamp: snap.timestamp ?? null,
   };
-  if (editing) Object.assign(editing, fields);
-  else log.push(Object.assign({ id: Date.now(), logged_at: new Date().toISOString() }, fields));
+  let savedEntry;
+  if (editing) { Object.assign(editing, fields); savedEntry = editing; }
+  else { savedEntry = Object.assign({ id: Date.now(), logged_at: new Date().toISOString() }, fields); log.push(savedEntry); }
   saveLog(log); pendingPhoto = null; editingId = null; pendingLatLng = null; closeModal(); renderLog();
+  return savedEntry;
+}
+
+// ---------- share a catch ----------
+const SHARE_URL = 'https://audaddy.github.io/lake-louise-bite-tracker/';
+
+function loadImageEl(src) {
+  return new Promise((resolve, reject) => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.onerror = () => reject(new Error('could not load photo'));
+    img.src = src;
+  });
+}
+function drawCoverImage(ctx, img, x, y, w, h) {
+  const ir = img.width / img.height, tr = w / h;
+  let sx, sy, sw, sh;
+  if (ir > tr) { sh = img.height; sw = sh * tr; sx = (img.width - sw) / 2; sy = 0; }
+  else { sw = img.width; sh = sw / tr; sx = 0; sy = (img.height - sh) / 2; }
+  ctx.drawImage(img, sx, sy, sw, sh, x, y, w, h);
+}
+function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight, maxLines) {
+  const words = text.split(' ');
+  let line = '', lines = [];
+  for (const w of words) {
+    const test = line ? line + ' ' + w : w;
+    if (ctx.measureText(test).width > maxWidth && line) { lines.push(line); line = w; }
+    else line = test;
+  }
+  if (line) lines.push(line);
+  lines = lines.slice(0, maxLines || lines.length);
+  lines.forEach((l, i) => ctx.fillText(l, x, y + i * lineHeight));
+  return y + lines.length * lineHeight;
+}
+
+async function buildShareCardBlob(entry) {
+  const W = 1080, H = 1350;
+  const canvas = document.createElement('canvas');
+  canvas.width = W; canvas.height = H;
+  const ctx = canvas.getContext('2d');
+
+  const grad = ctx.createLinearGradient(0, 0, 0, H);
+  grad.addColorStop(0, '#0e1b2a'); grad.addColorStop(1, '#15293d');
+  ctx.fillStyle = grad; ctx.fillRect(0, 0, W, H);
+
+  let contentTop;
+  if (entry.photo) {
+    const photoH = Math.round(H * 0.6);
+    try {
+      const img = await loadImageEl(entry.photo);
+      drawCoverImage(ctx, img, 0, 0, W, photoH);
+    } catch (e) { /* fall through with no image drawn */ }
+    const fade = ctx.createLinearGradient(0, photoH - 160, 0, photoH);
+    fade.addColorStop(0, 'rgba(14,27,42,0)'); fade.addColorStop(1, '#15293d');
+    ctx.fillStyle = fade; ctx.fillRect(0, photoH - 160, W, 160);
+    contentTop = photoH - 30;
+  } else {
+    const bandH = Math.round(H * 0.38);
+    ctx.fillStyle = (typeof SPECIES_COLOR !== 'undefined' && SPECIES_COLOR[entry.species]) || '#4aa3df';
+    ctx.globalAlpha = 0.16; ctx.fillRect(0, 0, W, bandH); ctx.globalAlpha = 1;
+    ctx.font = '160px -apple-system, Helvetica, Arial, sans-serif';
+    ctx.fillStyle = '#e8eef5'; ctx.globalAlpha = 0.85;
+    ctx.fillText('🎣', 56, bandH - 40); ctx.globalAlpha = 1;
+    contentTop = bandH - 10;
+  }
+
+  let y = contentTop + 70;
+  const speciesLabel = (typeof SPECIES_LABELS !== 'undefined' && SPECIES_LABELS[entry.species]) || 'Fish';
+  const resultWord = (typeof RESULT_LABEL !== 'undefined' && RESULT_LABEL[entry.result]) || 'Logged';
+  const countSuffix = (entry.result === 'fish' && entry.count > 1) ? ` ×${entry.count}` : '';
+
+  ctx.fillStyle = '#e8eef5';
+  ctx.font = '700 66px -apple-system, Helvetica, Arial, sans-serif';
+  ctx.fillText(`${speciesLabel}${countSuffix}`, 56, y);
+  y += 54;
+  ctx.font = '600 34px -apple-system, Helvetica, Arial, sans-serif';
+  ctx.fillStyle = '#4aa3df';
+  ctx.fillText(entry.result === 'fish' ? '🎣 Caught' : resultWord, 56, y);
+  y += 46;
+
+  ctx.strokeStyle = 'rgba(255,255,255,0.14)';
+  ctx.beginPath(); ctx.moveTo(56, y); ctx.lineTo(W - 56, y); ctx.stroke();
+  y += 56;
+
+  ctx.font = '400 32px -apple-system, Helvetica, Arial, sans-serif';
+  ctx.fillStyle = '#8da7bf';
+  const when = new Date(entry.caught_at || entry.logged_at).toLocaleDateString([], { month: 'long', day: 'numeric', year: 'numeric' });
+  ctx.fillText(when, 56, y); y += 48;
+  const loc = entry.location_name || (typeof LOCATION_NAME !== 'undefined' ? LOCATION_NAME : null);
+  if (loc) { ctx.fillText('📍 ' + loc, 56, y); y += 48; }
+  const meta = [entry.method === 'fly' ? 'Fly' : entry.method === 'spin' ? 'Spin' : null, entry.lure].filter(Boolean).join(' · ');
+  if (meta) { ctx.fillText('🪝 ' + meta, 56, y); y += 48; }
+  if (entry.score != null) { ctx.fillText(`📊 Bite score ${entry.score}${entry.tier ? ' · ' + entry.tier : ''}`, 56, y); y += 48; }
+  if (entry.notes) {
+    ctx.font = 'italic 30px -apple-system, Helvetica, Arial, sans-serif';
+    y = wrapCanvasText(ctx, '“' + entry.notes + '”', 56, y + 6, W - 112, 40, 2);
+  }
+
+  ctx.font = '700 38px -apple-system, Helvetica, Arial, sans-serif';
+  ctx.fillStyle = '#e8eef5';
+  ctx.fillText('🎣 BiteCast', 56, H - 92);
+  ctx.font = '400 28px -apple-system, Helvetica, Arial, sans-serif';
+  ctx.fillStyle = '#4aa3df';
+  ctx.fillText('audaddy.github.io/lake-louise-bite-tracker', 56, H - 50);
+
+  return new Promise((resolve) => canvas.toBlob(resolve, 'image/jpeg', 0.92));
+}
+
+async function shareEntry(entry) {
+  if (!entry) return;
+  let blob;
+  try { blob = await buildShareCardBlob(entry); }
+  catch (e) { alert('Could not build the share image: ' + e.message); return; }
+  const file = new File([blob], 'bitecast-catch.jpg', { type: 'image/jpeg' });
+  const shareText = 'Check out my catch on BiteCast! 🎣 ' + SHARE_URL;
+  if (navigator.canShare && navigator.canShare({ files: [file] })) {
+    try { await navigator.share({ files: [file], title: 'BiteCast catch', text: shareText }); return; }
+    catch (e) { if (e && e.name === 'AbortError') return; }
+  }
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a'); a.href = url; a.download = 'bitecast-catch.jpg'; document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 4000);
+  try { await navigator.clipboard.writeText(SHARE_URL); alert('Image downloaded and the app link is copied — attach the photo and paste the link wherever you share it.'); }
+  catch (e) { alert('Image downloaded! Share it along with: ' + SHARE_URL); }
 }
 
 function renderLog() {
@@ -1355,7 +1484,7 @@ function renderLog() {
     const sc = e.score != null ? `score ${e.score}` : 'no score';
     const meta = [e.species, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
     const photoImg = e.photo ? `<img src="${e.photo}" alt="catch" style="width:54px;height:54px;object-fit:cover;border-radius:8px;margin-top:6px;">` : '';
-    return `<div class="logentry" data-id="${e.id}"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}<span class="le-edit">✎ edit</span></span><span style="color:var(--muted)">${when} · ${sc}</span></div><div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div>${photoImg}</div>`;
+    return `<div class="logentry" data-id="${e.id}"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}<span class="le-edit">✎ edit</span><button type="button" class="le-share" title="Share this catch">📤 Share</button></span><span style="color:var(--muted)">${when} · ${sc}</span></div><div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div>${photoImg}</div>`;
   }).join('');
   body.innerHTML =
     `<div class="summary-line"><b>${sessions}</b> session${sessions !== 1 ? 's' : ''} logged · <b>${fish}</b> fish landed · ${landedSessions} productive trip${landedSessions !== 1 ? 's' : ''}</div>` +
@@ -1381,11 +1510,22 @@ document.getElementById('logSave').addEventListener('click', saveEntry);
 document.getElementById('logExport').addEventListener('click', exportLog);
 document.getElementById('logClear').addEventListener('click', clearLog);
 document.getElementById('photoAddBtn').addEventListener('click', () => document.getElementById('photoInput').click());
-document.getElementById('photoInput').addEventListener('change', async (e) => { const f = e.target.files[0]; if (f) { try { pendingPhoto = await compressImage(f, 240, 0.6); updatePhotoPreview(); } catch (_) {} } e.target.value = ''; });
+document.getElementById('photoInput').addEventListener('change', async (e) => { const f = e.target.files[0]; if (f) { try { pendingPhoto = await compressImage(f, 480, 0.72); updatePhotoPreview(); } catch (_) {} } e.target.value = ''; });
 document.getElementById('photoRemoveBtn').addEventListener('click', () => { pendingPhoto = null; updatePhotoPreview(); });
 document.getElementById('useGpsBtn').addEventListener('click', useGps);
 document.getElementById('logDelete').addEventListener('click', () => { if (editingId && confirm('Delete this catch from your log?')) { saveLog(loadLog().filter(x => x.id !== editingId)); editingId = null; pendingPhoto = null; closeModal(); renderLog(); } });
-document.getElementById('logBody').addEventListener('click', (e) => { const row = e.target.closest('.logentry'); if (!row) return; const entry = loadLog().find(x => x.id === Number(row.dataset.id)); if (entry) openEditModal(entry); });
+document.getElementById('logShare').addEventListener('click', async () => { const entry = await saveEntry(); if (entry) shareEntry(entry); });
+document.getElementById('logBody').addEventListener('click', (e) => {
+  const shareBtn = e.target.closest('.le-share');
+  if (shareBtn) {
+    e.stopPropagation();
+    const row = shareBtn.closest('.logentry');
+    const entry = row ? loadLog().find(x => x.id === Number(row.dataset.id)) : null;
+    if (entry) shareEntry(entry);
+    return;
+  }
+  const row = e.target.closest('.logentry'); if (!row) return; const entry = loadLog().find(x => x.id === Number(row.dataset.id)); if (entry) openEditModal(entry);
+});
 document.getElementById('logModal').addEventListener('click', e => { if (e.target.id === 'logModal') closeModal(); });
 document.getElementById('segResult').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.result = b.dataset.v; setSeg('segResult', sel.result); document.getElementById('countField').style.display = sel.result === 'fish' ? '' : 'none'; });
 document.getElementById('segSpecies').addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; sel.species = b.dataset.v; setSeg('segSpecies', sel.species); });
@@ -1470,7 +1610,7 @@ async function handlePhoto(file, mode) {
       (data.vision ? `<div class="ai-vision">Vision read: ${escapeHtml(data.vision)}</div>` : '');
     if (mode === 'fish') {
       lastFishSpecies = detectSpecies(data.answer + ' ' + (data.vision || ''));
-      lastFishPhoto = await compressImage(file, 240, 0.6);
+      lastFishPhoto = await compressImage(file, 480, 0.72);
       html += `<button class="btn btn-primary" id="aiLogBtn" style="margin-top:12px;width:100%;">＋ Log this catch (${SPECIES_LABELS[lastFishSpecies] || lastFishSpecies})</button>`;
     }
     showAiResult(html);
