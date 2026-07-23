@@ -131,8 +131,10 @@
   .time-row input { flex: 1; min-width: 0; }
   select, input[type=text], input[type=number], input[type=datetime-local], textarea { width: 100%; background: #0e1f31; color: var(--text); border: 1px solid var(--border); border-radius: 10px; padding: 11px; font-size: 0.95rem; font-family: inherit; }
   input[type=datetime-local] { color-scheme: dark; }
-  .photo-row { display: flex; gap: 10px; align-items: center; }
-  .photo-preview { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); }
+  .photo-row { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+  .photo-thumb { position: relative; width: 56px; height: 56px; }
+  .photo-thumb img { width: 56px; height: 56px; object-fit: cover; border-radius: 8px; border: 1px solid var(--border); display: block; }
+  .photo-thumb .photo-x { position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; background: var(--red); color: #fff; border: none; font-size: 12px; line-height: 20px; text-align: center; cursor: pointer; padding: 0; }
   .btn-sm { flex: 0 0 auto; padding: 9px 12px; font-weight: 600; }
   .logentry { cursor: pointer; }
   .le-edit { color: var(--muted); font-size: 0.85rem; margin-left: 6px; }
@@ -402,13 +404,9 @@
     <div class="field"><label>Depth fished</label><select id="logDepth"></select></div>
     <div class="field"><label>Notes (optional)</label><textarea id="logNotes" placeholder="retrieve speed, color, time, anything worth remembering"></textarea></div>
     <div class="field">
-      <label>Photo</label>
-      <div class="photo-row">
-        <img id="photoPreview" class="photo-preview" style="display:none;" alt="catch photo" />
-        <button type="button" class="btn btn-ghost btn-sm" id="photoAddBtn">Add photo</button>
-        <button type="button" class="btn btn-ghost btn-sm" id="photoRemoveBtn" style="display:none;">Remove</button>
-      </div>
-      <input type="file" id="photoInput" accept="image/*" style="display:none;" />
+      <label>Photos <span style="text-transform:none;color:var(--muted);font-weight:400;">(up to 4)</span></label>
+      <div class="photo-row" id="photoGallery"></div>
+      <input type="file" id="photoInput" accept="image/*" multiple style="display:none;" />
     </div>
     <div class="field">
       <label>Where on the lake <span id="mapCoord" style="color:var(--muted);font-weight:400;"></span></label>
@@ -447,7 +445,8 @@ const SPIN_LURES = ['Inline spinner', 'Spinnerbait', 'Spoon', 'Jig', 'Soft plast
 const POSITIONS = ['Shoreline', 'Off the dock', 'Open water / middle', 'Drop-off / ledge', 'Weed edge', 'Inlet / current', 'Boat / drifting', 'Other'];
 const DEPTHS = ['Surface / top', 'Shallow (0–8 ft)', 'Mid (8–15 ft)', 'Deep (15+ ft)'];
 const SPECIES_LABELS = { trout: 'Trout', bass: 'Bass', perch: 'Perch', bluegill: 'Bluegill', other: 'Other' };
-let pendingPhoto = null, lastFishPhoto = null, lastFishSpecies = null, editingId = null;
+const MAX_PHOTOS = 4;
+let pendingPhotos = [], lastFishPhoto = null, lastFishSpecies = null, editingId = null;
 let pendingLatLng = null, logMap = null, logMarker = null, spotMap = null, spotMarkers = null;
 const SPECIES_COLOR = { trout: '#2ecc71', bass: '#4aa3df', perch: '#f1c40f', bluegill: '#9b59b6', other: '#e74c3c' };
 
@@ -1150,13 +1149,13 @@ async function snapshotForTime(ms) {
 function loadLog() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || []; } catch (e) { return []; } }
 function saveLog(a) {
   // Keep photos only on the 30 most recent entries so we don't blow localStorage.
-  const withPhoto = a.filter(x => x.photo);
+  const withPhoto = a.filter(x => x.photo || (x.photos && x.photos.length));
   if (withPhoto.length > 30) {
     const drop = new Set(withPhoto.slice(0, withPhoto.length - 30).map(x => x.id));
-    a = a.map(x => drop.has(x.id) ? Object.assign({}, x, { photo: null }) : x);
+    a = a.map(x => drop.has(x.id) ? Object.assign({}, x, { photo: null, photos: null }) : x);
   }
   try { localStorage.setItem(LS_KEY, JSON.stringify(a)); }
-  catch (e) { localStorage.setItem(LS_KEY, JSON.stringify(a.map(x => Object.assign({}, x, { photo: null })))); }
+  catch (e) { localStorage.setItem(LS_KEY, JSON.stringify(a.map(x => Object.assign({}, x, { photo: null, photos: null })))); }
 }
 function tierOf(s) { if (s == null) return null; return s >= 80 ? 'Excellent' : s >= 60 ? 'Good' : s >= 40 ? 'Fair' : 'Slow'; }
 const RESULT_LABEL = { fish: 'Caught', nibble: 'Nibbles', skunk: 'Skunked' };
@@ -1190,7 +1189,7 @@ function openModal() {
   document.getElementById('logEnd').value = nowLocalInput();
   document.getElementById('logStart').value = isoToLocalInput(new Date(Date.now() - 2 * 3600e3).toISOString());
   updateTimeFields();
-  pendingPhoto = null; editingId = null;
+  pendingPhotos = []; editingId = null;
   document.getElementById('logModalTitle').textContent = 'Log a session';
   document.getElementById('logDelete').style.display = 'none';
   document.getElementById('logSave').textContent = 'Save entry';
@@ -1206,9 +1205,14 @@ function openModal() {
 }
 function closeModal() { document.getElementById('logModal').classList.remove('open'); }
 function updatePhotoPreview() {
-  const img = document.getElementById('photoPreview'), rm = document.getElementById('photoRemoveBtn'), add = document.getElementById('photoAddBtn');
-  if (pendingPhoto) { img.src = pendingPhoto; img.style.display = ''; rm.style.display = ''; add.textContent = 'Change'; }
-  else { img.removeAttribute('src'); img.style.display = 'none'; rm.style.display = 'none'; add.textContent = 'Add photo'; }
+  const gallery = document.getElementById('photoGallery');
+  const thumbs = pendingPhotos.map((src, i) =>
+    `<div class="photo-thumb"><img src="${src}" alt="catch photo ${i + 1}"><button type="button" class="photo-x" data-i="${i}" title="Remove">×</button></div>`
+  ).join('');
+  const addBtn = pendingPhotos.length < MAX_PHOTOS
+    ? `<button type="button" class="btn btn-ghost btn-sm" id="photoAddBtn">${pendingPhotos.length ? '+ Add' : 'Add photo'}</button>`
+    : '';
+  gallery.innerHTML = thumbs + addBtn;
 }
 function openEditModal(entry) {
   openModal();
@@ -1231,7 +1235,8 @@ function openEditModal(entry) {
   if (entry.position) document.getElementById('logPosition').value = entry.position;
   if (entry.depth) document.getElementById('logDepth').value = entry.depth;
   document.getElementById('logNotes').value = entry.notes || '';
-  pendingPhoto = entry.photo || null; updatePhotoPreview();
+  pendingPhotos = (entry.photos && entry.photos.length) ? entry.photos.slice() : (entry.photo ? [entry.photo] : []);
+  updatePhotoPreview();
   document.getElementById('logSnapshot').textContent = entry.score != null
     ? `Logged at score ${entry.score} (${entry.tier}). Change the time to recompute conditions.`
     : 'Edit the details below.';
@@ -1356,7 +1361,8 @@ async function saveEntry() {
     start_at: startISO, end_at: endISO,
     lure: document.getElementById('logLure').value, position: document.getElementById('logPosition').value,
     depth: document.getElementById('logDepth').value, notes: document.getElementById('logNotes').value.trim(),
-    caught_at: new Date(caughtMs).toISOString(), photo: pendingPhoto || null,
+    caught_at: new Date(caughtMs).toISOString(),
+    photos: pendingPhotos.length ? pendingPhotos.slice() : null, photo: pendingPhotos[0] || null,
     catch_lat: pendingLatLng ? pendingLatLng.lat : (editing ? (editing.catch_lat ?? null) : null),
     catch_lng: pendingLatLng ? pendingLatLng.lng : (editing ? (editing.catch_lng ?? null) : null),
     location_name: (typeof LOCATION_NAME !== 'undefined' && LOCATION_NAME) ? LOCATION_NAME : (editing ? (editing.location_name ?? null) : null),
@@ -1367,7 +1373,7 @@ async function saveEntry() {
   let savedEntry;
   if (editing) { Object.assign(editing, fields); savedEntry = editing; }
   else { savedEntry = Object.assign({ id: Date.now(), logged_at: new Date().toISOString() }, fields); log.push(savedEntry); }
-  saveLog(log); pendingPhoto = null; editingId = null; pendingLatLng = null; closeModal(); renderLog();
+  saveLog(log); pendingPhotos = []; editingId = null; pendingLatLng = null; closeModal(); renderLog();
   return savedEntry;
 }
 
@@ -1531,7 +1537,13 @@ function renderLog() {
     const rlabel = RESULT_LABEL[e.result] + (e.result === 'fish' && e.count > 1 ? ` ×${e.count}` : '');
     const sc = e.score != null ? `score ${e.score}` : 'no score';
     const meta = [e.species, e.method, e.lure, e.position, e.depth].filter(Boolean).join(' · ');
-    const photoImg = e.photo ? `<img src="${e.photo}" alt="catch" style="width:54px;height:54px;object-fit:cover;border-radius:8px;margin-top:6px;">` : '';
+    const photosArr = (e.photos && e.photos.length) ? e.photos : (e.photo ? [e.photo] : []);
+    const photoImg = photosArr.length
+      ? `<div style="display:flex;gap:6px;margin-top:6px;">` +
+          photosArr.slice(0, 3).map(p => `<img src="${p}" alt="catch" style="width:54px;height:54px;object-fit:cover;border-radius:8px;">`).join('') +
+          (photosArr.length > 3 ? `<div style="width:54px;height:54px;border-radius:8px;background:rgba(255,255,255,0.06);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:0.8rem;">+${photosArr.length - 3}</div>` : '') +
+        `</div>`
+      : '';
     return `<div class="logentry" data-id="${e.id}"><div class="le-top"><span class="le-result ${RESULT_CLASS[e.result]}">${rlabel}<span class="le-edit">✎ edit</span><button type="button" class="le-share" title="Share this catch">📤 Share</button></span><span style="color:var(--muted)">${when} · ${sc}</span></div><div class="le-meta">${meta}${e.notes ? ' — “' + e.notes.replace(/</g, '&lt;') + '”' : ''}</div>${photoImg}</div>`;
   }).join('');
   body.innerHTML =
@@ -1557,11 +1569,22 @@ document.getElementById('logCancel').addEventListener('click', closeModal);
 document.getElementById('logSave').addEventListener('click', saveEntry);
 document.getElementById('logExport').addEventListener('click', exportLog);
 document.getElementById('logClear').addEventListener('click', clearLog);
-document.getElementById('photoAddBtn').addEventListener('click', () => document.getElementById('photoInput').click());
-document.getElementById('photoInput').addEventListener('change', async (e) => { const f = e.target.files[0]; if (f) { try { pendingPhoto = await compressImage(f, 480, 0.72); updatePhotoPreview(); } catch (_) {} } e.target.value = ''; });
-document.getElementById('photoRemoveBtn').addEventListener('click', () => { pendingPhoto = null; updatePhotoPreview(); });
+document.getElementById('photoGallery').addEventListener('click', (e) => {
+  const x = e.target.closest('.photo-x');
+  if (x) { pendingPhotos.splice(Number(x.dataset.i), 1); updatePhotoPreview(); return; }
+  if (e.target.closest('#photoAddBtn')) document.getElementById('photoInput').click();
+});
+document.getElementById('photoInput').addEventListener('change', async (e) => {
+  const files = Array.from(e.target.files || []);
+  for (const f of files) {
+    if (pendingPhotos.length >= MAX_PHOTOS) { alert(`You can add up to ${MAX_PHOTOS} photos per catch.`); break; }
+    try { pendingPhotos.push(await compressImage(f, 480, 0.72)); } catch (_) {}
+  }
+  updatePhotoPreview();
+  e.target.value = '';
+});
 document.getElementById('useGpsBtn').addEventListener('click', useGps);
-document.getElementById('logDelete').addEventListener('click', () => { if (editingId && confirm('Delete this catch from your log?')) { saveLog(loadLog().filter(x => x.id !== editingId)); editingId = null; pendingPhoto = null; closeModal(); renderLog(); } });
+document.getElementById('logDelete').addEventListener('click', () => { if (editingId && confirm('Delete this catch from your log?')) { saveLog(loadLog().filter(x => x.id !== editingId)); editingId = null; pendingPhotos = []; closeModal(); renderLog(); } });
 document.getElementById('logShare').addEventListener('click', async () => { const entry = await saveEntry(); if (entry) shareEntry(entry); });
 document.getElementById('logBody').addEventListener('click', (e) => {
   const shareBtn = e.target.closest('.le-share');
@@ -1645,7 +1668,8 @@ function openModalPrefill(species, photo) {
   openModal();
   sel.result = 'fish'; setSeg('segResult', 'fish'); updateTimeFields();
   if (species) { sel.species = species; setSeg('segSpecies', species); }
-  pendingPhoto = photo || null; updatePhotoPreview();
+  pendingPhotos = photo ? [photo] : [];
+  updatePhotoPreview();
 }
 async function handlePhoto(file, mode) {
   if (!getWorkerUrl() && !promptWorkerUrl()) return;
