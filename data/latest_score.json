@@ -1,61 +1,54 @@
 {
-  "timestamp": "2026-07-23T00:18:12-07:00",
-  "score": 74,
+  "timestamp": "2026-07-23T02:56:19-07:00",
+  "score": 64,
   "tier": "Good",
-  "species_note": "Largemouth bass biting",
-  "message": "Good bass window right now \u2014 biting for the next ~33 min.",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-07-23T08:30:47-07:00"
   },
   "next_minor_period": {
-    "type": "moonset",
-    "time": "2026-07-23T00:21:20-07:00"
+    "type": "moonrise",
+    "time": "2026-07-23T16:53:29-07:00"
   },
   "pressure_trend_hpa": 1.1,
-  "species": "bass",
+  "species": "trout",
   "in_major_period": false,
-  "in_minor_period": true,
+  "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 67.7,
-  "temp_f": 66.9,
-  "surface_pressure_hpa": 1006.7,
-  "cloud_cover_pct": 100.0,
-  "wind_mph": 7.6,
+  "moon_illumination_pct": 68.6,
+  "temp_f": 62.9,
+  "surface_pressure_hpa": 1007.8,
+  "cloud_cover_pct": 89.0,
+  "wind_mph": 6.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
     "cloud_cover": 12,
-    "wind": 12,
-    "solunar_minor": 10
+    "wind": 12
   },
   "positive_factors": [
     "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect",
-    "Solunar minor period active (moonrise/moonset)"
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [],
   "light_phase": "night",
   "tactics": {
-    "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~67\u00b0F (warm) favors bass metabolism",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~63\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Either \u2014 match the water",
-    "method_reason": "conditions don't strongly favor one over the other",
+    "method_lean": "Fly fishing",
+    "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
-      {
-        "name": "Poppers / foam topwater",
-        "why": "low light + warm water = surface bass eats",
-        "hot": true
-      },
       {
         "name": "Dry flies (caddis / mayfly)",
         "why": "trout rise to the evening hatch in low light",
-        "hot": false
+        "hot": true
       },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
@@ -70,11 +63,6 @@
     ],
     "spin_options": [
       {
-        "name": "Topwater (buzzbaits, walking baits, poppers)",
-        "why": "first/last light over shallow cover for bass",
-        "hot": true
-      },
-      {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
         "hot": true
@@ -82,18 +70,18 @@
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
-        "hot": false
+        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean either \u2014 match the water"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "moonset@2026-07-23T00:21:20-07:00",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
