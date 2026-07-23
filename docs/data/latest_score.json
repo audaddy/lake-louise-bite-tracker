@@ -1,44 +1,46 @@
 {
-  "timestamp": "2026-07-22T18:14:28-07:00",
-  "score": 71,
+  "timestamp": "2026-07-22T21:37:05-07:00",
+  "score": 76,
   "tier": "Good",
-  "species_note": "Largemouth bass \u2014 good window",
-  "message": "Good conditions for bass right now. Worth a cast.",
+  "species_note": "Largemouth bass \u2014 dawn/dusk window",
+  "message": "Good bass conditions during the low-light window. Good time to fish.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-07-22T20:07:02-07:00"
+    "type": "underfoot",
+    "time": "2026-07-23T08:30:47-07:00"
   },
   "next_minor_period": {
     "type": "moonset",
     "time": "2026-07-23T00:21:20-07:00"
   },
-  "pressure_trend_hpa": -0.2,
+  "pressure_trend_hpa": 2.5,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 65.4,
-  "temp_f": 94.3,
-  "surface_pressure_hpa": 1003.1,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 66.7,
+  "temp_f": 74.6,
+  "surface_pressure_hpa": 1005.6,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 4.1,
+  "wind_mph": 7.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 12,
-    "wind": 12
+    "wind": 12,
+    "dawn_dusk": 12
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect"
+    "A light breeze/ripple has a very favorable effect",
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
-  "light_phase": "day",
+  "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~94\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~75\u00b0F (warm) favors bass metabolism",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -96,7 +98,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-22T18",
+    "period_key": "highscore@2026-07-22T21",
     "score_ge_70": true
   }
 }
