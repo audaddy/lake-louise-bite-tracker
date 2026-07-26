@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-07-26T13:36:28-07:00",
-  "score": 59,
+  "timestamp": "2026-07-26T14:38:58-07:00",
+  "score": 57,
   "tier": "Fair",
   "species_note": "Largemouth bass \u2014 fair conditions",
   "message": "Fair bass conditions right now. Could go either way.",
@@ -17,25 +17,22 @@
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 93.0,
+  "moon_illumination_pct": 93.2,
   "temp_f": 73.3,
   "surface_pressure_hpa": 1008.9,
-  "cloud_cover_pct": 15.0,
-  "wind_mph": 8.8,
+  "cloud_cover_pct": 28.0,
+  "wind_mph": 10.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 0,
-    "wind": 12
+    "cloud_cover": 4,
+    "wind": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect"
+    "Stable atmospheric pressure is comfortable for fish"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
