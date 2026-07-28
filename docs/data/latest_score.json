@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-28T12:52:15-07:00",
-  "score": 89,
-  "tier": "Excellent",
-  "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~50 min.",
+  "timestamp": "2026-07-28T14:04:33-07:00",
+  "score": 64,
+  "tier": "Good",
+  "species_note": "Largemouth bass \u2014 good window",
+  "message": "Good conditions for bass right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-07-29T01:06:39-07:00"
@@ -12,42 +12,45 @@
     "type": "moonrise",
     "time": "2026-07-28T20:48:38-07:00"
   },
-  "pressure_trend_hpa": 0.8,
+  "pressure_trend_hpa": 1.3,
   "species": "bass",
-  "in_major_period": true,
+  "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 99.4,
-  "temp_f": 71.3,
-  "surface_pressure_hpa": 1009.6,
+  "temp_f": 65.9,
+  "surface_pressure_hpa": 1010.3,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 12.4,
+  "wind_mph": 10.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 12,
     "wind": 6,
-    "solunar_major": 18,
     "moon_phase": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
-    "Solunar major period active (moon overhead/underfoot)",
     "Moon phase is favorable"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
-    "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~71\u00b0F (warm) favors bass metabolism",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~66\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Spin fishing",
-    "method_reason": "wind makes fly casting tough and rewards covering water",
+    "method_lean": "Fly fishing",
+    "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
+      {
+        "name": "Dry flies (caddis / mayfly)",
+        "why": "trout rise to the evening hatch in low light",
+        "hot": true
+      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -56,7 +59,7 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
-        "hot": true
+        "hot": false
       }
     ],
     "spin_options": [
@@ -73,23 +76,18 @@
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
-        "hot": false
-      },
-      {
-        "name": "Jigs & soft plastics (worked deep)",
-        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
         "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean spin fishing"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "underfoot@2026-07-28T12:42:39-07:00",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
