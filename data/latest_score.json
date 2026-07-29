@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-07-29T15:28:16-07:00",
+  "timestamp": "2026-07-29T16:32:26-07:00",
   "score": 71,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-07-29T21:11:55-07:00"
   },
-  "pressure_trend_hpa": -1.6,
+  "pressure_trend_hpa": -1.7,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 99.9,
-  "temp_f": 75.5,
-  "surface_pressure_hpa": 1006.3,
-  "cloud_cover_pct": 6.0,
-  "wind_mph": 7.0,
+  "moon_illumination_pct": 99.8,
+  "temp_f": 76.3,
+  "surface_pressure_hpa": 1006.0,
+  "cloud_cover_pct": 15.0,
+  "wind_mph": 5.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -89,7 +89,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-29T15",
+    "period_key": "highscore@2026-07-29T16",
     "score_ge_70": true
   }
 }
