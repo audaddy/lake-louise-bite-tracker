@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-07-29T16:32:26-07:00",
-  "score": 71,
+  "timestamp": "2026-07-29T18:01:22-07:00",
+  "score": 65,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
   "message": "Good conditions for bass right now. Worth a cast.",
@@ -12,26 +12,26 @@
     "type": "moonrise",
     "time": "2026-07-29T21:11:55-07:00"
   },
-  "pressure_trend_hpa": -1.7,
+  "pressure_trend_hpa": -0.8,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 99.8,
-  "temp_f": 76.3,
-  "surface_pressure_hpa": 1006.0,
-  "cloud_cover_pct": 15.0,
-  "wind_mph": 5.7,
+  "temp_f": 76.4,
+  "surface_pressure_hpa": 1005.5,
+  "cloud_cover_pct": 0.0,
+  "wind_mph": 4.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 12,
     "cloud_cover": 0,
     "wind": 12,
     "moon_phase": 6
   },
   "positive_factors": [
-    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect",
     "Moon phase is favorable"
   ],
@@ -86,10 +86,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-29T16",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
