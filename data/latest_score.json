@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-07-31T13:41:17-07:00",
-  "score": 71,
-  "tier": "Good",
-  "species_note": "Largemouth bass \u2014 good window",
-  "message": "Good conditions for bass right now. Worth a cast.",
+  "timestamp": "2026-07-31T14:45:42-07:00",
+  "score": 83,
+  "tier": "Excellent",
+  "species_note": "Largemouth bass biting",
+  "message": "Excellent bass window right now \u2014 biting for the next ~1 hours.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-07-31T14:59:09-07:00"
@@ -12,28 +12,28 @@
     "type": "moonrise",
     "time": "2026-07-31T21:47:59-07:00"
   },
-  "pressure_trend_hpa": -1.9,
+  "pressure_trend_hpa": -2.5,
   "species": "bass",
-  "in_major_period": false,
+  "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 95.1,
-  "temp_f": 78.7,
-  "surface_pressure_hpa": 1009.7,
+  "moon_illumination_pct": 94.9,
+  "temp_f": 80.7,
+  "surface_pressure_hpa": 1008.4,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 6.2,
+  "wind_mph": 6.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
     "cloud_cover": 0,
     "wind": 12,
-    "moon_phase": 6
+    "solunar_major": 18
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "A light breeze/ripple has a very favorable effect",
-    "Moon phase is favorable"
+    "Solunar major period active (moon overhead/underfoot)"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -41,7 +41,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~79\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~81\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Deep \u2014 15 ft+ near structure",
@@ -89,7 +89,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-07-31T13",
+    "period_key": "underfoot@2026-07-31T14:59:09-07:00",
     "score_ge_70": true
   }
 }
