@@ -1,44 +1,46 @@
 {
-  "timestamp": "2026-08-01T08:27:30-07:00",
-  "score": 64,
-  "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "timestamp": "2026-08-01T09:29:05-07:00",
+  "score": 81,
+  "tier": "Excellent",
+  "species_note": "Rainbow trout biting",
+  "message": "Excellent trout window right now \u2014 biting for the next ~7 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-08-01T15:42:02-07:00"
   },
   "next_minor_period": {
-    "type": "moonset",
-    "time": "2026-08-01T09:05:50-07:00"
+    "type": "moonrise",
+    "time": "2026-08-01T22:03:43-07:00"
   },
-  "pressure_trend_hpa": 1.3,
+  "pressure_trend_hpa": 0.0,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": false,
+  "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 91.0,
-  "temp_f": 64.6,
-  "surface_pressure_hpa": 1011.1,
+  "moon_illumination_pct": 90.8,
+  "temp_f": 63.5,
+  "surface_pressure_hpa": 1011.2,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 9.8,
+  "wind_mph": 8.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
+    "pressure": 12,
     "cloud_cover": 12,
-    "wind": 12
+    "wind": 12,
+    "solunar_minor": 10
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
+    "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect"
+    "A light breeze/ripple has a very favorable effect",
+    "Solunar minor period active (moonrise/moonset)"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~65\u00b0F; low light leans trout",
+    "species_reason": "moderate ~64\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -63,11 +65,6 @@
     ],
     "spin_options": [
       {
-        "name": "Topwater (buzzbaits, walking baits, poppers)",
-        "why": "first/last light over shallow cover for bass",
-        "hot": true
-      },
-      {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
         "hot": true
@@ -83,10 +80,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
-    "score_ge_70": false
+    "period_key": "moonset@2026-08-01T09:05:50-07:00",
+    "score_ge_70": true
   }
 }
