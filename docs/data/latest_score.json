@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-01T13:47:45-07:00",
-  "score": 65,
+  "timestamp": "2026-08-01T14:52:25-07:00",
+  "score": 61,
   "tier": "Good",
-  "species_note": "Largemouth bass \u2014 good window",
-  "message": "Good conditions for bass right now. Worth a cast.",
+  "species_note": "Largemouth bass biting",
+  "message": "Good bass window right now \u2014 biting for the next ~2 hours.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-08-01T15:42:02-07:00"
@@ -14,33 +14,36 @@
   },
   "pressure_trend_hpa": 0.5,
   "species": "bass",
-  "in_major_period": false,
+  "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 89.7,
-  "temp_f": 68.8,
-  "surface_pressure_hpa": 1012.4,
-  "cloud_cover_pct": 72.0,
-  "wind_mph": 14.8,
+  "moon_illumination_pct": 89.4,
+  "temp_f": 70.6,
+  "surface_pressure_hpa": 1012.5,
+  "cloud_cover_pct": 34.0,
+  "wind_mph": 15.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 12,
-    "wind": 6
+    "cloud_cover": 4,
+    "wind": -8,
+    "solunar_major": 18
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity"
+    "Solunar major period active (moon overhead/underfoot)"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Strong winds make conditions tougher"
+  ],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~69\u00b0F (warm) favors bass metabolism",
-    "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
-    "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Mid-depth \u2014 ~8\u201315 ft",
+    "species_reason": "water proxy ~71\u00b0F (warm) favors bass metabolism",
+    "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
+    "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
+    "depth": "Deep \u2014 15 ft+ near structure",
     "method_lean": "Spin fishing",
     "method_reason": "wind makes fly casting tough and rewards covering water",
     "fly_options": [
@@ -57,30 +60,30 @@
       {
         "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
         "why": "subsurface when nothing's rising / bright midday",
-        "hot": false
+        "hot": true
       }
     ],
     "spin_options": [
       {
-        "name": "Spinners / spinnerbaits",
-        "why": "chop or cloud cover \u2014 cover water at mid-depth",
-        "hot": true
-      },
-      {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
+      },
+      {
+        "name": "Jigs & soft plastics (worked deep)",
+        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
+        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Transition edges \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Largemouth bass \u00b7 Open water \u00b7 Deep \u2014 15 ft+ near structure \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
+    "period_key": "underfoot@2026-08-01T15:42:02-07:00",
     "score_ge_70": false
   }
 }
