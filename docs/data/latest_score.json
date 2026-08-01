@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-08-01T14:52:25-07:00",
-  "score": 61,
+  "timestamp": "2026-08-01T15:52:53-07:00",
+  "score": 75,
   "tier": "Good",
   "species_note": "Largemouth bass biting",
-  "message": "Good bass window right now \u2014 biting for the next ~2 hours.",
+  "message": "Good bass window right now \u2014 biting for the next ~49 min.",
   "next_major_period": {
-    "type": "underfoot",
-    "time": "2026-08-01T15:42:02-07:00"
+    "type": "transit",
+    "time": "2026-08-02T04:03:31-07:00"
   },
   "next_minor_period": {
     "type": "moonrise",
@@ -17,26 +17,24 @@
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 89.4,
-  "temp_f": 70.6,
-  "surface_pressure_hpa": 1012.5,
-  "cloud_cover_pct": 34.0,
-  "wind_mph": 15.2,
+  "moon_illumination_pct": 89.1,
+  "temp_f": 71.3,
+  "surface_pressure_hpa": 1012.7,
+  "cloud_cover_pct": 25.0,
+  "wind_mph": 14.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 4,
-    "wind": -8,
+    "wind": 6,
     "solunar_major": 18
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Solunar major period active (moon overhead/underfoot)"
   ],
-  "negative_factors": [
-    "Strong winds make conditions tougher"
-  ],
+  "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
@@ -84,6 +82,6 @@
   },
   "last_notified": {
     "period_key": "underfoot@2026-08-01T15:42:02-07:00",
-    "score_ge_70": false
+    "score_ge_70": true
   }
 }
