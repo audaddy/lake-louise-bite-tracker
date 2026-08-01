@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-01T15:52:53-07:00",
-  "score": 75,
-  "tier": "Good",
-  "species_note": "Largemouth bass biting",
-  "message": "Good bass window right now \u2014 biting for the next ~49 min.",
+  "timestamp": "2026-08-01T16:54:39-07:00",
+  "score": 46,
+  "tier": "Fair",
+  "species_note": "Largemouth bass \u2014 fair conditions",
+  "message": "Fair bass conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-08-02T04:03:31-07:00"
@@ -12,33 +12,33 @@
     "type": "moonrise",
     "time": "2026-08-01T22:03:43-07:00"
   },
-  "pressure_trend_hpa": 0.5,
+  "pressure_trend_hpa": 1.1,
   "species": "bass",
-  "in_major_period": true,
+  "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 89.1,
-  "temp_f": 71.3,
-  "surface_pressure_hpa": 1012.7,
-  "cloud_cover_pct": 25.0,
+  "moon_illumination_pct": 88.8,
+  "temp_f": 70.4,
+  "surface_pressure_hpa": 1013.5,
+  "cloud_cover_pct": 14.0,
   "wind_mph": 14.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
-    "cloud_cover": 4,
-    "wind": 6,
-    "solunar_major": 18
+    "pressure": 5,
+    "cloud_cover": 0,
+    "wind": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "Solunar major period active (moon overhead/underfoot)"
+    "Slightly rising pressure \u2014 neutral to mild"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Bright, clear skies can push fish deep and slow feeding"
+  ],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~71\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~70\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Deep \u2014 15 ft+ near structure",
@@ -78,10 +78,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "underfoot@2026-08-01T15:42:02-07:00",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
