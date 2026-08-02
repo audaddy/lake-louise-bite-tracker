@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-02T00:53:13-07:00",
+  "timestamp": "2026-08-02T02:53:36-07:00",
   "score": 59,
   "tier": "Fair",
   "species_note": "Rainbow trout \u2014 fair conditions",
@@ -12,16 +12,16 @@
     "type": "moonset",
     "time": "2026-08-02T10:17:10-07:00"
   },
-  "pressure_trend_hpa": -0.1,
+  "pressure_trend_hpa": 0.4,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 86.6,
-  "temp_f": 56.5,
-  "surface_pressure_hpa": 1014.1,
-  "cloud_cover_pct": 2.0,
-  "wind_mph": 4.6,
+  "moon_illumination_pct": 86.0,
+  "temp_f": 54.1,
+  "surface_pressure_hpa": 1014.5,
+  "cloud_cover_pct": 12.0,
+  "wind_mph": 4.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -38,8 +38,8 @@
   ],
   "light_phase": "night",
   "tactics": {
-    "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~56\u00b0F; low light leans trout",
+    "species_pick": "Rainbow trout",
+    "species_reason": "cool water ~54\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -75,7 +75,7 @@
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
