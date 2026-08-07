@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-06T22:12:18-07:00",
+  "timestamp": "2026-08-06T23:19:37-07:00",
   "score": 52,
   "tier": "Fair",
   "species_note": "Largemouth bass \u2014 fair conditions",
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-08-06T23:57:41-07:00"
   },
-  "pressure_trend_hpa": 1.1,
+  "pressure_trend_hpa": 1.5,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 37.5,
-  "temp_f": 73.2,
-  "surface_pressure_hpa": 1006.3,
+  "moon_illumination_pct": 37.0,
+  "temp_f": 69.8,
+  "surface_pressure_hpa": 1006.7,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 5.0,
+  "wind_mph": 4.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -39,7 +39,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~73\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~70\u00b0F (warm) favors bass metabolism",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -82,11 +82,6 @@
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
-      },
-      {
-        "name": "Jigs & soft plastics (worked deep)",
-        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
-        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
