@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-07T16:47:53-07:00",
-  "score": 69,
-  "tier": "Good",
-  "species_note": "Largemouth bass biting",
-  "message": "Good bass window right now \u2014 biting for the next ~27 min.",
+  "timestamp": "2026-08-07T18:19:50-07:00",
+  "score": 59,
+  "tier": "Fair",
+  "species_note": "Largemouth bass \u2014 fair conditions",
+  "message": "Fair bass conditions right now. Could go either way.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-08-07T20:46:51-07:00"
@@ -12,28 +12,26 @@
     "type": "moonrise",
     "time": "2026-08-08T00:44:55-07:00"
   },
-  "pressure_trend_hpa": -0.9,
+  "pressure_trend_hpa": -0.1,
   "species": "bass",
   "in_major_period": false,
-  "in_minor_period": true,
+  "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 29.0,
-  "temp_f": 84.1,
-  "surface_pressure_hpa": 1008.3,
+  "moon_illumination_pct": 28.3,
+  "temp_f": 83.6,
+  "surface_pressure_hpa": 1009.1,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 7.1,
+  "wind_mph": 8.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 12,
-    "solunar_minor": 10
+    "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect",
-    "Solunar minor period active (moonrise/moonset)"
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -89,7 +87,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "moonset@2026-08-07T16:45:18-07:00",
+    "period_key": null,
     "score_ge_70": false
   }
 }
