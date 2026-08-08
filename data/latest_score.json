@@ -1,37 +1,37 @@
 {
-  "timestamp": "2026-08-08T09:02:25-07:00",
-  "score": 76,
-  "tier": "Good",
+  "timestamp": "2026-08-08T09:51:15-07:00",
+  "score": 83,
+  "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~1.5 hours.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~28 min.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-08-08T09:18:54-07:00"
+    "type": "underfoot",
+    "time": "2026-08-08T21:51:25-07:00"
   },
   "next_minor_period": {
     "type": "moonset",
     "time": "2026-08-08T17:56:01-07:00"
   },
-  "pressure_trend_hpa": 1.2,
+  "pressure_trend_hpa": 0.3,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 22.0,
-  "temp_f": 60.9,
-  "surface_pressure_hpa": 1011.6,
-  "cloud_cover_pct": 100.0,
-  "wind_mph": 2.2,
+  "moon_illumination_pct": 21.7,
+  "temp_f": 64.4,
+  "surface_pressure_hpa": 1011.7,
+  "cloud_cover_pct": 98.0,
+  "wind_mph": 1.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
+    "pressure": 12,
     "cloud_cover": 12,
     "wind": 6,
     "solunar_major": 18
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
+    "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
     "Solunar major period active (moon overhead/underfoot)"
   ],
@@ -39,7 +39,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~61\u00b0F; low light leans trout",
+    "species_reason": "moderate ~64\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -63,6 +63,11 @@
       }
     ],
     "spin_options": [
+      {
+        "name": "Topwater (buzzbaits, walking baits, poppers)",
+        "why": "first/last light over shallow cover for bass",
+        "hot": true
+      },
       {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
