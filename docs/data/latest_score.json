@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-08T23:29:16-07:00",
+  "timestamp": "2026-08-09T00:35:54-07:00",
   "score": 59,
   "tier": "Fair",
-  "species_note": "Largemouth bass \u2014 fair conditions",
-  "message": "Fair bass conditions right now. Could go either way.",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-08-09T10:23:59-07:00"
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-08-09T01:47:49-07:00"
   },
-  "pressure_trend_hpa": -0.4,
-  "species": "bass",
+  "pressure_trend_hpa": 0.0,
+  "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 16.4,
-  "temp_f": 65.3,
-  "surface_pressure_hpa": 1009.4,
-  "cloud_cover_pct": 0.0,
-  "wind_mph": 4.9,
+  "moon_illumination_pct": 16.0,
+  "temp_f": 61.4,
+  "surface_pressure_hpa": 1009.9,
+  "cloud_cover_pct": 1.0,
+  "wind_mph": 4.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -39,7 +39,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~65\u00b0F; low light leans trout",
+    "species_reason": "moderate ~61\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -63,11 +63,6 @@
       }
     ],
     "spin_options": [
-      {
-        "name": "Topwater (buzzbaits, walking baits, poppers)",
-        "why": "first/last light over shallow cover for bass",
-        "hot": true
-      },
       {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
