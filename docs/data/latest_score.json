@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-10T09:31:14-07:00",
-  "score": 58,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-08-10T10:35:55-07:00",
+  "score": 83,
+  "tier": "Excellent",
+  "species_note": "Rainbow trout biting",
+  "message": "Excellent trout window right now \u2014 biting for the next ~2 hours.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-08-10T11:27:38-07:00"
@@ -12,26 +12,28 @@
     "type": "moonset",
     "time": "2026-08-10T19:35:36-07:00"
   },
-  "pressure_trend_hpa": 1.4,
+  "pressure_trend_hpa": 0.8,
   "species": "trout",
-  "in_major_period": false,
+  "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 5.9,
-  "temp_f": 60.4,
-  "surface_pressure_hpa": 1011.6,
-  "cloud_cover_pct": 90.0,
-  "wind_mph": 1.8,
+  "moon_illumination_pct": 5.7,
+  "temp_f": 60.2,
+  "surface_pressure_hpa": 1011.9,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 2.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
+    "pressure": 12,
     "cloud_cover": 12,
-    "wind": 6
+    "wind": 6,
+    "solunar_major": 18
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
-    "Overcast skies have a favorable impact on biting activity"
+    "Stable atmospheric pressure is comfortable for fish",
+    "Overcast skies have a favorable impact on biting activity",
+    "Solunar major period active (moon overhead/underfoot)"
   ],
   "negative_factors": [],
   "light_phase": "day",
@@ -77,10 +79,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
-    "score_ge_70": false
+    "period_key": "transit@2026-08-10T11:27:38-07:00",
+    "score_ge_70": true
   }
 }
