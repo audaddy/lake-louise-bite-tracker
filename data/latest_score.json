@@ -1,32 +1,32 @@
 {
-  "timestamp": "2026-08-12T00:22:23-07:00",
-  "score": 83,
+  "timestamp": "2026-08-12T01:46:29-07:00",
+  "score": 87,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~1.5 hours.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~9 min.",
   "next_major_period": {
-    "type": "underfoot",
-    "time": "2026-08-12T00:55:27-07:00"
+    "type": "transit",
+    "time": "2026-08-12T13:22:19-07:00"
   },
   "next_minor_period": {
     "type": "moonrise",
     "time": "2026-08-12T05:55:10-07:00"
   },
-  "pressure_trend_hpa": -0.8,
+  "pressure_trend_hpa": -0.3,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 0.3,
-  "temp_f": 63.9,
-  "surface_pressure_hpa": 1008.5,
-  "cloud_cover_pct": 1.0,
-  "wind_mph": 4.1,
+  "moon_illumination_pct": 0.2,
+  "temp_f": 62.2,
+  "surface_pressure_hpa": 1009.0,
+  "cloud_cover_pct": 24.0,
+  "wind_mph": 3.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 0,
+    "cloud_cover": 4,
     "wind": 12,
     "solunar_major": 18,
     "moon_phase": 6
@@ -37,15 +37,13 @@
     "Solunar major period active (moon overhead/underfoot)",
     "Moon phase is favorable"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~64\u00b0F; low light leans trout",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_reason": "moderate ~62\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -83,7 +81,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "underfoot@2026-08-12T00:55:27-07:00",
