@@ -1,48 +1,45 @@
 {
-  "timestamp": "2026-08-13T06:25:30-07:00",
-  "score": 89,
-  "tier": "Excellent",
-  "species_note": "Rainbow trout \u2014 dawn/dusk window",
-  "message": "Excellent trout conditions during the low-light window. Good time to fish.",
+  "timestamp": "2026-08-13T08:38:20-07:00",
+  "score": 71,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-08-13T14:12:50-07:00"
   },
   "next_minor_period": {
-    "type": "moonrise",
-    "time": "2026-08-13T07:17:47-07:00"
+    "type": "moonset",
+    "time": "2026-08-13T20:51:04-07:00"
   },
-  "pressure_trend_hpa": 0.5,
+  "pressure_trend_hpa": 0.7,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": true,
-  "moon_illumination_pct": 0.9,
-  "temp_f": 57.0,
-  "surface_pressure_hpa": 1005.1,
-  "cloud_cover_pct": 98.0,
-  "wind_mph": 3.5,
+  "in_dawn_dusk": false,
+  "moon_illumination_pct": 1.1,
+  "temp_f": 60.0,
+  "surface_pressure_hpa": 1005.6,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 1.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 12,
-    "dawn_dusk": 12,
+    "wind": 6,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect",
-    "Low-light dawn/dusk window \u2014 prime feeding time",
     "Moon phase is favorable"
   ],
   "negative_factors": [],
-  "light_phase": "dawn_dusk",
+  "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~57\u00b0F; low light leans trout",
+    "species_reason": "moderate ~60\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -85,7 +82,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-08-13T06",
+    "period_key": "highscore@2026-08-13T08",
     "score_ge_70": true
   }
 }
