@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-14T15:18:59-07:00",
+  "timestamp": "2026-08-14T15:48:41-07:00",
   "score": 83,
   "tier": "Excellent",
   "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~41 min.",
+  "message": "Excellent bass window right now \u2014 biting for the next ~11 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-08-15T03:22:49-07:00"
@@ -17,11 +17,11 @@
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 6.2,
-  "temp_f": 76.5,
+  "moon_illumination_pct": 6.4,
+  "temp_f": 77.4,
   "surface_pressure_hpa": 1006.6,
-  "cloud_cover_pct": 1.0,
-  "wind_mph": 4.9,
+  "cloud_cover_pct": 0.0,
+  "wind_mph": 4.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -41,7 +41,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~76\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~77\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Deep \u2014 15 ft+ near structure",
