@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-08-15T01:23:23-07:00",
-  "score": 50,
+  "timestamp": "2026-08-15T01:54:18-07:00",
+  "score": 53,
   "tier": "Fair",
   "species_note": "Rainbow trout \u2014 fair conditions",
   "message": "Fair trout conditions right now. Could go either way.",
@@ -12,34 +12,33 @@
     "type": "moonrise",
     "time": "2026-08-15T09:52:09-07:00"
   },
-  "pressure_trend_hpa": 0.2,
+  "pressure_trend_hpa": 0.6,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 8.7,
-  "temp_f": 58.8,
-  "surface_pressure_hpa": 1009.4,
-  "cloud_cover_pct": 10.0,
-  "wind_mph": 0.6,
+  "moon_illumination_pct": 8.8,
+  "temp_f": 57.8,
+  "surface_pressure_hpa": 1009.9,
+  "cloud_cover_pct": 3.0,
+  "wind_mph": 1.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 3
+    "wind": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish"
   ],
   "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding",
-    "Dead-calm water is less favorable than a light ripple"
+    "Bright, clear skies can push fish deep and slow feeding"
   ],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~59\u00b0F; low light leans trout",
+    "species_reason": "moderate ~58\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
