@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-15T05:44:57-07:00",
+  "timestamp": "2026-08-15T06:18:47-07:00",
   "score": 77,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
@@ -17,11 +17,11 @@
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 9.8,
-  "temp_f": 60.5,
-  "surface_pressure_hpa": 1010.2,
+  "moon_illumination_pct": 10.0,
+  "temp_f": 60.2,
+  "surface_pressure_hpa": 1010.3,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 2.1,
+  "wind_mph": 1.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -82,7 +82,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-08-15T05",
+    "period_key": "highscore@2026-08-15T06",
     "score_ge_70": true
   }
 }
