@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-08-16T13:22:58-07:00",
-  "score": 65,
+  "timestamp": "2026-08-16T13:46:43-07:00",
+  "score": 69,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
   "message": "Good conditions for bass right now. Worth a cast.",
@@ -12,48 +12,38 @@
     "type": "moonset",
     "time": "2026-08-16T21:41:54-07:00"
   },
-  "pressure_trend_hpa": -0.8,
+  "pressure_trend_hpa": -1.1,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 19.7,
-  "temp_f": 69.6,
-  "surface_pressure_hpa": 1014.9,
-  "cloud_cover_pct": 86.0,
-  "wind_mph": 2.1,
+  "moon_illumination_pct": 19.9,
+  "temp_f": 71.1,
+  "surface_pressure_hpa": 1014.6,
+  "cloud_cover_pct": 32.0,
+  "wind_mph": 4.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
-    "cloud_cover": 12,
-    "wind": 6
+    "pressure": 18,
+    "cloud_cover": 4,
+    "wind": 12
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity"
+    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~70\u00b0F (warm) favors bass metabolism",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
-    "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Either \u2014 match the water",
-    "method_reason": "conditions don't strongly favor one over the other",
+    "species_reason": "water proxy ~71\u00b0F (warm) favors bass metabolism",
+    "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
+    "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
+    "depth": "Deep \u2014 15 ft+ near structure",
+    "method_lean": "Spin fishing",
+    "method_reason": "bass holding on structure are efficient to target with lures",
     "fly_options": [
-      {
-        "name": "Poppers / foam topwater",
-        "why": "low light + warm water = surface bass eats",
-        "hot": true
-      },
-      {
-        "name": "Dry flies (caddis / mayfly)",
-        "why": "trout rise to the evening hatch in low light",
-        "hot": false
-      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -62,15 +52,15 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
-        "hot": false
+        "hot": true
+      },
+      {
+        "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
+        "why": "subsurface when nothing's rising / bright midday",
+        "hot": true
       }
     ],
     "spin_options": [
-      {
-        "name": "Topwater (buzzbaits, walking baits, poppers)",
-        "why": "first/last light over shallow cover for bass",
-        "hot": true
-      },
       {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
@@ -80,10 +70,15 @@
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
+      },
+      {
+        "name": "Jigs & soft plastics (worked deep)",
+        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
+        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean either \u2014 match the water"
+    "summary": "Largemouth bass \u00b7 Open water \u00b7 Deep \u2014 15 ft+ near structure \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
