@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-16T10:32:42-07:00",
-  "score": 62,
+  "timestamp": "2026-08-16T10:55:13-07:00",
+  "score": 72,
   "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "species_note": "Rainbow trout biting",
+  "message": "Good trout window right now \u2014 biting for the next ~41 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-08-16T16:29:44-07:00"
@@ -15,23 +15,25 @@
   "pressure_trend_hpa": 0.9,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": false,
+  "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 18.7,
-  "temp_f": 63.5,
+  "moon_illumination_pct": 18.9,
+  "temp_f": 64.1,
   "surface_pressure_hpa": 1015.7,
-  "cloud_cover_pct": 90.0,
-  "wind_mph": 0.6,
+  "cloud_cover_pct": 98.0,
+  "wind_mph": 0.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 3
+    "wind": 3,
+    "solunar_minor": 10
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity"
+    "Overcast skies have a favorable impact on biting activity",
+    "Solunar minor period active (moonrise/moonset)"
   ],
   "negative_factors": [
     "Dead-calm water is less favorable than a light ripple"
@@ -64,6 +66,11 @@
     ],
     "spin_options": [
       {
+        "name": "Topwater (buzzbaits, walking baits, poppers)",
+        "why": "first/last light over shallow cover for bass",
+        "hot": true
+      },
+      {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
         "hot": true
@@ -79,10 +86,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
-    "score_ge_70": false
+    "period_key": "moonrise@2026-08-16T11:05:44-07:00",
+    "score_ge_70": true
   }
 }
