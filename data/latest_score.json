@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-17T01:38:54-07:00",
+  "timestamp": "2026-08-17T02:23:14-07:00",
   "score": 71,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
@@ -12,15 +12,15 @@
     "type": "moonrise",
     "time": "2026-08-17T12:18:15-07:00"
   },
-  "pressure_trend_hpa": 0.8,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 24.1,
-  "temp_f": 59.3,
-  "surface_pressure_hpa": 1013.0,
-  "cloud_cover_pct": 82.0,
+  "moon_illumination_pct": 24.4,
+  "temp_f": 58.5,
+  "surface_pressure_hpa": 1013.2,
+  "cloud_cover_pct": 85.0,
   "wind_mph": 3.8,
   "precip_in": 0.0,
   "score_breakdown": {
@@ -38,7 +38,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~59\u00b0F; low light leans trout",
+    "species_reason": "moderate ~58\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -81,7 +81,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-08-17T01",
+    "period_key": "highscore@2026-08-17T02",
     "score_ge_70": true
   }
 }
