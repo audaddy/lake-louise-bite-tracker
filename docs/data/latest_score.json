@@ -1,32 +1,32 @@
 {
-  "timestamp": "2026-08-19T14:39:44-07:00",
-  "score": 81,
+  "timestamp": "2026-08-19T14:59:53-07:00",
+  "score": 85,
   "tier": "Excellent",
   "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~30 min.",
+  "message": "Excellent bass window right now \u2014 biting for the next ~10 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-08-19T18:48:35-07:00"
   },
   "next_minor_period": {
-    "type": "moonrise",
-    "time": "2026-08-19T14:40:10-07:00"
+    "type": "moonset",
+    "time": "2026-08-19T22:50:44-07:00"
   },
-  "pressure_trend_hpa": -1.3,
+  "pressure_trend_hpa": -1.9,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 48.1,
-  "temp_f": 76.8,
-  "surface_pressure_hpa": 1008.4,
-  "cloud_cover_pct": 18.0,
-  "wind_mph": 5.1,
+  "moon_illumination_pct": 48.2,
+  "temp_f": 77.1,
+  "surface_pressure_hpa": 1008.0,
+  "cloud_cover_pct": 27.0,
+  "wind_mph": 4.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
-    "cloud_cover": 0,
+    "cloud_cover": 4,
     "wind": 12,
     "solunar_minor": 10,
     "moon_phase": 6
@@ -37,9 +37,7 @@
     "Solunar minor period active (moonrise/moonset)",
     "Moon phase is favorable"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
@@ -88,7 +86,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "moonrise@2026-08-19T14:40:10-07:00",
