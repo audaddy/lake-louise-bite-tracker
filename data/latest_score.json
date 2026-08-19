@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-08-19T15:32:58-07:00",
-  "score": 75,
+  "timestamp": "2026-08-19T16:00:00-07:00",
+  "score": 71,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
   "message": "Good conditions for bass right now. Worth a cast.",
@@ -12,21 +12,21 @@
     "type": "moonset",
     "time": "2026-08-19T22:50:44-07:00"
   },
-  "pressure_trend_hpa": -2.4,
+  "pressure_trend_hpa": -2.2,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 48.4,
-  "temp_f": 79.5,
-  "surface_pressure_hpa": 1007.5,
-  "cloud_cover_pct": 21.0,
-  "wind_mph": 6.3,
+  "moon_illumination_pct": 48.6,
+  "temp_f": 80.0,
+  "surface_pressure_hpa": 1007.6,
+  "cloud_cover_pct": 0.0,
+  "wind_mph": 5.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
-    "cloud_cover": 4,
+    "cloud_cover": 0,
     "wind": 12,
     "moon_phase": 6
   },
@@ -35,7 +35,9 @@
     "A light breeze/ripple has a very favorable effect",
     "Moon phase is favorable"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Bright, clear skies can push fish deep and slow feeding"
+  ],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
@@ -87,7 +89,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-08-19T15",
+    "period_key": "highscore@2026-08-19T16",
     "score_ge_70": true
   }
 }
