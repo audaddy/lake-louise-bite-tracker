@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-20T08:48:21-07:00",
+  "timestamp": "2026-08-20T09:31:10-07:00",
   "score": 59,
   "tier": "Fair",
   "species_note": "Largemouth bass \u2014 fair conditions",
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-08-20T15:46:46-07:00"
   },
-  "pressure_trend_hpa": 0.8,
+  "pressure_trend_hpa": 0.4,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 55.3,
-  "temp_f": 65.4,
-  "surface_pressure_hpa": 1007.4,
-  "cloud_cover_pct": 2.0,
-  "wind_mph": 3.1,
+  "moon_illumination_pct": 55.6,
+  "temp_f": 69.4,
+  "surface_pressure_hpa": 1006.9,
+  "cloud_cover_pct": 1.0,
+  "wind_mph": 3.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -38,10 +38,10 @@
   ],
   "light_phase": "day",
   "tactics": {
-    "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~65\u00b0F; daytime warmth leans bass",
-    "where": "Transition edges \u2014 the first drop-off off the shoreline",
-    "where_reason": "mixed light; work the seam between shallow flats and deeper water",
+    "species_pick": "Largemouth bass",
+    "species_reason": "water proxy ~69\u00b0F (warm) favors bass metabolism",
+    "where": "Open water \u2014 drop-offs & deeper structure",
+    "where_reason": "bright sun + warm water pulls fish off the bank",
     "depth": "Mid-depth \u2014 ~8\u201315 ft",
     "method_lean": "Spin fishing",
     "method_reason": "bass holding on structure are efficient to target with lures",
@@ -80,7 +80,7 @@
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Either \u2014 slight bass edge \u00b7 Transition edges \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Largemouth bass \u00b7 Open water \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
