@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-20T09:31:10-07:00",
+  "timestamp": "2026-08-20T10:05:48-07:00",
   "score": 59,
   "tier": "Fair",
   "species_note": "Largemouth bass \u2014 fair conditions",
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-08-20T15:46:46-07:00"
   },
-  "pressure_trend_hpa": 0.4,
+  "pressure_trend_hpa": 0.2,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 55.6,
-  "temp_f": 69.4,
-  "surface_pressure_hpa": 1006.9,
+  "moon_illumination_pct": 55.8,
+  "temp_f": 70.9,
+  "surface_pressure_hpa": 1006.7,
   "cloud_cover_pct": 1.0,
-  "wind_mph": 3.3,
+  "wind_mph": 3.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -39,10 +39,10 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~69\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~71\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure",
     "where_reason": "bright sun + warm water pulls fish off the bank",
-    "depth": "Mid-depth \u2014 ~8\u201315 ft",
+    "depth": "Deep \u2014 15 ft+ near structure",
     "method_lean": "Spin fishing",
     "method_reason": "bass holding on structure are efficient to target with lures",
     "fly_options": [
@@ -80,7 +80,7 @@
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Open water \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Largemouth bass \u00b7 Open water \u00b7 Deep \u2014 15 ft+ near structure \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
