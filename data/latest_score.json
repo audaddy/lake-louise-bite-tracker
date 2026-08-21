@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-08-21T11:13:14-07:00",
-  "score": 64,
+  "timestamp": "2026-08-21T11:57:36-07:00",
+  "score": 71,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
   "message": "Good conditions for bass right now. Worth a cast.",
@@ -12,25 +12,25 @@
     "type": "moonrise",
     "time": "2026-08-21T16:46:51-07:00"
   },
-  "pressure_trend_hpa": 1.1,
+  "pressure_trend_hpa": -0.9,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 65.5,
-  "temp_f": 76.1,
-  "surface_pressure_hpa": 1007.2,
-  "cloud_cover_pct": 88.0,
-  "wind_mph": 3.1,
+  "moon_illumination_pct": 65.8,
+  "temp_f": 79.4,
+  "surface_pressure_hpa": 1006.4,
+  "cloud_cover_pct": 93.0,
+  "wind_mph": 5.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
+    "pressure": 12,
     "cloud_cover": 12,
     "wind": 12
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
+    "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect"
   ],
@@ -38,9 +38,9 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~76\u00b0F (warm) favors bass metabolism",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
+    "species_reason": "water proxy ~79\u00b0F (warm) favors bass metabolism",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Either \u2014 match the water",
     "method_reason": "conditions don't strongly favor one over the other",
@@ -93,10 +93,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
-    "score_ge_70": false
+    "period_key": "highscore@2026-08-21T11",
+    "score_ge_70": true
   }
 }
