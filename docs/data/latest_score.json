@@ -1,38 +1,38 @@
 {
-  "timestamp": "2026-08-20T19:36:26-07:00",
-  "score": 95,
+  "timestamp": "2026-08-20T20:35:06-07:00",
+  "score": 89,
   "tier": "Excellent",
   "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~1 hours.",
+  "message": "Excellent bass window right now \u2014 biting for the next ~3 min.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-08-20T19:38:16-07:00"
+    "type": "underfoot",
+    "time": "2026-08-21T08:03:39-07:00"
   },
   "next_minor_period": {
     "type": "moonset",
     "time": "2026-08-20T23:26:01-07:00"
   },
-  "pressure_trend_hpa": -1.1,
+  "pressure_trend_hpa": 0.5,
   "species": "bass",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 59.6,
-  "temp_f": 82.0,
-  "surface_pressure_hpa": 1004.2,
+  "moon_illumination_pct": 59.9,
+  "temp_f": 76.0,
+  "surface_pressure_hpa": 1005.1,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 5.6,
+  "wind_mph": 4.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 12,
     "cloud_cover": 0,
     "wind": 12,
     "solunar_major": 18,
     "dawn_dusk": 12
   },
   "positive_factors": [
-    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)",
     "Low-light dawn/dusk window \u2014 prime feeding time"
@@ -43,7 +43,7 @@
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~82\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~76\u00b0F (warm) favors bass metabolism",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -98,7 +98,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "transit@2026-08-20T19:38:16-07:00",
