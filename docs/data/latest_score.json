@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-21T15:49:56-07:00",
-  "score": 71,
-  "tier": "Good",
-  "species_note": "Largemouth bass \u2014 good window",
-  "message": "Good conditions for bass right now. Worth a cast.",
+  "timestamp": "2026-08-21T16:20:13-07:00",
+  "score": 81,
+  "tier": "Excellent",
+  "species_note": "Largemouth bass biting",
+  "message": "Excellent bass window right now \u2014 biting for the next ~57 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-08-21T20:29:18-07:00"
@@ -12,33 +12,35 @@
     "type": "moonrise",
     "time": "2026-08-21T16:46:51-07:00"
   },
-  "pressure_trend_hpa": -0.4,
+  "pressure_trend_hpa": -0.2,
   "species": "bass",
   "in_major_period": false,
-  "in_minor_period": false,
+  "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 67.3,
-  "temp_f": 85.0,
-  "surface_pressure_hpa": 1005.3,
+  "moon_illumination_pct": 67.4,
+  "temp_f": 84.5,
+  "surface_pressure_hpa": 1005.5,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 5.9,
+  "wind_mph": 6.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 12
+    "wind": 12,
+    "solunar_minor": 10
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect"
+    "A light breeze/ripple has a very favorable effect",
+    "Solunar minor period active (moonrise/moonset)"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~85\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~84\u00b0F (warm) favors bass metabolism",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -93,10 +95,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-08-21T15",
+    "period_key": "moonrise@2026-08-21T16:46:51-07:00",
     "score_ge_70": true
   }
 }
