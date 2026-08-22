@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-22T00:18:02-07:00",
-  "score": 67,
-  "tier": "Good",
-  "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~23 min.",
+  "timestamp": "2026-08-22T00:53:30-07:00",
+  "score": 59,
+  "tier": "Fair",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-08-22T08:55:03-07:00"
@@ -12,35 +12,36 @@
     "type": "moonrise",
     "time": "2026-08-22T17:37:48-07:00"
   },
-  "pressure_trend_hpa": 0.4,
+  "pressure_trend_hpa": 0.2,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": true,
+  "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 70.4,
-  "temp_f": 59.8,
-  "surface_pressure_hpa": 1007.8,
-  "cloud_cover_pct": 37.0,
-  "wind_mph": 2.9,
+  "moon_illumination_pct": 70.6,
+  "temp_f": 59.7,
+  "surface_pressure_hpa": 1007.5,
+  "cloud_cover_pct": 19.0,
+  "wind_mph": 4.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 4,
-    "wind": 6,
-    "solunar_minor": 10
+    "cloud_cover": 0,
+    "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Solunar minor period active (moonrise/moonset)"
+    "A light breeze/ripple has a very favorable effect"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Bright, clear skies can push fish deep and slow feeding"
+  ],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
     "species_reason": "moderate ~60\u00b0F; low light leans trout",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -63,6 +64,11 @@
     ],
     "spin_options": [
       {
+        "name": "Spinners / spinnerbaits",
+        "why": "chop or cloud cover \u2014 cover water at mid-depth",
+        "hot": true
+      },
+      {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": true
@@ -76,7 +82,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "moonset@2026-08-22T00:10:52-07:00",
+    "period_key": null,
     "score_ge_70": false
   }
 }
