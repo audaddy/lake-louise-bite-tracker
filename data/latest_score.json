@@ -1,27 +1,27 @@
 {
-  "timestamp": "2026-08-21T20:16:08-07:00",
+  "timestamp": "2026-08-21T21:04:40-07:00",
   "score": 94,
   "tier": "Excellent",
   "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~1 hours.",
+  "message": "Excellent bass window right now \u2014 biting for the next ~25 min.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-08-21T20:29:18-07:00"
+    "type": "underfoot",
+    "time": "2026-08-22T08:55:03-07:00"
   },
   "next_minor_period": {
     "type": "moonset",
     "time": "2026-08-22T00:10:52-07:00"
   },
-  "pressure_trend_hpa": 1.0,
+  "pressure_trend_hpa": 1.7,
   "species": "bass",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 68.9,
-  "temp_f": 68.9,
-  "surface_pressure_hpa": 1006.9,
+  "moon_illumination_pct": 69.2,
+  "temp_f": 66.1,
+  "surface_pressure_hpa": 1007.4,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 8.1,
+  "wind_mph": 7.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -42,7 +42,7 @@
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~69\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~66\u00b0F (warm) favors bass metabolism",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -92,7 +92,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "transit@2026-08-21T20:29:18-07:00",
