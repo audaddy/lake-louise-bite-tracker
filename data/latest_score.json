@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-22T01:24:41-07:00",
-  "score": 59,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-08-22T01:56:41-07:00",
+  "score": 63,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-08-22T08:55:03-07:00"
@@ -12,36 +12,34 @@
     "type": "moonrise",
     "time": "2026-08-22T17:37:48-07:00"
   },
-  "pressure_trend_hpa": 0.3,
+  "pressure_trend_hpa": 0.2,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 70.8,
-  "temp_f": 59.3,
-  "surface_pressure_hpa": 1007.7,
-  "cloud_cover_pct": 12.0,
-  "wind_mph": 4.3,
+  "moon_illumination_pct": 71.0,
+  "temp_f": 58.8,
+  "surface_pressure_hpa": 1007.5,
+  "cloud_cover_pct": 22.0,
+  "wind_mph": 3.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 0,
+    "cloud_cover": 4,
     "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
     "species_reason": "moderate ~59\u00b0F; low light leans trout",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
