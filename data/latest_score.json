@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-22T08:59:36-07:00",
-  "score": 89,
+  "timestamp": "2026-08-22T09:33:42-07:00",
+  "score": 82,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~55 min.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~21 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-08-22T21:20:46-07:00"
@@ -12,26 +12,26 @@
     "type": "moonrise",
     "time": "2026-08-22T17:37:48-07:00"
   },
-  "pressure_trend_hpa": 0.9,
+  "pressure_trend_hpa": 1.2,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 73.4,
-  "temp_f": 62.5,
-  "surface_pressure_hpa": 1008.9,
-  "cloud_cover_pct": 92.0,
-  "wind_mph": 5.2,
+  "moon_illumination_pct": 73.6,
+  "temp_f": 62.6,
+  "surface_pressure_hpa": 1009.5,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 5.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 12,
     "wind": 12,
     "solunar_major": 18
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)"
@@ -40,7 +40,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~62\u00b0F; low light leans trout",
+    "species_reason": "moderate ~63\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
