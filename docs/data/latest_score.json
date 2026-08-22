@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-22T14:44:50-07:00",
+  "timestamp": "2026-08-22T14:59:48-07:00",
   "score": 59,
   "tier": "Fair",
   "species_note": "Largemouth bass \u2014 fair conditions",
@@ -17,11 +17,11 @@
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 75.4,
-  "temp_f": 73.8,
+  "moon_illumination_pct": 75.5,
+  "temp_f": 74.2,
   "surface_pressure_hpa": 1008.9,
-  "cloud_cover_pct": 17.0,
-  "wind_mph": 7.4,
+  "cloud_cover_pct": 16.0,
+  "wind_mph": 7.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
