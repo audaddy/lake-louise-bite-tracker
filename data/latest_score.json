@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-22T06:29:00-07:00",
-  "score": 83,
-  "tier": "Excellent",
+  "timestamp": "2026-08-22T06:54:11-07:00",
+  "score": 76,
+  "tier": "Good",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
-  "message": "Excellent trout conditions during the low-light window. Good time to fish.",
+  "message": "Good trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-08-22T08:55:03-07:00"
@@ -12,26 +12,26 @@
     "type": "moonrise",
     "time": "2026-08-22T17:37:48-07:00"
   },
-  "pressure_trend_hpa": 0.6,
+  "pressure_trend_hpa": 1.0,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 72.6,
-  "temp_f": 60.4,
-  "surface_pressure_hpa": 1008.3,
+  "moon_illumination_pct": 72.7,
+  "temp_f": 60.7,
+  "surface_pressure_hpa": 1008.7,
   "cloud_cover_pct": 100.0,
   "wind_mph": 3.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 12,
     "wind": 12,
     "dawn_dusk": 12
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
     "Low-light dawn/dusk window \u2014 prime feeding time"
@@ -40,7 +40,7 @@
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~60\u00b0F; low light leans trout",
+    "species_reason": "moderate ~61\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -80,7 +80,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "highscore@2026-08-22T06",
