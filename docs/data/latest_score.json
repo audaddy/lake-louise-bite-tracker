@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-08-21T22:52:08-07:00",
-  "score": 71,
+  "timestamp": "2026-08-21T23:34:30-07:00",
+  "score": 60,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,35 +12,35 @@
     "type": "moonset",
     "time": "2026-08-22T00:10:52-07:00"
   },
-  "pressure_trend_hpa": 0.4,
+  "pressure_trend_hpa": 1.0,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 69.8,
-  "temp_f": 63.4,
-  "surface_pressure_hpa": 1007.3,
-  "cloud_cover_pct": 100.0,
-  "wind_mph": 6.5,
+  "moon_illumination_pct": 70.1,
+  "temp_f": 61.5,
+  "surface_pressure_hpa": 1007.9,
+  "cloud_cover_pct": 63.0,
+  "wind_mph": 3.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
-    "cloud_cover": 12,
+    "pressure": 5,
+    "cloud_cover": 8,
     "wind": 12
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity",
+    "Slightly rising pressure \u2014 neutral to mild",
+    "Partly cloudy skies are mildly favorable",
     "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~63\u00b0F; low light leans trout",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_reason": "moderate ~62\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -78,10 +78,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "highscore@2026-08-21T22",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
