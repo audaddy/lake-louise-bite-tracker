@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-08-23T06:19:05-07:00",
-  "score": 64,
+  "timestamp": "2026-08-23T06:53:02-07:00",
+  "score": 72,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
   "message": "Good trout conditions during the low-light window. Good time to fish.",
@@ -12,32 +12,31 @@
     "type": "moonrise",
     "time": "2026-08-23T18:18:48-07:00"
   },
-  "pressure_trend_hpa": 1.0,
+  "pressure_trend_hpa": 1.6,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 80.5,
+  "moon_illumination_pct": 80.7,
   "temp_f": 56.2,
-  "surface_pressure_hpa": 1011.1,
-  "cloud_cover_pct": 16.0,
-  "wind_mph": 4.4,
+  "surface_pressure_hpa": 1011.2,
+  "cloud_cover_pct": 40.0,
+  "wind_mph": 4.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
-    "cloud_cover": 0,
+    "cloud_cover": 8,
     "wind": 12,
     "dawn_dusk": 12
   },
   "positive_factors": [
     "Slightly rising pressure \u2014 neutral to mild",
+    "Partly cloudy skies are mildly favorable",
     "A light breeze/ripple has a very favorable effect",
     "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
@@ -81,10 +80,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
-    "score_ge_70": false
+    "period_key": "highscore@2026-08-23T06",
+    "score_ge_70": true
   }
 }
