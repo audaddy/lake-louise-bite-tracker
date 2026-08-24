@@ -1,27 +1,27 @@
 {
-  "timestamp": "2026-08-24T10:15:02-07:00",
+  "timestamp": "2026-08-24T10:49:18-07:00",
   "score": 77,
   "tier": "Good",
   "species_note": "Largemouth bass biting",
-  "message": "Good bass window right now \u2014 biting for the next ~1.5 hours.",
+  "message": "Good bass window right now \u2014 biting for the next ~47 min.",
   "next_major_period": {
-    "type": "underfoot",
-    "time": "2026-08-24T10:36:31-07:00"
+    "type": "transit",
+    "time": "2026-08-24T23:00:58-07:00"
   },
   "next_minor_period": {
     "type": "moonrise",
     "time": "2026-08-24T18:50:56-07:00"
   },
-  "pressure_trend_hpa": 0.4,
+  "pressure_trend_hpa": 0.0,
   "species": "bass",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 88.6,
-  "temp_f": 65.3,
-  "surface_pressure_hpa": 1010.1,
-  "cloud_cover_pct": 12.0,
-  "wind_mph": 9.0,
+  "moon_illumination_pct": 88.7,
+  "temp_f": 65.7,
+  "surface_pressure_hpa": 1009.6,
+  "cloud_cover_pct": 15.0,
+  "wind_mph": 8.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -41,7 +41,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~65\u00b0F; daytime warmth leans bass",
+    "species_reason": "moderate ~66\u00b0F; daytime warmth leans bass",
     "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
     "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Mid-depth \u2014 ~8\u201315 ft",
@@ -86,7 +86,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "underfoot@2026-08-24T10:36:31-07:00",
