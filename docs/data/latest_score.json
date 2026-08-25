@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-24T16:57:32-07:00",
-  "score": 65,
+  "timestamp": "2026-08-24T18:24:56-07:00",
+  "score": 69,
   "tier": "Good",
-  "species_note": "Largemouth bass \u2014 good window",
-  "message": "Good conditions for bass right now. Worth a cast.",
+  "species_note": "Largemouth bass biting",
+  "message": "Good bass window right now \u2014 biting for the next ~56 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-08-24T23:00:58-07:00"
@@ -12,26 +12,28 @@
     "type": "moonrise",
     "time": "2026-08-24T18:50:56-07:00"
   },
-  "pressure_trend_hpa": -2.2,
+  "pressure_trend_hpa": -0.7,
   "species": "bass",
   "in_major_period": false,
-  "in_minor_period": false,
+  "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 90.2,
-  "temp_f": 80.1,
-  "surface_pressure_hpa": 1005.2,
-  "cloud_cover_pct": 5.0,
-  "wind_mph": 8.7,
+  "moon_illumination_pct": 90.6,
+  "temp_f": 78.7,
+  "surface_pressure_hpa": 1005.3,
+  "cloud_cover_pct": 9.0,
+  "wind_mph": 7.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 12,
     "cloud_cover": 0,
-    "wind": 12
+    "wind": 12,
+    "solunar_minor": 10
   },
   "positive_factors": [
-    "Falling barometric pressure \u2014 fish often feed ahead of a front",
-    "A light breeze/ripple has a very favorable effect"
+    "Stable atmospheric pressure is comfortable for fish",
+    "A light breeze/ripple has a very favorable effect",
+    "Solunar minor period active (moonrise/moonset)"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -39,7 +41,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~80\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~79\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Deep \u2014 15 ft+ near structure",
@@ -84,10 +86,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
+    "period_key": "moonrise@2026-08-24T18:50:56-07:00",
     "score_ge_70": false
   }
 }
