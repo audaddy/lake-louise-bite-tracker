@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-08-25T00:29:56-07:00",
+  "timestamp": "2026-08-25T01:10:13-07:00",
   "score": 53,
   "tier": "Fair",
   "species_note": "Rainbow trout \u2014 fair conditions",
@@ -17,11 +17,11 @@
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 92.0,
-  "temp_f": 64.5,
-  "surface_pressure_hpa": 1005.6,
+  "moon_illumination_pct": 92.1,
+  "temp_f": 63.5,
+  "surface_pressure_hpa": 1005.7,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 1.9,
+  "wind_mph": 1.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -62,11 +62,6 @@
       }
     ],
     "spin_options": [
-      {
-        "name": "Topwater (buzzbaits, walking baits, poppers)",
-        "why": "first/last light over shallow cover for bass",
-        "hot": true
-      },
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
