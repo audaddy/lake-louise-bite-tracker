@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-08-25T21:23:45-07:00",
-  "score": 58,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-08-25T22:04:25-07:00",
+  "score": 65,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-08-25T23:48:21-07:00"
@@ -12,26 +12,26 @@
     "type": "moonset",
     "time": "2026-08-26T04:29:39-07:00"
   },
-  "pressure_trend_hpa": 1.0,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 96.0,
-  "temp_f": 62.5,
-  "surface_pressure_hpa": 1008.3,
-  "cloud_cover_pct": 2.0,
-  "wind_mph": 7.1,
+  "moon_illumination_pct": 96.1,
+  "temp_f": 61.3,
+  "surface_pressure_hpa": 1008.7,
+  "cloud_cover_pct": 3.0,
+  "wind_mph": 5.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
+    "pressure": 12,
     "cloud_cover": 0,
     "wind": 12,
     "moon_phase": 6
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
+    "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect",
     "Moon phase is favorable"
   ],
@@ -41,7 +41,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~62\u00b0F; low light leans trout",
+    "species_reason": "moderate ~61\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
