@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-08-30T04:12:56-07:00",
-  "score": 59,
+  "timestamp": "2026-08-30T08:21:03-07:00",
+  "score": 58,
   "tier": "Fair",
   "species_note": "Rainbow trout \u2014 fair conditions",
   "message": "Fair trout conditions right now. Could go either way.",
@@ -12,36 +12,34 @@
     "type": "moonset",
     "time": "2026-08-30T09:19:21-07:00"
   },
-  "pressure_trend_hpa": -0.3,
+  "pressure_trend_hpa": 1.1,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 94.3,
-  "temp_f": 50.4,
-  "surface_pressure_hpa": 1010.7,
-  "cloud_cover_pct": 4.0,
-  "wind_mph": 4.1,
+  "moon_illumination_pct": 93.4,
+  "temp_f": 56.5,
+  "surface_pressure_hpa": 1011.8,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 2.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
-    "cloud_cover": 0,
-    "wind": 12
+    "pressure": 5,
+    "cloud_cover": 12,
+    "wind": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect"
+    "Slightly rising pressure \u2014 neutral to mild",
+    "Overcast skies have a favorable impact on biting activity"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
-  "light_phase": "night",
+  "negative_factors": [],
+  "light_phase": "day",
   "tactics": {
-    "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~50\u00b0F favors trout; bass sluggish",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~56\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -75,7 +73,7 @@
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
