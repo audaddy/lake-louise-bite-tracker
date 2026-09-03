@@ -1,48 +1,51 @@
 {
-  "timestamp": "2026-09-03T02:48:21-07:00",
-  "score": 45,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-09-03T07:06:38-07:00",
+  "score": 100,
+  "tier": "Excellent",
+  "species_note": "Rainbow trout biting",
+  "message": "Excellent trout window right now \u2014 biting for the next ~3 min.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-09-03T06:09:19-07:00"
+    "type": "underfoot",
+    "time": "2026-09-03T18:39:21-07:00"
   },
   "next_minor_period": {
     "type": "moonset",
     "time": "2026-09-03T14:33:29-07:00"
   },
-  "pressure_trend_hpa": 3.3,
+  "pressure_trend_hpa": 0.7,
   "species": "trout",
-  "in_major_period": false,
+  "in_major_period": true,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 60.6,
-  "temp_f": 54.6,
-  "surface_pressure_hpa": 999.6,
-  "cloud_cover_pct": 45.0,
-  "wind_mph": 5.6,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 58.5,
+  "temp_f": 54.2,
+  "surface_pressure_hpa": 1000.3,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 4.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": -10,
-    "cloud_cover": 8,
-    "wind": 12
+    "pressure": 12,
+    "cloud_cover": 12,
+    "wind": 12,
+    "solunar_major": 18,
+    "dawn_dusk": 12
   },
   "positive_factors": [
-    "Partly cloudy skies are mildly favorable",
-    "A light breeze/ripple has a very favorable effect"
+    "Stable atmospheric pressure is comfortable for fish",
+    "Overcast skies have a favorable impact on biting activity",
+    "A light breeze/ripple has a very favorable effect",
+    "Solunar major period active (moon overhead/underfoot)",
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
-  "negative_factors": [
-    "Sharply rising pressure tends to slow the bite"
-  ],
-  "light_phase": "night",
+  "negative_factors": [],
+  "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~55\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~54\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Shallow \u2014 top ~0\u20138 ft (fish tight and slow it down \u2014 pressure rising)",
+    "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
@@ -79,10 +82,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
-    "score_ge_70": false
+    "period_key": "transit@2026-09-03T06:09:19-07:00",
+    "score_ge_70": true
   }
 }
