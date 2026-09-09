@@ -1,46 +1,49 @@
 {
-  "timestamp": "2026-09-09T02:31:48-07:00",
-  "score": 59,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-09-09T06:55:19-07:00",
+  "score": 68,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 dawn/dusk window",
+  "message": "Good trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-09-09T12:02:03-07:00"
   },
   "next_minor_period": {
-    "type": "moonrise",
-    "time": "2026-09-09T04:52:32-07:00"
+    "type": "moonset",
+    "time": "2026-09-09T18:54:22-07:00"
   },
-  "pressure_trend_hpa": 0.2,
+  "pressure_trend_hpa": -0.1,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 3.9,
-  "temp_f": 55.1,
-  "surface_pressure_hpa": 1016.3,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 3.1,
+  "temp_f": 50.3,
+  "surface_pressure_hpa": 1016.2,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 1.8,
+  "wind_mph": 0.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 6,
+    "wind": 3,
+    "dawn_dusk": 12,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
+    "Low-light dawn/dusk window \u2014 prime feeding time",
     "Moon phase is favorable"
   ],
   "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
+    "Bright, clear skies can push fish deep and slow feeding",
+    "Dead-calm water is less favorable than a light ripple"
   ],
-  "light_phase": "night",
+  "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~55\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~50\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
