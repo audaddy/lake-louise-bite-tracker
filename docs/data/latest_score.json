@@ -1,47 +1,46 @@
 {
-  "timestamp": "2026-09-12T13:46:15-07:00",
-  "score": 89,
-  "tier": "Excellent",
-  "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~1.5 hours.",
+  "timestamp": "2026-09-12T15:49:19-07:00",
+  "score": 77,
+  "tier": "Good",
+  "species_note": "Largemouth bass \u2014 good window",
+  "message": "Good conditions for bass right now. Worth a cast.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-09-12T14:21:04-07:00"
+    "type": "underfoot",
+    "time": "2026-09-13T02:43:35-07:00"
   },
   "next_minor_period": {
     "type": "moonset",
     "time": "2026-09-12T19:46:01-07:00"
   },
-  "pressure_trend_hpa": -0.3,
+  "pressure_trend_hpa": -0.6,
   "species": "bass",
-  "in_major_period": true,
+  "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 3.6,
-  "temp_f": 66.8,
-  "surface_pressure_hpa": 1003.3,
+  "moon_illumination_pct": 3.9,
+  "temp_f": 67.8,
+  "surface_pressure_hpa": 1002.7,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 2.9,
+  "wind_mph": 3.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 6,
-    "solunar_major": 18,
+    "wind": 12,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
-    "Solunar major period active (moon overhead/underfoot)",
+    "A light breeze/ripple has a very favorable effect",
     "Moon phase is favorable"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~67\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~68\u00b0F (warm) favors bass metabolism",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -94,7 +93,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "transit@2026-09-12T14:21:04-07:00",
+    "period_key": "highscore@2026-09-12T15",
     "score_ge_70": true
   }
 }
