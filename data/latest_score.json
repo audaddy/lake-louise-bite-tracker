@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-14T09:26:47-07:00",
-  "score": 60,
+  "timestamp": "2026-09-14T13:24:46-07:00",
+  "score": 63,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -9,38 +9,37 @@
     "time": "2026-09-14T15:52:29-07:00"
   },
   "next_minor_period": {
-    "type": "moonrise",
-    "time": "2026-09-14T11:10:26-07:00"
+    "type": "moonset",
+    "time": "2026-09-14T20:25:10-07:00"
   },
-  "pressure_trend_hpa": 1.8,
+  "pressure_trend_hpa": -0.3,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 13.8,
-  "temp_f": 59.5,
-  "surface_pressure_hpa": 1013.0,
-  "cloud_cover_pct": 50.0,
-  "wind_mph": 5.1,
+  "moon_illumination_pct": 14.9,
+  "temp_f": 63.8,
+  "surface_pressure_hpa": 1012.7,
+  "cloud_cover_pct": 33.0,
+  "wind_mph": 3.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
-    "cloud_cover": 8,
+    "pressure": 12,
+    "cloud_cover": 4,
     "wind": 12
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
-    "Partly cloudy skies are mildly favorable",
+    "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~60\u00b0F; daytime warmth leans bass",
-    "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
-    "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_reason": "moderate ~64\u00b0F; daytime warmth leans bass",
+    "where": "Transition edges \u2014 the first drop-off off the shoreline",
+    "where_reason": "mixed light; work the seam between shallow flats and deeper water",
     "depth": "Mid-depth \u2014 ~8\u201315 ft",
     "method_lean": "Spin fishing",
     "method_reason": "bass holding on structure are efficient to target with lures",
@@ -58,7 +57,7 @@
       {
         "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
         "why": "subsurface when nothing's rising / bright midday",
-        "hot": false
+        "hot": true
       }
     ],
     "spin_options": [
@@ -71,6 +70,11 @@
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
+      },
+      {
+        "name": "Jigs & soft plastics (worked deep)",
+        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
+        "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
