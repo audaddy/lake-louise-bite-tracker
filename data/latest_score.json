@@ -1,51 +1,54 @@
 {
-  "timestamp": "2026-09-22T16:49:39-07:00",
-  "score": 59,
-  "tier": "Fair",
-  "species_note": "Largemouth bass \u2014 fair conditions",
-  "message": "Fair bass conditions right now. Could go either way.",
+  "timestamp": "2026-09-22T20:14:24-07:00",
+  "score": 63,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-09-22T22:26:57-07:00"
   },
   "next_minor_period": {
-    "type": "moonrise",
-    "time": "2026-09-22T17:40:37-07:00"
+    "type": "moonset",
+    "time": "2026-09-23T03:23:27-07:00"
   },
-  "pressure_trend_hpa": -0.7,
-  "species": "bass",
+  "pressure_trend_hpa": 0.9,
+  "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 85.8,
-  "temp_f": 68.7,
-  "surface_pressure_hpa": 1008.5,
-  "cloud_cover_pct": 8.0,
-  "wind_mph": 8.5,
+  "moon_illumination_pct": 86.8,
+  "temp_f": 61.2,
+  "surface_pressure_hpa": 1009.4,
+  "cloud_cover_pct": 33.0,
+  "wind_mph": 6.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 0,
+    "cloud_cover": 4,
     "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
-  "light_phase": "day",
+  "negative_factors": [],
+  "light_phase": "night",
   "tactics": {
-    "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~69\u00b0F (warm) favors bass metabolism",
-    "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
-    "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Mid-depth \u2014 ~8\u201315 ft",
-    "method_lean": "Spin fishing",
-    "method_reason": "bass holding on structure are efficient to target with lures",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~61\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "depth": "Shallow \u2014 top ~0\u20138 ft",
+    "method_lean": "Fly fishing",
+    "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
+      {
+        "name": "Dry flies (caddis / mayfly)",
+        "why": "trout rise to the evening hatch in low light",
+        "hot": true
+      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -54,12 +57,7 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
-        "hot": true
-      },
-      {
-        "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
-        "why": "subsurface when nothing's rising / bright midday",
-        "hot": true
+        "hot": false
       }
     ],
     "spin_options": [
@@ -71,16 +69,11 @@
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
-        "hot": false
-      },
-      {
-        "name": "Jigs & soft plastics (worked deep)",
-        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
         "hot": true
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Largemouth bass \u00b7 Open water \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
