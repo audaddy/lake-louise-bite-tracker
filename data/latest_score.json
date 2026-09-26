@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-09-25T15:38:02-07:00",
-  "score": 23,
-  "tier": "Slow",
-  "species_note": "Rainbow trout \u2014 slow",
-  "message": "Slow bite. Marginal trout conditions at the moment.",
+  "timestamp": "2026-09-25T17:53:32-07:00",
+  "score": 56,
+  "tier": "Fair",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-09-26T00:40:09-07:00"
@@ -12,41 +12,38 @@
     "type": "moonrise",
     "time": "2026-09-25T18:32:44-07:00"
   },
-  "pressure_trend_hpa": 7.2,
+  "pressure_trend_hpa": 2.6,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 99.3,
-  "temp_f": 58.9,
-  "surface_pressure_hpa": 1006.4,
-  "cloud_cover_pct": 10.0,
-  "wind_mph": 16.6,
+  "moon_illumination_pct": 99.4,
+  "temp_f": 57.5,
+  "surface_pressure_hpa": 1009.0,
+  "cloud_cover_pct": 22.0,
+  "wind_mph": 12.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": -10,
-    "cloud_cover": 0,
-    "wind": -8,
+    "pressure": 5,
+    "cloud_cover": 4,
+    "wind": 6,
     "moon_phase": 6
   },
   "positive_factors": [
+    "Slightly rising pressure \u2014 neutral to mild",
     "Moon phase is favorable"
   ],
-  "negative_factors": [
-    "Sharply rising pressure tends to slow the bite",
-    "Bright, clear skies can push fish deep and slow feeding",
-    "Strong winds make conditions tougher"
-  ],
+  "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~59\u00b0F; daytime warmth leans bass",
-    "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
-    "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Mid-depth \u2014 ~8\u201315 ft (fish tight and slow it down \u2014 pressure rising)",
+    "species_reason": "moderate ~58\u00b0F; daytime warmth leans bass",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Spin fishing",
-    "method_reason": "wind makes fly casting tough and rewards covering water",
+    "method_reason": "bass holding on structure are efficient to target with lures",
     "fly_options": [
       {
         "name": "Woolly Buggers / leeches (slow strip)",
@@ -66,6 +63,11 @@
     ],
     "spin_options": [
       {
+        "name": "Spinners / spinnerbaits",
+        "why": "chop or cloud cover \u2014 cover water at mid-depth",
+        "hot": true
+      },
+      {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
@@ -77,7 +79,7 @@
       }
     ],
     "season_note": "Summer: bass prime in warm shallows early/late; trout slide deep and cool midday.",
-    "summary": "Either \u2014 slight bass edge \u00b7 Transition edges \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Either \u2014 slight bass edge \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
