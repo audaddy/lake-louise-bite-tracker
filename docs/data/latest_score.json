@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-09-28T10:25:09-07:00",
-  "score": 59,
+  "timestamp": "2026-09-28T10:37:41-07:00",
+  "score": 53,
   "tier": "Fair",
   "species_note": "Rainbow trout \u2014 fair conditions",
   "message": "Fair trout conditions right now. Could go either way.",
@@ -12,26 +12,25 @@
     "type": "moonrise",
     "time": "2026-09-28T19:31:31-07:00"
   },
-  "pressure_trend_hpa": -0.2,
+  "pressure_trend_hpa": -0.6,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 94.8,
-  "temp_f": 50.7,
-  "surface_pressure_hpa": 1010.6,
+  "temp_f": 51.6,
+  "surface_pressure_hpa": 1010.2,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 3.1,
+  "wind_mph": 2.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 12
+    "wind": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect"
+    "Stable atmospheric pressure is comfortable for fish"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -39,7 +38,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~51\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~52\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -63,11 +62,6 @@
       }
     ],
     "spin_options": [
-      {
-        "name": "Spinners / spinnerbaits",
-        "why": "chop or cloud cover \u2014 cover water at mid-depth",
-        "hot": true
-      },
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
