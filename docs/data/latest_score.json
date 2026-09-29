@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-09-29T03:54:14-07:00",
-  "score": 89,
-  "tier": "Excellent",
-  "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~13 min.",
+  "timestamp": "2026-09-29T04:09:32-07:00",
+  "score": 71,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-09-29T15:34:50-07:00"
@@ -14,10 +14,10 @@
   },
   "pressure_trend_hpa": -1.9,
   "species": "trout",
-  "in_major_period": true,
+  "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 90.6,
+  "moon_illumination_pct": 90.5,
   "temp_f": 57.3,
   "surface_pressure_hpa": 1004.5,
   "cloud_cover_pct": 100.0,
@@ -27,13 +27,11 @@
     "baseline": 35,
     "pressure": 18,
     "cloud_cover": 12,
-    "wind": 6,
-    "solunar_major": 18
+    "wind": 6
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
-    "Overcast skies have a favorable impact on biting activity",
-    "Solunar major period active (moon overhead/underfoot)"
+    "Overcast skies have a favorable impact on biting activity"
   ],
   "negative_factors": [],
   "light_phase": "night",
@@ -74,10 +72,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "transit@2026-09-29T03:07:02-07:00",
+    "period_key": "highscore@2026-09-29T04",
     "score_ge_70": true
   }
 }
