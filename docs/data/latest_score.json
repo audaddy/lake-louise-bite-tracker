@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-09-29T07:54:55-07:00",
-  "score": 77,
+  "timestamp": "2026-09-29T08:10:39-07:00",
+  "score": 65,
   "tier": "Good",
-  "species_note": "Rainbow trout \u2014 dawn/dusk window",
-  "message": "Good trout conditions during the low-light window. Good time to fish.",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-09-29T15:34:50-07:00"
@@ -12,31 +12,29 @@
     "type": "moonset",
     "time": "2026-09-29T10:59:53-07:00"
   },
-  "pressure_trend_hpa": 0.1,
+  "pressure_trend_hpa": 0.2,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": true,
-  "moon_illumination_pct": 89.4,
+  "in_dawn_dusk": false,
+  "moon_illumination_pct": 89.3,
   "temp_f": 58.0,
-  "surface_pressure_hpa": 1004.5,
+  "surface_pressure_hpa": 1004.7,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 12.7,
-  "precip_in": 0.004,
+  "wind_mph": 13.0,
+  "precip_in": 0.008,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 6,
-    "dawn_dusk": 12
+    "wind": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity",
-    "Low-light dawn/dusk window \u2014 prime feeding time"
+    "Overcast skies have a favorable impact on biting activity"
   ],
   "negative_factors": [],
-  "light_phase": "dawn_dusk",
+  "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
     "species_reason": "moderate ~58\u00b0F; low light leans trout",
@@ -77,7 +75,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "highscore@2026-09-29T07",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
