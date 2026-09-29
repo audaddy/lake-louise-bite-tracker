@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-09-29T10:25:08-07:00",
-  "score": 65,
+  "timestamp": "2026-09-29T10:38:27-07:00",
+  "score": 68,
   "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "species_note": "Rainbow trout biting",
+  "message": "Good trout window right now \u2014 biting for the next ~51 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-09-29T15:34:50-07:00"
@@ -12,32 +12,34 @@
     "type": "moonset",
     "time": "2026-09-29T10:59:53-07:00"
   },
-  "pressure_trend_hpa": -0.1,
+  "pressure_trend_hpa": 1.0,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": false,
+  "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 88.7,
-  "temp_f": 57.2,
-  "surface_pressure_hpa": 1005.4,
+  "moon_illumination_pct": 88.6,
+  "temp_f": 57.8,
+  "surface_pressure_hpa": 1005.2,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 13.2,
+  "wind_mph": 13.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 12,
-    "wind": 6
+    "wind": 6,
+    "solunar_minor": 10
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity"
+    "Slightly rising pressure \u2014 neutral to mild",
+    "Overcast skies have a favorable impact on biting activity",
+    "Solunar minor period active (moonrise/moonset)"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~57\u00b0F; low light leans trout",
+    "species_reason": "moderate ~58\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -72,10 +74,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
+    "period_key": "moonset@2026-09-29T10:59:53-07:00",
     "score_ge_70": false
   }
 }
