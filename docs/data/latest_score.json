@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-29T02:23:17-07:00",
+  "timestamp": "2026-09-29T02:41:13-07:00",
   "score": 89,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
@@ -12,35 +12,34 @@
     "type": "moonset",
     "time": "2026-09-29T10:59:53-07:00"
   },
-  "pressure_trend_hpa": -0.4,
+  "pressure_trend_hpa": -1.7,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 91.0,
-  "temp_f": 57.1,
-  "surface_pressure_hpa": 1006.1,
+  "moon_illumination_pct": 90.9,
+  "temp_f": 57.5,
+  "surface_pressure_hpa": 1005.2,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 9.8,
+  "wind_mph": 10.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 18,
     "cloud_cover": 12,
-    "wind": 12,
+    "wind": 6,
     "solunar_major": 18
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)"
   ],
   "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~57\u00b0F; low light leans trout",
+    "species_reason": "moderate ~58\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -80,7 +79,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "transit@2026-09-29T03:07:02-07:00",
