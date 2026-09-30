@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-09-29T20:54:24-07:00",
+  "timestamp": "2026-09-29T21:12:42-07:00",
   "score": 64,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
@@ -12,16 +12,16 @@
     "type": "moonset",
     "time": "2026-09-30T12:21:28-07:00"
   },
-  "pressure_trend_hpa": 1.1,
+  "pressure_trend_hpa": 1.3,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 85.3,
-  "temp_f": 58.1,
-  "surface_pressure_hpa": 1006.3,
+  "moon_illumination_pct": 85.2,
+  "temp_f": 57.2,
+  "surface_pressure_hpa": 1006.5,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 5.4,
+  "wind_mph": 4.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -38,7 +38,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~58\u00b0F; low light leans trout",
+    "species_reason": "moderate ~57\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
