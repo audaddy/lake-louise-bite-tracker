@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-01T08:43:57-07:00",
-  "score": 62,
-  "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "timestamp": "2026-10-01T08:53:39-07:00",
+  "score": 58,
+  "tier": "Fair",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-01T17:35:31-07:00"
@@ -12,26 +12,26 @@
     "type": "moonset",
     "time": "2026-10-01T13:37:21-07:00"
   },
-  "pressure_trend_hpa": 0.4,
+  "pressure_trend_hpa": -0.1,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 71.3,
-  "temp_f": 50.0,
-  "surface_pressure_hpa": 1009.6,
-  "cloud_cover_pct": 100.0,
-  "wind_mph": 0.7,
+  "temp_f": 51.0,
+  "surface_pressure_hpa": 1009.1,
+  "cloud_cover_pct": 63.0,
+  "wind_mph": 0.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 12,
+    "cloud_cover": 8,
     "wind": 3
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity"
+    "Partly cloudy skies are mildly favorable"
   ],
   "negative_factors": [
     "Dead-calm water is less favorable than a light ripple"
@@ -39,18 +39,13 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~50\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~51\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
-      {
-        "name": "Dry flies (caddis / mayfly)",
-        "why": "trout rise to the evening hatch in low light",
-        "hot": true
-      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -59,6 +54,11 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
+        "hot": true
+      },
+      {
+        "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
+        "why": "subsurface when nothing's rising / bright midday",
         "hot": false
       }
     ],
