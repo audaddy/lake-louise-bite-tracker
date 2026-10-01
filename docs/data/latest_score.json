@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-01T05:50:04-07:00",
-  "score": 89,
-  "tier": "Excellent",
-  "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~14 min.",
+  "timestamp": "2026-10-01T06:13:04-07:00",
+  "score": 77,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 dawn/dusk window",
+  "message": "Good trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-01T17:35:31-07:00"
@@ -12,32 +12,31 @@
     "type": "moonset",
     "time": "2026-10-01T13:37:21-07:00"
   },
-  "pressure_trend_hpa": -0.8,
+  "pressure_trend_hpa": -0.7,
   "species": "trout",
-  "in_major_period": true,
+  "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 72.6,
-  "temp_f": 48.2,
-  "surface_pressure_hpa": 1009.2,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 72.4,
+  "temp_f": 48.1,
+  "surface_pressure_hpa": 1009.3,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 3.0,
+  "wind_mph": 2.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 12,
-    "solunar_major": 18
+    "wind": 6,
+    "dawn_dusk": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect",
-    "Solunar major period active (moon overhead/underfoot)"
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
-  "light_phase": "night",
+  "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
     "species_reason": "cool water ~48\u00b0F favors trout; bass sluggish",
@@ -80,10 +79,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "transit@2026-10-01T05:04:15-07:00",
+    "period_key": "highscore@2026-10-01T06",
     "score_ge_70": true
   }
 }
