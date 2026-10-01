@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-01T15:09:22-07:00",
-  "score": 77,
+  "timestamp": "2026-10-01T15:24:31-07:00",
+  "score": 71,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
   "message": "Good conditions for bass right now. Worth a cast.",
@@ -17,28 +17,27 @@
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 68.5,
-  "temp_f": 67.4,
-  "surface_pressure_hpa": 1008.5,
+  "moon_illumination_pct": 68.4,
+  "temp_f": 67.7,
+  "surface_pressure_hpa": 1008.6,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 3.0,
+  "wind_mph": 2.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
     "cloud_cover": 12,
-    "wind": 12
+    "wind": 6
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
-    "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect"
+    "Overcast skies have a favorable impact on biting activity"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~67\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~68\u00b0F (warm) favors bass metabolism",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -88,7 +87,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "highscore@2026-10-01T15",
