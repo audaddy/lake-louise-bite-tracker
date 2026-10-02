@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-02T13:09:57-07:00",
+  "timestamp": "2026-10-02T13:25:55-07:00",
   "score": 59,
   "tier": "Fair",
   "species_note": "Largemouth bass \u2014 fair conditions",
@@ -17,11 +17,11 @@
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 58.3,
-  "temp_f": 68.5,
-  "surface_pressure_hpa": 1009.4,
-  "cloud_cover_pct": 15.0,
-  "wind_mph": 5.6,
+  "moon_illumination_pct": 58.2,
+  "temp_f": 69.1,
+  "surface_pressure_hpa": 1009.3,
+  "cloud_cover_pct": 13.0,
+  "wind_mph": 5.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -39,7 +39,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~68\u00b0F (warm) favors bass metabolism",
+    "species_reason": "water proxy ~69\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Mid-depth \u2014 ~8\u201315 ft",
