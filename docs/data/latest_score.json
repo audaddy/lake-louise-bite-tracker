@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-02T13:40:23-07:00",
+  "timestamp": "2026-10-02T13:50:30-07:00",
   "score": 63,
   "tier": "Good",
   "species_note": "Largemouth bass \u2014 good window",
@@ -12,15 +12,15 @@
     "type": "moonset",
     "time": "2026-10-02T14:41:34-07:00"
   },
-  "pressure_trend_hpa": 0.2,
+  "pressure_trend_hpa": 0.4,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 58.1,
-  "temp_f": 69.8,
+  "moon_illumination_pct": 58.0,
+  "temp_f": 70.4,
   "surface_pressure_hpa": 1010.0,
-  "cloud_cover_pct": 23.0,
+  "cloud_cover_pct": 24.0,
   "wind_mph": 5.0,
   "precip_in": 0.0,
   "score_breakdown": {
@@ -40,7 +40,7 @@
     "species_reason": "water proxy ~70\u00b0F (warm) favors bass metabolism",
     "where": "Open water \u2014 drop-offs & deeper structure \u2014 favor the windward shore",
     "where_reason": "bright sun + warm water pulls fish off the bank; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Mid-depth \u2014 ~8\u201315 ft",
+    "depth": "Deep \u2014 15 ft+ near structure",
     "method_lean": "Spin fishing",
     "method_reason": "bass holding on structure are efficient to target with lures",
     "fly_options": [
@@ -78,7 +78,7 @@
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
-    "summary": "Largemouth bass \u00b7 Open water \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Largemouth bass \u00b7 Open water \u00b7 Deep \u2014 15 ft+ near structure \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
