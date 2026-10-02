@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-02T14:48:33-07:00",
-  "score": 81,
+  "timestamp": "2026-10-02T15:09:28-07:00",
+  "score": 87,
   "tier": "Excellent",
   "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~23 min.",
+  "message": "Excellent bass window right now \u2014 biting for the next ~2 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-02T18:38:26-07:00"
@@ -12,26 +12,26 @@
     "type": "moonrise",
     "time": "2026-10-02T22:37:44-07:00"
   },
-  "pressure_trend_hpa": -0.8,
+  "pressure_trend_hpa": -1.0,
   "species": "bass",
   "in_major_period": false,
   "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 57.6,
-  "temp_f": 70.2,
-  "surface_pressure_hpa": 1009.4,
-  "cloud_cover_pct": 84.0,
-  "wind_mph": 5.8,
+  "moon_illumination_pct": 57.4,
+  "temp_f": 70.0,
+  "surface_pressure_hpa": 1009.3,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 6.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 18,
     "cloud_cover": 12,
     "wind": 12,
     "solunar_minor": 10
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
     "Solunar minor period active (moonrise/moonset)"
@@ -83,11 +83,6 @@
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": false
-      },
-      {
-        "name": "Jigs & soft plastics (worked deep)",
-        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
-        "hot": true
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
