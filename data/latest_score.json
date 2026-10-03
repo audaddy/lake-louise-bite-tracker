@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-03T15:36:21-07:00",
-  "score": 81,
-  "tier": "Excellent",
-  "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~25 min.",
+  "timestamp": "2026-10-03T16:36:04-07:00",
+  "score": 71,
+  "tier": "Good",
+  "species_note": "Largemouth bass \u2014 good window",
+  "message": "Good conditions for bass right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-03T19:39:41-07:00"
@@ -12,29 +12,27 @@
     "type": "moonrise",
     "time": "2026-10-03T23:54:07-07:00"
   },
-  "pressure_trend_hpa": -1.5,
+  "pressure_trend_hpa": -1.7,
   "species": "bass",
   "in_major_period": false,
-  "in_minor_period": true,
+  "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 45.7,
+  "moon_illumination_pct": 45.3,
   "temp_f": 67.0,
-  "surface_pressure_hpa": 1009.2,
+  "surface_pressure_hpa": 1008.5,
   "cloud_cover_pct": 7.0,
-  "wind_mph": 6.2,
+  "wind_mph": 6.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
     "cloud_cover": 0,
     "wind": 12,
-    "solunar_minor": 10,
     "moon_phase": 6
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "A light breeze/ripple has a very favorable effect",
-    "Solunar minor period active (moonrise/moonset)",
     "Moon phase is favorable"
   ],
   "negative_factors": [
@@ -91,7 +89,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "moonset@2026-10-03T15:31:29-07:00",
+    "period_key": "highscore@2026-10-03T16",
     "score_ge_70": true
   }
 }
