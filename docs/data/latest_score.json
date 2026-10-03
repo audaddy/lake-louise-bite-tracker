@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-03T04:03:57-07:00",
-  "score": 77,
+  "timestamp": "2026-10-03T05:27:11-07:00",
+  "score": 71,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,26 +12,26 @@
     "type": "moonset",
     "time": "2026-10-03T15:31:29-07:00"
   },
-  "pressure_trend_hpa": -1.0,
+  "pressure_trend_hpa": -0.3,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 51.3,
-  "temp_f": 53.0,
-  "surface_pressure_hpa": 1010.0,
+  "moon_illumination_pct": 50.6,
+  "temp_f": 52.4,
+  "surface_pressure_hpa": 1011.1,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 1.3,
+  "wind_mph": 1.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 12,
     "cloud_cover": 12,
     "wind": 6,
     "moon_phase": 6
   },
   "positive_factors": [
-    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
     "Moon phase is favorable"
   ],
@@ -39,7 +39,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~53\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~52\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -82,7 +82,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-10-03T04",
+    "period_key": "highscore@2026-10-03T05",
     "score_ge_70": true
   }
 }
