@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-02T18:57:24-07:00",
+  "timestamp": "2026-10-02T19:32:52-07:00",
   "score": 95,
   "tier": "Excellent",
-  "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~41 min.",
+  "species_note": "Rainbow trout biting",
+  "message": "Excellent trout window right now \u2014 biting for the next ~6 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-03T07:09:25-07:00"
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-10-02T22:37:44-07:00"
   },
-  "pressure_trend_hpa": 0.9,
-  "species": "bass",
+  "pressure_trend_hpa": 0.2,
+  "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 55.6,
-  "temp_f": 65.9,
-  "surface_pressure_hpa": 1010.5,
-  "cloud_cover_pct": 92.0,
-  "wind_mph": 2.1,
+  "moon_illumination_pct": 55.3,
+  "temp_f": 64.1,
+  "surface_pressure_hpa": 1010.0,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 2.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -41,7 +41,7 @@
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~66\u00b0F; low light leans trout",
+    "species_reason": "moderate ~64\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
