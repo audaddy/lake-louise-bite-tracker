@@ -1,38 +1,38 @@
 {
-  "timestamp": "2026-10-02T22:34:18-07:00",
-  "score": 72,
+  "timestamp": "2026-10-02T22:52:43-07:00",
+  "score": 79,
   "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~33 min.",
+  "message": "Good trout window right now \u2014 biting for the next ~15 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-03T07:09:25-07:00"
   },
   "next_minor_period": {
-    "type": "moonrise",
-    "time": "2026-10-02T22:37:44-07:00"
+    "type": "moonset",
+    "time": "2026-10-03T15:31:29-07:00"
   },
-  "pressure_trend_hpa": 1.0,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 53.9,
-  "temp_f": 58.7,
-  "surface_pressure_hpa": 1011.0,
-  "cloud_cover_pct": 21.0,
-  "wind_mph": 3.2,
+  "moon_illumination_pct": 53.7,
+  "temp_f": 58.3,
+  "surface_pressure_hpa": 1010.8,
+  "cloud_cover_pct": 32.0,
+  "wind_mph": 3.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
+    "pressure": 12,
     "cloud_cover": 4,
     "wind": 12,
     "solunar_minor": 10,
     "moon_phase": 6
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
+    "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect",
     "Solunar minor period active (moonrise/moonset)",
     "Moon phase is favorable"
@@ -41,7 +41,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~59\u00b0F; low light leans trout",
+    "species_reason": "moderate ~58\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
