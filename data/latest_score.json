@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-06T09:12:09-07:00",
-  "score": 81,
-  "tier": "Excellent",
+  "timestamp": "2026-10-06T09:33:06-07:00",
+  "score": 77,
+  "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~1.5 hours.",
+  "message": "Good trout window right now \u2014 biting for the next ~1.5 hours.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-06T09:55:50-07:00"
@@ -17,16 +17,16 @@
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 17.6,
-  "temp_f": 56.5,
-  "surface_pressure_hpa": 1013.4,
-  "cloud_cover_pct": 26.0,
-  "wind_mph": 6.2,
+  "moon_illumination_pct": 17.5,
+  "temp_f": 57.2,
+  "surface_pressure_hpa": 1013.6,
+  "cloud_cover_pct": 13.0,
+  "wind_mph": 6.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 4,
+    "cloud_cover": 0,
     "wind": 12,
     "solunar_major": 18
   },
@@ -35,11 +35,13 @@
     "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Bright, clear skies can push fish deep and slow feeding"
+  ],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~56\u00b0F; daytime warmth leans bass",
+    "species_reason": "moderate ~57\u00b0F; daytime warmth leans bass",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -84,7 +86,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "transit@2026-10-06T09:55:50-07:00",
