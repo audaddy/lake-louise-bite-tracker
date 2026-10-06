@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-05T21:42:38-07:00",
+  "timestamp": "2026-10-05T21:55:15-07:00",
   "score": 77,
   "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~48 min.",
+  "message": "Good trout window right now \u2014 biting for the next ~35 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-06T09:55:50-07:00"
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-10-06T02:35:44-07:00"
   },
-  "pressure_trend_hpa": -0.3,
+  "pressure_trend_hpa": 0.4,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 21.9,
-  "temp_f": 56.3,
-  "surface_pressure_hpa": 1011.6,
+  "moon_illumination_pct": 21.8,
+  "temp_f": 55.9,
+  "surface_pressure_hpa": 1011.8,
   "cloud_cover_pct": 1.0,
-  "wind_mph": 4.1,
+  "wind_mph": 3.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -40,10 +40,10 @@
   ],
   "light_phase": "night",
   "tactics": {
-    "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~56\u00b0F; low light leans trout",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_pick": "Rainbow trout",
+    "species_reason": "cool water ~56\u00b0F favors trout; bass sluggish",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -77,7 +77,7 @@
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
-    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
