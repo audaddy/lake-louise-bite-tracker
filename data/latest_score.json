@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-06T12:23:49-07:00",
+  "timestamp": "2026-10-06T12:36:59-07:00",
   "score": 63,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
@@ -12,15 +12,15 @@
     "type": "moonset",
     "time": "2026-10-06T16:58:56-07:00"
   },
-  "pressure_trend_hpa": -0.9,
+  "pressure_trend_hpa": -0.8,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 16.5,
-  "temp_f": 61.4,
-  "surface_pressure_hpa": 1012.7,
-  "cloud_cover_pct": 30.0,
+  "moon_illumination_pct": 16.4,
+  "temp_f": 62.3,
+  "surface_pressure_hpa": 1012.8,
+  "cloud_cover_pct": 20.0,
   "wind_mph": 6.3,
   "precip_in": 0.0,
   "score_breakdown": {
@@ -37,7 +37,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~61\u00b0F; daytime warmth leans bass",
+    "species_reason": "moderate ~62\u00b0F; daytime warmth leans bass",
     "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
     "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Mid-depth \u2014 ~8\u201315 ft",
