@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-10-07T10:39:17-07:00",
+  "timestamp": "2026-10-07T10:51:20-07:00",
   "score": 89,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~1 hours.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~52 min.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-10-07T10:43:46-07:00"
+    "type": "underfoot",
+    "time": "2026-10-07T23:06:49-07:00"
   },
   "next_minor_period": {
     "type": "moonset",
@@ -18,9 +18,9 @@
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 9.6,
-  "temp_f": 56.9,
+  "temp_f": 57.4,
   "surface_pressure_hpa": 1012.7,
-  "cloud_cover_pct": 94.0,
+  "cloud_cover_pct": 85.0,
   "wind_mph": 7.3,
   "precip_in": 0.0,
   "score_breakdown": {
