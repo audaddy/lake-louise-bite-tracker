@@ -1,37 +1,37 @@
 {
-  "timestamp": "2026-10-06T22:10:58-07:00",
-  "score": 89,
+  "timestamp": "2026-10-06T22:30:01-07:00",
+  "score": 82,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~1 hours.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~50 min.",
   "next_major_period": {
-    "type": "underfoot",
-    "time": "2026-10-06T22:20:10-07:00"
+    "type": "transit",
+    "time": "2026-10-07T10:43:46-07:00"
   },
   "next_minor_period": {
     "type": "moonrise",
     "time": "2026-10-07T03:54:04-07:00"
   },
-  "pressure_trend_hpa": 0.5,
+  "pressure_trend_hpa": 1.2,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 13.3,
-  "temp_f": 53.4,
-  "surface_pressure_hpa": 1011.5,
-  "cloud_cover_pct": 91.0,
-  "wind_mph": 4.7,
+  "moon_illumination_pct": 13.2,
+  "temp_f": 52.3,
+  "surface_pressure_hpa": 1011.9,
+  "cloud_cover_pct": 87.0,
+  "wind_mph": 3.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 12,
     "wind": 12,
     "solunar_major": 18
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)"
@@ -40,9 +40,9 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~53\u00b0F favors trout; bass sluggish",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_reason": "cool water ~52\u00b0F favors trout; bass sluggish",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
