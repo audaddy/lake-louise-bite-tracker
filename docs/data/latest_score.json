@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-08T12:13:33-07:00",
-  "score": 89,
+  "timestamp": "2026-10-08T12:28:47-07:00",
+  "score": 95,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~16 min.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~1 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-08T23:51:50-07:00"
@@ -18,22 +18,23 @@
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 3.9,
-  "temp_f": 59.8,
-  "surface_pressure_hpa": 1010.2,
-  "cloud_cover_pct": 83.0,
-  "wind_mph": 2.7,
+  "temp_f": 60.7,
+  "surface_pressure_hpa": 1010.1,
+  "cloud_cover_pct": 85.0,
+  "wind_mph": 4.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 6,
+    "wind": 12,
     "solunar_major": 18,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
+    "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)",
     "Moon phase is favorable"
   ],
@@ -41,9 +42,9 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~60\u00b0F; low light leans trout",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
+    "species_reason": "moderate ~61\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
