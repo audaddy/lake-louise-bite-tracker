@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-08T07:32:05-07:00",
-  "score": 83,
+  "timestamp": "2026-10-08T07:53:10-07:00",
+  "score": 80,
   "tier": "Excellent",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
   "message": "Excellent trout conditions during the low-light window. Good time to fish.",
@@ -12,22 +12,22 @@
     "type": "moonset",
     "time": "2026-10-08T17:34:28-07:00"
   },
-  "pressure_trend_hpa": 0.3,
+  "pressure_trend_hpa": -0.4,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 4.8,
-  "temp_f": 51.7,
-  "surface_pressure_hpa": 1010.9,
+  "moon_illumination_pct": 4.7,
+  "temp_f": 51.9,
+  "surface_pressure_hpa": 1010.5,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 1.1,
+  "wind_mph": 0.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 6,
+    "wind": 3,
     "dawn_dusk": 12,
     "moon_phase": 6
   },
@@ -37,7 +37,9 @@
     "Low-light dawn/dusk window \u2014 prime feeding time",
     "Moon phase is favorable"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Dead-calm water is less favorable than a light ripple"
+  ],
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
