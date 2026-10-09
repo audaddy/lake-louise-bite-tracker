@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-08T22:54:39-07:00",
-  "score": 95,
+  "timestamp": "2026-10-08T23:18:10-07:00",
+  "score": 100,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~2 hours.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~1.5 hours.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-08T23:51:50-07:00"
@@ -12,27 +12,27 @@
     "type": "moonrise",
     "time": "2026-10-09T06:24:01-07:00"
   },
-  "pressure_trend_hpa": -0.7,
+  "pressure_trend_hpa": -1.1,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 2.3,
-  "temp_f": 55.8,
-  "surface_pressure_hpa": 1004.5,
-  "cloud_cover_pct": 91.0,
-  "wind_mph": 5.2,
+  "moon_illumination_pct": 2.2,
+  "temp_f": 54.5,
+  "surface_pressure_hpa": 1004.2,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 4.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 18,
     "cloud_cover": 12,
     "wind": 12,
     "solunar_major": 18,
     "moon_phase": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)",
@@ -42,7 +42,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~56\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~54\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -82,7 +82,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "underfoot@2026-10-08T23:51:50-07:00",
