@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-09T14:09:04-07:00",
-  "score": 45,
+  "timestamp": "2026-10-09T14:25:14-07:00",
+  "score": 49,
   "tier": "Fair",
   "species_note": "Rainbow trout \u2014 fair conditions",
   "message": "Fair trout conditions right now. Could go either way.",
@@ -17,16 +17,16 @@
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 0.8,
-  "temp_f": 61.5,
-  "surface_pressure_hpa": 1001.3,
-  "cloud_cover_pct": 1.0,
-  "wind_mph": 15.7,
+  "moon_illumination_pct": 0.7,
+  "temp_f": 61.6,
+  "surface_pressure_hpa": 1001.4,
+  "cloud_cover_pct": 20.0,
+  "wind_mph": 15.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 0,
+    "cloud_cover": 4,
     "wind": -8,
     "moon_phase": 6
   },
@@ -35,7 +35,6 @@
     "Moon phase is favorable"
   ],
   "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding",
     "Strong winds make conditions tougher"
   ],
   "light_phase": "day",
