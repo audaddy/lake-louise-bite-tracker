@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-10T08:38:19-07:00",
-  "score": 59,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-10-10T08:49:22-07:00",
+  "score": 63,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-10T12:58:48-07:00"
@@ -12,21 +12,21 @@
     "type": "moonset",
     "time": "2026-10-10T18:08:31-07:00"
   },
-  "pressure_trend_hpa": 0.3,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 0.1,
-  "temp_f": 43.3,
-  "surface_pressure_hpa": 1002.0,
-  "cloud_cover_pct": 19.0,
-  "wind_mph": 2.8,
+  "temp_f": 44.9,
+  "surface_pressure_hpa": 1002.4,
+  "cloud_cover_pct": 21.0,
+  "wind_mph": 2.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 0,
+    "cloud_cover": 4,
     "wind": 6,
     "moon_phase": 6
   },
@@ -34,13 +34,11 @@
     "Stable atmospheric pressure is comfortable for fish",
     "Moon phase is favorable"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~43\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~45\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
