@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-09T22:53:46-07:00",
-  "score": 59,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-10-09T23:16:35-07:00",
+  "score": 65,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-10T00:36:23-07:00"
@@ -12,26 +12,27 @@
     "type": "moonrise",
     "time": "2026-10-10T07:37:23-07:00"
   },
-  "pressure_trend_hpa": 0.0,
+  "pressure_trend_hpa": -0.2,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 0.3,
-  "temp_f": 48.0,
+  "temp_f": 47.1,
   "surface_pressure_hpa": 1001.5,
   "cloud_cover_pct": 8.0,
-  "wind_mph": 2.9,
+  "wind_mph": 3.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 6,
+    "wind": 12,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
+    "A light breeze/ripple has a very favorable effect",
     "Moon phase is favorable"
   ],
   "negative_factors": [
@@ -40,7 +41,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~48\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~47\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -64,6 +65,11 @@
       }
     ],
     "spin_options": [
+      {
+        "name": "Spinners / spinnerbaits",
+        "why": "chop or cloud cover \u2014 cover water at mid-depth",
+        "hot": true
+      },
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
