@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-09T23:52:27-07:00",
+  "timestamp": "2026-10-10T00:13:53-07:00",
   "score": 83,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
@@ -17,10 +17,10 @@
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 0.3,
-  "temp_f": 47.9,
-  "surface_pressure_hpa": 1001.8,
-  "cloud_cover_pct": 11.0,
+  "moon_illumination_pct": 0.2,
+  "temp_f": 47.5,
+  "surface_pressure_hpa": 1001.9,
+  "cloud_cover_pct": 2.0,
   "wind_mph": 3.8,
   "precip_in": 0.0,
   "score_breakdown": {
@@ -83,7 +83,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "underfoot@2026-10-10T00:36:23-07:00",
