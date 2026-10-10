@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-10T02:10:13-07:00",
-  "score": 69,
+  "timestamp": "2026-10-10T02:27:38-07:00",
+  "score": 65,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,21 +12,21 @@
     "type": "moonrise",
     "time": "2026-10-10T07:37:23-07:00"
   },
-  "pressure_trend_hpa": 0.6,
+  "pressure_trend_hpa": 0.7,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 0.2,
-  "temp_f": 46.4,
-  "surface_pressure_hpa": 1002.1,
-  "cloud_cover_pct": 23.0,
-  "wind_mph": 4.8,
+  "temp_f": 45.4,
+  "surface_pressure_hpa": 1002.2,
+  "cloud_cover_pct": 16.0,
+  "wind_mph": 4.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 4,
+    "cloud_cover": 0,
     "wind": 12,
     "moon_phase": 6
   },
@@ -35,11 +35,13 @@
     "A light breeze/ripple has a very favorable effect",
     "Moon phase is favorable"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Bright, clear skies can push fish deep and slow feeding"
+  ],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~46\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~45\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
