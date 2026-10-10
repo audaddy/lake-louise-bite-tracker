@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-10T13:10:04-07:00",
+  "timestamp": "2026-10-10T13:26:32-07:00",
   "score": 95,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~49 min.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~32 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-11T01:21:29-07:00"
@@ -12,16 +12,16 @@
     "type": "moonset",
     "time": "2026-10-10T18:08:31-07:00"
   },
-  "pressure_trend_hpa": -0.8,
+  "pressure_trend_hpa": -0.1,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 0.2,
-  "temp_f": 55.4,
-  "surface_pressure_hpa": 1001.7,
-  "cloud_cover_pct": 92.0,
-  "wind_mph": 5.7,
+  "temp_f": 56.2,
+  "surface_pressure_hpa": 1002.1,
+  "cloud_cover_pct": 86.0,
+  "wind_mph": 5.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -41,8 +41,8 @@
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
-    "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~55\u00b0F favors trout; bass sluggish",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~56\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -78,7 +78,7 @@
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
-    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
