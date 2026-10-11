@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-11T14:38:24-07:00",
-  "score": 83,
-  "tier": "Excellent",
-  "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~6 min.",
+  "timestamp": "2026-10-11T14:49:50-07:00",
+  "score": 65,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-12T02:07:58-07:00"
@@ -12,14 +12,14 @@
     "type": "moonset",
     "time": "2026-10-11T18:28:19-07:00"
   },
-  "pressure_trend_hpa": -1.5,
+  "pressure_trend_hpa": -2.0,
   "species": "trout",
-  "in_major_period": true,
+  "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 1.8,
   "temp_f": 60.1,
-  "surface_pressure_hpa": 1004.7,
+  "surface_pressure_hpa": 1004.9,
   "cloud_cover_pct": 0.0,
   "wind_mph": 10.7,
   "precip_in": 0.0,
@@ -28,12 +28,10 @@
     "pressure": 18,
     "cloud_cover": 0,
     "wind": 6,
-    "solunar_major": 18,
     "moon_phase": 6
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
-    "Solunar major period active (moon overhead/underfoot)",
     "Moon phase is favorable"
   ],
   "negative_factors": [
@@ -90,7 +88,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "transit@2026-10-11T13:44:31-07:00",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
