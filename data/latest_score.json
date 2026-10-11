@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-11T08:25:09-07:00",
+  "timestamp": "2026-10-11T08:38:12-07:00",
   "score": 81,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~55 min.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~42 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-11T13:44:31-07:00"
@@ -18,9 +18,9 @@
   "in_minor_period": true,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 1.2,
-  "temp_f": 40.3,
-  "surface_pressure_hpa": 1006.3,
-  "cloud_cover_pct": 97.0,
+  "temp_f": 41.5,
+  "surface_pressure_hpa": 1006.2,
+  "cloud_cover_pct": 93.0,
   "wind_mph": 2.9,
   "precip_in": 0.0,
   "score_breakdown": {
@@ -41,7 +41,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~40\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~42\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -81,7 +81,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "moonrise@2026-10-11T08:50:37-07:00",
