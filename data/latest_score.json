@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-12T14:49:37-07:00",
-  "score": 83,
-  "tier": "Excellent",
+  "timestamp": "2026-10-12T15:09:58-07:00",
+  "score": 77,
+  "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~42 min.",
+  "message": "Good trout window right now \u2014 biting for the next ~22 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-13T02:56:14-07:00"
@@ -12,26 +12,26 @@
     "type": "moonset",
     "time": "2026-10-12T18:52:03-07:00"
   },
-  "pressure_trend_hpa": -1.0,
+  "pressure_trend_hpa": -0.4,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 5.4,
-  "temp_f": 59.8,
-  "surface_pressure_hpa": 1009.1,
+  "moon_illumination_pct": 5.5,
+  "temp_f": 60.0,
+  "surface_pressure_hpa": 1009.5,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 4.4,
+  "wind_mph": 4.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 12,
     "cloud_cover": 0,
     "wind": 12,
     "solunar_major": 18
   },
   "positive_factors": [
-    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)"
   ],
