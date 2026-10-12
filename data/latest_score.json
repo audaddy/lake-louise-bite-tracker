@@ -1,38 +1,39 @@
 {
-  "timestamp": "2026-10-12T01:50:47-07:00",
-  "score": 70,
+  "timestamp": "2026-10-12T02:23:39-07:00",
+  "score": 76,
   "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~1.5 hours.",
+  "message": "Good trout window right now \u2014 biting for the next ~44 min.",
   "next_major_period": {
-    "type": "underfoot",
-    "time": "2026-10-12T02:07:58-07:00"
+    "type": "transit",
+    "time": "2026-10-12T14:31:52-07:00"
   },
   "next_minor_period": {
     "type": "moonrise",
     "time": "2026-10-12T10:03:27-07:00"
   },
-  "pressure_trend_hpa": 2.0,
+  "pressure_trend_hpa": 1.9,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 3.3,
   "temp_f": 39.4,
-  "surface_pressure_hpa": 1008.1,
+  "surface_pressure_hpa": 1008.0,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 2.7,
+  "wind_mph": 3.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
     "cloud_cover": 0,
-    "wind": 6,
+    "wind": 12,
     "solunar_major": 18,
     "moon_phase": 6
   },
   "positive_factors": [
     "Slightly rising pressure \u2014 neutral to mild",
+    "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)",
     "Moon phase is favorable"
   ],
@@ -66,6 +67,11 @@
       }
     ],
     "spin_options": [
+      {
+        "name": "Spinners / spinnerbaits",
+        "why": "chop or cloud cover \u2014 cover water at mid-depth",
+        "hot": true
+      },
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
