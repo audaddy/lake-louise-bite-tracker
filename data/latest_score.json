@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-12T10:27:30-07:00",
-  "score": 66,
-  "tier": "Good",
-  "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~6 min.",
+  "timestamp": "2026-10-12T10:44:17-07:00",
+  "score": 59,
+  "tier": "Fair",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-12T14:31:52-07:00"
@@ -15,35 +15,32 @@
   "pressure_trend_hpa": -0.2,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": true,
+  "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 4.6,
-  "temp_f": 48.1,
-  "surface_pressure_hpa": 1008.7,
-  "cloud_cover_pct": 17.0,
-  "wind_mph": 0.6,
+  "moon_illumination_pct": 4.7,
+  "temp_f": 49.9,
+  "surface_pressure_hpa": 1008.8,
+  "cloud_cover_pct": 4.0,
+  "wind_mph": 1.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 3,
-    "solunar_minor": 10,
+    "wind": 6,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Solunar minor period active (moonrise/moonset)",
     "Moon phase is favorable"
   ],
   "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding",
-    "Dead-calm water is less favorable than a light ripple"
+    "Bright, clear skies can push fish deep and slow feeding"
   ],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~48\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~50\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -86,7 +83,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "moonrise@2026-10-12T10:03:27-07:00",
+    "period_key": null,
     "score_ge_70": false
   }
 }
