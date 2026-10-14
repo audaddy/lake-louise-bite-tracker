@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-13T17:24:16-07:00",
-  "score": 71,
+  "timestamp": "2026-10-13T18:05:05-07:00",
+  "score": 70,
   "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "species_note": "Rainbow trout \u2014 dawn/dusk window",
+  "message": "Good trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-14T03:46:17-07:00"
@@ -12,33 +12,34 @@
     "type": "moonset",
     "time": "2026-10-13T19:21:41-07:00"
   },
-  "pressure_trend_hpa": 0.4,
+  "pressure_trend_hpa": 1.8,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 11.4,
-  "temp_f": 62.3,
-  "surface_pressure_hpa": 1013.8,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 11.5,
+  "temp_f": 60.3,
+  "surface_pressure_hpa": 1014.8,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 3.1,
+  "wind_mph": 2.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 12,
-    "wind": 12
+    "wind": 6,
+    "dawn_dusk": 12
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect"
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
-  "light_phase": "day",
+  "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~62\u00b0F; low light leans trout",
+    "species_reason": "moderate ~60\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -81,7 +82,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-10-13T17",
+    "period_key": "highscore@2026-10-13T18",
     "score_ge_70": true
   }
 }
