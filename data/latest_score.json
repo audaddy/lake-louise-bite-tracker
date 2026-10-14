@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-14T16:33:49-07:00",
+  "timestamp": "2026-10-14T16:48:04-07:00",
   "score": 77,
   "tier": "Good",
   "species_note": "Largemouth bass biting",
-  "message": "Good bass window right now \u2014 biting for the next ~38 min.",
+  "message": "Good bass window right now \u2014 biting for the next ~24 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-15T04:37:32-07:00"
@@ -17,10 +17,10 @@
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 17.9,
+  "moon_illumination_pct": 18.0,
   "temp_f": 66.1,
-  "surface_pressure_hpa": 1016.6,
-  "cloud_cover_pct": 4.0,
+  "surface_pressure_hpa": 1016.5,
+  "cloud_cover_pct": 3.0,
   "wind_mph": 3.4,
   "precip_in": 0.0,
   "score_breakdown": {
