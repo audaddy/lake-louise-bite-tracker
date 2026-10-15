@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-15T01:54:34-07:00",
-  "score": 46,
+  "timestamp": "2026-10-15T02:10:46-07:00",
+  "score": 43,
   "tier": "Fair",
   "species_note": "Rainbow trout \u2014 fair conditions",
   "message": "Fair trout conditions right now. Could go either way.",
@@ -12,28 +12,29 @@
     "type": "moonrise",
     "time": "2026-10-15T13:19:54-07:00"
   },
-  "pressure_trend_hpa": 1.4,
+  "pressure_trend_hpa": 1.2,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 20.8,
+  "moon_illumination_pct": 20.9,
   "temp_f": 48.1,
-  "surface_pressure_hpa": 1019.7,
+  "surface_pressure_hpa": 1019.9,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 1.3,
+  "wind_mph": 0.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
     "cloud_cover": 0,
-    "wind": 6
+    "wind": 3
   },
   "positive_factors": [
     "Slightly rising pressure \u2014 neutral to mild"
   ],
   "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
+    "Bright, clear skies can push fish deep and slow feeding",
+    "Dead-calm water is less favorable than a light ripple"
   ],
   "light_phase": "night",
   "tactics": {
