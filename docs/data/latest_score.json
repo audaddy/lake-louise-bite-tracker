@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-15T13:49:17-07:00",
-  "score": 81,
-  "tier": "Excellent",
-  "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~1 min.",
+  "timestamp": "2026-10-15T14:09:14-07:00",
+  "score": 67,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-15T17:03:20-07:00"
@@ -12,35 +12,33 @@
     "type": "moonset",
     "time": "2026-10-15T20:46:27-07:00"
   },
-  "pressure_trend_hpa": 0.5,
+  "pressure_trend_hpa": -0.5,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": true,
+  "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 24.8,
-  "temp_f": 59.8,
-  "surface_pressure_hpa": 1019.1,
-  "cloud_cover_pct": 73.0,
+  "moon_illumination_pct": 24.9,
+  "temp_f": 60.7,
+  "surface_pressure_hpa": 1018.8,
+  "cloud_cover_pct": 66.0,
   "wind_mph": 4.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 12,
-    "wind": 12,
-    "solunar_minor": 10
+    "cloud_cover": 8,
+    "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect",
-    "Solunar minor period active (moonrise/moonset)"
+    "Partly cloudy skies are mildly favorable",
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~60\u00b0F; daytime warmth leans bass",
+    "species_reason": "moderate ~61\u00b0F; daytime warmth leans bass",
     "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
     "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Mid-depth \u2014 ~8\u201315 ft",
@@ -83,7 +81,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "moonrise@2026-10-15T13:19:55-07:00",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
