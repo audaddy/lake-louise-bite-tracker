@@ -1,53 +1,57 @@
 {
-  "timestamp": "2026-10-15T16:47:57-07:00",
-  "score": 83,
+  "timestamp": "2026-10-15T17:23:36-07:00",
+  "score": 93,
   "tier": "Excellent",
-  "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~1.5 hours.",
+  "species_note": "Rainbow trout biting",
+  "message": "Excellent trout window right now \u2014 biting for the next ~40 min.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-10-15T17:03:20-07:00"
+    "type": "underfoot",
+    "time": "2026-10-16T05:29:04-07:00"
   },
   "next_minor_period": {
     "type": "moonset",
     "time": "2026-10-15T20:46:27-07:00"
   },
-  "pressure_trend_hpa": -2.6,
-  "species": "bass",
+  "pressure_trend_hpa": -2.5,
+  "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 25.8,
-  "temp_f": 65.1,
-  "surface_pressure_hpa": 1016.5,
-  "cloud_cover_pct": 0.0,
-  "wind_mph": 3.5,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 26.0,
+  "temp_f": 64.4,
+  "surface_pressure_hpa": 1016.2,
+  "cloud_cover_pct": 22.0,
+  "wind_mph": 2.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
-    "cloud_cover": 0,
-    "wind": 12,
-    "solunar_major": 18
+    "cloud_cover": 4,
+    "wind": 6,
+    "solunar_major": 18,
+    "dawn_dusk": 12
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
-    "A light breeze/ripple has a very favorable effect",
-    "Solunar major period active (moon overhead/underfoot)"
+    "Solunar major period active (moon overhead/underfoot)",
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
-  "light_phase": "day",
+  "negative_factors": [],
+  "light_phase": "dawn_dusk",
   "tactics": {
-    "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~65\u00b0F; daytime warmth leans bass",
-    "where": "Transition edges \u2014 the first drop-off off the shoreline",
-    "where_reason": "mixed light; work the seam between shallow flats and deeper water",
-    "depth": "Mid-depth \u2014 ~8\u201315 ft",
-    "method_lean": "Spin fishing",
-    "method_reason": "bass holding on structure are efficient to target with lures",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~64\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
+    "depth": "Shallow \u2014 top ~0\u20138 ft",
+    "method_lean": "Fly fishing",
+    "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
+      {
+        "name": "Dry flies (caddis / mayfly)",
+        "why": "trout rise to the evening hatch in low light",
+        "hot": true
+      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -56,33 +60,23 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
-        "hot": true
-      },
-      {
-        "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
-        "why": "subsurface when nothing's rising / bright midday",
-        "hot": true
+        "hot": false
       }
     ],
     "spin_options": [
       {
-        "name": "Spinners / spinnerbaits",
-        "why": "chop or cloud cover \u2014 cover water at mid-depth",
+        "name": "Topwater (buzzbaits, walking baits, poppers)",
+        "why": "first/last light over shallow cover for bass",
         "hot": true
       },
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
-        "hot": false
-      },
-      {
-        "name": "Jigs & soft plastics (worked deep)",
-        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
         "hot": true
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
-    "summary": "Either \u2014 slight bass edge \u00b7 Transition edges \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
