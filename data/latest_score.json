@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-16T13:49:33-07:00",
+  "timestamp": "2026-10-16T14:08:00-07:00",
   "score": 81,
   "tier": "Excellent",
   "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~49 min.",
+  "message": "Excellent bass window right now \u2014 biting for the next ~31 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-16T17:54:35-07:00"
@@ -17,11 +17,11 @@
   "in_major_period": false,
   "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 33.4,
-  "temp_f": 70.6,
-  "surface_pressure_hpa": 1011.5,
-  "cloud_cover_pct": 93.0,
-  "wind_mph": 1.8,
+  "moon_illumination_pct": 33.5,
+  "temp_f": 71.0,
+  "surface_pressure_hpa": 1011.3,
+  "cloud_cover_pct": 83.0,
+  "wind_mph": 2.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -94,7 +94,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "moonrise@2026-10-16T14:08:51-07:00",
