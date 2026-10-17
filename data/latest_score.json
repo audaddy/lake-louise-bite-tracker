@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-17T14:48:05-07:00",
-  "score": 77,
-  "tier": "Good",
+  "timestamp": "2026-10-17T15:08:01-07:00",
+  "score": 81,
+  "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~30 min.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~10 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-17T18:44:33-07:00"
@@ -12,41 +12,46 @@
     "type": "moonset",
     "time": "2026-10-17T22:46:33-07:00"
   },
-  "pressure_trend_hpa": -0.1,
+  "pressure_trend_hpa": -0.2,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 42.9,
-  "temp_f": 64.3,
-  "surface_pressure_hpa": 1014.4,
-  "cloud_cover_pct": 62.0,
-  "wind_mph": 8.1,
+  "moon_illumination_pct": 43.0,
+  "temp_f": 64.5,
+  "surface_pressure_hpa": 1014.3,
+  "cloud_cover_pct": 79.0,
+  "wind_mph": 8.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 8,
+    "cloud_cover": 12,
     "wind": 12,
     "solunar_minor": 10
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Partly cloudy skies are mildly favorable",
+    "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
     "Solunar minor period active (moonrise/moonset)"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
-    "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~64\u00b0F; daytime warmth leans bass",
-    "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
-    "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Mid-depth \u2014 ~8\u201315 ft",
-    "method_lean": "Spin fishing",
-    "method_reason": "bass holding on structure are efficient to target with lures",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~64\u00b0F; low light leans trout",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "depth": "Shallow \u2014 top ~0\u20138 ft",
+    "method_lean": "Fly fishing",
+    "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
+      {
+        "name": "Dry flies (caddis / mayfly)",
+        "why": "trout rise to the evening hatch in low light",
+        "hot": true
+      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -55,15 +60,15 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
-        "hot": true
-      },
-      {
-        "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
-        "why": "subsurface when nothing's rising / bright midday",
         "hot": false
       }
     ],
     "spin_options": [
+      {
+        "name": "Topwater (buzzbaits, walking baits, poppers)",
+        "why": "first/last light over shallow cover for bass",
+        "hot": true
+      },
       {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
@@ -72,11 +77,11 @@
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
-        "hot": false
+        "hot": true
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
-    "summary": "Either \u2014 slight bass edge \u00b7 Transition edges \u00b7 Mid-depth \u2014 ~8\u201315 ft \u00b7 lean spin fishing"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
