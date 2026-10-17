@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-16T19:34:34-07:00",
-  "score": 59,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-10-16T19:51:39-07:00",
+  "score": 67,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-17T06:19:46-07:00"
@@ -12,34 +12,33 @@
     "type": "moonset",
     "time": "2026-10-16T21:42:53-07:00"
   },
-  "pressure_trend_hpa": -0.3,
+  "pressure_trend_hpa": -0.7,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 35.5,
-  "temp_f": 64.2,
-  "surface_pressure_hpa": 1009.2,
-  "cloud_cover_pct": 12.0,
-  "wind_mph": 6.3,
+  "moon_illumination_pct": 35.6,
+  "temp_f": 63.4,
+  "surface_pressure_hpa": 1009.0,
+  "cloud_cover_pct": 44.0,
+  "wind_mph": 6.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 0,
+    "cloud_cover": 8,
     "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
+    "Partly cloudy skies are mildly favorable",
     "A light breeze/ripple has a very favorable effect"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~64\u00b0F; low light leans trout",
+    "species_reason": "moderate ~63\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -63,11 +62,6 @@
       }
     ],
     "spin_options": [
-      {
-        "name": "Topwater (buzzbaits, walking baits, poppers)",
-        "why": "first/last light over shallow cover for bass",
-        "hot": true
-      },
       {
         "name": "Spinners / spinnerbaits",
         "why": "chop or cloud cover \u2014 cover water at mid-depth",
