@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-16T18:29:11-07:00",
+  "timestamp": "2026-10-16T18:49:00-07:00",
   "score": 95,
   "tier": "Excellent",
   "species_note": "Largemouth bass biting",
-  "message": "Excellent bass window right now \u2014 biting for the next ~25 min.",
+  "message": "Excellent bass window right now \u2014 biting for the next ~6 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-17T06:19:46-07:00"
@@ -12,16 +12,16 @@
     "type": "moonset",
     "time": "2026-10-16T21:42:53-07:00"
   },
-  "pressure_trend_hpa": -1.3,
+  "pressure_trend_hpa": -1.1,
   "species": "bass",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 35.1,
-  "temp_f": 67.9,
-  "surface_pressure_hpa": 1009.1,
-  "cloud_cover_pct": 1.0,
-  "wind_mph": 4.7,
+  "moon_illumination_pct": 35.2,
+  "temp_f": 65.7,
+  "surface_pressure_hpa": 1008.9,
+  "cloud_cover_pct": 0.0,
+  "wind_mph": 5.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -42,23 +42,18 @@
   ],
   "light_phase": "dawn_dusk",
   "tactics": {
-    "species_pick": "Largemouth bass",
-    "species_reason": "water proxy ~68\u00b0F (warm) favors bass metabolism",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~66\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Either \u2014 match the water",
-    "method_reason": "conditions don't strongly favor one over the other",
+    "method_lean": "Fly fishing",
+    "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
-      {
-        "name": "Poppers / foam topwater",
-        "why": "low light + warm water = surface bass eats",
-        "hot": true
-      },
       {
         "name": "Dry flies (caddis / mayfly)",
         "why": "trout rise to the evening hatch in low light",
-        "hot": false
+        "hot": true
       },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
@@ -85,11 +80,11 @@
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
-        "hot": false
+        "hot": true
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
-    "summary": "Largemouth bass \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean either \u2014 match the water"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
