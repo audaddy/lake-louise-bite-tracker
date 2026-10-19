@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-19T07:43:35-07:00",
+  "timestamp": "2026-10-19T07:54:38-07:00",
   "score": 100,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-10-19T15:42:23-07:00"
   },
-  "pressure_trend_hpa": 0.7,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": true,
   "moon_illumination_pct": 59.1,
-  "temp_f": 42.0,
-  "surface_pressure_hpa": 1004.9,
+  "temp_f": 42.2,
+  "surface_pressure_hpa": 1005.0,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 3.4,
+  "wind_mph": 3.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
