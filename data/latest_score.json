@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-19T08:39:31-07:00",
-  "score": 83,
-  "tier": "Excellent",
+  "timestamp": "2026-10-19T08:49:11-07:00",
+  "score": 76,
+  "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~16 min.",
+  "message": "Good trout window right now \u2014 biting for the next ~7 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-19T20:18:47-07:00"
@@ -12,26 +12,26 @@
     "type": "moonrise",
     "time": "2026-10-19T15:42:23-07:00"
   },
-  "pressure_trend_hpa": 0.8,
+  "pressure_trend_hpa": 1.0,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 59.4,
-  "temp_f": 42.7,
-  "surface_pressure_hpa": 1005.4,
-  "cloud_cover_pct": 100.0,
-  "wind_mph": 2.7,
+  "moon_illumination_pct": 59.5,
+  "temp_f": 43.4,
+  "surface_pressure_hpa": 1005.6,
+  "cloud_cover_pct": 97.0,
+  "wind_mph": 2.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 12,
     "wind": 6,
     "solunar_major": 18
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
     "Solunar major period active (moon overhead/underfoot)"
   ],
