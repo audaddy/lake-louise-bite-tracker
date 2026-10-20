@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-20T16:08:16-07:00",
-  "score": 75,
+  "timestamp": "2026-10-20T16:22:13-07:00",
+  "score": 69,
   "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~24 min.",
+  "message": "Good trout window right now \u2014 biting for the next ~10 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-20T21:03:21-07:00"
@@ -12,26 +12,26 @@
     "type": "moonset",
     "time": "2026-10-21T02:15:06-07:00"
   },
-  "pressure_trend_hpa": -1.2,
+  "pressure_trend_hpa": -0.8,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 71.6,
-  "temp_f": 61.5,
-  "surface_pressure_hpa": 1009.3,
+  "moon_illumination_pct": 71.7,
+  "temp_f": 61.4,
+  "surface_pressure_hpa": 1009.2,
   "cloud_cover_pct": 1.0,
-  "wind_mph": 5.6,
+  "wind_mph": 5.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 12,
     "cloud_cover": 0,
     "wind": 12,
     "solunar_minor": 10
   },
   "positive_factors": [
-    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect",
     "Solunar minor period active (moonrise/moonset)"
   ],
@@ -41,7 +41,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Either \u2014 slight bass edge",
-    "species_reason": "moderate ~62\u00b0F; daytime warmth leans bass",
+    "species_reason": "moderate ~61\u00b0F; daytime warmth leans bass",
     "where": "Transition edges \u2014 the first drop-off off the shoreline \u2014 favor the windward shore",
     "where_reason": "mixed light; work the seam between shallow flats and deeper water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Mid-depth \u2014 ~8\u201315 ft",
@@ -90,6 +90,6 @@
   },
   "last_notified": {
     "period_key": "moonrise@2026-10-20T16:02:27-07:00",
-    "score_ge_70": true
+    "score_ge_70": false
   }
 }
