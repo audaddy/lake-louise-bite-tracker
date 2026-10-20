@@ -1,38 +1,37 @@
 {
-  "timestamp": "2026-10-19T20:12:41-07:00",
-  "score": 78,
+  "timestamp": "2026-10-19T20:32:59-07:00",
+  "score": 74,
   "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~1 hours.",
+  "message": "Good trout window right now \u2014 biting for the next ~46 min.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-10-19T20:18:47-07:00"
+    "type": "underfoot",
+    "time": "2026-10-20T08:41:14-07:00"
   },
   "next_minor_period": {
     "type": "moonset",
     "time": "2026-10-20T01:04:25-07:00"
   },
-  "pressure_trend_hpa": 1.3,
+  "pressure_trend_hpa": 1.2,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 64.0,
-  "temp_f": 52.5,
-  "surface_pressure_hpa": 1008.5,
-  "cloud_cover_pct": 43.0,
-  "wind_mph": 5.6,
+  "moon_illumination_pct": 64.1,
+  "temp_f": 51.5,
+  "surface_pressure_hpa": 1008.4,
+  "cloud_cover_pct": 25.0,
+  "wind_mph": 5.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
-    "cloud_cover": 8,
+    "cloud_cover": 4,
     "wind": 12,
     "solunar_major": 18
   },
   "positive_factors": [
     "Slightly rising pressure \u2014 neutral to mild",
-    "Partly cloudy skies are mildly favorable",
     "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)"
   ],
