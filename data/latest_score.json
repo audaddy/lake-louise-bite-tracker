@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-20T09:44:03-07:00",
-  "score": 63,
+  "timestamp": "2026-10-20T09:54:05-07:00",
+  "score": 67,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,34 +12,35 @@
     "type": "moonrise",
     "time": "2026-10-20T16:02:27-07:00"
   },
-  "pressure_trend_hpa": 0.7,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 69.2,
-  "temp_f": 49.2,
-  "surface_pressure_hpa": 1010.6,
-  "cloud_cover_pct": 36.0,
-  "wind_mph": 3.3,
+  "temp_f": 50.1,
+  "surface_pressure_hpa": 1010.5,
+  "cloud_cover_pct": 46.0,
+  "wind_mph": 5.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 4,
+    "cloud_cover": 8,
     "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
+    "Partly cloudy skies are mildly favorable",
     "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~49\u00b0F favors trout; bass sluggish",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
+    "species_reason": "cool water ~50\u00b0F favors trout; bass sluggish",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -57,7 +58,7 @@
       {
         "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
         "why": "subsurface when nothing's rising / bright midday",
-        "hot": true
+        "hot": false
       }
     ],
     "spin_options": [
@@ -69,11 +70,6 @@
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
-        "hot": true
-      },
-      {
-        "name": "Jigs & soft plastics (worked deep)",
-        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
         "hot": true
       }
     ],
