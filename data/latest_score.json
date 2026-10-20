@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-20T12:23:14-07:00",
-  "score": 67,
-  "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "timestamp": "2026-10-20T12:48:26-07:00",
+  "score": 59,
+  "tier": "Fair",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-20T21:03:21-07:00"
@@ -12,29 +12,30 @@
     "type": "moonrise",
     "time": "2026-10-20T16:02:27-07:00"
   },
-  "pressure_trend_hpa": 0.2,
+  "pressure_trend_hpa": 0.0,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 70.2,
-  "temp_f": 54.7,
-  "surface_pressure_hpa": 1010.8,
-  "cloud_cover_pct": 42.0,
-  "wind_mph": 8.7,
+  "moon_illumination_pct": 70.3,
+  "temp_f": 55.1,
+  "surface_pressure_hpa": 1010.6,
+  "cloud_cover_pct": 18.0,
+  "wind_mph": 8.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 8,
+    "cloud_cover": 0,
     "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Partly cloudy skies are mildly favorable",
     "A light breeze/ripple has a very favorable effect"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Bright, clear skies can push fish deep and slow feeding"
+  ],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
@@ -58,7 +59,7 @@
       {
         "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
         "why": "subsurface when nothing's rising / bright midday",
-        "hot": false
+        "hot": true
       }
     ],
     "spin_options": [
@@ -70,6 +71,11 @@
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
+        "hot": true
+      },
+      {
+        "name": "Jigs & soft plastics (worked deep)",
+        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
         "hot": true
       }
     ],
