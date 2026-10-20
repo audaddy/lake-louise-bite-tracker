@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-20T04:09:45-07:00",
-  "score": 61,
+  "timestamp": "2026-10-20T04:24:51-07:00",
+  "score": 62,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,28 +12,30 @@
     "type": "moonrise",
     "time": "2026-10-20T16:02:27-07:00"
   },
-  "pressure_trend_hpa": 0.3,
+  "pressure_trend_hpa": -0.1,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 67.0,
-  "temp_f": 43.6,
-  "surface_pressure_hpa": 1009.7,
-  "cloud_cover_pct": 62.0,
-  "wind_mph": 1.6,
+  "moon_illumination_pct": 67.1,
+  "temp_f": 43.5,
+  "surface_pressure_hpa": 1009.8,
+  "cloud_cover_pct": 74.0,
+  "wind_mph": 0.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 8,
-    "wind": 6
+    "cloud_cover": 12,
+    "wind": 3
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Partly cloudy skies are mildly favorable"
+    "Overcast skies have a favorable impact on biting activity"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Dead-calm water is less favorable than a light ripple"
+  ],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
