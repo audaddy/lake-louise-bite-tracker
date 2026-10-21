@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-21T08:09:19-07:00",
-  "score": 75,
-  "tier": "Good",
-  "species_note": "Rainbow trout \u2014 dawn/dusk window",
-  "message": "Good trout conditions during the low-light window. Good time to fish.",
+  "timestamp": "2026-10-21T08:26:36-07:00",
+  "score": 93,
+  "tier": "Excellent",
+  "species_note": "Rainbow trout biting",
+  "message": "Excellent trout window right now \u2014 biting for the next ~2 hours.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-21T09:25:15-07:00"
@@ -14,31 +14,33 @@
   },
   "pressure_trend_hpa": -1.8,
   "species": "trout",
-  "in_major_period": false,
+  "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 77.4,
-  "temp_f": 36.1,
+  "moon_illumination_pct": 77.5,
+  "temp_f": 37.1,
   "surface_pressure_hpa": 1005.2,
-  "cloud_cover_pct": 24.0,
-  "wind_mph": 1.7,
+  "cloud_cover_pct": 29.0,
+  "wind_mph": 2.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
     "cloud_cover": 4,
     "wind": 6,
+    "solunar_major": 18,
     "dawn_dusk": 12
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "Solunar major period active (moon overhead/underfoot)",
     "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~36\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~37\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -76,7 +78,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-10-21T08",
+    "period_key": "underfoot@2026-10-21T09:25:15-07:00",
     "score_ge_70": true
   }
 }
