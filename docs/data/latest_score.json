@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-21T06:38:41-07:00",
+  "timestamp": "2026-10-21T06:50:38-07:00",
   "score": 83,
   "tier": "Excellent",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
@@ -12,7 +12,7 @@
     "type": "moonrise",
     "time": "2026-10-21T16:20:02-07:00"
   },
-  "pressure_trend_hpa": 0.0,
+  "pressure_trend_hpa": 0.1,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
