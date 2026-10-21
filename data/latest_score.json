@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-21T01:36:07-07:00",
-  "score": 53,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-10-21T01:55:19-07:00",
+  "score": 63,
+  "tier": "Good",
+  "species_note": "Rainbow trout biting",
+  "message": "Good trout window right now \u2014 biting for the next ~50 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-21T09:25:15-07:00"
@@ -12,25 +12,27 @@
     "type": "moonset",
     "time": "2026-10-21T02:15:06-07:00"
   },
-  "pressure_trend_hpa": -0.1,
+  "pressure_trend_hpa": -0.7,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": false,
+  "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 75.1,
-  "temp_f": 43.6,
-  "surface_pressure_hpa": 1007.5,
+  "moon_illumination_pct": 75.2,
+  "temp_f": 43.4,
+  "surface_pressure_hpa": 1006.8,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 2.1,
+  "wind_mph": 2.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 6
+    "wind": 6,
+    "solunar_minor": 10
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish"
+    "Stable atmospheric pressure is comfortable for fish",
+    "Solunar minor period active (moonrise/moonset)"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -38,7 +40,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~44\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~43\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -73,10 +75,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
+    "period_key": "moonset@2026-10-21T02:15:06-07:00",
     "score_ge_70": false
   }
 }
