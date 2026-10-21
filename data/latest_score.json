@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-21T00:16:06-07:00",
-  "score": 56,
+  "timestamp": "2026-10-21T00:42:47-07:00",
+  "score": 53,
   "tier": "Fair",
   "species_note": "Rainbow trout \u2014 fair conditions",
   "message": "Fair trout conditions right now. Could go either way.",
@@ -12,34 +12,33 @@
     "type": "moonset",
     "time": "2026-10-21T02:15:06-07:00"
   },
-  "pressure_trend_hpa": -1.0,
+  "pressure_trend_hpa": -0.3,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 74.6,
-  "temp_f": 47.0,
-  "surface_pressure_hpa": 1007.4,
+  "moon_illumination_pct": 74.7,
+  "temp_f": 45.7,
+  "surface_pressure_hpa": 1007.3,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 0.9,
+  "wind_mph": 2.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 12,
     "cloud_cover": 0,
-    "wind": 3
+    "wind": 6
   },
   "positive_factors": [
-    "Falling barometric pressure \u2014 fish often feed ahead of a front"
+    "Stable atmospheric pressure is comfortable for fish"
   ],
   "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding",
-    "Dead-calm water is less favorable than a light ripple"
+    "Bright, clear skies can push fish deep and slow feeding"
   ],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~47\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~46\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
