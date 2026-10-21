@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-21T02:29:51-07:00",
-  "score": 63,
-  "tier": "Good",
-  "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~15 min.",
+  "timestamp": "2026-10-21T02:45:50-07:00",
+  "score": 53,
+  "tier": "Fair",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-21T09:25:15-07:00"
@@ -12,27 +12,25 @@
     "type": "moonrise",
     "time": "2026-10-21T16:20:02-07:00"
   },
-  "pressure_trend_hpa": -0.7,
+  "pressure_trend_hpa": -0.4,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": true,
+  "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 75.4,
-  "temp_f": 43.0,
-  "surface_pressure_hpa": 1006.7,
-  "cloud_cover_pct": 1.0,
-  "wind_mph": 1.6,
+  "moon_illumination_pct": 75.5,
+  "temp_f": 42.6,
+  "surface_pressure_hpa": 1006.9,
+  "cloud_cover_pct": 7.0,
+  "wind_mph": 2.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 6,
-    "solunar_minor": 10
+    "wind": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "Solunar minor period active (moonrise/moonset)"
+    "Stable atmospheric pressure is comfortable for fish"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -78,7 +76,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "moonset@2026-10-21T02:15:06-07:00",
+    "period_key": null,
     "score_ge_70": false
   }
 }
