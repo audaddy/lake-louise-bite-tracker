@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-21T18:32:58-07:00",
-  "score": 77,
+  "timestamp": "2026-10-21T18:57:17-07:00",
+  "score": 62,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
   "message": "Good trout conditions during the low-light window. Good time to fish.",
@@ -12,34 +12,36 @@
     "type": "moonset",
     "time": "2026-10-22T03:26:28-07:00"
   },
-  "pressure_trend_hpa": -0.6,
+  "pressure_trend_hpa": -0.7,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 81.0,
-  "temp_f": 57.0,
-  "surface_pressure_hpa": 1003.7,
-  "cloud_cover_pct": 99.0,
-  "wind_mph": 1.2,
+  "moon_illumination_pct": 81.1,
+  "temp_f": 56.3,
+  "surface_pressure_hpa": 1003.5,
+  "cloud_cover_pct": 2.0,
+  "wind_mph": 0.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 12,
-    "wind": 6,
+    "cloud_cover": 0,
+    "wind": 3,
     "dawn_dusk": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity",
     "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Bright, clear skies can push fish deep and slow feeding",
+    "Dead-calm water is less favorable than a light ripple"
+  ],
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~57\u00b0F; low light leans trout",
+    "species_reason": "moderate ~56\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -64,11 +66,6 @@
     ],
     "spin_options": [
       {
-        "name": "Spinners / spinnerbaits",
-        "why": "chop or cloud cover \u2014 cover water at mid-depth",
-        "hot": true
-      },
-      {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
         "hot": true
@@ -82,7 +79,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "highscore@2026-10-21T18",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
