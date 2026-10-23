@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-23T09:51:13-07:00",
-  "score": 43,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-10-23T10:07:43-07:00",
+  "score": 61,
+  "tier": "Good",
+  "species_note": "Rainbow trout biting",
+  "message": "Good trout window right now \u2014 biting for the next ~2 hours.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-23T10:53:20-07:00"
@@ -12,25 +12,27 @@
     "type": "moonrise",
     "time": "2026-10-23T16:53:15-07:00"
   },
-  "pressure_trend_hpa": 3.2,
+  "pressure_trend_hpa": 3.5,
   "species": "trout",
-  "in_major_period": false,
+  "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 92.4,
-  "temp_f": 48.1,
-  "surface_pressure_hpa": 1017.5,
+  "moon_illumination_pct": 92.5,
+  "temp_f": 48.8,
+  "surface_pressure_hpa": 1017.9,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 1.4,
+  "wind_mph": 1.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": -10,
     "cloud_cover": 12,
-    "wind": 6
+    "wind": 6,
+    "solunar_major": 18
   },
   "positive_factors": [
-    "Overcast skies have a favorable impact on biting activity"
+    "Overcast skies have a favorable impact on biting activity",
+    "Solunar major period active (moon overhead/underfoot)"
   ],
   "negative_factors": [
     "Sharply rising pressure tends to slow the bite"
@@ -38,7 +40,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~48\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~49\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft (fish tight and slow it down \u2014 pressure rising)",
@@ -78,10 +80,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
+    "period_key": "underfoot@2026-10-23T10:53:20-07:00",
     "score_ge_70": false
   }
 }
