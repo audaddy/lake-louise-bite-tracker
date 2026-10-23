@@ -1,45 +1,45 @@
 {
-  "timestamp": "2026-10-23T04:25:43-07:00",
-  "score": 64,
+  "timestamp": "2026-10-23T04:39:47-07:00",
+  "score": 66,
   "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~44 min.",
+  "message": "Good trout window right now \u2014 biting for the next ~30 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-23T10:53:20-07:00"
   },
   "next_minor_period": {
-    "type": "moonset",
-    "time": "2026-10-23T04:39:17-07:00"
+    "type": "moonrise",
+    "time": "2026-10-23T16:53:15-07:00"
   },
-  "pressure_trend_hpa": 1.7,
+  "pressure_trend_hpa": 2.0,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": true,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 91.1,
-  "temp_f": 44.5,
-  "surface_pressure_hpa": 1013.0,
-  "cloud_cover_pct": 40.0,
-  "wind_mph": 2.1,
+  "temp_f": 46.0,
+  "surface_pressure_hpa": 1013.3,
+  "cloud_cover_pct": 24.0,
+  "wind_mph": 3.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
-    "cloud_cover": 8,
-    "wind": 6,
+    "cloud_cover": 4,
+    "wind": 12,
     "solunar_minor": 10
   },
   "positive_factors": [
     "Slightly rising pressure \u2014 neutral to mild",
-    "Partly cloudy skies are mildly favorable",
+    "A light breeze/ripple has a very favorable effect",
     "Solunar minor period active (moonrise/moonset)"
   ],
   "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~44\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~46\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -79,10 +79,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "moonset@2026-10-23T04:39:17-07:00",
+    "period_key": "moonset@2026-10-23T04:39:18-07:00",
     "score_ge_70": false
   }
 }
