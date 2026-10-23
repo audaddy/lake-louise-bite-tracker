@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-23T01:36:08-07:00",
-  "score": 46,
+  "timestamp": "2026-10-23T01:54:03-07:00",
+  "score": 58,
   "tier": "Fair",
   "species_note": "Rainbow trout \u2014 fair conditions",
   "message": "Fair trout conditions right now. Could go either way.",
@@ -12,29 +12,28 @@
     "type": "moonset",
     "time": "2026-10-23T04:39:17-07:00"
   },
-  "pressure_trend_hpa": 1.2,
+  "pressure_trend_hpa": 1.4,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 90.3,
-  "temp_f": 48.4,
-  "surface_pressure_hpa": 1011.3,
-  "cloud_cover_pct": 17.0,
-  "wind_mph": 2.5,
+  "moon_illumination_pct": 90.4,
+  "temp_f": 47.8,
+  "surface_pressure_hpa": 1011.4,
+  "cloud_cover_pct": 76.0,
+  "wind_mph": 2.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
-    "cloud_cover": 0,
+    "cloud_cover": 12,
     "wind": 6
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild"
+    "Slightly rising pressure \u2014 neutral to mild",
+    "Overcast skies have a favorable impact on biting activity"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
@@ -62,6 +61,11 @@
       }
     ],
     "spin_options": [
+      {
+        "name": "Spinners / spinnerbaits",
+        "why": "chop or cloud cover \u2014 cover water at mid-depth",
+        "hot": true
+      },
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
