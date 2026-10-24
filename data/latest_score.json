@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-24T09:24:44-07:00",
-  "score": 77,
+  "timestamp": "2026-10-24T09:37:41-07:00",
+  "score": 69,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,45 +12,39 @@
     "type": "moonrise",
     "time": "2026-10-24T17:11:32-07:00"
   },
-  "pressure_trend_hpa": -1.5,
+  "pressure_trend_hpa": -1.2,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 97.0,
-  "temp_f": 36.8,
-  "surface_pressure_hpa": 1015.3,
-  "cloud_cover_pct": 100.0,
-  "wind_mph": 1.8,
+  "moon_illumination_pct": 97.1,
+  "temp_f": 39.2,
+  "surface_pressure_hpa": 1015.4,
+  "cloud_cover_pct": 34.0,
+  "wind_mph": 2.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
-    "cloud_cover": 12,
+    "cloud_cover": 4,
     "wind": 6,
     "moon_phase": 6
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
-    "Overcast skies have a favorable impact on biting activity",
     "Moon phase is favorable"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~37\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~39\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
-      {
-        "name": "Dry flies (caddis / mayfly)",
-        "why": "trout rise to the evening hatch in low light",
-        "hot": true
-      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -59,18 +53,23 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
-        "hot": false
+        "hot": true
+      },
+      {
+        "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
+        "why": "subsurface when nothing's rising / bright midday",
+        "hot": true
       }
     ],
     "spin_options": [
       {
-        "name": "Spinners / spinnerbaits",
-        "why": "chop or cloud cover \u2014 cover water at mid-depth",
+        "name": "Inline spinners / small spoons",
+        "why": "steady trout producer at mid-depth",
         "hot": true
       },
       {
-        "name": "Inline spinners / small spoons",
-        "why": "steady trout producer at mid-depth",
+        "name": "Jigs & soft plastics (worked deep)",
+        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
         "hot": true
       }
     ],
@@ -82,7 +81,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "highscore@2026-10-24T09",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
