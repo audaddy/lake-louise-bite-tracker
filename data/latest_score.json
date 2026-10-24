@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-24T05:12:14-07:00",
-  "score": 83,
+  "timestamp": "2026-10-24T05:34:13-07:00",
+  "score": 93,
   "tier": "Excellent",
-  "species_note": "Rainbow trout \u2014 excellent window",
-  "message": "Excellent conditions for trout right now. Worth a cast.",
+  "species_note": "Rainbow trout biting",
+  "message": "Excellent trout window right now \u2014 biting for the next ~50 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-24T11:39:43-07:00"
@@ -12,14 +12,14 @@
     "type": "moonset",
     "time": "2026-10-24T05:54:39-07:00"
   },
-  "pressure_trend_hpa": -2.2,
+  "pressure_trend_hpa": -1.9,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": false,
+  "in_minor_period": true,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 96.4,
-  "temp_f": 33.7,
-  "surface_pressure_hpa": 1016.2,
+  "temp_f": 32.6,
+  "surface_pressure_hpa": 1016.0,
   "cloud_cover_pct": 100.0,
   "wind_mph": 3.0,
   "precip_in": 0.0,
@@ -28,19 +28,21 @@
     "pressure": 18,
     "cloud_cover": 12,
     "wind": 12,
+    "solunar_minor": 10,
     "moon_phase": 6
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
+    "Solunar minor period active (moonrise/moonset)",
     "Moon phase is favorable"
   ],
   "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~34\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~33\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -83,7 +85,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-10-24T05",
+    "period_key": "moonset@2026-10-24T05:54:39-07:00",
     "score_ge_70": true
   }
 }
