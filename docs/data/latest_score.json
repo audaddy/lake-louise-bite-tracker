@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-24T06:47:54-07:00",
-  "score": 83,
-  "tier": "Excellent",
+  "timestamp": "2026-10-24T07:08:07-07:00",
+  "score": 79,
+  "tier": "Good",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
-  "message": "Excellent trout conditions during the low-light window. Good time to fish.",
+  "message": "Good trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-24T11:39:43-07:00"
@@ -12,28 +12,28 @@
     "type": "moonrise",
     "time": "2026-10-24T17:11:32-07:00"
   },
-  "pressure_trend_hpa": -0.1,
+  "pressure_trend_hpa": -0.4,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 96.6,
-  "temp_f": 32.2,
-  "surface_pressure_hpa": 1016.4,
-  "cloud_cover_pct": 90.0,
-  "wind_mph": 2.5,
+  "moon_illumination_pct": 96.7,
+  "temp_f": 32.4,
+  "surface_pressure_hpa": 1016.0,
+  "cloud_cover_pct": 57.0,
+  "wind_mph": 2.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 12,
+    "cloud_cover": 8,
     "wind": 6,
     "dawn_dusk": 12,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity",
+    "Partly cloudy skies are mildly favorable",
     "Low-light dawn/dusk window \u2014 prime feeding time",
     "Moon phase is favorable"
   ],
@@ -81,10 +81,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-10-24T06",
+    "period_key": "highscore@2026-10-24T07",
     "score_ge_70": true
   }
 }
