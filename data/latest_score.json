@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-24T12:33:58-07:00",
-  "score": 95,
-  "tier": "Excellent",
-  "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~6 min.",
+  "timestamp": "2026-10-24T12:47:53-07:00",
+  "score": 77,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-25T00:04:03-07:00"
@@ -12,14 +12,14 @@
     "type": "moonrise",
     "time": "2026-10-24T17:11:32-07:00"
   },
-  "pressure_trend_hpa": -2.6,
+  "pressure_trend_hpa": -2.9,
   "species": "trout",
-  "in_major_period": true,
+  "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 97.5,
-  "temp_f": 52.4,
-  "surface_pressure_hpa": 1012.8,
+  "temp_f": 53.0,
+  "surface_pressure_hpa": 1012.5,
   "cloud_cover_pct": 100.0,
   "wind_mph": 1.4,
   "precip_in": 0.0,
@@ -28,20 +28,18 @@
     "pressure": 18,
     "cloud_cover": 12,
     "wind": 6,
-    "solunar_major": 18,
     "moon_phase": 6
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "Overcast skies have a favorable impact on biting activity",
-    "Solunar major period active (moon overhead/underfoot)",
     "Moon phase is favorable"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~52\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~53\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -81,10 +79,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "underfoot@2026-10-24T11:39:43-07:00",
+    "period_key": "highscore@2026-10-24T12",
     "score_ge_70": true
   }
 }
