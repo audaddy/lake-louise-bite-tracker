@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-24T15:34:56-07:00",
+  "timestamp": "2026-10-24T15:47:57-07:00",
   "score": 77,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-10-24T17:11:32-07:00"
   },
-  "pressure_trend_hpa": -1.7,
+  "pressure_trend_hpa": -1.4,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 97.9,
-  "temp_f": 55.8,
+  "temp_f": 56.3,
   "surface_pressure_hpa": 1011.1,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 1.9,
+  "wind_mph": 2.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -38,8 +38,8 @@
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
-    "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~56\u00b0F favors trout; bass sluggish",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~56\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -75,7 +75,7 @@
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
-    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
