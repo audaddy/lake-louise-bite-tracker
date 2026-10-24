@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-24T08:47:47-07:00",
+  "timestamp": "2026-10-24T09:09:06-07:00",
   "score": 77,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
@@ -17,11 +17,11 @@
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 96.9,
-  "temp_f": 33.7,
-  "surface_pressure_hpa": 1015.3,
+  "moon_illumination_pct": 97.0,
+  "temp_f": 35.2,
+  "surface_pressure_hpa": 1015.5,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 2.0,
+  "wind_mph": 1.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -39,7 +39,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~34\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~35\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -79,10 +79,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-10-24T08",
+    "period_key": "highscore@2026-10-24T09",
     "score_ge_70": true
   }
 }
