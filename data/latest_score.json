@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-26T15:42:01-07:00",
-  "score": 71,
+  "timestamp": "2026-10-26T15:52:09-07:00",
+  "score": 73,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,27 +12,27 @@
     "type": "moonrise",
     "time": "2026-10-26T18:00:20-07:00"
   },
-  "pressure_trend_hpa": -0.5,
+  "pressure_trend_hpa": -1.1,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 99.0,
   "temp_f": 55.1,
-  "surface_pressure_hpa": 1008.2,
-  "cloud_cover_pct": 93.0,
+  "surface_pressure_hpa": 1007.6,
+  "cloud_cover_pct": 65.0,
   "wind_mph": 2.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
-    "cloud_cover": 12,
+    "pressure": 18,
+    "cloud_cover": 8,
     "wind": 6,
     "moon_phase": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "Overcast skies have a favorable impact on biting activity",
+    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "Partly cloudy skies are mildly favorable",
     "Moon phase is favorable"
   ],
   "negative_factors": [],
@@ -47,11 +47,6 @@
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
       {
-        "name": "Dry flies (caddis / mayfly)",
-        "why": "trout rise to the evening hatch in low light",
-        "hot": true
-      },
-      {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
         "hot": true
@@ -59,6 +54,11 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
+        "hot": true
+      },
+      {
+        "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
+        "why": "subsurface when nothing's rising / bright midday",
         "hot": false
       }
     ],
