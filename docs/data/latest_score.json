@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-26T16:07:59-07:00",
-  "score": 79,
+  "timestamp": "2026-10-26T16:22:46-07:00",
+  "score": 73,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,26 +12,26 @@
     "type": "moonrise",
     "time": "2026-10-26T18:00:20-07:00"
   },
-  "pressure_trend_hpa": -1.2,
+  "pressure_trend_hpa": -0.9,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 99.0,
-  "temp_f": 55.1,
-  "surface_pressure_hpa": 1007.5,
-  "cloud_cover_pct": 61.0,
-  "wind_mph": 3.0,
+  "moon_illumination_pct": 98.9,
+  "temp_f": 55.3,
+  "surface_pressure_hpa": 1007.4,
+  "cloud_cover_pct": 63.0,
+  "wind_mph": 3.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 12,
     "cloud_cover": 8,
     "wind": 12,
     "moon_phase": 6
   },
   "positive_factors": [
-    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "Stable atmospheric pressure is comfortable for fish",
     "Partly cloudy skies are mildly favorable",
     "A light breeze/ripple has a very favorable effect",
     "Moon phase is favorable"
@@ -80,7 +80,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "highscore@2026-10-26T16",
