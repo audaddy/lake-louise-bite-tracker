@@ -1,51 +1,48 @@
 {
-  "timestamp": "2026-10-25T17:26:08-07:00",
-  "score": 78,
+  "timestamp": "2026-10-25T18:10:35-07:00",
+  "score": 71,
   "tier": "Good",
-  "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~37 min.",
+  "species_note": "Rainbow trout \u2014 dawn/dusk window",
+  "message": "Good trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-26T00:55:46-07:00"
   },
   "next_minor_period": {
-    "type": "moonrise",
-    "time": "2026-10-25T17:33:06-07:00"
+    "type": "moonset",
+    "time": "2026-10-26T08:36:15-07:00"
   },
-  "pressure_trend_hpa": -0.1,
+  "pressure_trend_hpa": -0.7,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": true,
+  "in_minor_period": false,
   "in_dawn_dusk": true,
   "moon_illumination_pct": 99.8,
-  "temp_f": 53.9,
-  "surface_pressure_hpa": 1006.2,
-  "cloud_cover_pct": 0.0,
-  "wind_mph": 0.7,
+  "temp_f": 51.1,
+  "surface_pressure_hpa": 1006.1,
+  "cloud_cover_pct": 1.0,
+  "wind_mph": 1.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 3,
-    "solunar_minor": 10,
+    "wind": 6,
     "dawn_dusk": 12,
     "moon_phase": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Solunar minor period active (moonrise/moonset)",
     "Low-light dawn/dusk window \u2014 prime feeding time",
     "Moon phase is favorable"
   ],
   "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding",
-    "Dead-calm water is less favorable than a light ripple"
+    "Bright, clear skies can push fish deep and slow feeding"
   ],
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~54\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~51\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -83,7 +80,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "moonrise@2026-10-25T17:33:06-07:00",
+    "period_key": "highscore@2026-10-25T18",
     "score_ge_70": true
   }
 }
