@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-27T23:50:00-07:00",
+  "timestamp": "2026-10-28T00:08:19-07:00",
   "score": 71,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
@@ -12,16 +12,16 @@
     "type": "moonset",
     "time": "2026-10-28T11:21:45-07:00"
   },
-  "pressure_trend_hpa": -2.1,
+  "pressure_trend_hpa": -2.3,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 93.7,
-  "temp_f": 47.7,
-  "surface_pressure_hpa": 1003.5,
+  "temp_f": 47.3,
+  "surface_pressure_hpa": 1003.3,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 13.5,
+  "wind_mph": 11.3,
   "precip_in": 0.02,
   "score_breakdown": {
     "baseline": 35,
@@ -37,13 +37,18 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~48\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~47\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Spin fishing",
-    "method_reason": "wind makes fly casting tough and rewards covering water",
+    "method_lean": "Fly fishing",
+    "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
+      {
+        "name": "Dry flies (caddis / mayfly)",
+        "why": "trout rise to the evening hatch in low light",
+        "hot": true
+      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -52,7 +57,7 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
-        "hot": true
+        "hot": false
       }
     ],
     "spin_options": [
@@ -68,14 +73,14 @@
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
-    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean spin fishing"
+    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-10-27T23",
+    "period_key": "highscore@2026-10-28T00",
     "score_ge_70": true
   }
 }
