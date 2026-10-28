@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-28T11:35:46-07:00",
+  "timestamp": "2026-10-28T11:48:06-07:00",
   "score": 74,
   "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~16 min.",
+  "message": "Good trout window right now \u2014 biting for the next ~4 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-28T15:25:12-07:00"
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-10-28T19:25:14-07:00"
   },
-  "pressure_trend_hpa": 1.6,
+  "pressure_trend_hpa": 1.2,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": true,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 90.6,
-  "temp_f": 49.9,
-  "surface_pressure_hpa": 1006.1,
-  "cloud_cover_pct": 98.0,
-  "wind_mph": 8.6,
+  "temp_f": 49.3,
+  "surface_pressure_hpa": 1005.9,
+  "cloud_cover_pct": 97.0,
+  "wind_mph": 8.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -40,7 +40,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~50\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~49\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
