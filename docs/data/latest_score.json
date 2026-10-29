@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-10-28T18:08:00-07:00",
-  "score": 70,
+  "timestamp": "2026-10-28T18:20:31-07:00",
+  "score": 76,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
   "message": "Good trout conditions during the low-light window. Good time to fish.",
@@ -12,36 +12,37 @@
     "type": "moonrise",
     "time": "2026-10-28T19:25:14-07:00"
   },
-  "pressure_trend_hpa": 1.5,
+  "pressure_trend_hpa": 1.6,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 88.7,
-  "temp_f": 48.0,
-  "surface_pressure_hpa": 1007.7,
-  "cloud_cover_pct": 96.0,
-  "wind_mph": 1.7,
+  "moon_illumination_pct": 88.6,
+  "temp_f": 47.4,
+  "surface_pressure_hpa": 1007.8,
+  "cloud_cover_pct": 74.0,
+  "wind_mph": 4.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
     "cloud_cover": 12,
-    "wind": 6,
+    "wind": 12,
     "dawn_dusk": 12
   },
   "positive_factors": [
     "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
+    "A light breeze/ripple has a very favorable effect",
     "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~48\u00b0F favors trout; bass sluggish",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
+    "species_reason": "cool water ~47\u00b0F favors trout; bass sluggish",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -79,7 +80,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "highscore@2026-10-28T18",
