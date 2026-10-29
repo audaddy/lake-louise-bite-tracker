@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-10-29T07:47:55-07:00",
+  "timestamp": "2026-10-29T08:07:34-07:00",
   "score": 83,
   "tier": "Excellent",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
@@ -12,16 +12,16 @@
     "type": "moonset",
     "time": "2026-10-29T12:32:28-07:00"
   },
-  "pressure_trend_hpa": -0.7,
+  "pressure_trend_hpa": -0.8,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 84.1,
-  "temp_f": 41.0,
-  "surface_pressure_hpa": 1006.5,
-  "cloud_cover_pct": 82.0,
-  "wind_mph": 3.6,
+  "moon_illumination_pct": 84.0,
+  "temp_f": 40.9,
+  "surface_pressure_hpa": 1006.4,
+  "cloud_cover_pct": 93.0,
+  "wind_mph": 3.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -80,10 +80,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-10-29T07",
+    "period_key": "highscore@2026-10-29T08",
     "score_ge_70": true
   }
 }
