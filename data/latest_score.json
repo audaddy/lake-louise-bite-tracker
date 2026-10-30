@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-29T16:47:59-07:00",
-  "score": 89,
+  "timestamp": "2026-10-29T17:19:49-07:00",
+  "score": 100,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~42 min.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~10 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-30T05:02:00-07:00"
@@ -12,35 +12,37 @@
     "type": "moonrise",
     "time": "2026-10-29T20:28:27-07:00"
   },
-  "pressure_trend_hpa": -0.7,
+  "pressure_trend_hpa": -0.5,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 80.8,
-  "temp_f": 52.4,
-  "surface_pressure_hpa": 1005.5,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 80.5,
+  "temp_f": 51.2,
+  "surface_pressure_hpa": 1005.6,
   "cloud_cover_pct": 88.0,
-  "wind_mph": 3.9,
+  "wind_mph": 3.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
     "wind": 12,
-    "solunar_major": 18
+    "solunar_major": 18,
+    "dawn_dusk": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
-    "Solunar major period active (moon overhead/underfoot)"
+    "Solunar major period active (moon overhead/underfoot)",
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
-  "light_phase": "day",
+  "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~52\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~51\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
