@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-30T12:33:27-07:00",
-  "score": 58,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-10-30T12:47:43-07:00",
+  "score": 65,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-30T17:33:21-07:00"
@@ -12,25 +12,25 @@
     "type": "moonset",
     "time": "2026-10-30T13:28:18-07:00"
   },
-  "pressure_trend_hpa": 1.0,
+  "pressure_trend_hpa": 0.9,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 72.6,
-  "temp_f": 46.9,
-  "surface_pressure_hpa": 1004.7,
+  "moon_illumination_pct": 72.5,
+  "temp_f": 47.2,
+  "surface_pressure_hpa": 1004.6,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 2.2,
+  "wind_mph": 2.1,
   "precip_in": 0.004,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
+    "pressure": 12,
     "cloud_cover": 12,
     "wind": 6
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
+    "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity"
   ],
   "negative_factors": [],
