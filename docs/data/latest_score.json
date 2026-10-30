@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-30T06:47:57-07:00",
-  "score": 71,
+  "timestamp": "2026-10-30T07:07:33-07:00",
+  "score": 77,
   "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "species_note": "Rainbow trout \u2014 dawn/dusk window",
+  "message": "Good trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-10-30T17:33:21-07:00"
@@ -16,26 +16,27 @@
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 75.1,
-  "temp_f": 43.6,
-  "surface_pressure_hpa": 1003.7,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 75.0,
+  "temp_f": 43.7,
+  "surface_pressure_hpa": 1003.6,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 3.7,
+  "wind_mph": 2.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 12
+    "wind": 6,
+    "dawn_dusk": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect"
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
-  "light_phase": "night",
+  "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
     "species_reason": "cool water ~44\u00b0F favors trout; bass sluggish",
@@ -78,10 +79,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-10-30T06",
+    "period_key": "highscore@2026-10-30T07",
     "score_ge_70": true
   }
 }
