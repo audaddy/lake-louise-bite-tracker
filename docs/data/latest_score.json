@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-30T18:47:28-07:00",
+  "timestamp": "2026-10-30T19:08:14-07:00",
   "score": 65,
   "tier": "Good",
-  "species_note": "Rainbow trout \u2014 dawn/dusk window",
-  "message": "Good trout conditions during the low-light window. Good time to fish.",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-31T06:03:42-07:00"
@@ -12,32 +12,29 @@
     "type": "moonrise",
     "time": "2026-10-30T21:43:36-07:00"
   },
-  "pressure_trend_hpa": 0.7,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": true,
-  "moon_illumination_pct": 69.9,
-  "temp_f": 46.3,
-  "surface_pressure_hpa": 1005.5,
-  "cloud_cover_pct": 15.0,
-  "wind_mph": 2.0,
+  "in_dawn_dusk": false,
+  "moon_illumination_pct": 69.8,
+  "temp_f": 45.7,
+  "surface_pressure_hpa": 1005.2,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 1.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 0,
-    "wind": 6,
-    "dawn_dusk": 12
+    "cloud_cover": 12,
+    "wind": 6
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "Low-light dawn/dusk window \u2014 prime feeding time"
+    "Overcast skies have a favorable impact on biting activity"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
-  "light_phase": "dawn_dusk",
+  "negative_factors": [],
+  "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
     "species_reason": "cool water ~46\u00b0F favors trout; bass sluggish",
@@ -64,6 +61,11 @@
       }
     ],
     "spin_options": [
+      {
+        "name": "Spinners / spinnerbaits",
+        "why": "chop or cloud cover \u2014 cover water at mid-depth",
+        "hot": true
+      },
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
