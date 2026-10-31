@@ -1,32 +1,32 @@
 {
-  "timestamp": "2026-10-30T21:33:20-07:00",
-  "score": 73,
+  "timestamp": "2026-10-30T21:47:52-07:00",
+  "score": 69,
   "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~40 min.",
+  "message": "Good trout window right now \u2014 biting for the next ~26 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-31T06:03:42-07:00"
   },
   "next_minor_period": {
-    "type": "moonrise",
-    "time": "2026-10-30T21:43:36-07:00"
+    "type": "moonset",
+    "time": "2026-10-31T14:09:47-07:00"
   },
-  "pressure_trend_hpa": 0.6,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 68.7,
-  "temp_f": 43.8,
-  "surface_pressure_hpa": 1006.2,
-  "cloud_cover_pct": 22.0,
-  "wind_mph": 4.5,
+  "moon_illumination_pct": 68.6,
+  "temp_f": 43.6,
+  "surface_pressure_hpa": 1006.0,
+  "cloud_cover_pct": 9.0,
+  "wind_mph": 4.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 4,
+    "cloud_cover": 0,
     "wind": 12,
     "solunar_minor": 10
   },
@@ -35,7 +35,9 @@
     "A light breeze/ripple has a very favorable effect",
     "Solunar minor period active (moonrise/moonset)"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Bright, clear skies can push fish deep and slow feeding"
+  ],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
@@ -83,6 +85,6 @@
   },
   "last_notified": {
     "period_key": "moonrise@2026-10-30T21:43:36-07:00",
-    "score_ge_70": true
+    "score_ge_70": false
   }
 }
