@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-30T18:06:50-07:00",
-  "score": 89,
+  "timestamp": "2026-10-30T18:18:04-07:00",
+  "score": 83,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~27 min.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~15 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-10-31T06:03:42-07:00"
@@ -12,28 +12,27 @@
     "type": "moonrise",
     "time": "2026-10-30T21:43:36-07:00"
   },
-  "pressure_trend_hpa": 0.0,
+  "pressure_trend_hpa": 0.1,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 70.2,
-  "temp_f": 46.8,
-  "surface_pressure_hpa": 1005.6,
-  "cloud_cover_pct": 3.0,
-  "wind_mph": 5.4,
+  "moon_illumination_pct": 70.1,
+  "temp_f": 46.0,
+  "surface_pressure_hpa": 1005.7,
+  "cloud_cover_pct": 2.0,
+  "wind_mph": 2.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 12,
+    "wind": 6,
     "solunar_major": 18,
     "dawn_dusk": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect",
     "Solunar major period active (moon overhead/underfoot)",
     "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
@@ -43,9 +42,9 @@
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~47\u00b0F favors trout; bass sluggish",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_reason": "cool water ~46\u00b0F favors trout; bass sluggish",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -67,11 +66,6 @@
       }
     ],
     "spin_options": [
-      {
-        "name": "Spinners / spinnerbaits",
-        "why": "chop or cloud cover \u2014 cover water at mid-depth",
-        "hot": true
-      },
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
