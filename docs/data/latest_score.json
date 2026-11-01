@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-10-31T21:07:22-07:00",
-  "score": 59,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-10-31T21:18:46-07:00",
+  "score": 63,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-11-01T06:00:52-08:00"
@@ -12,29 +12,27 @@
     "type": "moonrise",
     "time": "2026-10-31T23:04:25-07:00"
   },
-  "pressure_trend_hpa": -1.1,
+  "pressure_trend_hpa": -1.0,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 57.8,
-  "temp_f": 42.8,
-  "surface_pressure_hpa": 1005.6,
-  "cloud_cover_pct": 18.0,
-  "wind_mph": 1.4,
+  "moon_illumination_pct": 57.7,
+  "temp_f": 42.7,
+  "surface_pressure_hpa": 1005.7,
+  "cloud_cover_pct": 21.0,
+  "wind_mph": 1.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
-    "cloud_cover": 0,
+    "cloud_cover": 4,
     "wind": 6
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
