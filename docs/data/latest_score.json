@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-02T14:47:38-08:00",
+  "timestamp": "2026-11-02T15:05:42-08:00",
   "score": 71,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
@@ -12,16 +12,16 @@
     "type": "moonrise",
     "time": "2026-11-03T00:43:27-08:00"
   },
-  "pressure_trend_hpa": -1.8,
+  "pressure_trend_hpa": -2.3,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 38.0,
+  "moon_illumination_pct": 37.9,
   "temp_f": 47.9,
-  "surface_pressure_hpa": 1012.8,
+  "surface_pressure_hpa": 1012.1,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 2.2,
+  "wind_mph": 1.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -80,7 +80,7 @@
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-11-02T14",
+    "period_key": "highscore@2026-11-02T15",
     "score_ge_70": true
   }
 }
