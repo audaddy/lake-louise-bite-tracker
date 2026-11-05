@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-05T12:06:09-08:00",
-  "score": 59,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-11-05T12:17:30-08:00",
+  "score": 63,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-05T21:32:52-08:00"
@@ -17,25 +17,23 @@
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 12.1,
-  "temp_f": 55.9,
-  "surface_pressure_hpa": 1015.4,
-  "cloud_cover_pct": 6.0,
-  "wind_mph": 6.5,
+  "moon_illumination_pct": 12.0,
+  "temp_f": 55.7,
+  "surface_pressure_hpa": 1014.4,
+  "cloud_cover_pct": 36.0,
+  "wind_mph": 6.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
-    "cloud_cover": 0,
+    "cloud_cover": 4,
     "wind": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "A light breeze/ripple has a very favorable effect"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
