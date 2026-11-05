@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-05T11:47:52-08:00",
+  "timestamp": "2026-11-05T12:06:09-08:00",
   "score": 59,
   "tier": "Fair",
   "species_note": "Rainbow trout \u2014 fair conditions",
@@ -12,15 +12,15 @@
     "type": "moonset",
     "time": "2026-11-05T14:57:08-08:00"
   },
-  "pressure_trend_hpa": -0.4,
+  "pressure_trend_hpa": -0.7,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 12.1,
-  "temp_f": 55.6,
-  "surface_pressure_hpa": 1015.3,
-  "cloud_cover_pct": 17.0,
+  "temp_f": 55.9,
+  "surface_pressure_hpa": 1015.4,
+  "cloud_cover_pct": 6.0,
   "wind_mph": 6.5,
   "precip_in": 0.0,
   "score_breakdown": {
