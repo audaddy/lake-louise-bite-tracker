@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-07T14:47:32-08:00",
-  "score": 83,
+  "timestamp": "2026-11-07T15:05:04-08:00",
+  "score": 93,
   "tier": "Excellent",
-  "species_note": "Rainbow trout \u2014 excellent window",
-  "message": "Excellent conditions for trout right now. Worth a cast.",
+  "species_note": "Rainbow trout biting",
+  "message": "Excellent trout window right now \u2014 biting for the next ~58 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-07T23:02:19-08:00"
@@ -12,35 +12,37 @@
     "type": "moonset",
     "time": "2026-11-07T15:32:48-08:00"
   },
-  "pressure_trend_hpa": -2.1,
+  "pressure_trend_hpa": -2.0,
   "species": "trout",
   "in_major_period": false,
-  "in_minor_period": false,
+  "in_minor_period": true,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 2.0,
-  "temp_f": 58.7,
-  "surface_pressure_hpa": 1002.5,
+  "moon_illumination_pct": 1.9,
+  "temp_f": 58.3,
+  "surface_pressure_hpa": 1002.4,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 3.5,
+  "wind_mph": 3.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
     "cloud_cover": 12,
     "wind": 12,
+    "solunar_minor": 10,
     "moon_phase": 6
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
+    "Solunar minor period active (moonrise/moonset)",
     "Moon phase is favorable"
   ],
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~59\u00b0F; low light leans trout",
+    "species_reason": "moderate ~58\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -80,10 +82,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-11-07T14",
+    "period_key": "moonset@2026-11-07T15:32:48-08:00",
     "score_ge_70": true
   }
 }
