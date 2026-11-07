@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-07T06:47:27-08:00",
-  "score": 93,
+  "timestamp": "2026-11-07T07:05:05-08:00",
+  "score": 86,
   "tier": "Excellent",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
   "message": "Excellent trout conditions during the low-light window. Good time to fish.",
@@ -12,20 +12,20 @@
     "type": "moonset",
     "time": "2026-11-07T15:32:48-08:00"
   },
-  "pressure_trend_hpa": -3.0,
+  "pressure_trend_hpa": -1.8,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 3.0,
-  "temp_f": 42.9,
-  "surface_pressure_hpa": 1007.4,
+  "moon_illumination_pct": 2.9,
+  "temp_f": 43.3,
+  "surface_pressure_hpa": 1008.6,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 0.7,
+  "wind_mph": 0.8,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 25,
+    "pressure": 18,
     "cloud_cover": 12,
     "wind": 3,
     "dawn_dusk": 12,
@@ -83,10 +83,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-11-07T06",
+    "period_key": "highscore@2026-11-07T07",
     "score_ge_70": true
   }
 }
