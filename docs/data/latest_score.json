@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-06T18:47:40-08:00",
-  "score": 55,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-11-06T19:07:05-08:00",
+  "score": 70,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-06T22:16:57-08:00"
@@ -12,39 +12,38 @@
     "type": "moonrise",
     "time": "2026-11-07T05:35:34-08:00"
   },
-  "pressure_trend_hpa": 3.3,
+  "pressure_trend_hpa": 1.9,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 4.9,
-  "temp_f": 53.7,
-  "surface_pressure_hpa": 1011.3,
+  "moon_illumination_pct": 4.8,
+  "temp_f": 53.5,
+  "surface_pressure_hpa": 1011.6,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 7.4,
+  "wind_mph": 8.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": -10,
+    "pressure": 5,
     "cloud_cover": 12,
     "wind": 12,
     "moon_phase": 6
   },
   "positive_factors": [
+    "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
     "Moon phase is favorable"
   ],
-  "negative_factors": [
-    "Sharply rising pressure tends to slow the bite"
-  ],
+  "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
     "species_reason": "cool water ~54\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Shallow \u2014 top ~0\u20138 ft (fish tight and slow it down \u2014 pressure rising)",
+    "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
@@ -81,10 +80,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
-    "score_ge_70": false
+    "period_key": "highscore@2026-11-06T19",
+    "score_ge_70": true
   }
 }
