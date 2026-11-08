@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-07T22:09:37-08:00",
-  "score": 68,
-  "tier": "Good",
+  "timestamp": "2026-11-07T22:23:38-08:00",
+  "score": 82,
+  "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~2 hours.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~1.5 hours.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-07T23:02:19-08:00"
@@ -12,22 +12,22 @@
     "type": "moonrise",
     "time": "2026-11-08T06:47:40-08:00"
   },
-  "pressure_trend_hpa": 1.8,
+  "pressure_trend_hpa": 2.4,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 1.2,
-  "temp_f": 54.6,
-  "surface_pressure_hpa": 1000.9,
+  "temp_f": 54.4,
+  "surface_pressure_hpa": 1001.2,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 17.4,
-  "precip_in": 0.008,
+  "wind_mph": 13.2,
+  "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
     "cloud_cover": 12,
-    "wind": -8,
+    "wind": 6,
     "solunar_major": 18,
     "moon_phase": 6
   },
@@ -37,13 +37,11 @@
     "Solunar major period active (moon overhead/underfoot)",
     "Moon phase is favorable"
   ],
-  "negative_factors": [
-    "Strong winds make conditions tougher"
-  ],
+  "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~55\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~54\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -82,6 +80,6 @@
   },
   "last_notified": {
     "period_key": "underfoot@2026-11-07T23:02:19-08:00",
-    "score_ge_70": false
+    "score_ge_70": true
   }
 }
