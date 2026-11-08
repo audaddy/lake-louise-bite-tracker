@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-08T07:04:56-08:00",
+  "timestamp": "2026-11-08T07:17:35-08:00",
   "score": 86,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~13 min.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~0 min.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-11-08T11:25:42-08:00"
@@ -18,11 +18,11 @@
   "in_minor_period": true,
   "in_dawn_dusk": true,
   "moon_illumination_pct": 0.6,
-  "temp_f": 51.7,
-  "surface_pressure_hpa": 1007.6,
+  "temp_f": 52.1,
+  "surface_pressure_hpa": 1007.9,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 11.3,
-  "precip_in": 0.004,
+  "wind_mph": 12.3,
+  "precip_in": 0.02,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
@@ -47,14 +47,9 @@
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
-    "method_lean": "Fly fishing",
-    "method_reason": "calm-ish water and a trout bite suit fly presentations",
+    "method_lean": "Spin fishing",
+    "method_reason": "wind makes fly casting tough and rewards covering water",
     "fly_options": [
-      {
-        "name": "Dry flies (caddis / mayfly)",
-        "why": "trout rise to the evening hatch in low light",
-        "hot": true
-      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -63,7 +58,7 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
-        "hot": false
+        "hot": true
       }
     ],
     "spin_options": [
@@ -79,7 +74,7 @@
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
-    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean spin fishing"
   },
   "notification": {
     "fired": false,
