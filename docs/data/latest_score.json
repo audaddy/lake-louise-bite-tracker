@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-08T03:05:10-08:00",
-  "score": 50,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-11-08T03:17:37-08:00",
+  "score": 64,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-11-08T11:25:42-08:00"
@@ -12,22 +12,22 @@
     "type": "moonrise",
     "time": "2026-11-08T06:47:40-08:00"
   },
-  "pressure_trend_hpa": 1.0,
+  "pressure_trend_hpa": 1.6,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 0.9,
-  "temp_f": 52.5,
-  "surface_pressure_hpa": 1004.3,
+  "moon_illumination_pct": 0.8,
+  "temp_f": 52.7,
+  "surface_pressure_hpa": 1004.4,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 15.1,
+  "wind_mph": 14.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
     "cloud_cover": 12,
-    "wind": -8,
+    "wind": 6,
     "moon_phase": 6
   },
   "positive_factors": [
@@ -35,13 +35,11 @@
     "Overcast skies have a favorable impact on biting activity",
     "Moon phase is favorable"
   ],
-  "negative_factors": [
-    "Strong winds make conditions tougher"
-  ],
+  "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~52\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~53\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
