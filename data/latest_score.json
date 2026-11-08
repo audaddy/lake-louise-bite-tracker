@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-08T10:47:55-08:00",
+  "timestamp": "2026-11-08T11:04:49-08:00",
   "score": 82,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
@@ -12,16 +12,16 @@
     "type": "moonset",
     "time": "2026-11-08T15:54:54-08:00"
   },
-  "pressure_trend_hpa": 2.1,
+  "pressure_trend_hpa": 1.8,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 0.4,
-  "temp_f": 56.2,
-  "surface_pressure_hpa": 1011.0,
-  "cloud_cover_pct": 82.0,
-  "wind_mph": 10.8,
+  "temp_f": 56.6,
+  "surface_pressure_hpa": 1011.1,
+  "cloud_cover_pct": 100.0,
+  "wind_mph": 10.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
@@ -41,7 +41,7 @@
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~56\u00b0F; low light leans trout",
+    "species_reason": "moderate ~57\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -81,7 +81,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "transit@2026-11-08T11:25:42-08:00",
