@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-09T11:33:17-08:00",
-  "score": 89,
+  "timestamp": "2026-11-09T11:47:25-08:00",
+  "score": 86,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
   "message": "Excellent trout window right now \u2014 biting for the next ~1.5 hours.",
@@ -18,16 +18,16 @@
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 0.5,
-  "temp_f": 52.8,
-  "surface_pressure_hpa": 1007.2,
+  "temp_f": 53.3,
+  "surface_pressure_hpa": 1007.1,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 1.3,
+  "wind_mph": 0.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 6,
+    "wind": 3,
     "solunar_major": 18,
     "moon_phase": 6
   },
@@ -37,7 +37,9 @@
     "Solunar major period active (moon overhead/underfoot)",
     "Moon phase is favorable"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Dead-calm water is less favorable than a light ripple"
+  ],
   "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
