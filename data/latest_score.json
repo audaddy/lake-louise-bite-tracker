@@ -1,12 +1,12 @@
 {
-  "timestamp": "2026-11-10T12:47:27-08:00",
+  "timestamp": "2026-11-10T13:05:37-08:00",
   "score": 100,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~1.5 hours.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~59 min.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-11-10T13:04:13-08:00"
+    "type": "underfoot",
+    "time": "2026-11-11T01:29:50-08:00"
   },
   "next_minor_period": {
     "type": "moonset",
@@ -18,11 +18,11 @@
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 2.6,
-  "temp_f": 55.9,
+  "temp_f": 56.1,
   "surface_pressure_hpa": 1008.9,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 3.2,
-  "precip_in": 0.02,
+  "wind_mph": 3.8,
+  "precip_in": 0.016,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 18,
@@ -41,8 +41,8 @@
   "negative_factors": [],
   "light_phase": "day",
   "tactics": {
-    "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~56\u00b0F favors trout; bass sluggish",
+    "species_pick": "Rainbow trout (bass possible)",
+    "species_reason": "moderate ~56\u00b0F; low light leans trout",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -78,7 +78,7 @@
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
-    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
