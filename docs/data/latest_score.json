@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-09T20:18:58-08:00",
-  "score": 70,
-  "tier": "Good",
-  "species_note": "Rainbow trout \u2014 good window",
-  "message": "Good conditions for trout right now. Worth a cast.",
+  "timestamp": "2026-11-09T20:33:22-08:00",
+  "score": 55,
+  "tier": "Fair",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-10T00:38:54-08:00"
@@ -12,38 +12,39 @@
     "type": "moonrise",
     "time": "2026-11-10T09:07:18-08:00"
   },
-  "pressure_trend_hpa": 2.9,
+  "pressure_trend_hpa": 3.7,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 1.0,
-  "temp_f": 50.8,
-  "surface_pressure_hpa": 1006.3,
-  "cloud_cover_pct": 96.0,
-  "wind_mph": 5.2,
+  "temp_f": 51.8,
+  "surface_pressure_hpa": 1006.9,
+  "cloud_cover_pct": 91.0,
+  "wind_mph": 7.2,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
+    "pressure": -10,
     "cloud_cover": 12,
     "wind": 12,
     "moon_phase": 6
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
     "Moon phase is favorable"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Sharply rising pressure tends to slow the bite"
+  ],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~51\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~52\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Shallow \u2014 top ~0\u20138 ft",
+    "depth": "Shallow \u2014 top ~0\u20138 ft (fish tight and slow it down \u2014 pressure rising)",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
@@ -83,7 +84,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "highscore@2026-11-09T20",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
