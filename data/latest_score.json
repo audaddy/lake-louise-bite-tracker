@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-11T14:17:45-08:00",
+  "timestamp": "2026-11-11T14:33:16-08:00",
   "score": 89,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~38 min.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~22 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-12T02:21:27-08:00"
@@ -12,16 +12,16 @@
     "type": "moonset",
     "time": "2026-11-11T17:40:38-08:00"
   },
-  "pressure_trend_hpa": 0.0,
+  "pressure_trend_hpa": 0.2,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 6.6,
-  "temp_f": 63.2,
-  "surface_pressure_hpa": 1006.2,
+  "moon_illumination_pct": 6.7,
+  "temp_f": 63.0,
+  "surface_pressure_hpa": 1006.0,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 7.2,
+  "wind_mph": 6.7,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
