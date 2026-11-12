@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-12T07:33:24-08:00",
-  "score": 83,
+  "timestamp": "2026-11-12T07:47:37-08:00",
+  "score": 89,
   "tier": "Excellent",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
   "message": "Excellent trout conditions during the low-light window. Good time to fish.",
@@ -12,26 +12,26 @@
     "type": "moonrise",
     "time": "2026-11-12T11:01:59-08:00"
   },
-  "pressure_trend_hpa": -0.9,
+  "pressure_trend_hpa": -1.2,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
   "moon_illumination_pct": 10.4,
-  "temp_f": 46.3,
-  "surface_pressure_hpa": 1001.0,
+  "temp_f": 46.5,
+  "surface_pressure_hpa": 1000.0,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 3.7,
+  "wind_mph": 3.4,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 18,
     "cloud_cover": 12,
     "wind": 12,
     "dawn_dusk": 12
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "Overcast skies have a favorable impact on biting activity",
     "A light breeze/ripple has a very favorable effect",
     "Low-light dawn/dusk window \u2014 prime feeding time"
