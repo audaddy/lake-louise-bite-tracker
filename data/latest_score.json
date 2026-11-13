@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-12T19:07:23-08:00",
-  "score": 71,
+  "timestamp": "2026-11-12T19:19:18-08:00",
+  "score": 75,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,28 +12,30 @@
     "type": "moonrise",
     "time": "2026-11-13T11:44:25-08:00"
   },
-  "pressure_trend_hpa": -2.8,
+  "pressure_trend_hpa": -3.0,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 13.3,
+  "moon_illumination_pct": 13.4,
   "temp_f": 49.8,
-  "surface_pressure_hpa": 990.1,
+  "surface_pressure_hpa": 989.9,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 1.7,
+  "wind_mph": 0.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 18,
+    "pressure": 25,
     "cloud_cover": 12,
-    "wind": 6
+    "wind": 3
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "Overcast skies have a favorable impact on biting activity"
   ],
-  "negative_factors": [],
+  "negative_factors": [
+    "Dead-calm water is less favorable than a light ripple"
+  ],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
@@ -77,7 +79,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "highscore@2026-11-12T19",
