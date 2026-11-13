@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-13T05:47:33-08:00",
-  "score": 84,
+  "timestamp": "2026-11-13T06:17:48-08:00",
+  "score": 96,
   "tier": "Excellent",
-  "species_note": "Rainbow trout \u2014 excellent window",
-  "message": "Excellent conditions for trout right now. Worth a cast.",
+  "species_note": "Rainbow trout \u2014 dawn/dusk window",
+  "message": "Excellent trout conditions during the low-light window. Good time to fish.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-11-13T15:37:33-08:00"
@@ -12,30 +12,32 @@
     "type": "moonrise",
     "time": "2026-11-13T11:44:25-08:00"
   },
-  "pressure_trend_hpa": -3.5,
+  "pressure_trend_hpa": -3.7,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
-  "in_dawn_dusk": false,
-  "moon_illumination_pct": 16.3,
-  "temp_f": 49.7,
-  "surface_pressure_hpa": 982.2,
+  "in_dawn_dusk": true,
+  "moon_illumination_pct": 16.4,
+  "temp_f": 49.6,
+  "surface_pressure_hpa": 981.6,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 4.9,
+  "wind_mph": 5.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 25,
     "cloud_cover": 12,
-    "wind": 12
+    "wind": 12,
+    "dawn_dusk": 12
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect"
+    "A light breeze/ripple has a very favorable effect",
+    "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
-  "light_phase": "night",
+  "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
     "species_reason": "cool water ~50\u00b0F favors trout; bass sluggish",
@@ -78,10 +80,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-11-13T05",
+    "period_key": "highscore@2026-11-13T06",
     "score_ge_70": true
   }
 }
