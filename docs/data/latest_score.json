@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-12T15:47:40-08:00",
-  "score": 90,
+  "timestamp": "2026-11-12T16:16:49-08:00",
+  "score": 96,
   "tier": "Excellent",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
   "message": "Excellent trout conditions during the low-light window. Good time to fish.",
@@ -12,36 +12,37 @@
     "type": "moonset",
     "time": "2026-11-12T18:33:51-08:00"
   },
-  "pressure_trend_hpa": -4.2,
+  "pressure_trend_hpa": -4.0,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 12.4,
-  "temp_f": 56.6,
-  "surface_pressure_hpa": 993.2,
+  "moon_illumination_pct": 12.6,
+  "temp_f": 55.3,
+  "surface_pressure_hpa": 992.9,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 1.6,
+  "wind_mph": 4.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 25,
     "cloud_cover": 12,
-    "wind": 6,
+    "wind": 12,
     "dawn_dusk": 12
   },
   "positive_factors": [
     "Falling barometric pressure \u2014 fish often feed ahead of a front",
     "Overcast skies have a favorable impact on biting activity",
+    "A light breeze/ripple has a very favorable effect",
     "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
   "light_phase": "dawn_dusk",
   "tactics": {
-    "species_pick": "Rainbow trout (bass possible)",
-    "species_reason": "moderate ~57\u00b0F; low light leans trout",
-    "where": "Shoreline & shallow cover",
-    "where_reason": "fish push shallow toward the bank in low light / cool water",
+    "species_pick": "Rainbow trout",
+    "species_reason": "cool water ~55\u00b0F favors trout; bass sluggish",
+    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
+    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
@@ -75,14 +76,14 @@
       }
     ],
     "season_note": "Fall: both species feed up on baitfish \u2014 bigger streamers/swimbaits shine.",
-    "summary": "Rainbow trout (bass possible) \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
+    "summary": "Rainbow trout \u00b7 Shoreline & shallow cover \u00b7 Shallow \u2014 top ~0\u20138 ft \u00b7 lean fly fishing"
   },
   "notification": {
     "fired": false,
     "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-11-12T15",
+    "period_key": "highscore@2026-11-12T16",
     "score_ge_70": true
   }
 }
