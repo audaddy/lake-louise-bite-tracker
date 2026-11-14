@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-14T05:47:36-08:00",
-  "score": 52,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-11-14T06:05:02-08:00",
+  "score": 37,
+  "tier": "Slow",
+  "species_note": "Rainbow trout \u2014 slow",
+  "message": "Slow bite. Marginal trout conditions at the moment.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-11-14T16:26:01-08:00"
@@ -12,28 +12,28 @@
     "type": "moonrise",
     "time": "2026-11-14T12:17:39-08:00"
   },
-  "pressure_trend_hpa": 2.8,
+  "pressure_trend_hpa": 3.2,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 23.7,
-  "temp_f": 46.8,
-  "surface_pressure_hpa": 994.3,
+  "moon_illumination_pct": 23.8,
+  "temp_f": 46.7,
+  "surface_pressure_hpa": 994.6,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 5.6,
+  "wind_mph": 5.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
+    "pressure": -10,
     "cloud_cover": 0,
     "wind": 12
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
     "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
+    "Sharply rising pressure tends to slow the bite",
     "Bright, clear skies can push fish deep and slow feeding"
   ],
   "light_phase": "night",
@@ -42,7 +42,7 @@
     "species_reason": "cool water ~47\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover \u2014 favor the windward shore",
     "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
-    "depth": "Shallow \u2014 top ~0\u20138 ft",
+    "depth": "Shallow \u2014 top ~0\u20138 ft (fish tight and slow it down \u2014 pressure rising)",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
