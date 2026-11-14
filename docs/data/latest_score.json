@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-13T19:07:03-08:00",
+  "timestamp": "2026-11-13T19:18:22-08:00",
   "score": 81,
   "tier": "Excellent",
   "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~58 min.",
+  "message": "Excellent trout window right now \u2014 biting for the next ~47 min.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-14T04:02:04-08:00"
@@ -12,17 +12,17 @@
     "type": "moonset",
     "time": "2026-11-13T19:34:56-08:00"
   },
-  "pressure_trend_hpa": 0.3,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": true,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 20.3,
-  "temp_f": 50.3,
-  "surface_pressure_hpa": 986.5,
+  "temp_f": 50.4,
+  "surface_pressure_hpa": 986.7,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 4.9,
-  "precip_in": 0.008,
+  "wind_mph": 4.5,
+  "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
@@ -80,7 +80,7 @@
   },
   "notification": {
     "fired": false,
-    "status": "would notify, but NTFY_TOPIC is unset"
+    "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
     "period_key": "moonset@2026-11-13T19:34:56-08:00",
