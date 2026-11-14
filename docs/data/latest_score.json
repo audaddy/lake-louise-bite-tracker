@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-13T18:08:40-08:00",
-  "score": 64,
+  "timestamp": "2026-11-13T18:32:58-08:00",
+  "score": 65,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
   "message": "Good conditions for trout right now. Worth a cast.",
@@ -12,35 +12,34 @@
     "type": "moonset",
     "time": "2026-11-13T19:34:56-08:00"
   },
-  "pressure_trend_hpa": 1.2,
+  "pressure_trend_hpa": 0.5,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 20.0,
-  "temp_f": 49.1,
-  "surface_pressure_hpa": 986.5,
+  "moon_illumination_pct": 20.1,
+  "temp_f": 49.8,
+  "surface_pressure_hpa": 986.3,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 4.7,
+  "wind_mph": 2.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 5,
+    "pressure": 12,
     "cloud_cover": 12,
-    "wind": 12
+    "wind": 6
   },
   "positive_factors": [
-    "Slightly rising pressure \u2014 neutral to mild",
-    "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect"
+    "Stable atmospheric pressure is comfortable for fish",
+    "Overcast skies have a favorable impact on biting activity"
   ],
   "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~49\u00b0F favors trout; bass sluggish",
-    "where": "Shoreline & shallow cover \u2014 favor the windward shore",
-    "where_reason": "fish push shallow toward the bank in low light / cool water; wind stacks plankton and baitfish on the wind-blown bank",
+    "species_reason": "cool water ~50\u00b0F favors trout; bass sluggish",
+    "where": "Shoreline & shallow cover",
+    "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",

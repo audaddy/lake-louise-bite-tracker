@@ -1,12 +1,5 @@
 [
   {
-    "timestamp": "2026-11-08T01:06:02-08:00",
-    "score": 51,
-    "tier": "Fair",
-    "pressure": 1004.0,
-    "temp_f": 51.9
-  },
-  {
     "timestamp": "2026-11-08T01:17:26-08:00",
     "score": 51,
     "tier": "Fair",
@@ -3498,5 +3491,12 @@
     "tier": "Good",
     "pressure": 986.5,
     "temp_f": 49.1
+  },
+  {
+    "timestamp": "2026-11-13T18:32:58-08:00",
+    "score": 65,
+    "tier": "Good",
+    "pressure": 986.3,
+    "temp_f": 49.8
   }
 ]
