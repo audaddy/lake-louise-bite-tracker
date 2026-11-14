@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-14T04:47:34-08:00",
-  "score": 70,
-  "tier": "Good",
-  "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~14 min.",
+  "timestamp": "2026-11-14T05:17:35-08:00",
+  "score": 52,
+  "tier": "Fair",
+  "species_note": "Rainbow trout \u2014 fair conditions",
+  "message": "Fair trout conditions right now. Could go either way.",
   "next_major_period": {
     "type": "transit",
     "time": "2026-11-14T16:26:01-08:00"
@@ -12,28 +12,26 @@
     "type": "moonrise",
     "time": "2026-11-14T12:17:39-08:00"
   },
-  "pressure_trend_hpa": 2.3,
+  "pressure_trend_hpa": 2.5,
   "species": "trout",
-  "in_major_period": true,
+  "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 23.4,
-  "temp_f": 47.3,
-  "surface_pressure_hpa": 993.2,
+  "moon_illumination_pct": 23.6,
+  "temp_f": 47.2,
+  "surface_pressure_hpa": 993.7,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 7.0,
+  "wind_mph": 7.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
     "cloud_cover": 0,
-    "wind": 12,
-    "solunar_major": 18
+    "wind": 12
   },
   "positive_factors": [
     "Slightly rising pressure \u2014 neutral to mild",
-    "A light breeze/ripple has a very favorable effect",
-    "Solunar major period active (moon overhead/underfoot)"
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
@@ -84,7 +82,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "underfoot@2026-11-14T04:02:04-08:00",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
