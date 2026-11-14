@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-14T07:17:37-08:00",
-  "score": 64,
+  "timestamp": "2026-11-14T07:33:08-08:00",
+  "score": 68,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 dawn/dusk window",
   "message": "Good trout conditions during the low-light window. Good time to fish.",
@@ -12,21 +12,21 @@
     "type": "moonrise",
     "time": "2026-11-14T12:17:39-08:00"
   },
-  "pressure_trend_hpa": 2.2,
+  "pressure_trend_hpa": 1.9,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 24.2,
-  "temp_f": 45.8,
-  "surface_pressure_hpa": 995.7,
-  "cloud_cover_pct": 12.0,
-  "wind_mph": 5.2,
+  "moon_illumination_pct": 24.3,
+  "temp_f": 46.5,
+  "surface_pressure_hpa": 994.9,
+  "cloud_cover_pct": 29.0,
+  "wind_mph": 6.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
-    "cloud_cover": 0,
+    "cloud_cover": 4,
     "wind": 12,
     "dawn_dusk": 12
   },
@@ -35,9 +35,7 @@
     "A light breeze/ripple has a very favorable effect",
     "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
