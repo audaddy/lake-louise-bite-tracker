@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-14T09:17:36-08:00",
+  "timestamp": "2026-11-14T09:33:11-08:00",
   "score": 64,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
@@ -10,19 +10,19 @@
   },
   "next_minor_period": {
     "type": "moonrise",
-    "time": "2026-11-14T12:17:39-08:00"
+    "time": "2026-11-14T12:17:38-08:00"
   },
-  "pressure_trend_hpa": 2.4,
+  "pressure_trend_hpa": 2.1,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 24.9,
-  "temp_f": 50.5,
-  "surface_pressure_hpa": 997.0,
+  "moon_illumination_pct": 25.0,
+  "temp_f": 49.8,
+  "surface_pressure_hpa": 996.7,
   "cloud_cover_pct": 89.0,
-  "wind_mph": 8.1,
-  "precip_in": 0.004,
+  "wind_mph": 6.9,
+  "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 5,
