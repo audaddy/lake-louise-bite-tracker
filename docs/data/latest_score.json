@@ -1,6 +1,6 @@
 {
-  "timestamp": "2026-11-16T14:47:28-08:00",
-  "score": 53,
+  "timestamp": "2026-11-16T15:05:19-08:00",
+  "score": 59,
   "tier": "Fair",
   "species_note": "Rainbow trout \u2014 fair conditions",
   "message": "Fair trout conditions right now. Could go either way.",
@@ -12,25 +12,27 @@
     "type": "moonset",
     "time": "2026-11-16T22:57:58-08:00"
   },
-  "pressure_trend_hpa": -0.6,
+  "pressure_trend_hpa": -0.4,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 44.9,
-  "temp_f": 51.6,
-  "surface_pressure_hpa": 1009.9,
+  "moon_illumination_pct": 45.0,
+  "temp_f": 51.7,
+  "surface_pressure_hpa": 1010.0,
   "cloud_cover_pct": 7.0,
-  "wind_mph": 2.5,
+  "wind_mph": 2.9,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 0,
-    "wind": 6
+    "wind": 6,
+    "moon_phase": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish"
+    "Stable atmospheric pressure is comfortable for fish",
+    "Moon phase is favorable"
   ],
   "negative_factors": [
     "Bright, clear skies can push fish deep and slow feeding"
