@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-15T18:10:09-08:00",
-  "score": 82,
-  "tier": "Excellent",
-  "species_note": "Rainbow trout biting",
-  "message": "Excellent trout window right now \u2014 biting for the next ~2 min.",
+  "timestamp": "2026-11-15T18:24:09-08:00",
+  "score": 64,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-16T05:34:36-08:00"
@@ -12,14 +12,14 @@
     "type": "moonset",
     "time": "2026-11-15T21:49:08-08:00"
   },
-  "pressure_trend_hpa": 1.7,
+  "pressure_trend_hpa": 1.1,
   "species": "trout",
-  "in_major_period": true,
+  "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 36.8,
-  "temp_f": 47.1,
-  "surface_pressure_hpa": 1005.7,
+  "moon_illumination_pct": 36.9,
+  "temp_f": 47.2,
+  "surface_pressure_hpa": 1005.1,
   "cloud_cover_pct": 100.0,
   "wind_mph": 6.5,
   "precip_in": 0.0,
@@ -27,14 +27,12 @@
     "baseline": 35,
     "pressure": 5,
     "cloud_cover": 12,
-    "wind": 12,
-    "solunar_major": 18
+    "wind": 12
   },
   "positive_factors": [
     "Slightly rising pressure \u2014 neutral to mild",
     "Overcast skies have a favorable impact on biting activity",
-    "A light breeze/ripple has a very favorable effect",
-    "Solunar major period active (moon overhead/underfoot)"
+    "A light breeze/ripple has a very favorable effect"
   ],
   "negative_factors": [],
   "light_phase": "night",
@@ -83,7 +81,7 @@
     "status": "skipped (dedup or below threshold)"
   },
   "last_notified": {
-    "period_key": "transit@2026-11-15T17:12:15-08:00",
-    "score_ge_70": true
+    "period_key": null,
+    "score_ge_70": false
   }
 }
