@@ -1,37 +1,37 @@
 {
-  "timestamp": "2026-11-19T19:33:10-08:00",
-  "score": 71,
+  "timestamp": "2026-11-19T20:07:39-08:00",
+  "score": 64,
   "tier": "Good",
   "species_note": "Rainbow trout biting",
-  "message": "Good trout window right now \u2014 biting for the next ~1.5 hours.",
+  "message": "Good trout window right now \u2014 biting for the next ~58 min.",
   "next_major_period": {
-    "type": "transit",
-    "time": "2026-11-19T20:05:25-08:00"
+    "type": "underfoot",
+    "time": "2026-11-20T08:27:51-08:00"
   },
   "next_minor_period": {
     "type": "moonset",
     "time": "2026-11-20T02:29:23-08:00"
   },
-  "pressure_trend_hpa": 0.8,
+  "pressure_trend_hpa": 1.2,
   "species": "trout",
   "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 75.7,
-  "temp_f": 39.8,
-  "surface_pressure_hpa": 1006.8,
+  "moon_illumination_pct": 76.0,
+  "temp_f": 38.5,
+  "surface_pressure_hpa": 1007.0,
   "cloud_cover_pct": 0.0,
-  "wind_mph": 1.4,
+  "wind_mph": 2.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 5,
     "cloud_cover": 0,
     "wind": 6,
     "solunar_major": 18
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
+    "Slightly rising pressure \u2014 neutral to mild",
     "Solunar major period active (moon overhead/underfoot)"
   ],
   "negative_factors": [
@@ -40,7 +40,7 @@
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~40\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~38\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -79,6 +79,6 @@
   },
   "last_notified": {
     "period_key": "transit@2026-11-19T20:05:25-08:00",
-    "score_ge_70": true
+    "score_ge_70": false
   }
 }
