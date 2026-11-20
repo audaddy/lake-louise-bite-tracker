@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-20T07:17:30-08:00",
-  "score": 77,
-  "tier": "Good",
-  "species_note": "Rainbow trout \u2014 dawn/dusk window",
-  "message": "Good trout conditions during the low-light window. Good time to fish.",
+  "timestamp": "2026-11-20T07:33:21-08:00",
+  "score": 100,
+  "tier": "Excellent",
+  "species_note": "Rainbow trout biting",
+  "message": "Excellent trout window right now \u2014 biting for the next ~2 hours.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-20T08:27:51-08:00"
@@ -12,34 +12,37 @@
     "type": "moonrise",
     "time": "2026-11-20T14:12:59-08:00"
   },
-  "pressure_trend_hpa": 0.4,
+  "pressure_trend_hpa": 0.6,
   "species": "trout",
-  "in_major_period": false,
+  "in_major_period": true,
   "in_minor_period": false,
   "in_dawn_dusk": true,
-  "moon_illumination_pct": 80.1,
-  "temp_f": 32.3,
-  "surface_pressure_hpa": 1010.3,
+  "moon_illumination_pct": 80.2,
+  "temp_f": 33.0,
+  "surface_pressure_hpa": 1010.5,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 2.4,
+  "wind_mph": 3.0,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": 12,
     "cloud_cover": 12,
-    "wind": 6,
+    "wind": 12,
+    "solunar_major": 18,
     "dawn_dusk": 12
   },
   "positive_factors": [
     "Stable atmospheric pressure is comfortable for fish",
     "Overcast skies have a favorable impact on biting activity",
+    "A light breeze/ripple has a very favorable effect",
+    "Solunar major period active (moon overhead/underfoot)",
     "Low-light dawn/dusk window \u2014 prime feeding time"
   ],
   "negative_factors": [],
   "light_phase": "dawn_dusk",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~32\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~33\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
@@ -79,10 +82,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": "highscore@2026-11-20T07",
+    "period_key": "underfoot@2026-11-20T08:27:51-08:00",
     "score_ge_70": true
   }
 }
