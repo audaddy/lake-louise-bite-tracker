@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-21T07:47:40-08:00",
-  "score": 69,
-  "tier": "Good",
-  "species_note": "Rainbow trout \u2014 dawn/dusk window",
-  "message": "Good trout conditions during the low-light window. Good time to fish.",
+  "timestamp": "2026-11-21T08:33:14-08:00",
+  "score": 81,
+  "tier": "Excellent",
+  "species_note": "Rainbow trout biting",
+  "message": "Excellent trout window right now \u2014 biting for the next ~1.5 hours.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-21T09:15:04-08:00"
@@ -12,44 +12,39 @@
     "type": "moonrise",
     "time": "2026-11-21T14:32:39-08:00"
   },
-  "pressure_trend_hpa": -0.9,
+  "pressure_trend_hpa": -1.3,
   "species": "trout",
-  "in_major_period": false,
+  "in_major_period": true,
   "in_minor_period": false,
-  "in_dawn_dusk": true,
-  "moon_illumination_pct": 88.2,
-  "temp_f": 31.6,
+  "in_dawn_dusk": false,
+  "moon_illumination_pct": 88.4,
+  "temp_f": 31.4,
   "surface_pressure_hpa": 1005.5,
-  "cloud_cover_pct": 21.0,
-  "wind_mph": 1.7,
+  "cloud_cover_pct": 26.0,
+  "wind_mph": 2.6,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
+    "pressure": 18,
     "cloud_cover": 4,
     "wind": 6,
-    "dawn_dusk": 12
+    "solunar_major": 18
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "Low-light dawn/dusk window \u2014 prime feeding time"
+    "Falling barometric pressure \u2014 fish often feed ahead of a front",
+    "Solunar major period active (moon overhead/underfoot)"
   ],
   "negative_factors": [],
-  "light_phase": "dawn_dusk",
+  "light_phase": "day",
   "tactics": {
     "species_pick": "Rainbow trout",
-    "species_reason": "cool water ~32\u00b0F favors trout; bass sluggish",
+    "species_reason": "cool water ~31\u00b0F favors trout; bass sluggish",
     "where": "Shoreline & shallow cover",
     "where_reason": "fish push shallow toward the bank in low light / cool water",
     "depth": "Shallow \u2014 top ~0\u20138 ft",
     "method_lean": "Fly fishing",
     "method_reason": "calm-ish water and a trout bite suit fly presentations",
     "fly_options": [
-      {
-        "name": "Dry flies (caddis / mayfly)",
-        "why": "trout rise to the evening hatch in low light",
-        "hot": true
-      },
       {
         "name": "Woolly Buggers / leeches (slow strip)",
         "why": "all-purpose in low light, wind, or stained water \u2014 both species",
@@ -58,13 +53,23 @@
       {
         "name": "Streamers (sculpin / baitfish)",
         "why": "active fish chasing bait; strip on a sink-tip",
-        "hot": false
+        "hot": true
+      },
+      {
+        "name": "Nymphs (pheasant tail, hare's ear) under an indicator",
+        "why": "subsurface when nothing's rising / bright midday",
+        "hot": true
       }
     ],
     "spin_options": [
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
+        "hot": true
+      },
+      {
+        "name": "Jigs & soft plastics (worked deep)",
+        "why": "bright sun / warm water \u2014 fish off the bank and on structure",
         "hot": true
       }
     ],
@@ -73,10 +78,10 @@
   },
   "notification": {
     "fired": false,
-    "status": "skipped (dedup or below threshold)"
+    "status": "would notify, but NTFY_TOPIC is unset"
   },
   "last_notified": {
-    "period_key": null,
-    "score_ge_70": false
+    "period_key": "underfoot@2026-11-21T09:15:04-08:00",
+    "score_ge_70": true
   }
 }
