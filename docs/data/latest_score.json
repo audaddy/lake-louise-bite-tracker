@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-22T03:32:55-08:00",
+  "timestamp": "2026-11-22T03:47:37-08:00",
   "score": 65,
   "tier": "Good",
   "species_note": "Rainbow trout \u2014 good window",
@@ -18,10 +18,10 @@
   "in_minor_period": false,
   "in_dawn_dusk": false,
   "moon_illumination_pct": 93.5,
-  "temp_f": 40.1,
+  "temp_f": 40.3,
   "surface_pressure_hpa": 1005.7,
   "cloud_cover_pct": 100.0,
-  "wind_mph": 1.4,
+  "wind_mph": 2.1,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
