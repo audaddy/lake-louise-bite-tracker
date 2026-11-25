@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-25T05:47:51-08:00",
-  "score": 49,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-11-25T06:07:00-08:00",
+  "score": 37,
+  "tier": "Slow",
+  "species_note": "Rainbow trout \u2014 slow",
+  "message": "Slow bite. Marginal trout conditions at the moment.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-25T13:12:16-08:00"
@@ -12,30 +12,30 @@
     "type": "moonset",
     "time": "2026-11-25T09:12:25-08:00"
   },
-  "pressure_trend_hpa": 3.1,
+  "pressure_trend_hpa": 3.3,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 98.5,
-  "temp_f": 52.1,
-  "surface_pressure_hpa": 1006.6,
-  "cloud_cover_pct": 81.0,
-  "wind_mph": 13.5,
+  "moon_illumination_pct": 98.4,
+  "temp_f": 52.2,
+  "surface_pressure_hpa": 1007.0,
+  "cloud_cover_pct": 6.0,
+  "wind_mph": 13.3,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
     "pressure": -10,
-    "cloud_cover": 12,
+    "cloud_cover": 0,
     "wind": 6,
     "moon_phase": 6
   },
   "positive_factors": [
-    "Overcast skies have a favorable impact on biting activity",
     "Moon phase is favorable"
   ],
   "negative_factors": [
-    "Sharply rising pressure tends to slow the bite"
+    "Sharply rising pressure tends to slow the bite",
+    "Bright, clear skies can push fish deep and slow feeding"
   ],
   "light_phase": "night",
   "tactics": {
@@ -59,11 +59,6 @@
       }
     ],
     "spin_options": [
-      {
-        "name": "Spinners / spinnerbaits",
-        "why": "chop or cloud cover \u2014 cover water at mid-depth",
-        "hot": true
-      },
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
