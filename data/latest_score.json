@@ -1,9 +1,9 @@
 {
-  "timestamp": "2026-11-28T06:05:11-08:00",
-  "score": 59,
-  "tier": "Fair",
-  "species_note": "Rainbow trout \u2014 fair conditions",
-  "message": "Fair trout conditions right now. Could go either way.",
+  "timestamp": "2026-11-28T06:17:27-08:00",
+  "score": 63,
+  "tier": "Good",
+  "species_note": "Rainbow trout \u2014 good window",
+  "message": "Good conditions for trout right now. Worth a cast.",
   "next_major_period": {
     "type": "underfoot",
     "time": "2026-11-28T16:21:07-08:00"
@@ -12,30 +12,27 @@
     "type": "moonset",
     "time": "2026-11-28T11:41:15-08:00"
   },
-  "pressure_trend_hpa": -0.9,
+  "pressure_trend_hpa": -1.4,
   "species": "trout",
   "in_major_period": false,
   "in_minor_period": false,
   "in_dawn_dusk": false,
-  "moon_illumination_pct": 78.5,
-  "temp_f": 41.4,
-  "surface_pressure_hpa": 1014.0,
-  "cloud_cover_pct": 3.0,
-  "wind_mph": 3.3,
+  "moon_illumination_pct": 78.4,
+  "temp_f": 41.2,
+  "surface_pressure_hpa": 1013.5,
+  "cloud_cover_pct": 30.0,
+  "wind_mph": 2.5,
   "precip_in": 0.0,
   "score_breakdown": {
     "baseline": 35,
-    "pressure": 12,
-    "cloud_cover": 0,
-    "wind": 12
+    "pressure": 18,
+    "cloud_cover": 4,
+    "wind": 6
   },
   "positive_factors": [
-    "Stable atmospheric pressure is comfortable for fish",
-    "A light breeze/ripple has a very favorable effect"
+    "Falling barometric pressure \u2014 fish often feed ahead of a front"
   ],
-  "negative_factors": [
-    "Bright, clear skies can push fish deep and slow feeding"
-  ],
+  "negative_factors": [],
   "light_phase": "night",
   "tactics": {
     "species_pick": "Rainbow trout",
@@ -63,11 +60,6 @@
       }
     ],
     "spin_options": [
-      {
-        "name": "Spinners / spinnerbaits",
-        "why": "chop or cloud cover \u2014 cover water at mid-depth",
-        "hot": true
-      },
       {
         "name": "Inline spinners / small spoons",
         "why": "steady trout producer at mid-depth",
